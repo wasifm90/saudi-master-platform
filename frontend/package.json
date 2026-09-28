@@ -1,0 +1,10 @@
+{
+  "name": "saudi-master-frontend",
+  "version": "1.0.0",
+  "description": "Saudi Master Company x ULMA Frontend UI (Angular & Node Ports)",
+  "scripts": {
+    "start": "node ../ui_server.js",
+    "serve": "node ../ui_server.js"
+  },
+  "private": true
+}

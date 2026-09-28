@@ -1,0 +1,12 @@
+{
+  "name": "saudi-master-platform",
+  "version": "1.0.0",
+  "description": "Saudi Master Company x ULMA Sovereign Formwork & Scaffolding Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "server": "node server.js"
+  },
+  "private": true
+}

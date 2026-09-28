@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+  <!-- Dynamic base href: sets '/' only for HTTP/HTTPS servers to preserve relative paths in file:/// preview panes -->
+  <script>
+    if (window.location.protocol.startsWith('http')) {
+      var baseEl = document.createElement('base');
+      baseEl.href = '/';
+      document.head.appendChild(baseEl);
+    }
+  </script>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"/>
+  <title>Saudi Master Company × ULMA | Sovereign Formwork & Scaffolding Alliance</title>
+  <meta name="description" content="Saudi manufacturer & European ULMA engineering alliance for formwork, scaffolding, heavy shoring, sales, rental, and supervision across Saudi Arabia."/>
+  
+  <!-- Pre-Compiled Static High-Performance Tailwind CSS (Zero Runtime JIT Overhead) -->
+  <link rel="stylesheet" href="css/styles.css"/>
+
+  <!-- Optimized Web Fonts (Streamlined to essential weights with font-display: swap) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=Space+Grotesk:wght@600;700&family=Cairo:wght@600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* Global Base & Rendering Engine Optimizations */
+    body {
+      background-color: #FAF8F5;
+      color: #18181B;
+      font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      text-rendering: optimizeSpeed;
+      -webkit-font-smoothing: antialiased;
+    }
+    html[dir="rtl"] body {
+      font-family: 'Cairo', 'IBM Plex Sans', sans-serif;
+    }
+    .tab-active {
+      background-color: #18181B !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 12px rgba(24,24,27,0.15);
+    }
+    .fallback-card {
+      background: linear-gradient(135deg, #18181B 0%, #2A2F38 100%);
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* GPU Compositing & 60/120fps Hardware Acceleration */
+    .gpu-layer {
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      will-change: transform;
+    }
+    .smooth-corridor {
+      will-change: scroll-position;
+      contain: layout style;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-desert-ivory selection:bg-primary-gold selection:text-white">
+
+  <!-- TOP APP HEADER (Clean public-facing corporate header - NO admin button) -->
+  <header class="sticky top-0 z-40 bg-desert-ivory/95 backdrop-blur-md border-b border-divider-color transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand & Alliance Logo -->
+      <a href="#hero-section" class="flex items-center gap-4 cursor-pointer text-decoration-none">
+        <div class="w-10 h-10 rounded bg-charcoal text-content-offwhite flex items-center justify-center font-display font-bold text-lg shadow-sm">
+          SM
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-display font-bold text-sm tracking-wider uppercase text-charcoal">Saudi Master</span>
+            <span class="text-xs text-muted-brown">×</span>
+            <span class="font-display font-bold text-xs uppercase text-ulma-orange tracking-widest">ULMA</span>
+          </div>
+          <span class="text-[11px] text-muted-brown font-medium tracking-tight uppercase" id="headerTagline">
+            Sovereign Formwork & Scaffolding Alliance
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-charcoal">
+        <a href="#systems-matrix" class="hover:text-primary-gold transition-colors" data-i18n="nav_systems">Systems</a>
+        <a href="#geometry-section" class="hover:text-primary-gold transition-colors" data-i18n="nav_geometry">Geometries</a>
+        <a href="#assembly-section" class="hover:text-primary-gold transition-colors" data-i18n="nav_assembly">Assembly In Motion</a>
+        <a href="#services-section" class="hover:text-primary-gold transition-colors" data-i18n="nav_services">Services</a>
+        <a href="#manufacturing-section" class="hover:text-primary-gold transition-colors" data-i18n="nav_mfg">KSA Manufacturing</a>
+        <a href="#projects-section" class="hover:text-primary-gold transition-colors" data-i18n="nav_projects">Projects</a>
+      </nav>
+
+      <!-- Action Utilities -->
+      <div class="flex items-center gap-3">
+        <!-- Language Switcher -->
+        <button id="langToggleBtn" onclick="toggleLanguage()" class="px-3.5 py-1.5 border border-divider-color rounded-md bg-card-surface text-xs font-display font-bold tracking-wider hover:bg-soft-sand transition-colors flex items-center gap-1.5 shadow-2xs">
+          <span class="material-symbols-outlined text-sm text-primary-gold">translate</span>
+          <span id="langLabel">عربي</span>
+        </button>
+
+        <!-- Direct RFQ Action -->
+        <a href="#quote-terminal" class="inline-flex items-center gap-1.5 px-4 py-2 bg-charcoal text-content-offwhite text-xs font-display font-bold uppercase tracking-wider rounded-md hover:bg-primary-gold transition-colors shadow-sm">
+          <span class="material-symbols-outlined text-sm text-ulma-orange">request_quote</span>
+          <span data-i18n="cta_rfq">Request RFQ</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Capability Rail -->
+    <div class="bg-soft-sand border-t border-b border-divider-color py-1.5 px-4 overflow-x-auto no-scrollbar">
+      <div class="max-w-7xl mx-auto flex items-center justify-between min-w-max text-[11px] font-display uppercase tracking-widest text-muted-brown" id="capRail">
+        <span class="flex items-center gap-1 text-charcoal font-semibold"><span class="w-1.5 h-1.5 rounded-full bg-ulma-orange"></span> KSA LOCAL MANUFACTURING</span>
+        <span>•</span>
+        <span class="text-charcoal font-semibold">EUROPEAN ULMA ENGINEERING</span>
+        <span>•</span>
+        <span>DESIGN</span>
+        <span>•</span>
+        <span>SUPPLY</span>
+        <span>•</span>
+        <span>SUPERVISION</span>
+        <span>•</span>
+        <span>SALES</span>
+        <span>•</span>
+        <span class="text-secondary-earth font-bold">RENTAL FLEET</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN PUBLIC CONTENT WRAPPER -->
+  <main class="flex-1 pb-16 flex flex-col gap-14">
+    <div id="landingView" class="flex flex-col gap-14">
+
+    <!-- 1. FULL-WIDTH CINEMATIC VIDEO BANNER (REALISTIC CIVIL WORKS / ZERO TEXT OVERLAY) -->
+    <section class="w-full relative h-[60vh] sm:h-[72vh] min-h-[480px] max-h-[780px] overflow-hidden bg-charcoal shadow-2xl" id="hero-section">
+      <video id="heroVideo" autoplay loop muted playsinline preload="auto" poster="images/projects/metropolitan-tower-erection.jpg" class="w-full h-full object-cover gpu-layer">
+        <source id="heroVideoSource" src="assets/hero_construction.mp4" type="video/mp4"/>
+      </video>
+      <!-- Fallback Photographic Poster -->
+      <div id="heroPosterBg" class="absolute inset-0 bg-cover bg-center pointer-events-none opacity-40 mix-blend-overlay gpu-layer" style="background-image: url('images/projects/metropolitan-tower-erection.jpg');"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-black/25 pointer-events-none"></div>
+
+      <!-- Real-Time Civil Engineering Telemetry HUD (Pure Visual Context) -->
+      <div class="absolute bottom-6 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between pointer-events-none z-10">
+        <div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/65 backdrop-blur-md border border-white/20 text-white text-xs font-display tracking-widest shadow-lg">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+          <span class="font-bold uppercase tracking-wider text-[11px] sm:text-xs">CIVIL ENGINEERING & FORMWORK IN MOTION</span>
+          <span class="text-white/40 hidden sm:inline">|</span>
+          <span class="text-primary-gold font-mono text-[11px] hidden sm:inline">KSA GIGAPROJECT SITES & RIYADH INDUSTRIAL YARD</span>
+        </div>
+        <div class="hidden md:flex items-center gap-2 text-white/90 text-[11px] font-display">
+          <span class="px-3 py-1 rounded-md bg-white/10 backdrop-blur-md border border-white/15 font-mono uppercase text-primary-gold">SASO 2874</span>
+          <span class="px-3 py-1 rounded-md bg-white/10 backdrop-blur-md border border-white/15 font-mono uppercase text-ulma-orange">EN 12810 / 12812</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. HIGH-IMPACT CORPORATE POSITIONING & TRUST BADGES -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-14 sm:-mt-16 relative z-20 w-full" id="hero-statement">
+      <div class="bg-card-surface border border-divider-color rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl backdrop-blur-md flex flex-col gap-6">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="flex flex-col gap-3 max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-desert-ivory border border-primary-gold/40 rounded-full w-fit">
+              <span class="w-2 h-2 rounded-full bg-ulma-orange animate-ping"></span>
+              <span class="font-display font-bold text-xs uppercase tracking-wider text-charcoal" data-i18n="hero_badge">Sovereign Alliance • Saudi Master × ULMA</span>
+            </div>
+            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-display font-bold text-charcoal uppercase leading-tight tracking-tight" id="heroHeadline">
+              Local Manufacturing.<br/>
+              <span class="text-primary-gold">European Engineering.</span><br/>
+              One Construction Partner.
+            </h1>
+            <p class="text-sm sm:text-base text-muted-brown leading-relaxed font-body max-w-2xl" id="heroSubcopy">
+              Bespoke steel shutters, modular formwork systems, certified heavy shoring, and high-safety access scaffolding engineered for the Kingdom's most demanding gigaprojects and regional trade corridors.
+            </p>
+          </div>
+
+          <!-- Action Buttons Strip -->
+          <div class="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+            <a href="#systems-showcase" class="px-7 py-3.5 bg-charcoal text-white font-display text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-primary-gold transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg">
+              <span data-i18n="btn_explore_systems">Explore Systems</span>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+            <a href="tel:+966114009800" class="px-6 py-3.5 bg-desert-ivory border border-divider-color text-charcoal font-display text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-soft-sand transition-colors flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary-gold">engineering</span>
+              <span data-i18n="btn_talk_engineer">Talk To Engineer</span>
+            </a>
+            <a href="#quote-terminal" class="px-6 py-3.5 bg-primary-gold text-white font-display text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-secondary-earth transition-colors flex items-center justify-center gap-2 shadow-sm">
+              <span class="material-symbols-outlined text-base">upload_file</span>
+              <span data-i18n="btn_instant_rfq">Instant RFQ</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Trust Badges Strip -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-divider-color" id="trust-badges">
+          <div class="p-4 bg-desert-ivory/60 border border-divider-color rounded-xl flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary-gold/15 text-primary-gold flex items-center justify-center font-display font-bold text-xl shrink-0">
+              🇸🇦
+            </div>
+            <div>
+              <span class="block font-display font-bold text-lg text-charcoal">IKTVA 85%</span>
+              <span class="text-xs text-muted-brown uppercase tracking-wider font-semibold" data-i18n="badge_iktva">Saudi Local Content</span>
+            </div>
+          </div>
+          <div class="p-4 bg-desert-ivory/60 border border-divider-color rounded-xl flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-ulma-orange/15 text-ulma-orange flex items-center justify-center font-display font-bold text-xl shrink-0">
+              🇪🇺
+            </div>
+            <div>
+              <span class="block font-display font-bold text-lg text-charcoal">EN 12810 / 12812</span>
+              <span class="text-xs text-muted-brown uppercase tracking-wider font-semibold" data-i18n="badge_euro">European Certified</span>
+            </div>
+          </div>
+          <div class="p-4 bg-desert-ivory/60 border border-divider-color rounded-xl flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-charcoal/10 text-charcoal flex items-center justify-center font-display font-bold text-xl shrink-0">
+              ⚡
+            </div>
+            <div>
+              <span class="block font-display font-bold text-lg text-charcoal">24–48 Hours</span>
+              <span class="text-xs text-muted-brown uppercase tracking-wider font-semibold" data-i18n="badge_dispatch">KSA Site Dispatch</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. IMMERSIVE SCROLL-DRIVEN PRODUCT SHOWCASE (ZEROCO2 INSPIRATION) -->
+    <section class="w-full relative py-8" id="systems-matrix">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Editorial Section Header & Large Text Category Selector -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-divider-color">
+          <div>
+            <div class="inline-flex items-center gap-2 text-primary-gold text-xs font-display font-bold uppercase tracking-widest mb-1.5">
+              <span class="w-2 h-2 rounded-full bg-primary-gold animate-pulse"></span>
+              <span data-i18n="sec_products_kicker">OUR PRODUCTS</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-charcoal uppercase tracking-tight" data-i18n="sec_engineered_systems">
+              Engineered Systems
+            </h2>
+            <p class="text-xs sm:text-sm text-muted-brown mt-1.5 max-w-xl font-body" data-i18n="sec_products_sub">
+              Sovereign KSA fabrication and European ULMA engineering chapters discovered in continuous motion.
+            </p>
+          </div>
+
+          <!-- Editorial Category Toggle (Large Refined Text Toggle, NOT Ecommerce Tabs) -->
+          <div class="flex items-center gap-6 sm:gap-8 text-xs sm:text-sm font-display font-bold uppercase tracking-wider overflow-x-auto no-scrollbar py-2" id="editorialToggle">
+            <button onclick="switchClassification('ALL')" id="filter-ALL" class="editorial-filter pb-1.5 border-b-2 border-transparent text-muted-brown hover:text-charcoal transition-all cursor-pointer">
+              <span data-i18n="tab_all_systems">ALL PRODUCTS</span>
+            </button>
+            <button onclick="switchClassification('LOCAL')" id="filter-LOCAL" class="editorial-filter pb-1.5 border-b-2 border-primary-gold text-charcoal font-bold transition-all cursor-pointer">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-primary-gold"></span>
+                <span data-i18n="tab_local_mfg">LOCAL MANUFACTURED</span>
+              </span>
+            </button>
+            <button onclick="switchClassification('EUROPEAN')" id="filter-EUROPEAN" class="editorial-filter pb-1.5 border-b-2 border-transparent text-muted-brown hover:text-charcoal transition-all cursor-pointer">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-ulma-orange"></span>
+                <span data-i18n="tab_euro_systems">EUROPEAN SYSTEMS</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Immersive Desktop Sticky Showcase & Mobile Chapter Progression Container -->
+      <div id="productShowcaseStage" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+        <!-- Injected and updated dynamically via app.js -->
+      </div>
+    </section>
+
+    <!-- 3. FORMWORK FOR EVERY GEOMETRY (Horizontal Scroll Driven) -->
+    <section class="bg-soft-sand border-t border-b border-divider-color relative" id="geometry-section">
+      <!-- Scroll Runway for sticky horizontal driving -->
+      <div id="geometryScrollRunway" class="relative" style="height: 300vh;">
+        <!-- Sticky Viewport Window -->
+        <div class="sticky top-20 w-full overflow-hidden py-8 sm:py-12">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+              <div class="flex flex-col gap-1 max-w-2xl">
+                <span class="font-display text-xs uppercase tracking-widest text-secondary-earth font-bold" data-i18n="geom_label">Architectural Versatility</span>
+                <h2 class="text-2xl sm:text-3xl font-display font-bold text-charcoal uppercase" data-i18n="geom_title">Formwork for Every Geometry</h2>
+                <p class="text-xs sm:text-sm text-muted-brown" data-i18n="geom_subtitle">Scroll or click to transition geometries horizontally, pairing Saudi Master local steel and ULMA systems.</p>
+              </div>
+
+              <!-- Horizontal Progress & Navigation Controls -->
+              <div class="flex items-center gap-3 shrink-0">
+                <div class="flex items-center gap-1.5 px-3 py-1.5 bg-card-surface border border-divider-color rounded-full shadow-xs">
+                  <span class="w-2 h-2 rounded-full bg-primary-gold animate-pulse"></span>
+                  <span id="geometryCounterBadge" class="font-mono text-xs font-bold text-charcoal">01 / 06</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button onclick="prevGeometrySlide()" class="w-8 h-8 rounded-full bg-card-surface border border-divider-color hover:border-primary-gold text-charcoal flex items-center justify-center transition-colors shadow-xs" title="Previous Geometry">
+                    <span class="material-symbols-outlined text-sm rtl:rotate-180">arrow_back</span>
+                  </button>
+                  <button onclick="nextGeometrySlide()" class="w-8 h-8 rounded-full bg-charcoal hover:bg-primary-gold text-white flex items-center justify-center transition-colors shadow-xs" title="Next Geometry">
+                    <span class="material-symbols-outlined text-sm rtl:rotate-180">arrow_forward</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Geometry Pills Selector -->
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2 mb-6" id="geometryButtons">
+              <!-- Dynamic geometry chips -->
+            </div>
+
+            <!-- Horizontal Sliding Track Container -->
+            <div class="relative w-full overflow-hidden rounded-2xl border border-divider-color shadow-md bg-card-surface">
+              <div id="geometryTrack" class="flex transition-transform duration-500 ease-out will-change-transform" style="transform: translateX(0%);">
+                <!-- Rendered dynamically as 6 horizontal slides by app.js -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SYSTEMS IN MOTION (7-Step Horizontal Scroll Stepper) -->
+    <section class="w-full relative" id="assembly-section">
+      <!-- Scroll Runway for sticky horizontal driving -->
+      <div id="assemblyScrollRunway" class="relative" style="height: 350vh;">
+        <!-- Sticky Viewport Window -->
+        <div class="sticky top-20 w-full overflow-hidden py-8 sm:py-12">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-card-surface border border-divider-color rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col gap-6">
+              
+              <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-divider-color pb-4">
+                <div>
+                  <div class="inline-flex items-center gap-1.5 font-display text-xs uppercase tracking-wider text-ulma-orange font-bold">
+                    <span class="material-symbols-outlined text-sm">view_in_ar</span>
+                    <span data-i18n="seq_label">Systems in Motion</span>
+                  </div>
+                  <h2 class="text-2xl sm:text-3xl font-display font-bold text-charcoal uppercase mt-1" data-i18n="seq_title">Structural Assembly Protocol</h2>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-display px-3 py-1 bg-desert-ivory border border-divider-color rounded text-charcoal font-semibold hidden sm:inline">EN 12810 / SASO Certified</span>
+                  <div class="flex items-center gap-1.5 px-3 py-1 bg-charcoal text-white rounded-full font-mono text-xs font-bold">
+                    <span id="assemblyStepCounter">01 / 07</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Horizontal Sliding Stepper Track -->
+              <div class="relative w-full overflow-hidden rounded-xl">
+                <div id="assemblyTrack" class="flex transition-transform duration-500 ease-out will-change-transform" style="transform: translateX(0%);">
+                  <!-- Rendered dynamically as 7 horizontal step slides by app.js -->
+                </div>
+              </div>
+
+              <!-- Bottom Stepper Controls & Dots -->
+              <div class="flex items-center justify-between pt-4 border-t border-divider-color">
+                <button onclick="prevAssemblyStep()" class="px-4 py-2 border border-divider-color bg-desert-ivory rounded-md font-display text-xs font-bold uppercase tracking-wider hover:bg-soft-sand flex items-center gap-1 transition-colors">
+                  <span class="material-symbols-outlined text-sm rtl:rotate-180">arrow_back</span>
+                  <span data-i18n="btn_prev">Previous</span>
+                </button>
+
+                <div class="flex items-center gap-1.5" id="stepperDots"></div>
+
+                <button onclick="nextAssemblyStep()" class="px-4 py-2 bg-charcoal text-content-offwhite rounded-md font-display text-xs font-bold uppercase tracking-wider hover:bg-primary-gold flex items-center gap-1 transition-colors shadow-xs">
+                  <span data-i18n="btn_next">Next Phase</span>
+                  <span class="material-symbols-outlined text-sm rtl:rotate-180">arrow_forward</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 5-STEP LIFECYCLE (Design to Site) -->
+    <section class="bg-soft-sand border-t border-b border-divider-color py-12" id="services-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-8">
+        
+        <div>
+          <span class="font-display text-xs uppercase tracking-widest text-primary-gold font-bold" data-i18n="svc_protocol">Full Lifecycle Protocol</span>
+          <h2 class="text-2xl sm:text-3xl font-display font-bold text-charcoal uppercase mt-1" data-i18n="svc_from_design">From Design to Site</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" id="servicesCards">
+          <!-- Populated dynamically -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. IN-KINGDOM MANUFACTURING PROCESSES -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" id="manufacturing-section">
+      <div class="flex flex-col gap-6">
+        
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-divider-color pb-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 font-display text-xs uppercase tracking-wider text-primary-gold font-bold">
+              <span class="material-symbols-outlined text-sm">precision_manufacturing</span>
+              <span data-i18n="mfg_badge">In-Kingdom Infrastructure</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-display font-bold text-charcoal uppercase mt-1" data-i18n="mfg_title">
+              Manufactured Here. Ready for the Kingdom.
+            </h2>
+          </div>
+          <div class="flex items-center gap-2 px-3 py-1 bg-card-surface border border-divider-color rounded-md">
+            <span class="material-symbols-outlined text-sm text-ulma-orange">verified</span>
+            <span class="font-display font-bold text-xs">IKTVA 85% Certified</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="manufacturingStepsGrid">
+          <!-- 6-Stage factory processes -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. SAUDI MEGAPROJECTS PORTFOLIO -->
+    <section class="bg-soft-sand border-t border-b border-divider-color py-12" id="projects-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-6">
+        
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-divider-color pb-4">
+          <div>
+            <span class="font-display text-xs uppercase tracking-widest text-primary-gold font-bold" data-i18n="proj_badge">Kingdom Gigaprojects</span>
+            <h2 class="text-2xl sm:text-3xl font-display font-bold text-charcoal uppercase mt-1" data-i18n="proj_title">Proven Project Deployments</h2>
+          </div>
+          <span class="text-xs font-display text-muted-brown">NEOM • Red Sea • Riyadh Metro • Qiddiya</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projectsGrid">
+          <!-- Populated from DB -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8. RFQ DRAWING UPLOAD & CONSULTATION TERMINAL -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" id="quote-terminal">
+      <div class="bg-charcoal text-content-offwhite rounded-2xl p-6 sm:p-12 shadow-xl border border-divider-color/20">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            <span class="font-display text-xs uppercase tracking-widest text-primary-gold font-bold" data-i18n="rfq_badge">Engineering Consultation</span>
+            <h2 class="text-2xl sm:text-4xl font-display font-bold uppercase tracking-tight leading-tight" data-i18n="rfq_headline">
+              Bring Us The Structure.<br/>
+              <span class="text-primary-gold">We'll Engineer The System.</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-soft-sand/80 leading-relaxed" data-i18n="rfq_subcopy">
+              Upload your structural drawings or CAD layouts for instant temporary works review, FEA stress verification, and quotation from our senior engineering team in Riyadh.
+            </p>
+
+            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex items-center gap-3 mt-4">
+              <div class="w-10 h-10 rounded-full bg-primary-gold text-charcoal flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-lg">call</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[10px] font-display uppercase tracking-widest text-soft-sand" data-i18n="rfq_phone_label">Senior Engineer Direct Line</span>
+                <span class="font-display font-bold text-sm sm:text-base text-content-offwhite">+966 11 400 9800</span>
+              </div>
+            </div>
+
+            <!-- WhatsApp Instant Escalation -->
+            <a href="https://wa.me/966500000000?text=Hello%20Saudi%20Master%20ULMA%20Engineering%20Desk%2C%20I%20have%20an%20RFQ%20for%20a%20project." target="_blank" class="w-full py-2.5 bg-[#25D366] text-white rounded-md font-display text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-95 transition-opacity">
+              <span class="material-symbols-outlined text-base">chat</span>
+              <span data-i18n="rfq_whatsapp">Chat on WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- RFQ Form Submission Card -->
+          <div class="lg:col-span-7 bg-card-surface text-charcoal rounded-xl p-6 sm:p-8 border border-divider-color shadow-lg">
+            <form id="rfqForm" onsubmit="handleRfqSubmit(event)" class="flex flex-col gap-4">
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-display font-semibold uppercase text-muted-brown" data-i18n="form_name">Full Name & Title *</label>
+                  <input type="text" id="rfq_name" required placeholder="Eng. Fahad Al-Otaibi" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm focus:outline-none focus:ring-1 focus:ring-primary-gold"/>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-display font-semibold uppercase text-muted-brown" data-i18n="form_company">Company Name *</label>
+                  <input type="text" id="rfq_company" required placeholder="Al Bawani Contracting" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm focus:outline-none focus:ring-1 focus:ring-primary-gold"/>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-display font-semibold uppercase text-muted-brown" data-i18n="form_email">Email *</label>
+                  <input type="email" id="rfq_email" required placeholder="f.otaibi@company.sa" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm focus:outline-none focus:ring-1 focus:ring-primary-gold"/>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-display font-semibold uppercase text-muted-brown" data-i18n="form_phone">Phone (KSA / GCC) *</label>
+                  <input type="tel" id="rfq_phone" required placeholder="+966 50 123 4567" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm focus:outline-none focus:ring-1 focus:ring-primary-gold"/>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-display font-semibold uppercase text-muted-brown" data-i18n="form_system">System Requirement</label>
+                  <select id="rfq_system" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm focus:outline-none focus:ring-1 focus:ring-primary-gold">
+                    <option value="Cuplock Scaffolding">Cuplock Scaffolding (Sales / Rental)</option>
+                    <option value="ULMA BRIO Ringlock">ULMA BRIO Multidirectional Ringlock</option>
+                    <option value="ULMA ORMA Modular Formwork">ULMA ORMA / CC-4 Wall & Slab Formwork</option>
+                    <option value="ULMA Heavy Shoring MK">Heavy Shoring Towers (MK / T-500)</option>
+                    <option value="Bespoke Highway Piers & Manholes">Bespoke Bridge Pier & Manhole Moulds</option>
+                  </select>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-display font-semibold uppercase text-muted-brown" data-i18n="form_type">Transaction Type</label>
+                  <select id="rfq_type" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm focus:outline-none focus:ring-1 focus:ring-primary-gold">
+                    <option value="RENTAL">Rental Fleet (KSA)</option>
+                    <option value="PURCHASE">Direct Purchase / Custom Fabrication</option>
+                    <option value="SUPERVISION">Engineering Design & Site Supervision</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" id="rfqSubmitBtn" class="w-full py-3 bg-charcoal text-content-offwhite font-display text-xs font-bold uppercase tracking-wider rounded hover:bg-primary-gold transition-colors flex items-center justify-center gap-2 shadow-sm">
+                <span data-i18n="form_btn">Dispatch Spec to Engineering Desk</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+
+              <div id="rfqSuccessToast" class="hidden p-3 bg-green-50 border border-green-200 text-green-800 rounded text-xs flex items-center gap-2">
+                <span class="material-symbols-outlined text-green-600">check_circle</span>
+                <span id="rfqSuccessMsg">RFQ registered successfully! Ticket created.</span>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    </div><!-- /#landingView -->
+
+    <!-- DEDICATED PRODUCT DETAIL VIEW (SPA ROUTE: /products/{slug}) -->
+    <section id="productDetailView" class="hidden w-full bg-desert-ivory py-8 transition-all duration-300 min-h-[80vh]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="productDetailContainer">
+        <!-- Rendered dynamically via renderProductDetailPage(slug) in app.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CORPORATE FOOTER -->
+  <footer class="bg-footer-dark text-soft-sand pt-12 pb-8 border-t border-divider-color/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded bg-primary-gold text-charcoal flex items-center justify-center font-display font-bold text-sm">SM</div>
+            <span class="font-display font-bold text-content-offwhite text-sm uppercase">Saudi Master × ULMA</span>
+          </div>
+          <p class="text-xs text-soft-sand/70 leading-relaxed" data-i18n="footer_about">
+            Engineering sovereign heavy-civil formwork, high-load shoring towers, and certified modular scaffolding across the Kingdom of Saudi Arabia.
+          </p>
+          <div class="text-[11px] font-display text-primary-gold uppercase">
+            Vision 2030 Partner • ISO 9001:2015
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2 text-xs">
+          <span class="font-display font-bold text-content-offwhite uppercase tracking-wider mb-1" data-i18n="footer_hq">Riyadh Central HQ</span>
+          <span data-i18n="footer_addr">Al-Malaz District, Industrial Corridor, PO Box 41293 Riyadh, KSA</span>
+          <span>Phone: +966 11 400 9800</span>
+          <span>Email: engineering@saudimaster.com</span>
+        </div>
+
+        <div class="flex flex-col gap-2 text-xs">
+          <span class="font-display font-bold text-content-offwhite uppercase tracking-wider mb-1" data-i18n="footer_yards">Logistics Yards</span>
+          <span data-i18n="yard_ryd">Riyadh Central Distribution Yard</span>
+          <span data-i18n="yard_dam">Dammam 2nd Industrial Yard</span>
+          <span data-i18n="yard_jed">Jeddah Maritime Logistics Hub</span>
+          <span data-i18n="yard_neom">NEOM Forward Tactical Base (Tabuk)</span>
+        </div>
+
+      </div>
+
+      <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] text-soft-sand/50">
+        <span data-i18n="footer_rights">© 2025 Saudi Master Company (ULMA Alliance). All rights reserved.</span>
+        <span data-i18n="footer_motto">Sovereign KSA Manufacturing & European Engineering.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- SCRIPT ENGINE -->
+  <script src="js/seed_data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin & CMS Portal | Saudi Master × ULMA Construction</title>
+  <!-- Pre-Compiled Static High-Performance Tailwind CSS (Zero Runtime JIT Overhead) -->
+  <link rel="stylesheet" href="css/styles.css"/>
+
+  <style>
+    body {
+      background-color: #F5F0E6;
+      color: #25231F;
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    .tab-active {
+      background-color: #25231F !important;
+      color: #FAF8F3 !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-desert-ivory">
+
+  <!-- ADMIN TOPBAR -->
+  <header class="bg-charcoal text-content-offwhite px-6 py-4 flex flex-wrap items-center justify-between border-b border-white/10 shadow-md gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded bg-primary-gold text-charcoal flex items-center justify-center font-display font-bold text-lg shadow-sm">
+        SM
+      </div>
+      <div>
+        <h1 class="font-display font-bold text-sm sm:text-base uppercase tracking-wider text-white">
+          Saudi Master × ULMA Construction | CMS Portal
+        </h1>
+        <span class="text-[11px] text-soft-sand/70 font-display">Full Production Content & Relational Management Interface</span>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3 text-xs font-display">
+      <button onclick="resetFactoryDefaults()" class="px-3 py-1.5 rounded bg-red-950/60 border border-red-700/60 text-red-300 hover:bg-red-900 transition-colors flex items-center gap-1.5" title="Clear all local CMS overrides and restore factory data">
+        <span class="material-symbols-outlined text-sm">restart_alt</span>
+        <span class="hidden sm:inline">Reset Factory Defaults</span>
+      </button>
+      <a href="/" target="_blank" class="px-3.5 py-1.5 rounded bg-white/10 text-soft-sand hover:text-white flex items-center gap-1.5 transition-colors border border-white/10">
+        <span class="material-symbols-outlined text-sm">open_in_new</span>
+        <span>View Public Website</span>
+      </a>
+      <div class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-green-950/60 border border-green-700/50 text-green-300">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        <span class="font-bold">Live Synced</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <div class="bg-soft-sand border-b border-divider-color px-6 py-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+    <button onclick="setTab('products')" id="tab-btn-products" class="tab-active px-3.5 py-2 rounded font-display text-xs font-bold uppercase transition-all shrink-0">
+      Products Manager
+    </button>
+    <button onclick="setTab('hero')" id="tab-btn-hero" class="px-3.5 py-2 rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-card-surface transition-all shrink-0">
+      Hero & Video Banner
+    </button>
+    <button onclick="setTab('sections')" id="tab-btn-sections" class="px-3.5 py-2 rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-card-surface transition-all shrink-0">
+      Section Visibility
+    </button>
+    <button onclick="setTab('geometries')" id="tab-btn-geometries" class="px-3.5 py-2 rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-card-surface transition-all shrink-0">
+      Geometries CMS
+    </button>
+    <button onclick="setTab('projects')" id="tab-btn-projects" class="px-3.5 py-2 rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-card-surface transition-all shrink-0">
+      Projects Portfolio
+    </button>
+    <button onclick="setTab('processes')" id="tab-btn-processes" class="px-3.5 py-2 rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-card-surface transition-all shrink-0">
+      KSA Manufacturing
+    </button>
+    <button onclick="setTab('leads')" id="tab-btn-leads" class="px-3.5 py-2 rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-card-surface transition-all shrink-0">
+      Inbound RFQs (<span id="rfqBadgeCount">0</span>)
+    </button>
+    <button onclick="setTab('settings')" id="tab-btn-settings" class="px-3.5 py-2 rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-card-surface transition-all shrink-0">
+      Site Settings
+    </button>
+  </div>
+
+  <!-- MAIN ADMIN BODY -->
+  <main class="max-w-7xl mx-auto w-full p-6 flex-1 flex flex-col gap-6" id="adminMainContainer">
+    <!-- Populated by JS -->
+  </main>
+
+  <script src="js/seed_data.js"></script>
+  <script>
+    let currentTab = 'products';
+    let db = window.DB_SNAPSHOT || {};
+
+    const defaultHeroConfig = {
+      title_en: 'Local Manufacturing.<br/><span class="text-primary-gold">European Engineering.</span><br/>One Construction Partner.',
+      title_ar: 'تصنيع سعودي محلي.<br/><span class="text-primary-gold">هندسة أوروبية متقدمة.</span><br/>شريك إنشائي متكامل.',
+      subcopy_en: "Bespoke steel shutters, modular formwork systems, certified heavy shoring, and high-safety access scaffolding engineered for the Kingdom's most demanding gigaprojects and regional trade corridors.",
+      subcopy_ar: "شدات فولاذية متطورة، قوالب صب معيارية، أبراج تدعيم ثقيل للجسور، وسقالات وصول عالية الأمان مصممة خصيصاً لمشاريع المملكة الكبرى والشرق الأوسط.",
+      video_url: 'assets/hero_construction.mp4',
+      poster_url: 'images/projects/metropolitan-tower-erection.jpg',
+      iktva: 'IKTVA 85%',
+      euro: 'EN 12810',
+      dispatch: '24-48h'
+    };
+
+    const defaultSections = [
+      { id: 'hero-section', name: 'Cinematic Hero Statement', type: 'HERO', visible: true },
+      { id: 'trust-badges', name: 'Trust Badges (IKTVA, EN, Dispatch)', type: 'BADGES', visible: true },
+      { id: 'systems-matrix', name: 'Product Classification Engine & Catalog', type: 'PRODUCT_TABS', visible: true },
+      { id: 'geometry-section', name: 'Formwork for Every Geometry Explorer', type: 'GEOMETRY_EXPLORER', visible: true },
+      { id: 'assembly-section', name: 'Systems in Motion (7-Step Assembly Stepper)', type: 'ASSEMBLY_SEQUENCE', visible: true },
+      { id: 'services-section', name: 'From Design to Site (5-Step Protocol)', type: 'SERVICES', visible: true },
+      { id: 'manufacturing-section', name: 'In-Kingdom Manufacturing Infrastructure', type: 'MANUFACTURING', visible: true },
+      { id: 'projects-section', name: 'Kingdom Gigaprojects Portfolio', type: 'PROJECTS', visible: true },
+      { id: 'quote-terminal', name: 'Engineering Consultation & RFQ Terminal', type: 'FINAL_CTA', visible: true }
+    ];
+
+    const defaultGeometries = [
+      {
+        id: 'wall',
+        name_en: 'Wall & Shear',
+        name_ar: 'جدران وقص',
+        code: 'ULMA ORMA + SM Walers',
+        title_en: 'Monolithic Retaining & Shear Walls',
+        title_ar: 'حوائط القص والجدران الاستنادية المصمتة',
+        desc_en: 'Engineered for swift cycle repetitions. Integrates ULMA modular wall panels with locally fabricated high-load alignment struts to hold lateral pressure up to 80 kN/m².',
+        desc_ar: 'مصممة لدورات صب سريعة ومتكررة. تدمج ألواح أورما المعيارية مع دعامات تقوية محلية تتحمل ضغط خرسانة حتى 80 كيلو نيوتن/م².',
+        image: 'images/projects/metropolitan-slipform-core.jpg',
+        p1_label_en: 'Pressure Capacity',
+        p1_label_ar: 'تحمل ضغط الخرسانة',
+        p1_val: '80 kN/m²',
+        p2_label_en: 'Striking Speed',
+        p2_label_ar: 'سرعة الفك والتدوير',
+        p2_val: '0.25 hr/m²'
+      },
+      {
+        id: 'column',
+        name_en: 'Column',
+        name_ar: 'أعمدة صقيلة',
+        code: 'SM Rolled Shells + ULMA LGR',
+        title_en: 'Circular & Rectangular High-Speed Columns',
+        title_ar: 'الأعمدة الدائرية والمستطيلة فائقة النعومة',
+        desc_en: 'Custom-rolled high-tensile steel half-cylinders and universal clamp assemblies for fair-faced columns up to 100 kN/m² pour speeds.',
+        desc_ar: 'أنصاف قوالب فولاذية مدرفلة مخصصة لصب الأعمدة الصقيلة Class A بسرعة صب هيدروستاتيكي تصل إلى 100 كيلو نيوتن/م² بدون عيوب.',
+        image: 'images/projects/sovereign-wealth-atrium.jpg',
+        p1_label_en: 'Pour Pressure',
+        p1_label_ar: 'ضغط الصب الأقصى',
+        p1_val: '100 kN/m²',
+        p2_label_en: 'Diameter Range',
+        p2_label_ar: 'أقطار متوفرة',
+        p2_val: 'Ø300 – Ø2000mm'
+      },
+      {
+        id: 'circular',
+        name_en: 'Circular & Tanks',
+        name_ar: 'خزانات وصوامع',
+        code: 'ULMA BIRAMAX + SM Radius Walers',
+        title_en: 'Curved Containment & Silo Structures',
+        title_ar: 'المنشآت المنحنية وخزانات المياه والصوامع',
+        desc_en: 'Continuously adjustable radius wall formwork engineered for wastewater treatment digesters and cylindrical water storage tanks.',
+        desc_ar: 'شدات حوائط بنصف قطر قابل للتعديل المستمر مصممة لخزانات معالجة المياه وصوامع الحبوب والغاز الطبيعي المسال.',
+        image: 'images/projects/stadium-canopy.jpg',
+        p1_label_en: 'Concrete Proof',
+        p1_label_ar: 'مقاومة الضغط',
+        p1_val: '60 kN/m²',
+        p2_label_en: 'Min Radius',
+        p2_label_ar: 'أقل نصف قطر',
+        p2_val: 'Radius ≥ 2.5m'
+      },
+      {
+        id: 'slab',
+        name_en: 'Slab & Deck',
+        name_ar: 'أسقف وبلاطات',
+        code: 'ULMA CC-4 Drop-Head + SM Props',
+        title_en: 'Rapid Post-Tensioned & Flat Slabs',
+        title_ar: 'الأسقف المستوية والبلاطات مسبقة الإجهاد',
+        desc_en: 'Aluminum drop-head modular decking enabling 3-day striking cycles while leaving shoring props untouched, reducing inventory on-site by 40%.',
+        desc_ar: 'نظام أسقف ألومنيوم برؤوس إسقاط سريعة يتيح فك الألواح بعد 3 أيام مع إبقاء الركائز داعمة، مما يخفض تكلفة المعدات بنسبة 40%.',
+        image: 'images/projects/sovereign-atrium-millwork.jpg',
+        p1_label_en: 'Slab Thickness',
+        p1_label_ar: 'سماكة البلاطة',
+        p1_val: 'Up to 90cm',
+        p2_label_en: 'Striking Cycle',
+        p2_label_ar: 'دورة فك الشدة',
+        p2_val: '72 Hours'
+      },
+      {
+        id: 'high-rise',
+        name_en: 'High-Rise Core',
+        name_ar: 'أبراج شاهقة',
+        code: 'ULMA ATR Hydraulic Self-Climbing',
+        title_en: 'Wind-Shielded High-Rise Cores',
+        title_ar: 'قلوب الأبراج وأنظمة التسلق الهيدروليكي الآلي',
+        desc_en: 'Crane-free self-climbing hydraulic system carrying multi-tiered placing booms, formwork panels, and weather shields up skyscraper towers.',
+        desc_ar: 'منظومة تسلق ذاتية بدون رافعة برجية ترفع شدات الحوائط ومضخات الخرسانة وشاشات حماية الرياح لأطول ناطحات السحاب.',
+        image: 'images/projects/metropolitan-tower-erection.jpg',
+        p1_label_en: 'Lifting Cylinder',
+        p1_label_ar: 'قدرة المكبس',
+        p1_val: '100 kN Force',
+        p2_label_en: 'Wind Safety',
+        p2_label_ar: 'مقاومة الرياح',
+        p2_val: '72 km/h Safe'
+      },
+      {
+        id: 'bridge',
+        name_en: 'Bridge & Viaduct',
+        name_ar: 'جسور وأنفاق',
+        code: 'ULMA MK Carriage & Heavy Shoring',
+        title_en: 'Cantilever & Launching Bridge Systems',
+        title_ar: 'عربات صب الجسور وأبراج التدعيم الجبارة',
+        desc_en: 'Specialized modular trusses for balanced cantilever bridges, composite decks, and high-clearance overpass flyovers.',
+        desc_ar: 'جمالونات فولاذية متطورة للجسور المعلقة والأنفاق تتيح فتح مسارات مرورية عريضة أسفل منطقة العمل دون إغلاق الطرق.',
+        image: 'images/projects/infrastructure-bridge.jpg',
+        p1_label_en: 'Leg Capacity',
+        p1_label_ar: 'تحمل القائم',
+        p1_val: '500 kN / Leg',
+        p2_label_en: 'Clear Span',
+        p2_label_ar: 'البحور المفتوحة',
+        p2_val: 'Up to 24m'
+      }
+    ];
+
+    function loadOverrides() {
+      if (localStorage.getItem('sm_products_override')) {
+        try { db.products = JSON.parse(localStorage.getItem('sm_products_override')); } catch(e) {}
+      }
+      if (localStorage.getItem('sm_site_override')) {
+        try { db.site = JSON.parse(localStorage.getItem('sm_site_override')); } catch(e) {}
+      }
+      if (localStorage.getItem('sm_projects_override')) {
+        try { db.projects = JSON.parse(localStorage.getItem('sm_projects_override')); } catch(e) {}
+      }
+      if (localStorage.getItem('sm_processes_override')) {
+        try { db.processes = JSON.parse(localStorage.getItem('sm_processes_override')); } catch(e) {}
+      }
+    }
+
+    loadOverrides();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateRfqCount();
+      renderCurrentTab();
+    });
+
+    function updateRfqCount() {
+      const el = document.getElementById('rfqBadgeCount');
+      if (el && db.leads) el.innerText = db.leads.length;
+    }
+
+    function setTab(tab) {
+      currentTab = tab;
+      ['products', 'hero', 'sections', 'geometries', 'projects', 'processes', 'leads', 'settings'].forEach(t => {
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (btn) {
+          if (t === tab) {
+            btn.className = 'tab-active px-3.5 py-2 rounded font-display text-xs font-bold uppercase transition-all shrink-0';
+          } else {
+            btn.className = 'px-3.5 py-2 rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-card-surface transition-all shrink-0';
+          }
+        }
+      });
+      renderCurrentTab();
+    }
+
+    function renderCurrentTab() {
+      const container = document.getElementById('adminMainContainer');
+      if (!container) return;
+
+      if (currentTab === 'products') {
+        container.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between border-b border-divider-color pb-4 gap-4">
+            <div>
+              <h2 class="text-xl font-display font-bold uppercase text-charcoal">Systems & Product Inventory (${db.products ? db.products.length : 0})</h2>
+              <p class="text-xs text-muted-brown">Configure product photos, SKUs, classifications, and bilingual technical specifications.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="addNewProductModal()" class="px-4 py-2 bg-charcoal text-white rounded font-display text-xs font-bold uppercase tracking-wider hover:bg-primary-gold flex items-center gap-1.5 shadow-sm">
+                <span class="material-symbols-outlined text-sm">add_box</span>
+                <span>Add New System</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto rounded-xl border border-divider-color bg-card-surface shadow-sm">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-desert-ivory text-muted-brown uppercase font-display border-b border-divider-color">
+                <tr>
+                  <th class="py-3 px-4">Preview</th>
+                  <th class="py-3 px-4">SKU</th>
+                  <th class="py-3 px-4">English Title</th>
+                  <th class="py-3 px-4 font-arabic" dir="rtl">الاسم العربي</th>
+                  <th class="py-3 px-4">Classification</th>
+                  <th class="py-3 px-4">Commercial</th>
+                  <th class="py-3 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${(db.products || []).map(p => `
+                  <tr class="border-b border-divider-color hover:bg-desert-ivory/40">
+                    <td class="py-2 px-4">
+                      <img src="${p.main_image || p.hero_image}" alt="${p.sku}" class="w-12 h-10 object-cover rounded border border-divider-color bg-charcoal" onerror="this.src='data:image/svg+xml;charset=utf-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'48\' height=\'40\' viewBox=\'0 0 48 40\'%3E%3Crect width=\'48\' height=\'40\' fill=\'%231C2024\'/ %3E%3Ctext x=\'24\' y=\'24\' font-size=\'8\' fill=\'%23B58A52\' text-anchor=\'middle\'%3ECAD%3C/text%3E%3C/svg%3E'"/>
+                    </td>
+                    <td class="py-3 px-4 font-display font-bold text-primary-gold">${p.sku}</td>
+                    <td class="py-3 px-4 font-semibold text-charcoal">${p.name_en}</td>
+                    <td class="py-3 px-4 font-arabic text-charcoal" dir="rtl">${p.name_ar}</td>
+                    <td class="py-3 px-4">
+                      <span class="px-2 py-0.5 rounded text-[10px] font-display font-bold ${p.class_code === 'LOCAL' ? 'bg-primary-gold text-white' : 'bg-ulma-orange text-white'}">
+                        ${p.class_code}
+                      </span>
+                    </td>
+                    <td class="py-3 px-4 text-[11px] font-display">
+                      ${p.sales_available ? 'Sales' : ''} ${p.rental_available ? '+ Rental' : ''}
+                    </td>
+                    <td class="py-3 px-4 text-right space-x-1">
+                      <button onclick="editProductPrompt(${p.id})" class="px-3 py-1 bg-charcoal text-white rounded font-display text-[11px] font-bold uppercase hover:bg-primary-gold">
+                        Edit
+                      </button>
+                      <button onclick="deleteProductPrompt(${p.id})" class="px-2.5 py-1 bg-red-100 text-red-700 rounded font-display text-[11px] font-bold uppercase hover:bg-red-200">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      } else if (currentTab === 'hero') {
+        let hero = defaultHeroConfig;
+        if (localStorage.getItem('sm_hero_override')) {
+          try { hero = Object.assign({}, defaultHeroConfig, JSON.parse(localStorage.getItem('sm_hero_override'))); } catch(e) {}
+        }
+
+        container.innerHTML = `
+          <div class="border-b border-divider-color pb-3">
+            <h2 class="text-xl font-display font-bold uppercase text-charcoal">Hero Section & Video Banner CMS</h2>
+            <p class="text-xs text-muted-brown">Configure the cinematic banner, video feed stream, fallback photography, and bilingual headlines.</p>
+          </div>
+
+          <form onsubmit="saveHeroConfig(event)" class="bg-card-surface border border-divider-color rounded-xl p-6 shadow-sm flex flex-col gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-display font-semibold uppercase text-muted-brown">Hero Headline (English - HTML supported)</label>
+                <textarea rows="3" id="hero_title_en" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm font-display">${hero.title_en}</textarea>
+              </div>
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-display font-semibold uppercase text-muted-brown font-arabic" dir="rtl">عنوان الواجهة (عربي - يدعم وسوم التنسيق)</label>
+                <textarea rows="3" id="hero_title_ar" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm font-arabic" dir="rtl">${hero.title_ar}</textarea>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-display font-semibold uppercase text-muted-brown">Hero Subcopy (English)</label>
+                <textarea rows="3" id="hero_sub_en" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm">${hero.subcopy_en}</textarea>
+              </div>
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-display font-semibold uppercase text-muted-brown font-arabic" dir="rtl">النص التوضيحي للواجهة (عربي)</label>
+                <textarea rows="3" id="hero_sub_ar" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm font-arabic" dir="rtl">${hero.subcopy_ar}</textarea>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-display font-semibold uppercase text-muted-brown">Cinematic Hero Video URL (MP4 stream)</label>
+                <input type="url" id="hero_video_url" value="${hero.video_url}" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+                <span class="text-[11px] text-muted-brown">The public site plays this video automatically in a loop with zero text overlay.</span>
+              </div>
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-display font-semibold uppercase text-muted-brown">Hero Poster Background Image (High-Res Fallback Photo)</label>
+                <input type="url" id="hero_poster_url" onchange="document.getElementById('heroPosterPreview').src=this.value" value="${hero.poster_url}" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+                <div class="mt-2 flex items-center gap-3">
+                  <img id="heroPosterPreview" src="${hero.poster_url}" alt="Hero Poster Preview" class="h-16 w-32 object-cover rounded border border-divider-color bg-charcoal"/>
+                  <span class="text-[11px] text-muted-brown">Displayed behind the video and while streaming loads.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="border-t border-divider-color pt-4">
+              <h4 class="font-display font-bold text-xs uppercase text-charcoal mb-3">Trust Strip Badges</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="flex flex-col gap-1">
+                  <label class="text-[11px] font-display font-semibold uppercase text-muted-brown">IKTVA Badge</label>
+                  <input type="text" id="hero_badge_iktva" value="${hero.iktva}" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-[11px] font-display font-semibold uppercase text-muted-brown">Euro Norm Badge</label>
+                  <input type="text" id="hero_badge_euro" value="${hero.euro}" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-[11px] font-display font-semibold uppercase text-muted-brown">Dispatch Speed Badge</label>
+                  <input type="text" id="hero_badge_dispatch" value="${hero.dispatch}" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-end pt-4 border-t border-divider-color">
+              <button type="submit" class="px-6 py-2.5 bg-charcoal text-white rounded font-display text-xs font-bold uppercase tracking-wider hover:bg-primary-gold transition-colors shadow-sm">
+                Save Hero Configuration
+              </button>
+            </div>
+          </form>
+        `;
+      } else if (currentTab === 'sections') {
+        let sections = defaultSections;
+        if (localStorage.getItem('sm_sections_override')) {
+          try { sections = JSON.parse(localStorage.getItem('sm_sections_override')); } catch(e) {}
+        }
+
+        container.innerHTML = `
+          <div class="border-b border-divider-color pb-3">
+            <h2 class="text-xl font-display font-bold uppercase text-charcoal">Homepage Section Visibility Builder</h2>
+            <p class="text-xs text-muted-brown">Toggle visibility for each section dynamically without modifying code.</p>
+          </div>
+
+          <div class="flex flex-col gap-3">
+            ${sections.map((s, idx) => `
+              <div class="p-4 bg-card-surface border border-divider-color rounded-xl flex items-center justify-between shadow-2xs">
+                <div class="flex items-center gap-3">
+                  <span class="w-8 h-8 rounded bg-desert-ivory text-charcoal font-display font-bold text-xs flex items-center justify-center border border-divider-color">0${idx+1}</span>
+                  <div>
+                    <h3 class="font-display font-bold text-xs sm:text-sm uppercase text-charcoal">${s.name}</h3>
+                    <span class="text-[10px] text-muted-brown font-display uppercase tracking-wider font-mono">#${s.id} • ${s.type}</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                  <span class="px-2.5 py-1 rounded text-[10px] font-display font-bold uppercase ${s.visible ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                    ${s.visible ? 'Published' : 'Hidden'}
+                  </span>
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" onchange="toggleSection('${s.id}', this.checked)" ${s.visible ? 'checked' : ''} class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-charcoal"></div>
+                  </label>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (currentTab === 'geometries') {
+        let geoms = defaultGeometries;
+        if (localStorage.getItem('sm_geometries_override')) {
+          try { geoms = JSON.parse(localStorage.getItem('sm_geometries_override')); } catch(e) {}
+        }
+
+        container.innerHTML = `
+          <div class="border-b border-divider-color pb-3 flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-display font-bold uppercase text-charcoal">Architectural Geometries CMS (${geoms.length})</h2>
+              <p class="text-xs text-muted-brown">Configure engineering pairs, specifications, and imagery for each structural geometry.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${geoms.map(g => `
+              <div class="p-5 bg-card-surface border border-divider-color rounded-xl flex flex-col justify-between gap-4 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <img src="${g.image}" alt="${g.title_en}" class="w-24 h-20 object-cover rounded-lg border border-divider-color bg-charcoal shrink-0"/>
+                  <div>
+                    <span class="px-2 py-0.5 rounded bg-desert-ivory text-primary-gold text-[10px] font-display font-bold uppercase">${g.code}</span>
+                    <h3 class="font-display font-bold text-sm text-charcoal uppercase mt-1">${g.title_en}</h3>
+                    <p class="text-xs text-muted-brown font-arabic mt-0.5" dir="rtl">${g.title_ar}</p>
+                    <p class="text-xs text-muted-brown line-clamp-2 mt-1 font-body">${g.desc_en}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-3 border-t border-divider-color">
+                  <span class="text-[11px] font-display text-secondary-earth font-semibold">${g.p1_label_en}: ${g.p1_val}</span>
+                  <button onclick="editGeometryModal('${g.id}')" class="px-3 py-1 bg-charcoal text-white rounded font-display text-[11px] font-bold uppercase hover:bg-primary-gold">
+                    Edit Geometry
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (currentTab === 'projects') {
+        const prjs = db.projects || [];
+        container.innerHTML = `
+          <div class="border-b border-divider-color pb-3">
+            <h2 class="text-xl font-display font-bold uppercase text-charcoal">Kingdom Gigaprojects Portfolio (${prjs.length})</h2>
+            <p class="text-xs text-muted-brown">Edit case study images, locations, sector tags, and quantitative delivery metrics.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${prjs.map(p => `
+              <div class="p-5 bg-card-surface border border-divider-color rounded-xl flex flex-col justify-between gap-4 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <img src="${p.hero_image || 'https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=400&q=80'}" alt="${p.name_en}" class="w-24 h-24 object-cover rounded-lg border border-divider-color bg-charcoal shrink-0"/>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between">
+                      <span class="px-2 py-0.5 rounded bg-desert-ivory text-primary-gold text-[10px] font-display font-bold uppercase">${p.industry_en}</span>
+                      <span class="text-[11px] font-display text-muted-brown font-semibold">${p.location_en}</span>
+                    </div>
+                    <h3 class="font-display font-bold text-sm text-charcoal uppercase mt-1">${p.name_en}</h3>
+                    <p class="text-xs text-muted-brown font-arabic" dir="rtl">${p.name_ar}</p>
+                    <p class="text-xs text-muted-brown line-clamp-2 mt-1.5">${p.summary_en}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-3 border-t border-divider-color">
+                  <div class="flex gap-2">
+                    ${(p.metrics || []).map(m => `
+                      <span class="text-[10px] font-display bg-desert-ivory px-2 py-0.5 rounded text-charcoal font-semibold">${m.label}: ${m.value}</span>
+                    `).join('')}
+                  </div>
+                  <button onclick="editProjectModal(${p.id})" class="px-3 py-1 bg-charcoal text-white rounded font-display text-[11px] font-bold uppercase hover:bg-primary-gold">
+                    Edit Project
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (currentTab === 'processes') {
+        const procs = db.processes || [];
+        container.innerHTML = `
+          <div class="border-b border-divider-color pb-3">
+            <h2 class="text-xl font-display font-bold uppercase text-charcoal">KSA Manufacturing Infrastructure (${procs.length})</h2>
+            <p class="text-xs text-muted-brown">Configure factory workflow stages, technical equipment descriptions, and process photos.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${procs.map(pr => `
+              <div class="p-5 bg-card-surface border border-divider-color rounded-xl flex flex-col justify-between gap-4 shadow-sm">
+                <div class="flex items-start gap-4">
+                  <img src="${pr.hero_image || 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80'}" alt="${pr.name_en}" class="w-24 h-20 object-cover rounded-lg border border-divider-color bg-charcoal shrink-0"/>
+                  <div class="flex-1">
+                    <span class="px-2 py-0.5 rounded bg-desert-ivory text-primary-gold text-[10px] font-display font-bold uppercase">${pr.step_tag}</span>
+                    <h3 class="font-display font-bold text-sm text-charcoal uppercase mt-1">${pr.name_en}</h3>
+                    <p class="text-xs text-muted-brown font-arabic" dir="rtl">${pr.name_ar}</p>
+                    <p class="text-xs text-muted-brown line-clamp-2 mt-1">${pr.summary_en}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-end pt-3 border-t border-divider-color">
+                  <button onclick="editProcessModal(${pr.step_number})" class="px-3 py-1 bg-charcoal text-white rounded font-display text-[11px] font-bold uppercase hover:bg-primary-gold">
+                    Edit Process
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (currentTab === 'leads') {
+        container.innerHTML = `
+          <div class="flex items-center justify-between border-b border-divider-color pb-3">
+            <div>
+              <h2 class="text-xl font-display font-bold uppercase text-charcoal">Inbound Technical RFQs (${db.leads ? db.leads.length : 0})</h2>
+              <p class="text-xs text-muted-brown">All tender specifications submitted from the website terminal.</p>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto rounded-xl border border-divider-color bg-card-surface shadow-sm">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-desert-ivory text-muted-brown uppercase font-display border-b border-divider-color">
+                <tr>
+                  <th class="py-3 px-4">Ticket</th>
+                  <th class="py-3 px-4">Client Contact</th>
+                  <th class="py-3 px-4">Company</th>
+                  <th class="py-3 px-4">System Package</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4 text-right">Update Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${(db.leads || []).map(l => `
+                  <tr class="border-b border-divider-color hover:bg-desert-ivory/40">
+                    <td class="py-3 px-4 font-display font-bold text-primary-gold">${l.ticket_number}</td>
+                    <td class="py-3 px-4 font-semibold text-charcoal">${l.full_name}<br/><span class="text-[11px] text-muted-brown font-normal">${l.email} • ${l.phone}</span></td>
+                    <td class="py-3 px-4 text-charcoal">${l.company_name || 'N/A'}</td>
+                    <td class="py-3 px-4 font-display">${l.system_interest} (${l.transaction_type})</td>
+                    <td class="py-3 px-4">
+                      <span class="px-2.5 py-0.5 rounded text-[10px] font-display font-bold ${l.status === 'NEW' ? 'bg-red-100 text-red-800' : l.status === 'IN_REVIEW' ? 'bg-amber-100 text-amber-800' : 'bg-green-100 text-green-800'}">
+                        ${l.status}
+                      </span>
+                    </td>
+                    <td class="py-3 px-4 text-right">
+                      <select onchange="updateLead(${l.id}, this.value)" class="px-2 py-1 bg-desert-ivory border border-divider-color rounded font-display text-[11px]">
+                        <option value="NEW" ${l.status === 'NEW' ? 'selected' : ''}>NEW</option>
+                        <option value="IN_REVIEW" ${l.status === 'IN_REVIEW' ? 'selected' : ''}>IN_REVIEW</option>
+                        <option value="CONTACTED" ${l.status === 'CONTACTED' ? 'selected' : ''}>CONTACTED</option>
+                        <option value="QUALIFIED" ${l.status === 'QUALIFIED' ? 'selected' : ''}>QUALIFIED</option>
+                        <option value="CLOSED" ${l.status === 'CLOSED' ? 'selected' : ''}>CLOSED</option>
+                      </select>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      } else if (currentTab === 'settings') {
+        const s = db.site || {};
+        container.innerHTML = `
+          <div class="border-b border-divider-color pb-3">
+            <h2 class="text-xl font-display font-bold uppercase text-charcoal">Global Corporate Settings</h2>
+            <p class="text-xs text-muted-brown">Single source of truth for hotlines, emails, addresses, and corporate entity naming.</p>
+          </div>
+
+          <form onsubmit="saveSiteSettings(event)" class="bg-card-surface border border-divider-color rounded-xl p-6 shadow-sm grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-display font-semibold uppercase text-muted-brown">Company Name (English)</label>
+              <input type="text" id="cfg_comp_en" value="${s.company_name_en || 'Saudi Master Company'}" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-display font-semibold uppercase text-muted-brown font-arabic" dir="rtl">اسم الشركة (عربي)</label>
+              <input type="text" id="cfg_comp_ar" value="${s.company_name_ar || 'شركة الماستر السعودي'}" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm font-arabic" dir="rtl"/>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-display font-semibold uppercase text-muted-brown">Central Hotline / Phone</label>
+              <input type="text" id="cfg_phone" value="${s.phone || '+966 11 400 9800'}" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-display font-semibold uppercase text-muted-brown">WhatsApp Escalation Direct</label>
+              <input type="text" id="cfg_wa" value="${s.whatsapp || '+966500000000'}" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-display font-semibold uppercase text-muted-brown">Central Engineering Email</label>
+              <input type="email" id="cfg_email" value="${s.email || 'engineering@saudimaster.com'}" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-display font-semibold uppercase text-muted-brown">Riyadh HQ Address (EN)</label>
+              <input type="text" id="cfg_addr_en" value="${s.address_en || 'Al-Malaz District, Industrial Corridor, PO Box 41293 Riyadh, KSA'}" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+            </div>
+            <div class="sm:col-span-2 flex justify-end pt-4 border-t border-divider-color">
+              <button type="submit" class="px-6 py-2.5 bg-charcoal text-white rounded font-display text-xs font-bold uppercase tracking-wider hover:bg-primary-gold transition-colors">
+                Save Settings to Database
+              </button>
+            </div>
+          </form>
+        `;
+      }
+    }
+
+    function editProductPrompt(id) {
+      const p = db.products.find(x => x.id === id);
+      if (!p) return;
+      openProductModal(p);
+    }
+
+    function deleteProductPrompt(id) {
+      const p = db.products.find(x => x.id === id);
+      if (!p) return;
+      if (confirm(`Are you sure you want to remove product ${p.sku} (${p.name_en}) from the catalog?`)) {
+        db.products = db.products.filter(x => x.id !== id);
+        localStorage.setItem('sm_products_override', JSON.stringify(db.products));
+        renderCurrentTab();
+      }
+    }
+
+    function addNewProductModal() {
+      openProductModal(null);
+    }
+
+    function openProductModal(p) {
+      const isEdit = !!p;
+      const modal = document.createElement('div');
+      modal.id = 'productModal';
+      modal.className = 'fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4 backdrop-blur-xs overflow-y-auto';
+      
+      const currentImg = isEdit ? (p.main_image || p.hero_image) : 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80';
+
+      modal.innerHTML = `
+        <div class="bg-card-surface border border-divider-color rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl my-8">
+          <div class="flex items-center justify-between border-b border-divider-color pb-4 mb-6">
+            <h3 class="text-lg font-display font-bold uppercase text-charcoal flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary-gold">${isEdit ? 'edit_note' : 'add_box'}</span>
+              <span>${isEdit ? `Edit System: ${p.sku}` : 'Add New Engineered System'}</span>
+            </h3>
+            <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-desert-ivory text-charcoal hover:bg-red-100 hover:text-red-700 flex items-center justify-center font-bold">✕</button>
+          </div>
+
+          <form onsubmit="saveProductForm(event, ${isEdit ? p.id : 'null'})" class="space-y-4 text-xs font-display">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">SKU / System Code *</label>
+                <input required type="text" id="m_sku" value="${isEdit ? p.sku : 'SMC-NEW-' + Math.floor(Math.random()*900+100)}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-bold"/>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Classification *</label>
+                <select id="m_class" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-bold">
+                  <option value="LOCAL" ${isEdit && p.class_code === 'LOCAL' ? 'selected' : ''}>🇸🇦 Local Made (KSA)</option>
+                  <option value="EUROPEAN" ${isEdit && p.class_code === 'EUROPEAN' ? 'selected' : ''}>🇪🇺 European / ULMA</option>
+                </select>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Category Slug</label>
+                <select id="m_catslug" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-bold">
+                  <option value="scaffolding" ${isEdit && p.cat_slug === 'scaffolding' ? 'selected' : ''}>Scaffolding</option>
+                  <option value="formwork" ${isEdit && p.cat_slug === 'formwork' ? 'selected' : ''}>Formwork</option>
+                  <option value="heavy-shoring" ${isEdit && p.cat_slug === 'heavy-shoring' ? 'selected' : ''}>Heavy Shoring</option>
+                  <option value="precast-custom" ${isEdit && p.cat_slug === 'precast-custom' ? 'selected' : ''}>Precast & Moulds</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="p-3 bg-desert-ivory border border-divider-color rounded-xl flex flex-col sm:flex-row items-center gap-4">
+              <div class="flex-1 w-full">
+                <label class="font-bold text-muted-brown uppercase block mb-1">Product Visual Image URL *</label>
+                <input required type="url" id="m_image" onchange="document.getElementById('m_img_prev').src = this.value" value="${currentImg}" class="w-full px-3 py-2 bg-card-surface border border-divider-color rounded text-charcoal"/>
+                <span class="text-[10px] text-muted-brown mt-1 block">Live Unsplash or CDN image URL displayed on cards and details modal.</span>
+              </div>
+              <img id="m_img_prev" src="${currentImg}" alt="Preview" class="w-24 h-20 object-cover rounded-lg border border-divider-color bg-charcoal shrink-0"/>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">English Title *</label>
+                <input required type="text" id="m_name_en" value="${isEdit ? p.name_en : ''}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal"/>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1 font-arabic" dir="rtl">الاسم بالعربي *</label>
+                <input required type="text" id="m_name_ar" value="${isEdit ? p.name_ar : ''}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-arabic" dir="rtl"/>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Homepage Summary (EN - 1-2 lines)</label>
+                <textarea rows="2" id="m_sum_en" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal">${isEdit ? (p.short_summary_en || '') : ''}</textarea>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1 font-arabic" dir="rtl">ملخص الصفحة الرئيسية (عربي)</label>
+                <textarea rows="2" id="m_sum_ar" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-arabic" dir="rtl">${isEdit ? (p.short_summary_ar || '') : ''}</textarea>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">What Is It? (Modal Details EN)</label>
+                <textarea rows="2" id="m_what_en" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal">${isEdit ? (p.what_is_it_en || '') : ''}</textarea>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1 font-arabic" dir="rtl">ما هو النظام؟ (تفاصيل النافذة عربي)</label>
+                <textarea rows="2" id="m_what_ar" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-arabic" dir="rtl">${isEdit ? (p.what_is_it_ar || '') : ''}</textarea>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Primary Applications (Used For EN)</label>
+                <textarea rows="2" id="m_used_en" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal">${isEdit ? (p.what_is_used_for_en || '') : ''}</textarea>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1 font-arabic" dir="rtl">أبرز الاستخدامات (عربي)</label>
+                <textarea rows="2" id="m_used_ar" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-arabic" dir="rtl">${isEdit ? (p.what_is_used_for_ar || '') : ''}</textarea>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-6 pt-2">
+              <label class="flex items-center gap-2 cursor-pointer font-bold text-charcoal">
+                <input type="checkbox" id="m_sales" ${!isEdit || p.sales_available ? 'checked' : ''} class="w-4 h-4 text-primary-gold rounded"/>
+                <span>Sales Available</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer font-bold text-charcoal">
+                <input type="checkbox" id="m_rental" ${!isEdit || p.rental_available ? 'checked' : ''} class="w-4 h-4 text-primary-gold rounded"/>
+                <span>Rental Available</span>
+              </label>
+            </div>
+
+            <div class="flex items-center justify-end gap-3 pt-6 border-t border-divider-color">
+              <button type="button" onclick="closeProductModal()" class="px-4 py-2 border border-divider-color rounded text-charcoal hover:bg-desert-ivory">Cancel</button>
+              <button type="submit" class="px-6 py-2.5 bg-charcoal text-white rounded font-bold uppercase hover:bg-primary-gold shadow-md">
+                ${isEdit ? 'Save Changes' : 'Create System'}
+              </button>
+            </div>
+          </form>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function closeProductModal() {
+      const m = document.getElementById('productModal');
+      if (m) m.remove();
+    }
+
+    function saveProductForm(e, existingId) {
+      e.preventDefault();
+      const sku = document.getElementById('m_sku').value;
+      const classCode = document.getElementById('m_class').value;
+      const catSlug = document.getElementById('m_catslug').value;
+      const imgUrl = document.getElementById('m_image').value;
+      const nameEn = document.getElementById('m_name_en').value;
+      const nameAr = document.getElementById('m_name_ar').value;
+      const sumEn = document.getElementById('m_sum_en').value;
+      const sumAr = document.getElementById('m_sum_ar').value;
+      const whatEn = document.getElementById('m_what_en').value;
+      const whatAr = document.getElementById('m_what_ar').value;
+      const usedEn = document.getElementById('m_used_en').value;
+      const usedAr = document.getElementById('m_used_ar').value;
+      const sales = document.getElementById('m_sales').checked ? 1 : 0;
+      const rental = document.getElementById('m_rental').checked ? 1 : 0;
+
+      if (existingId) {
+        const p = db.products.find(x => x.id === existingId);
+        if (p) {
+          p.sku = sku;
+          p.class_code = classCode;
+          p.cat_slug = catSlug;
+          p.main_image = imgUrl;
+          p.hero_image = imgUrl;
+          p.name_en = nameEn;
+          p.name_ar = nameAr;
+          p.short_summary_en = sumEn;
+          p.short_summary_ar = sumAr;
+          p.what_is_it_en = whatEn;
+          p.what_is_it_ar = whatAr;
+          p.what_is_used_for_en = usedEn;
+          p.what_is_used_for_ar = usedAr;
+          p.sales_available = sales;
+          p.rental_available = rental;
+        }
+      } else {
+        const newProduct = {
+          id: db.products.length ? Math.max(...db.products.map(x => x.id)) + 1 : 1,
+          sku: sku,
+          slug: nameEn.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+          class_code: classCode,
+          cat_slug: catSlug,
+          brand_name: classCode === 'LOCAL' ? 'Saudi Master' : 'ULMA Construction',
+          name_en: nameEn,
+          name_ar: nameAr,
+          short_summary_en: sumEn,
+          short_summary_ar: sumAr,
+          what_is_it_en: whatEn,
+          what_is_it_ar: whatAr,
+          what_is_used_for_en: usedEn,
+          what_is_used_for_ar: usedAr,
+          sales_available: sales,
+          rental_available: rental,
+          main_image: imgUrl,
+          hero_image: imgUrl,
+          key_advantages_en: ["Engineered for heavy civil load requirements", "High-frequency reuse durability", "Full safety compliance"],
+          key_advantages_ar: ["مصمم لمقاومة الأحمال الإنشائية الكبرى", "متانة فائقة للاستخدام المتكرر", "مطابق لأعلى معايير السلامة"],
+          technical_specs: { "load_class": "Heavy Duty", "steel_spec": "S355JR", "certification": "SASO / EN 12810" }
+        };
+        db.products.push(newProduct);
+      }
+
+      localStorage.setItem('sm_products_override', JSON.stringify(db.products));
+      closeProductModal();
+      renderCurrentTab();
+      alert('Product saved and synchronized with public catalog!');
+    }
+
+    function saveHeroConfig(e) {
+      e.preventDefault();
+      const hero = {
+        title_en: document.getElementById('hero_title_en').value,
+        title_ar: document.getElementById('hero_title_ar').value,
+        subcopy_en: document.getElementById('hero_sub_en').value,
+        subcopy_ar: document.getElementById('hero_sub_ar').value,
+        video_url: document.getElementById('hero_video_url').value,
+        poster_url: document.getElementById('hero_poster_url').value,
+        iktva: document.getElementById('hero_badge_iktva').value,
+        euro: document.getElementById('hero_badge_euro').value,
+        dispatch: document.getElementById('hero_badge_dispatch').value
+      };
+      localStorage.setItem('sm_hero_override', JSON.stringify(hero));
+      alert('Hero Configuration saved successfully and reflected on public website!');
+    }
+
+    function toggleSection(secId, isVisible) {
+      let sections = defaultSections;
+      if (localStorage.getItem('sm_sections_override')) {
+        try { sections = JSON.parse(localStorage.getItem('sm_sections_override')); } catch(e) {}
+      }
+      const s = sections.find(x => x.id === secId);
+      if (s) s.visible = isVisible;
+      localStorage.setItem('sm_sections_override', JSON.stringify(sections));
+      renderCurrentTab();
+    }
+
+    function editGeometryModal(id) {
+      let geoms = defaultGeometries;
+      if (localStorage.getItem('sm_geometries_override')) {
+        try { geoms = JSON.parse(localStorage.getItem('sm_geometries_override')); } catch(e) {}
+      }
+      const g = geoms.find(x => x.id === id);
+      if (!g) return;
+
+      const modal = document.createElement('div');
+      modal.id = 'geomModal';
+      modal.className = 'fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4 backdrop-blur-xs overflow-y-auto';
+      modal.innerHTML = `
+        <div class="bg-card-surface border border-divider-color rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl my-8">
+          <div class="flex items-center justify-between border-b border-divider-color pb-4 mb-6">
+            <h3 class="text-lg font-display font-bold uppercase text-charcoal">Edit Geometry: ${g.name_en}</h3>
+            <button onclick="document.getElementById('geomModal').remove()" class="w-8 h-8 rounded-full bg-desert-ivory text-charcoal hover:bg-red-100 hover:text-red-700 flex items-center justify-center font-bold">✕</button>
+          </div>
+
+          <form onsubmit="saveGeometryForm(event, '${g.id}')" class="space-y-4 text-xs font-display">
+            <div>
+              <label class="font-bold text-muted-brown uppercase block mb-1">Image URL</label>
+              <input required type="url" id="gm_image" value="${g.image}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal"/>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Title (EN)</label>
+                <input required type="text" id="gm_title_en" value="${g.title_en}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal"/>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1 font-arabic" dir="rtl">العنوان (عربي)</label>
+                <input required type="text" id="gm_title_ar" value="${g.title_ar}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-arabic" dir="rtl"/>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Description (EN)</label>
+                <textarea rows="3" id="gm_desc_en" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal">${g.desc_en}</textarea>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1 font-arabic" dir="rtl">الوصف (عربي)</label>
+                <textarea rows="3" id="gm_desc_ar" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-arabic" dir="rtl">${g.desc_ar}</textarea>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Spec 1 Value</label>
+                <input type="text" id="gm_p1" value="${g.p1_val}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal"/>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Spec 2 Value</label>
+                <input type="text" id="gm_p2" value="${g.p2_val}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal"/>
+              </div>
+            </div>
+            <div class="flex justify-end gap-3 pt-4 border-t border-divider-color">
+              <button type="button" onclick="document.getElementById('geomModal').remove()" class="px-4 py-2 border border-divider-color rounded">Cancel</button>
+              <button type="submit" class="px-5 py-2.5 bg-charcoal text-white rounded uppercase font-bold hover:bg-primary-gold">Save Geometry</button>
+            </div>
+          </form>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function saveGeometryForm(e, id) {
+      e.preventDefault();
+      let geoms = defaultGeometries;
+      if (localStorage.getItem('sm_geometries_override')) {
+        try { geoms = JSON.parse(localStorage.getItem('sm_geometries_override')); } catch(e) {}
+      }
+      const g = geoms.find(x => x.id === id);
+      if (g) {
+        g.image = document.getElementById('gm_image').value;
+        g.title_en = document.getElementById('gm_title_en').value;
+        g.title_ar = document.getElementById('gm_title_ar').value;
+        g.desc_en = document.getElementById('gm_desc_en').value;
+        g.desc_ar = document.getElementById('gm_desc_ar').value;
+        g.p1_val = document.getElementById('gm_p1').value;
+        g.p2_val = document.getElementById('gm_p2').value;
+        localStorage.setItem('sm_geometries_override', JSON.stringify(geoms));
+        document.getElementById('geomModal').remove();
+        renderCurrentTab();
+        alert('Geometry updated successfully!');
+      }
+    }
+
+    function editProjectModal(id) {
+      const p = db.projects.find(x => x.id === id);
+      if (!p) return;
+
+      const modal = document.createElement('div');
+      modal.id = 'prjModal';
+      modal.className = 'fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4 backdrop-blur-xs overflow-y-auto';
+      modal.innerHTML = `
+        <div class="bg-card-surface border border-divider-color rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl my-8">
+          <div class="flex items-center justify-between border-b border-divider-color pb-4 mb-6">
+            <h3 class="text-lg font-display font-bold uppercase text-charcoal">Edit Project: ${p.name_en}</h3>
+            <button onclick="document.getElementById('prjModal').remove()" class="w-8 h-8 rounded-full bg-desert-ivory text-charcoal hover:bg-red-100 hover:text-red-700 flex items-center justify-center font-bold">✕</button>
+          </div>
+
+          <form onsubmit="saveProjectForm(event, ${p.id})" class="space-y-4 text-xs font-display">
+            <div>
+              <label class="font-bold text-muted-brown uppercase block mb-1">Hero Image URL</label>
+              <input required type="url" id="prj_image" value="${p.hero_image || ''}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal"/>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Project Name (EN)</label>
+                <input required type="text" id="prj_name_en" value="${p.name_en}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal"/>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1 font-arabic" dir="rtl">اسم المشروع (عربي)</label>
+                <input required type="text" id="prj_name_ar" value="${p.name_ar}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-arabic" dir="rtl"/>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Summary (EN)</label>
+                <textarea rows="3" id="prj_sum_en" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal">${p.summary_en}</textarea>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1 font-arabic" dir="rtl">الملخص (عربي)</label>
+                <textarea rows="3" id="prj_sum_ar" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-arabic" dir="rtl">${p.summary_ar}</textarea>
+              </div>
+            </div>
+            <div class="flex justify-end gap-3 pt-4 border-t border-divider-color">
+              <button type="button" onclick="document.getElementById('prjModal').remove()" class="px-4 py-2 border border-divider-color rounded">Cancel</button>
+              <button type="submit" class="px-5 py-2.5 bg-charcoal text-white rounded uppercase font-bold hover:bg-primary-gold">Save Project</button>
+            </div>
+          </form>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function saveProjectForm(e, id) {
+      e.preventDefault();
+      const p = db.projects.find(x => x.id === id);
+      if (p) {
+        p.hero_image = document.getElementById('prj_image').value;
+        p.name_en = document.getElementById('prj_name_en').value;
+        p.name_ar = document.getElementById('prj_name_ar').value;
+        p.summary_en = document.getElementById('prj_sum_en').value;
+        p.summary_ar = document.getElementById('prj_sum_ar').value;
+        localStorage.setItem('sm_projects_override', JSON.stringify(db.projects));
+        document.getElementById('prjModal').remove();
+        renderCurrentTab();
+        alert('Project updated successfully!');
+      }
+    }
+
+    function editProcessModal(stepNumber) {
+      const pr = db.processes.find(x => x.step_number === stepNumber);
+      if (!pr) return;
+
+      const modal = document.createElement('div');
+      modal.id = 'procModal';
+      modal.className = 'fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4 backdrop-blur-xs overflow-y-auto';
+      modal.innerHTML = `
+        <div class="bg-card-surface border border-divider-color rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl my-8">
+          <div class="flex items-center justify-between border-b border-divider-color pb-4 mb-6">
+            <h3 class="text-lg font-display font-bold uppercase text-charcoal">Edit Process: Stage ${pr.step_number}</h3>
+            <button onclick="document.getElementById('procModal').remove()" class="w-8 h-8 rounded-full bg-desert-ivory text-charcoal hover:bg-red-100 hover:text-red-700 flex items-center justify-center font-bold">✕</button>
+          </div>
+
+          <form onsubmit="saveProcessForm(event, ${pr.step_number})" class="space-y-4 text-xs font-display">
+            <div>
+              <label class="font-bold text-muted-brown uppercase block mb-1">Process Image URL</label>
+              <input required type="url" id="proc_image" value="${pr.hero_image || ''}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal"/>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Process Name (EN)</label>
+                <input required type="text" id="proc_name_en" value="${pr.name_en}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal"/>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1 font-arabic" dir="rtl">اسم المرحلة (عربي)</label>
+                <input required type="text" id="proc_name_ar" value="${pr.name_ar}" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-arabic" dir="rtl"/>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1">Summary (EN)</label>
+                <textarea rows="3" id="proc_sum_en" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal">${pr.summary_en}</textarea>
+              </div>
+              <div>
+                <label class="font-bold text-muted-brown uppercase block mb-1 font-arabic" dir="rtl">الوصف (عربي)</label>
+                <textarea rows="3" id="proc_sum_ar" class="w-full px-3 py-2 bg-desert-ivory border border-divider-color rounded text-charcoal font-arabic" dir="rtl">${pr.summary_ar}</textarea>
+              </div>
+            </div>
+            <div class="flex justify-end gap-3 pt-4 border-t border-divider-color">
+              <button type="button" onclick="document.getElementById('procModal').remove()" class="px-4 py-2 border border-divider-color rounded">Cancel</button>
+              <button type="submit" class="px-5 py-2.5 bg-charcoal text-white rounded uppercase font-bold hover:bg-primary-gold">Save Process</button>
+            </div>
+          </form>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function saveProcessForm(e, stepNumber) {
+      e.preventDefault();
+      const pr = db.processes.find(x => x.step_number === stepNumber);
+      if (pr) {
+        pr.hero_image = document.getElementById('proc_image').value;
+        pr.name_en = document.getElementById('proc_name_en').value;
+        pr.name_ar = document.getElementById('proc_name_ar').value;
+        pr.summary_en = document.getElementById('proc_sum_en').value;
+        pr.summary_ar = document.getElementById('proc_sum_ar').value;
+        localStorage.setItem('sm_processes_override', JSON.stringify(db.processes));
+        document.getElementById('procModal').remove();
+        renderCurrentTab();
+        alert('Manufacturing process updated successfully!');
+      }
+    }
+
+    function updateLead(id, status) {
+      const l = db.leads.find(x => x.id === id);
+      if (l) {
+        l.status = status;
+        alert(`Lead ticket ${l.ticket_number} status set to ${status}.`);
+      }
+    }
+
+    function saveSiteSettings(e) {
+      e.preventDefault();
+      db.site.company_name_en = document.getElementById('cfg_comp_en').value;
+      db.site.company_name_ar = document.getElementById('cfg_comp_ar').value;
+      db.site.phone = document.getElementById('cfg_phone').value;
+      db.site.whatsapp = document.getElementById('cfg_wa').value;
+      db.site.email = document.getElementById('cfg_email').value;
+      db.site.address_en = document.getElementById('cfg_addr_en').value;
+      localStorage.setItem('sm_site_override', JSON.stringify(db.site));
+      alert('Corporate settings updated and persisted successfully!');
+    }
+
+    function resetFactoryDefaults() {
+      if (confirm('Are you sure you want to reset all configurations to factory defaults? All custom edits will be cleared.')) {
+        localStorage.removeItem('sm_products_override');
+        localStorage.removeItem('sm_hero_override');
+        localStorage.removeItem('sm_sections_override');
+        localStorage.removeItem('sm_geometries_override');
+        localStorage.removeItem('sm_projects_override');
+        localStorage.removeItem('sm_processes_override');
+        localStorage.removeItem('sm_site_override');
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>

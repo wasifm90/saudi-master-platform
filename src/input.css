@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tab-active {
+  background-color: #18181B !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(24,24,27,0.15);
+}
+.fallback-card {
+  background: linear-gradient(135deg, #18181B 0%, #2A2F38 100%);
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.gpu-layer {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+.smooth-corridor {
+  will-change: scroll-position;
+  contain: layout style;
+  -webkit-overflow-scrolling: touch;
+}
+.section-lazy-render {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+/* Cinematic zeroCO2-Inspired Scroll Transitions */
+.ease-cinematic {
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.chapter-reveal {
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.chapter-image-transition {
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.editorial-filter-active {
+  border-bottom-color: #D4AF37 !important;
+  color: #18181B !important;
+  font-weight: 700 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chapter-reveal,
+  .chapter-image-transition,
+  .gpu-layer {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+

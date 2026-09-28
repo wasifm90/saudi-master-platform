@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saudi Master Company × ULMA | Integrated Platform Viewer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "desert-ivory": "#F5F0E6",
+            "soft-sand": "#E9DFC9",
+            "content-offwhite": "#FAF8F3",
+            "card-surface": "#FFFDF8",
+            "divider-color": "#D9CFBE",
+            "charcoal": "#25231F",
+            "muted-brown": "#6F685E",
+            "primary-gold": "#B58A52",
+            "secondary-earth": "#B66E3C",
+            "ulma-orange": "#E2882A",
+            "footer-dark": "#332E27"
+          },
+          fontFamily: {
+            display: ["'Space Grotesk'", "sans-serif"],
+            body: ["'IBM Plex Sans'", "sans-serif"],
+            arabic: ["'Cairo'", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #F5F0E6;
+      color: #25231F;
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    html[dir="rtl"] body {
+      font-family: 'Cairo', 'IBM Plex Sans', sans-serif;
+    }
+    .tab-active {
+      background-color: #25231F !important;
+      color: #FAF8F3 !important;
+    }
+    .fallback-card {
+      background: linear-gradient(135deg, #25231F 0%, #3A352F 100%);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-desert-ivory">
+
+  <!-- TOP BAR -->
+  <header class="sticky top-0 z-40 bg-desert-ivory/95 backdrop-blur-md border-b border-divider-color px-4 sm:px-8 py-3 flex items-center justify-between shadow-xs">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded bg-charcoal text-content-offwhite flex items-center justify-center font-display font-bold text-lg">
+        SM
+      </div>
+      <div>
+        <div class="flex items-center gap-1.5 font-display font-bold text-sm tracking-wider uppercase text-charcoal">
+          <span>Saudi Master</span>
+          <span class="text-xs text-muted-brown">×</span>
+          <span class="text-ulma-orange font-bold">ULMA</span>
+        </div>
+        <span class="text-[11px] text-muted-brown uppercase tracking-tight font-medium" id="headerTagline">
+          Sovereign Formwork & Scaffolding Alliance
+        </span>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-3">
+      <button onclick="toggleLang()" class="px-3 py-1.5 border border-divider-color rounded bg-card-surface font-display text-xs font-bold uppercase hover:bg-soft-sand flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">translate</span>
+        <span id="langBtnText">عربي</span>
+      </button>
+
+      <button onclick="toggleAdmin(true)" class="px-3 py-1.5 bg-card-surface border border-divider-color rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-soft-sand flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-sm text-primary-gold">admin_panel_settings</span>
+        <span>Admin CMS</span>
+      </button>
+
+      <a href="#quote-sec" class="px-4 py-1.5 bg-charcoal text-white rounded font-display text-xs font-bold uppercase tracking-wider hover:bg-primary-gold flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm text-ulma-orange">request_quote</span>
+        <span>Instant RFQ</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- CAPABILITY RAIL -->
+  <div class="bg-soft-sand border-b border-divider-color py-1.5 px-4 overflow-x-auto text-[11px] font-display uppercase tracking-widest text-muted-brown text-center">
+    <span class="text-charcoal font-bold">🇸🇦 KSA LOCAL MANUFACTURING</span> • 
+    <span class="text-charcoal font-bold">🇪🇺 EUROPEAN ULMA ENGINEERING</span> • 
+    <span>DESIGN</span> • <span>SUPPLY</span> • <span>SUPERVISION</span> • <span>SALES</span> • 
+    <span class="text-secondary-earth font-bold">RENTAL FLEET</span>
+  </div>
+
+  <!-- MAIN -->
+  <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-8 py-8 flex flex-col gap-14">
+
+    <!-- 1. HERO -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4">
+      <div class="lg:col-span-7 flex flex-col gap-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-card-surface border border-divider-color rounded-full w-fit">
+          <span class="w-2 h-2 rounded-full bg-ulma-orange"></span>
+          <span class="font-display font-bold text-xs uppercase tracking-wider text-charcoal">Sovereign Alliance • Saudi Master × ULMA</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-display font-bold text-charcoal uppercase leading-tight">
+          Local Manufacturing.<br/>
+          <span class="text-primary-gold">European Engineering.</span><br/>
+          One Construction Partner.
+        </h1>
+
+        <p class="text-base text-secondary-earth font-medium font-arabic" dir="rtl">
+          تصنيع سعودي محلي وهندسة أوروبية متقدمة من أولما للشدات والسقالات
+        </p>
+
+        <p class="text-sm text-muted-brown leading-relaxed max-w-xl">
+          Modular scaffolding, heavy bridge shoring towers, fair-faced column shutters, and turnkey falsework engineered for the Kingdom's gigaprojects.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <a href="#systems-sec" class="px-5 py-2.5 bg-charcoal text-white font-display text-xs font-bold uppercase tracking-wider rounded hover:bg-primary-gold">
+            Explore Systems
+          </a>
+          <a href="#geometry-sec" class="px-5 py-2.5 bg-card-surface border border-divider-color font-display text-xs font-bold uppercase tracking-wider rounded hover:bg-soft-sand">
+            Geometry Solutions
+          </a>
+          <a href="#quote-sec" class="px-5 py-2.5 bg-primary-gold text-white font-display text-xs font-bold uppercase tracking-wider rounded hover:bg-secondary-earth">
+            Upload CAD / RFQ
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 pt-4 border-t border-divider-color mt-2 text-center sm:text-left">
+          <div class="p-3 bg-card-surface border border-divider-color rounded-lg">
+            <span class="block font-display font-bold text-lg text-primary-gold">IKTVA 85%</span>
+            <span class="text-[10px] text-muted-brown uppercase tracking-wider font-semibold">Local Content</span>
+          </div>
+          <div class="p-3 bg-card-surface border border-divider-color rounded-lg">
+            <span class="block font-display font-bold text-lg text-secondary-earth">EN 12810</span>
+            <span class="text-[10px] text-muted-brown uppercase tracking-wider font-semibold">Euro Certified</span>
+          </div>
+          <div class="p-3 bg-card-surface border border-divider-color rounded-lg">
+            <span class="block font-display font-bold text-lg text-charcoal">24-48h</span>
+            <span class="text-[10px] text-muted-brown uppercase tracking-wider font-semibold">KSA Dispatch</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Representation -->
+      <div class="lg:col-span-5 fallback-card rounded-2xl p-6 text-content-offwhite border border-divider-color flex flex-col justify-between shadow-lg min-h-[320px]">
+        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-ulma-orange"></span>
+            <span class="font-display font-bold text-xs uppercase tracking-wider">NEOM Sector 04 Deployment</span>
+          </div>
+          <span class="px-2 py-0.5 rounded bg-white/10 text-[10px] font-display uppercase">1,400 kN Leg</span>
+        </div>
+
+        <div class="my-6 flex flex-col gap-2">
+          <span class="text-[11px] font-display uppercase tracking-widest text-primary-gold">Sovereign Bridge Pier Shuttering</span>
+          <h3 class="text-2xl font-display font-bold uppercase">High-Speed Rail Viaduct Formwork</h3>
+          <p class="text-xs text-soft-sand/70 leading-relaxed">
+            Monolithic casting of 32m high bridge supports in mountainous desert canyons, resisting 85 km/h gusts with zero tie-rod face punctures.
+          </p>
+        </div>
+
+        <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-display">
+          <span class="text-soft-sand/80">Riyadh Central Yard Dispatch</span>
+          <span class="text-primary-gold font-bold">SASO 2874 & DIN 18218</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PRODUCT CLASSIFICATION ENGINE -->
+    <section class="flex flex-col gap-6" id="systems-sec">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-divider-color pb-4">
+        <div>
+          <span class="font-display text-xs uppercase tracking-widest text-primary-gold font-bold">Technical Inventory Matrix</span>
+          <h2 class="text-2xl sm:text-3xl font-display font-bold text-charcoal uppercase mt-1">Engineered Systems</h2>
+        </div>
+
+        <!-- Classification Tabs -->
+        <div class="p-1 bg-soft-sand rounded-lg inline-flex gap-1 border border-divider-color">
+          <button onclick="setClassification('LOCAL')" id="btn-tab-LOCAL" class="tab-active px-4 py-2 rounded-md font-display text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all">
+            <span>🇸🇦</span>
+            <span>Local Made (KSA)</span>
+          </button>
+          <button onclick="setClassification('EUROPEAN')" id="btn-tab-EUROPEAN" class="px-4 py-2 rounded-md font-display text-xs font-bold uppercase tracking-wider text-charcoal flex items-center gap-2 hover:bg-card-surface transition-all">
+            <span>🇪🇺</span>
+            <span>European / ULMA</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <div class="flex items-center gap-2 overflow-x-auto py-1" id="catFilterContainer">
+          <button onclick="filterCat('all')" class="cat-chip px-3.5 py-1.5 rounded-full bg-charcoal text-white font-display text-xs font-semibold uppercase tracking-wider shadow-xs" data-c="all">All Systems</button>
+          <button onclick="filterCat('scaffolding')" class="cat-chip px-3.5 py-1.5 rounded-full bg-card-surface text-charcoal border border-divider-color font-display text-xs font-semibold uppercase hover:bg-soft-sand" data-c="scaffolding">Scaffolding</button>
+          <button onclick="filterCat('formwork')" class="cat-chip px-3.5 py-1.5 rounded-full bg-card-surface text-charcoal border border-divider-color font-display text-xs font-semibold uppercase hover:bg-soft-sand" data-c="formwork">Formwork</button>
+          <button onclick="filterCat('heavy-shoring')" class="cat-chip px-3.5 py-1.5 rounded-full bg-card-surface text-charcoal border border-divider-color font-display text-xs font-semibold uppercase hover:bg-soft-sand" data-c="heavy-shoring">Heavy Shoring</button>
+          <button onclick="filterCat('precast-custom')" class="cat-chip px-3.5 py-1.5 rounded-full bg-card-surface text-charcoal border border-divider-color font-display text-xs font-semibold uppercase hover:bg-soft-sand" data-c="precast-custom">Precast & Moulds</button>
+        </div>
+        <span class="text-xs font-display text-muted-brown" id="productCountBadge">Loading systems...</span>
+      </div>
+
+      <!-- 60/40 Editorial Product Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="productsDisplayGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- 3. FORMWORK GEOMETRY EXPLORER -->
+    <section class="bg-soft-sand border border-divider-color rounded-2xl p-6 sm:p-8 flex flex-col gap-6" id="geometry-sec">
+      <div>
+        <span class="font-display text-xs uppercase tracking-widest text-secondary-earth font-bold">Architectural Versatility</span>
+        <h2 class="text-2xl font-display font-bold text-charcoal uppercase mt-1">Formwork for Every Geometry</h2>
+        <p class="text-xs sm:text-sm text-muted-brown">Select a structural geometry to inspect the optimal engineering pairing between Saudi Master local steel and ULMA systems.</p>
+      </div>
+
+      <div class="flex items-center gap-2 overflow-x-auto py-1" id="geomButtonsContainer">
+        <!-- Geom Buttons -->
+      </div>
+
+      <div class="bg-card-surface border border-divider-color rounded-xl p-6 shadow-sm" id="geomCardDisplay">
+        <!-- Geom Active Display -->
+      </div>
+    </section>
+
+    <!-- 4. SYSTEMS IN MOTION (7-STEP ASSEMBLY) -->
+    <section class="bg-card-surface border border-divider-color rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-sm" id="assembly-sec">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-divider-color pb-4">
+        <div>
+          <span class="font-display text-xs uppercase tracking-widest text-ulma-orange font-bold">Systems in Motion</span>
+          <h2 class="text-2xl font-display font-bold text-charcoal uppercase mt-1">Structural Assembly Protocol</h2>
+        </div>
+        <span class="text-xs font-display px-3 py-1 bg-desert-ivory border border-divider-color rounded text-charcoal font-semibold">EN 12810 / SASO Certified</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Step Visual Banner -->
+        <div class="lg:col-span-6 fallback-card rounded-xl p-6 text-content-offwhite flex flex-col justify-between min-h-[280px] border border-divider-color shadow-sm">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded bg-white/10 font-display text-xs font-bold text-primary-gold" id="stepCounterLabel">STEP 01 / 07</span>
+            <span class="text-xs font-display uppercase tracking-widest text-soft-sand">ULMA BRIO / Cuplock</span>
+          </div>
+
+          <div class="my-4">
+            <span class="text-[10px] font-display uppercase tracking-widest text-primary-gold block">Protocol Phase</span>
+            <h3 class="text-xl sm:text-2xl font-display font-bold uppercase mt-1" id="stepTitleDisplay">Step Title</h3>
+          </div>
+
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-display">
+            <span class="text-soft-sand/80">Erection Clearance</span>
+            <span class="text-primary-gold font-bold">Class A Tolerance</span>
+          </div>
+        </div>
+
+        <!-- Step Technical Specifications -->
+        <div class="lg:col-span-6 flex flex-col justify-between gap-4">
+          <p class="text-sm text-charcoal leading-relaxed" id="stepDescDisplay">Step description goes here...</p>
+
+          <div class="grid grid-cols-2 gap-3 p-4 bg-desert-ivory border border-divider-color rounded-lg">
+            <div>
+              <span class="block text-[10px] uppercase font-display text-muted-brown font-semibold" id="stepSpecALabel">Torque / Capacity</span>
+              <strong class="font-display font-bold text-sm text-charcoal" id="stepSpecAVal">45 kN Base Load</strong>
+            </div>
+            <div>
+              <span class="block text-[10px] uppercase font-display text-muted-brown font-semibold" id="stepSpecBLabel">Standard Norm</span>
+              <strong class="font-display font-bold text-sm text-primary-gold" id="stepSpecBVal">SASO ISO 3834-2</strong>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-3 border-t border-divider-color">
+            <button onclick="prevStep()" class="px-4 py-2 border border-divider-color bg-desert-ivory rounded font-display text-xs font-bold uppercase hover:bg-soft-sand">
+              Previous
+            </button>
+            <div class="flex items-center gap-1.5" id="stepDotsContainer"></div>
+            <button onclick="nextStep()" class="px-4 py-2 bg-charcoal text-white rounded font-display text-xs font-bold uppercase hover:bg-primary-gold">
+              Next Phase
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. 5-STEP SERVICE LIFECYCLE -->
+    <section class="flex flex-col gap-6" id="services-sec">
+      <div class="border-b border-divider-color pb-4">
+        <span class="font-display text-xs uppercase tracking-widest text-primary-gold font-bold">Full Lifecycle Protocol</span>
+        <h2 class="text-2xl sm:text-3xl font-display font-bold text-charcoal uppercase mt-1">From Design to Site</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" id="servicesDisplayGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- 6. MEGAPROJECTS PORTFOLIO -->
+    <section class="flex flex-col gap-6" id="projects-sec">
+      <div class="border-b border-divider-color pb-4 flex items-end justify-between">
+        <div>
+          <span class="font-display text-xs uppercase tracking-widest text-primary-gold font-bold">Kingdom Gigaprojects</span>
+          <h2 class="text-2xl sm:text-3xl font-display font-bold text-charcoal uppercase mt-1">Proven Project Deployments</h2>
+        </div>
+        <span class="text-xs font-display text-muted-brown">NEOM • Red Sea • Riyadh Metro • Qiddiya</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projectsDisplayGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- 7. RFQ CONSULTATION TERMINAL -->
+    <section class="bg-charcoal text-content-offwhite rounded-2xl p-6 sm:p-10 border border-divider-color/20" id="quote-sec">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5 flex flex-col gap-4">
+          <span class="font-display text-xs uppercase tracking-widest text-primary-gold font-bold">Engineering Consultation</span>
+          <h2 class="text-2xl sm:text-4xl font-display font-bold uppercase leading-tight">
+            Bring Us The Structure.<br/>
+            <span class="text-primary-gold">We'll Engineer The System.</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-soft-sand/70 leading-relaxed">
+            Upload your structural drawings or CAD layouts for instant temporary works review, FEA stress verification, and quotation from our senior engineering team in Riyadh.
+          </p>
+
+          <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex items-center gap-3 mt-2">
+            <span class="material-symbols-outlined text-2xl text-primary-gold">call</span>
+            <div class="flex flex-col">
+              <span class="text-[10px] font-display uppercase tracking-widest text-soft-sand/70">Senior Technical Desk</span>
+              <span class="font-display font-bold text-base text-white">+966 11 400 9800</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-card-surface text-charcoal p-6 sm:p-8 rounded-xl border border-divider-color">
+          <form onsubmit="submitRfqForm(event)" class="flex flex-col gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-display font-semibold uppercase text-muted-brown">Full Name *</label>
+                <input type="text" id="in_name" required placeholder="Eng. Fahad Al-Otaibi" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+              </div>
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-display font-semibold uppercase text-muted-brown">Company Name *</label>
+                <input type="text" id="in_company" required placeholder="Al Bawani Contracting" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-display font-semibold uppercase text-muted-brown">Email *</label>
+                <input type="email" id="in_email" required placeholder="f.otaibi@company.sa" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+              </div>
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-display font-semibold uppercase text-muted-brown">Phone (KSA / GCC) *</label>
+                <input type="tel" id="in_phone" required placeholder="+966 50 123 4567" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm"/>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-display font-semibold uppercase text-muted-brown">System Package Needed</label>
+              <select id="in_sys" class="px-3 py-2 bg-desert-ivory border border-divider-color rounded text-sm">
+                <option value="Cuplock Scaffolding">Cuplock Scaffolding (Sales / Rental)</option>
+                <option value="ULMA BRIO Ringlock">ULMA BRIO Multidirectional Scaffolding</option>
+                <option value="ULMA ORMA Modular Formwork">ULMA ORMA / CC-4 Wall & Slab Formwork</option>
+                <option value="ULMA Heavy Shoring MK">Heavy Shoring Towers (MK / T-500)</option>
+                <option value="Bespoke Highway Piers & Manholes">Bespoke Bridge Pier & Manhole Moulds</option>
+              </select>
+            </div>
+
+            <button type="submit" id="btnRfqSend" class="w-full py-3 bg-charcoal text-white font-display text-xs font-bold uppercase tracking-wider rounded hover:bg-primary-gold transition-colors flex items-center justify-center gap-1.5 shadow-sm">
+              <span>Transmit Spec to Riyadh Technical Desk</span>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+
+            <div id="rfqDoneBox" class="hidden p-3 bg-green-50 border border-green-200 text-green-800 rounded text-xs flex items-center gap-2">
+              <span class="material-symbols-outlined text-green-600">check_circle</span>
+              <span id="rfqDoneMsg">Inquiry registered successfully!</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-footer-dark text-soft-sand pt-10 pb-6 border-t border-divider-color/20 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col gap-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-white/10 pb-6">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded bg-primary-gold text-charcoal font-display font-bold flex items-center justify-center">SM</div>
+          <span class="font-display font-bold text-white uppercase text-sm">Saudi Master × ULMA Alliance</span>
+        </div>
+        <div class="flex items-center gap-4 text-soft-sand/70">
+          <span>Riyadh Central HQ • Industrial City 2</span>
+          <span>+966 11 400 9800</span>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center justify-between text-soft-sand/50 text-[11px]">
+        <span>© 2025 Saudi Master Company. Sovereign KSA Manufacturing & European Engineering.</span>
+        <button onclick="toggleAdmin(true)" class="hover:text-primary-gold uppercase font-display font-bold">Open Database CMS</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: ADMIN CMS PORTAL                                                   -->
+  <!-- ========================================================================= -->
+  <div id="adminPortalModal" class="fixed inset-0 z-50 bg-charcoal/70 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-card-surface border border-divider-color rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden my-auto">
+      
+      <div class="p-4 bg-charcoal text-white flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary-gold">admin_panel_settings</span>
+          <span class="font-display font-bold text-sm uppercase">Saudi Master Admin & CMS Portal</span>
+        </div>
+        <button onclick="toggleAdmin(false)" class="p-1 rounded hover:bg-white/10 text-white">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="bg-soft-sand border-b border-divider-color px-4 py-2 flex items-center gap-2">
+        <button onclick="setAdminTab('prods')" id="atab-prods" class="tab-active px-3 py-1.5 rounded font-display text-xs font-bold uppercase">Products Inventory</button>
+        <button onclick="setAdminTab('leads')" id="atab-leads" class="px-3 py-1.5 rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-card-surface">Inbound RFQs</button>
+      </div>
+
+      <div class="p-6 overflow-y-auto flex-1" id="adminBody">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT ENGINE -->
+  <script src="/js/seed_data.js"></script>
+  <script>
+    let activeLang = 'en';
+    let activeCls = 'LOCAL';
+    let activeCat = 'all';
+    let curStep = 0;
+    let db = window.DB_SNAPSHOT || {};
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts();
+      renderGeom();
+      renderAssembly();
+      renderServices();
+      renderProjects();
+    });
+
+    function toggleLang() {
+      activeLang = (activeLang === 'en') ? 'ar' : 'en';
+      document.documentElement.setAttribute('lang', activeLang);
+      document.documentElement.setAttribute('dir', activeLang === 'ar' ? 'rtl' : 'ltr');
+      document.getElementById('langBtnText').innerText = (activeLang === 'en') ? 'عربي' : 'EN';
+      renderProducts();
+      renderGeom();
+      renderAssembly();
+      renderServices();
+      renderProjects();
+    }
+
+    function setClassification(cls) {
+      activeCls = cls;
+      const bLoc = document.getElementById('btn-tab-LOCAL');
+      const bUlm = document.getElementById('btn-tab-EUROPEAN');
+      if (cls === 'LOCAL') {
+        bLoc.className = 'tab-active px-4 py-2 rounded-md font-display text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all';
+        bUlm.className = 'px-4 py-2 rounded-md font-display text-xs font-bold uppercase tracking-wider text-charcoal flex items-center gap-2 hover:bg-card-surface transition-all';
+      } else {
+        bUlm.className = 'tab-active px-4 py-2 rounded-md font-display text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all';
+        bLoc.className = 'px-4 py-2 rounded-md font-display text-xs font-bold uppercase tracking-wider text-charcoal flex items-center gap-2 hover:bg-card-surface transition-all';
+      }
+      renderProducts();
+    }
+
+    function filterCat(cat) {
+      activeCat = cat;
+      document.querySelectorAll('.cat-chip').forEach(c => {
+        if (c.getAttribute('data-c') === cat) {
+          c.className = 'cat-chip px-3.5 py-1.5 rounded-full bg-charcoal text-white font-display text-xs font-semibold uppercase tracking-wider shadow-xs';
+        } else {
+          c.className = 'cat-chip px-3.5 py-1.5 rounded-full bg-card-surface text-charcoal border border-divider-color font-display text-xs font-semibold uppercase hover:bg-soft-sand';
+        }
+      });
+      renderProducts();
+    }
+
+    function renderProducts() {
+      const container = document.getElementById('productsDisplayGrid');
+      const badge = document.getElementById('productCountBadge');
+      if (!container || !db.products) return;
+
+      let list = db.products.filter(p => p.class_code === activeCls);
+      if (activeCat !== 'all') {
+        list = list.filter(p => p.cat_slug === activeCat);
+      }
+
+      badge.innerText = `${list.length} Systems Active`;
+
+      container.innerHTML = list.map(p => {
+        const isLoc = p.class_code === 'LOCAL';
+        const tagBg = isLoc ? 'bg-primary-gold text-white' : 'bg-ulma-orange text-white';
+        const name = (activeLang === 'ar') ? p.name_ar : p.name_en;
+        const summary = (activeLang === 'ar') ? p.short_summary_ar : p.short_summary_en;
+        const what = (activeLang === 'ar') ? p.what_is_it_ar : p.what_is_it_en;
+        const used = (activeLang === 'ar') ? p.what_is_used_for_ar : p.what_is_used_for_en;
+
+        return `
+          <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col justify-between hover:border-primary-gold transition-all">
+            <div class="fallback-card p-6 text-content-offwhite flex flex-col justify-between min-h-[160px] relative">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-display font-bold uppercase tracking-wider ${tagBg}">
+                  ${p.sku}
+                </span>
+                <span class="text-[10px] font-display uppercase tracking-widest text-soft-sand/80">
+                  ${p.sales_available && p.rental_available ? 'Sales & Rental' : 'Direct Sale'}
+                </span>
+              </div>
+              <div class="mt-4">
+                <span class="text-[10px] font-display uppercase tracking-wider text-primary-gold block font-semibold">${p.brand_name}</span>
+                <h3 class="text-lg font-display font-bold uppercase">${name}</h3>
+              </div>
+            </div>
+
+            <div class="p-6 flex flex-col justify-between flex-1 gap-4">
+              <div class="flex flex-col gap-2">
+                <p class="text-xs text-muted-brown leading-relaxed line-clamp-2">${summary}</p>
+                
+                <div class="bg-desert-ivory p-3 rounded-lg border border-divider-color flex flex-col gap-1.5 text-xs">
+                  <div><strong class="text-charcoal uppercase tracking-wider text-[10px] block">What It Is:</strong> <span class="text-muted-brown">${what}</span></div>
+                  <div class="pt-1 border-t border-divider-color/60"><strong class="text-charcoal uppercase tracking-wider text-[10px] block">Used For:</strong> <span class="text-muted-brown">${used}</span></div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between pt-2 border-t border-divider-color">
+                <span class="text-[11px] font-display text-secondary-earth font-bold">${isLoc ? '🇸🇦 KSA Plant' : '🇪🇺 Spain Origin'}</span>
+                <button onclick="prefill('${name}')" class="px-4 py-1.5 bg-charcoal text-white rounded text-xs font-display font-bold uppercase tracking-wider hover:bg-primary-gold">
+                  Quote System
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    const geoms = [
+      { id: 'wall', name_en: 'Wall', name_ar: 'جدران', code: 'ULMA ORMA + SM Walers', title: 'Monolithic Retaining & Shear Walls', desc: 'Engineered for swift cycle repetitions. Integrates modular wall panels with locally fabricated high-load alignment struts to hold lateral pressure up to 80 kN/m².', p1: '80 kN/m² Max', p2: '0.25 hr/m² Striking' },
+      { id: 'column', name_en: 'Column', name_ar: 'أعمدة', code: 'SM Rolled Shells + ULMA LGR', title: 'Circular & Rectangular High-Speed Columns', desc: 'Custom-rolled high-tensile steel half-cylinders and universal clamp assemblies for fair-faced columns up to 100 kN/m² pour speeds.', p1: '100 kN/m² Proof', p2: 'Ø300 – Ø2000mm' },
+      { id: 'circular', name_en: 'Circular & Tanks', name_ar: 'خزانات دائرية', code: 'ULMA BIRAMAX + SM Radius Walers', title: 'Curved Containment & Silo Structures', desc: 'Continuously adjustable radius wall formwork engineered for wastewater treatment digesters and cylindrical water storage tanks.', p1: '60 kN/m²', p2: 'Radius ≥ 2.5m' },
+      { id: 'slab', name_en: 'Slab & Deck', name_ar: 'أسقف وبلاطات', code: 'ULMA CC-4 Drop-Head + SM Props', title: 'Rapid Post-Tensioned & Flat Slabs', desc: 'Aluminum drop-head modular decking enabling 3-day striking cycles while leaving shoring props untouched, reducing inventory on-site by 40%.', p1: 'Up to 90cm Slabs', p2: 'Striking in 72h' },
+      { id: 'high-rise', name_en: 'High-Rise Core', name_ar: 'أبراج شاهقة', code: 'ULMA ATR Hydraulic Self-Climbing', title: 'Wind-Shielded High-Rise Cores', desc: 'Crane-free self-climbing hydraulic system carrying multi-tiered placing booms, formwork panels, and weather shields up skyscraper towers.', p1: '100 kN Cylinder', p2: '72 km/h Wind Safe' },
+      { id: 'bridge', name_en: 'Bridge & Viaduct', name_ar: 'جسور وأنفاق', code: 'ULMA MK Carriage & Heavy Shoring', title: 'Cantilever & Launching Bridge Systems', desc: 'Specialized modular trusses for balanced cantilever bridges, composite decks, and high-clearance overpass flyovers.', p1: '500 kN / Leg', p2: 'Variable Launch' }
+    ];
+    let activeGeomId = 'wall';
+
+    function renderGeom() {
+      const bContainer = document.getElementById('geomButtonsContainer');
+      const cContainer = document.getElementById('geomCardDisplay');
+      if (!bContainer || !cContainer) return;
+
+      bContainer.innerHTML = geoms.map(g => `
+        <button onclick="selectGeom('${g.id}')" class="px-4 py-2 rounded border border-divider-color font-display text-xs font-bold uppercase tracking-wider shrink-0 transition-all ${g.id === activeGeomId ? 'bg-charcoal text-white' : 'bg-card-surface text-charcoal hover:bg-soft-sand'}">
+          ${activeLang === 'ar' ? g.name_ar : g.name_en}
+        </button>
+      `).join('');
+
+      const g = geoms.find(x => x.id === activeGeomId) || geoms[0];
+      cContainer.innerHTML = `
+        <div class="flex items-center justify-between border-b border-divider-color pb-3 mb-4">
+          <span class="px-2.5 py-1 rounded bg-primary-gold text-white font-display text-xs font-bold uppercase">${g.name_en} Geometry</span>
+          <span class="text-xs font-display text-muted-brown uppercase font-semibold">${g.code}</span>
+        </div>
+        <h3 class="text-xl font-display font-bold uppercase text-charcoal mb-2">${g.title}</h3>
+        <p class="text-sm text-muted-brown leading-relaxed mb-6">${g.desc}</p>
+        <div class="grid grid-cols-2 gap-3 p-4 bg-desert-ivory border border-divider-color rounded-lg mb-6">
+          <div><span class="text-[10px] font-display uppercase text-muted-brown block">Pressure / Capacity</span><strong class="font-display font-bold text-sm text-charcoal">${g.p1}</strong></div>
+          <div><span class="text-[10px] font-display uppercase text-muted-brown block">Execution Benchmark</span><strong class="font-display font-bold text-sm text-primary-gold">${g.p2}</strong></div>
+        </div>
+        <button onclick="prefill('${g.title}')" class="w-full py-2.5 bg-charcoal text-white font-display text-xs font-bold uppercase tracking-wider rounded hover:bg-primary-gold">
+          Quote This Geometry
+        </button>
+      `;
+    }
+
+    function selectGeom(id) {
+      activeGeomId = id;
+      renderGeom();
+    }
+
+    function renderAssembly() {
+      if (!db.assembly || db.assembly.length === 0) return;
+      const s = db.assembly[curStep];
+      document.getElementById('stepCounterLabel').innerText = `STEP 0${s.step_number} / 0${db.assembly.length}`;
+      document.getElementById('stepTitleDisplay').innerText = (activeLang === 'ar') ? s.title_ar : s.title_en;
+      document.getElementById('stepDescDisplay').innerText = (activeLang === 'ar') ? s.description_ar : s.description_en;
+      document.getElementById('stepSpecALabel').innerText = s.spec_a_label || 'Standard';
+      document.getElementById('stepSpecAVal').innerText = s.spec_a_value || 'Verified';
+      document.getElementById('stepSpecBLabel').innerText = s.spec_b_label || 'Quality';
+      document.getElementById('stepSpecBVal').innerText = s.spec_b_value || 'EN 12810';
+
+      const dots = document.getElementById('stepDotsContainer');
+      if (dots) {
+        dots.innerHTML = db.assembly.map((_, i) => `
+          <button onclick="setStep(${i})" class="w-2.5 h-2.5 rounded-full transition-all ${i === curStep ? 'bg-primary-gold w-6' : 'bg-divider-color'}"></button>
+        `).join('');
+      }
+    }
+
+    function nextStep() {
+      if (curStep < db.assembly.length - 1) { curStep++; renderAssembly(); }
+    }
+    function prevStep() {
+      if (curStep > 0) { curStep--; renderAssembly(); }
+    }
+    function setStep(i) {
+      curStep = i; renderAssembly();
+    }
+
+    function renderServices() {
+      const c = document.getElementById('servicesDisplayGrid');
+      if (!c || !db.services) return;
+      c.innerHTML = db.services.map((s, idx) => `
+        <div class="p-5 bg-card-surface border border-divider-color rounded-xl flex flex-col justify-between gap-4">
+          <div class="flex flex-col gap-2">
+            <span class="w-7 h-7 rounded bg-charcoal text-white font-display font-bold text-xs flex items-center justify-center">0${idx+1}</span>
+            <h4 class="font-display font-bold text-sm uppercase text-charcoal">${activeLang === 'ar' ? s.name_ar : s.name_en}</h4>
+            <p class="text-xs text-muted-brown leading-relaxed">${activeLang === 'ar' ? s.summary_ar : s.summary_en}</p>
+          </div>
+          <button onclick="prefill('${s.name_en}')" class="text-xs font-display font-bold text-secondary-earth uppercase hover:text-charcoal flex items-center gap-1">
+            <span>Inquire</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function renderProjects() {
+      const c = document.getElementById('projectsDisplayGrid');
+      if (!c || !db.projects) return;
+      c.innerHTML = db.projects.map(p => `
+        <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col">
+          <div class="fallback-card p-6 text-content-offwhite flex flex-col justify-between min-h-[140px]">
+            <span class="px-2 py-0.5 rounded bg-white/10 text-[10px] font-display uppercase tracking-wider w-fit">${p.industry}</span>
+            <div class="mt-4">
+              <span class="text-[10px] font-display uppercase text-primary-gold block font-semibold">${p.location}</span>
+              <h3 class="text-base font-display font-bold uppercase">${p.name}</h3>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col gap-3">
+            <p class="text-xs text-muted-brown leading-relaxed">${p.summary}</p>
+            <div class="grid grid-cols-3 gap-2 p-2.5 bg-desert-ivory border border-divider-color rounded-lg text-center text-xs">
+              ${p.metrics.map(m => `
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">${m.label}</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">${m.value}</strong>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function prefill(title) {
+      const s = document.getElementById('in_sys');
+      if (s) {
+        for (let i = 0; i < s.options.length; i++) {
+          if (s.options[i].text.includes(title) || s.options[i].value.includes(title)) {
+            s.selectedIndex = i; break;
+          }
+        }
+      }
+      document.getElementById('quote-sec').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function submitRfqForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnRfqSend');
+      const box = document.getElementById('rfqDoneBox');
+      const msg = document.getElementById('rfqDoneMsg');
+      btn.disabled = true;
+      btn.innerText = 'Transmitting to Technical Desk...';
+
+      setTimeout(() => {
+        const ticket = 'ULMA-KSA-' + Math.floor(100000 + Math.random() * 900000);
+        msg.innerText = `Calculation Spec Registered! Ticket #${ticket} dispatched to Chief Structural Engineer.`;
+        box.classList.remove('hidden');
+        btn.disabled = false;
+        btn.innerText = 'Transmitted Successfully';
+      }, 1000);
+    }
+
+    function toggleAdmin(show) {
+      const m = document.getElementById('adminPortalModal');
+      if (!m) return;
+      if (show) {
+        m.classList.remove('hidden');
+        setAdminTab('prods');
+      } else {
+        m.classList.add('hidden');
+      }
+    }
+
+    function setAdminTab(tab) {
+      const b = document.getElementById('adminBody');
+      const tP = document.getElementById('atab-prods');
+      const tL = document.getElementById('atab-leads');
+
+      if (tab === 'prods') {
+        tP.className = 'tab-active px-3 py-1.5 rounded font-display text-xs font-bold uppercase';
+        tL.className = 'px-3 py-1.5 rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-card-surface';
+        b.innerHTML = `
+          <div class="flex flex-col gap-4">
+            <h4 class="font-display font-bold text-sm text-charcoal uppercase">Product Database (${db.products.length} Items)</h4>
+            <div class="overflow-x-auto border border-divider-color rounded-lg">
+              <table class="w-full text-left text-xs bg-card-surface">
+                <thead class="bg-desert-ivory font-display text-muted-brown border-b border-divider-color">
+                  <tr>
+                    <th class="py-2 px-3">SKU</th>
+                    <th class="py-2 px-3">Name</th>
+                    <th class="py-2 px-3">Class</th>
+                    <th class="py-2 px-3 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${db.products.map(p => `
+                    <tr class="border-b border-divider-color">
+                      <td class="py-2 px-3 font-display font-bold">${p.sku}</td>
+                      <td class="py-2 px-3">${p.name_en}</td>
+                      <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-display font-bold ${p.class_code === 'LOCAL' ? 'bg-primary-gold text-white' : 'bg-ulma-orange text-white'}">${p.class_code}</span></td>
+                      <td class="py-2 px-3 text-right">
+                        <button onclick="editDbProd(${p.id})" class="px-2.5 py-1 bg-charcoal text-white rounded text-[11px] font-display font-bold uppercase hover:bg-primary-gold">Edit Title</button>
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      } else {
+        tL.className = 'tab-active px-3 py-1.5 rounded font-display text-xs font-bold uppercase';
+        tP.className = 'px-3 py-1.5 rounded font-display text-xs font-bold uppercase text-charcoal hover:bg-card-surface';
+        b.innerHTML = `
+          <div class="flex flex-col gap-4">
+            <h4 class="font-display font-bold text-sm text-charcoal uppercase">Inbound RFQ Pipeline (${db.leads.length})</h4>
+            <div class="overflow-x-auto border border-divider-color rounded-lg">
+              <table class="w-full text-left text-xs bg-card-surface">
+                <thead class="bg-desert-ivory font-display text-muted-brown border-b border-divider-color">
+                  <tr>
+                    <th class="py-2 px-3">Ticket</th>
+                    <th class="py-2 px-3">Client</th>
+                    <th class="py-2 px-3">System</th>
+                    <th class="py-2 px-3">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${db.leads.map(l => `
+                    <tr class="border-b border-divider-color">
+                      <td class="py-2 px-3 font-display font-bold text-primary-gold">${l.ticket_number}</td>
+                      <td class="py-2 px-3">${l.full_name}<br/><span class="text-[10px] text-muted-brown">${l.company_name}</span></td>
+                      <td class="py-2 px-3">${l.system_interest}</td>
+                      <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-display font-bold bg-green-100 text-green-800">${l.status}</span></td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function editDbProd(id) {
+      const p = db.products.find(x => x.id === id);
+      if (!p) return;
+      const n = prompt('Enter new English title for ' + p.sku, p.name_en);
+      if (n) {
+        p.name_en = n;
+        renderProducts();
+        setAdminTab('prods');
+        alert('Product title updated in session and reflected immediately across the site!');
+      }
+    }
+  </script>
+</body>
+</html>
