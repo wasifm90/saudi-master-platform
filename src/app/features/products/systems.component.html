@@ -34,53 +34,58 @@
       <p class="catalog-error" role="alert">{{ repository.error() }}</p>
     }
     @if (filteredProducts().length) {
-      <div class="product-sequence" [attr.data-filter]="activeClassification()">
-        @for (
-          product of filteredProducts();
-          track activeClassification() + ':' + product.slug;
-          let index = $index
-        ) {
-          <article
-            class="system-chapter"
-            smScrollReveal
-            [attr.data-product-slug]="product.slug"
-            [class.reverse]="index % 2 === 1"
-          >
-            <div class="chapter-visual">
-              <sm-image
-                [src]="product.featuredImage"
-                [alt]="product.name"
-                sizes="(min-width: 851px) 65vw, 100vw"
-              /><span class="chapter-number"
-                >{{ (index + 1).toString().padStart(2, '0') }} /
-                {{ filteredProducts().length.toString().padStart(2, '0') }}</span
-              >
-            </div>
-            <div class="chapter-copy">
-              <p class="eyebrow">
-                {{ product.classification === 'LOCAL' ? 'Local manufactured' : 'European systems' }}
-                · {{ product.manufacturer }}
-              </p>
-              <h3>{{ product.name }}</h3>
-              <p>{{ product.shortDescription }}</p>
-              <dl class="chapter-specs">
-                @for (spec of product.technicalFeatures.slice(0, 2); track spec.label) {
-                  <div>
-                    <dt>{{ spec.label }}</dt>
-                    <dd>{{ spec.value }}</dd>
-                  </div>
-                }
-              </dl>
-              <a
-                class="chapter-link"
-                [routerLink]="['/products', product.slug]"
-                [attr.aria-label]="'View ' + product.name"
-                >View product <span aria-hidden="true">→</span></a
-              >
-            </div>
-          </article>
-        }
-      </div>
+      <sm-scroll-stack mode="pile" [count]="filteredProducts().length">
+        <div class="product-sequence" data-stack-stage [attr.data-filter]="activeClassification()">
+          @for (
+            product of filteredProducts();
+            track activeClassification() + ':' + product.slug;
+            let index = $index
+          ) {
+            <article
+              class="system-chapter"
+              data-stack-panel
+              [style.z-index]="filteredProducts().length - index"
+              [attr.data-product-slug]="product.slug"
+              [class.reverse]="index % 2 === 1"
+            >
+              <div class="chapter-visual">
+                <sm-image
+                  [src]="product.featuredImage"
+                  [alt]="product.name"
+                  sizes="(min-width: 851px) 65vw, 100vw"
+                /><span class="chapter-number"
+                  >{{ (index + 1).toString().padStart(2, '0') }} /
+                  {{ filteredProducts().length.toString().padStart(2, '0') }}</span
+                >
+              </div>
+              <div class="chapter-copy">
+                <p class="eyebrow">
+                  {{
+                    product.classification === 'LOCAL' ? 'Local manufactured' : 'European systems'
+                  }}
+                  · {{ product.manufacturer }}
+                </p>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.shortDescription }}</p>
+                <dl class="chapter-specs">
+                  @for (spec of product.technicalFeatures.slice(0, 2); track spec.label) {
+                    <div>
+                      <dt>{{ spec.label }}</dt>
+                      <dd>{{ spec.value }}</dd>
+                    </div>
+                  }
+                </dl>
+                <a
+                  class="chapter-link"
+                  [routerLink]="['/products', product.slug]"
+                  [attr.aria-label]="'View ' + product.name"
+                  >View product <span aria-hidden="true">→</span></a
+                >
+              </div>
+            </article>
+          }
+        </div>
+      </sm-scroll-stack>
     } @else {
       <p class="empty-state" role="status">
         {{ repository.loading() ? 'Loading systems…' : 'No active products match this selection.' }}

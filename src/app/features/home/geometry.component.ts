@@ -5,14 +5,14 @@ import { ProductRepository } from '../../core/services/product.repository';
 import { filterProducts } from '../../core/services/interaction-state';
 import { GeometryId } from '../../core/models/content';
 import { ImageComponent } from '../../shared/image.component';
-import { ScrollRailComponent } from '../../shared/scroll-rail.component';
+import { ScrollStackComponent } from '../../shared/scroll-stack.component';
 import { HOME } from '../../data/catalog';
 
 @Component({
   selector: 'sm-geometry',
-  imports: [RouterLink, ImageComponent, ScrollRailComponent],
+  imports: [RouterLink, ImageComponent, ScrollStackComponent],
   template: ` <section class="geometry" id="geometry" aria-labelledby="geometry-title">
-    <sm-scroll-rail [count]="categories.length">
+    <sm-scroll-stack mode="overlay" [count]="categories.length">
       <div class="geometry-stage">
         <div class="geometry-head shell">
           <p class="eyebrow">Architectural versatility</p>
@@ -31,13 +31,13 @@ import { HOME } from '../../data/catalog';
             }
           </div>
           <div class="rail-hint">
-            <span>Scroll down to move across systems →</span><span>Swipe to explore →</span>
+            <span>Scroll down to unveil systems ↓</span><span>Swipe to explore →</span>
           </div>
         </div>
-        <div class="geometry-viewport">
+        <div class="geometry-viewport" data-stack-stage>
           <div
             class="geometry-track"
-            data-scroll-track
+            data-mobile-track
             role="region"
             tabindex="0"
             aria-label="Formwork geometries; vertical scroll advances panels on desktop, swipe on mobile"
@@ -45,6 +45,8 @@ import { HOME } from '../../data/catalog';
             @for (category of categories; track category.id; let index = $index) {
               <article
                 class="geometry-panel"
+                data-stack-panel
+                [style.z-index]="index + 1"
                 [class.reverse]="index % 2 === 1"
                 [attr.data-category]="category.id"
               >
@@ -81,7 +83,7 @@ import { HOME } from '../../data/catalog';
           </div>
         </div>
       </div>
-    </sm-scroll-rail>
+    </sm-scroll-stack>
   </section>`,
   styles: `
     .geometry {
@@ -151,18 +153,26 @@ import { HOME } from '../../data/catalog';
       overflow: hidden;
     }
     .geometry-track {
-      display: flex;
-      width: max-content;
+      position: relative;
+      width: 100%;
       height: 100%;
     }
     .geometry-panel {
+      position: absolute;
+      inset: 0 auto 0 3%;
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
       align-items: stretch;
       gap: clamp(22px, 3vw, 48px);
-      width: 100vw;
+      width: 94%;
       height: 100%;
-      padding: 12px clamp(28px, 5vw, 90px) 24px;
+      padding: 12px clamp(24px, 4vw, 68px) 24px;
+      overflow: hidden;
+      border: 1px solid #dfd2c2;
+      border-radius: 27px;
+      background: #fffaf4;
+      box-shadow: 0 18px 42px #26354324;
+      transform-origin: center center;
     }
     .geometry-panel.reverse {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
@@ -294,6 +304,7 @@ import { HOME } from '../../data/catalog';
         overflow: visible;
       }
       .geometry-track {
+        display: flex;
         width: 100%;
         height: auto;
         gap: 14px;
@@ -305,6 +316,8 @@ import { HOME } from '../../data/catalog';
       }
       .geometry-panel,
       .geometry-panel.reverse {
+        position: relative;
+        inset: auto;
         flex: 0 0 min(84vw, 590px);
         display: block;
         width: auto;
@@ -348,7 +361,7 @@ export class GeometryComponent {
     (category) => category.id !== 'wall',
   );
   private readonly repository = inject(ProductRepository);
-  readonly rail = viewChild(ScrollRailComponent);
+  readonly rail = viewChild(ScrollStackComponent);
   relatedProducts(id: GeometryId) {
     return filterProducts(this.repository.products(), 'ALL', id);
   }

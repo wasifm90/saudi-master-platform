@@ -1,6 +1,6 @@
 .systems {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
   isolation: isolate;
   background:
     radial-gradient(circle at 92% 3%, #e6edf6 0, transparent 31%),
@@ -109,24 +109,27 @@
   letter-spacing: 0.11em;
 }
 .product-sequence {
-  display: grid;
-  gap: clamp(18px, 3vw, 42px);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  isolation: isolate;
 }
 .system-chapter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(300px, 0.9fr);
   align-items: center;
-  min-height: clamp(580px, 83svh, 900px);
+  height: calc(100% - clamp(65px, 9vh, 95px));
   overflow: hidden;
   border: 1px solid #ded4c9;
   border-radius: 30px;
   background: #fffaf5;
-  box-shadow: 0 24px 58px #2635431a;
-  scroll-margin-top: 106px;
-  transition:
-    opacity 0.65s ease,
-    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
-    clip-path 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  box-shadow: 0 18px 42px #26354325;
+  transform-origin: top center;
+  backface-visibility: hidden;
 }
 .system-chapter.reverse {
   grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.5fr);
@@ -134,20 +137,10 @@
 .system-chapter.reverse .chapter-visual {
   order: 2;
 }
-.system-chapter.reveal-pending {
-  opacity: 0.15;
-  transform: translateY(48px) scale(0.91);
-  clip-path: inset(10% 0 round 30px);
-}
-.system-chapter.reveal-active {
-  opacity: 1;
-  transform: none;
-  clip-path: inset(0 round 30px);
-}
 .chapter-visual {
   position: relative;
   height: 100%;
-  min-height: 580px;
+  min-height: 0;
   overflow: hidden;
 }
 .chapter-visual sm-image {
@@ -236,22 +229,27 @@
 @media (max-width: 850px) {
   .system-chapter,
   .system-chapter.reverse {
-    display: block;
-    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 38%) minmax(0, 62%);
+    height: calc(100% - 66px);
+    border-radius: 23px;
   }
   .system-chapter.reverse .chapter-visual {
     order: unset;
   }
   .chapter-visual {
-    height: auto;
+    height: 100%;
     min-height: 0;
   }
   .chapter-visual sm-image {
-    aspect-ratio: 4/3;
-    height: auto;
+    aspect-ratio: auto;
+    height: 100%;
   }
   .chapter-copy {
-    padding: 26px;
+    min-height: 0;
+    overflow: auto;
+    padding: 20px 24px;
   }
   .chapter-copy h3 {
     font-size: clamp(29px, 5vw, 46px);
@@ -276,7 +274,19 @@
     margin-top: 17px;
   }
   .chapter-copy {
-    padding: 22px;
+    padding: 17px 19px;
+  }
+  .chapter-copy h3 {
+    margin: 9px 0 12px;
+  }
+  .chapter-copy > p:not(.eyebrow) {
+    line-height: 1.45;
+  }
+  .chapter-specs {
+    margin: 15px 0;
+  }
+  .chapter-specs div:nth-child(n + 2) {
+    display: none;
   }
   .chapter-number {
     top: 16px;
@@ -284,13 +294,6 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .system-chapter,
-  .system-chapter.reveal-pending {
-    opacity: 1;
-    transform: none;
-    clip-path: none;
-    transition: none;
-  }
   .filters button {
     transition: none;
   }

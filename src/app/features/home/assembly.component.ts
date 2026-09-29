@@ -1,14 +1,14 @@
 import { Component, inject, viewChild } from '@angular/core';
 import { ContentRepository } from '../../core/services/content.repository';
 import { ImageComponent } from '../../shared/image.component';
-import { ScrollRailComponent } from '../../shared/scroll-rail.component';
+import { ScrollStackComponent } from '../../shared/scroll-stack.component';
 import { HOME } from '../../data/catalog';
 
 @Component({
   selector: 'sm-assembly',
-  imports: [ImageComponent, ScrollRailComponent],
+  imports: [ImageComponent, ScrollStackComponent],
   template: ` <section class="assembly" id="assembly" aria-labelledby="assembly-title">
-    <sm-scroll-rail [count]="steps.length">
+    <sm-scroll-stack mode="overlay" [count]="steps.length">
       <div class="assembly-stage">
         <div class="assembly-head shell">
           <p class="eyebrow">Systems in motion</p>
@@ -23,14 +23,14 @@ import { HOME } from '../../data/catalog';
             ><span>{{ steps.length.toString().padStart(2, '0') }}</span>
           </div>
           <span class="assembly-cue"
-            ><span>Scroll down to advance the build →</span
+            ><span>Scroll down to unveil each stage ↓</span
             ><span>Swipe through the build →</span></span
           >
         </div>
-        <div class="assembly-viewport">
+        <div class="assembly-viewport" data-stack-stage>
           <div
             class="assembly-track"
-            data-scroll-track
+            data-mobile-track
             role="region"
             tabindex="0"
             aria-label="Structural assembly stages; vertical scroll advances panels on desktop, swipe on mobile"
@@ -38,6 +38,8 @@ import { HOME } from '../../data/catalog';
             @for (step of steps; track step.id; let index = $index) {
               <article
                 class="assembly-panel"
+                data-stack-panel
+                [style.z-index]="index + 1"
                 [class.reverse]="index % 2 === 1"
                 [attr.data-step]="step.id"
               >
@@ -76,7 +78,7 @@ import { HOME } from '../../data/catalog';
           </div>
         </div>
       </div>
-    </sm-scroll-rail>
+    </sm-scroll-stack>
   </section>`,
   styles: `
     .assembly {
@@ -141,18 +143,26 @@ import { HOME } from '../../data/catalog';
       overflow: hidden;
     }
     .assembly-track {
-      display: flex;
-      width: max-content;
+      position: relative;
+      width: 100%;
       height: 100%;
     }
     .assembly-panel {
+      position: absolute;
+      inset: 0 auto 0 3%;
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
       gap: clamp(22px, 3vw, 48px);
       align-items: stretch;
-      width: 100vw;
+      width: 94%;
       height: 100%;
-      padding: 12px clamp(28px, 5vw, 90px) 24px;
+      padding: 12px clamp(24px, 4vw, 68px) 24px;
+      overflow: hidden;
+      border: 1px solid #d8d9d9;
+      border-radius: 27px;
+      background: #fffaf4;
+      box-shadow: 0 18px 42px #26354324;
+      transform-origin: center center;
     }
     .assembly-panel.reverse {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
@@ -250,6 +260,7 @@ import { HOME } from '../../data/catalog';
         overflow: visible;
       }
       .assembly-track {
+        display: flex;
         width: 100%;
         height: auto;
         gap: 14px;
@@ -261,6 +272,8 @@ import { HOME } from '../../data/catalog';
       }
       .assembly-panel,
       .assembly-panel.reverse {
+        position: relative;
+        inset: auto;
         flex: 0 0 min(84vw, 590px);
         display: block;
         width: auto;
@@ -301,5 +314,5 @@ import { HOME } from '../../data/catalog';
 export class AssemblyComponent {
   readonly copy = HOME;
   readonly steps = inject(ContentRepository).assembly;
-  readonly rail = viewChild(ScrollRailComponent);
+  readonly rail = viewChild(ScrollStackComponent);
 }

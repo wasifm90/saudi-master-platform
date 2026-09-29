@@ -29,7 +29,7 @@ async function configure(): Promise<void> {
   repository.products.set(PRODUCTS);
 }
 describe('Angular rendered interactions', () => {
-  it('rebuilds the progressive product sequence when filters change', async () => {
+  it('rebuilds the product pile when filters change', async () => {
     await configure();
     const fixture = TestBed.createComponent(SystemsComponent);
     fixture.detectChanges();
@@ -38,6 +38,8 @@ describe('Angular rendered interactions', () => {
     buttons[2]!.click();
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('.system-chapter')).toHaveLength(6);
+    expect(fixture.nativeElement.querySelector('[data-stack-stage]')).not.toBeNull();
+    expect(fixture.nativeElement.querySelectorAll('[data-stack-panel]')).toHaveLength(6);
     expect(fixture.nativeElement.querySelector('.system-chapter h3').textContent).toContain(
       'ULMA ORMA',
     );
@@ -59,7 +61,7 @@ describe('Angular rendered interactions', () => {
     expect(fixture.nativeElement.querySelectorAll('.product-grid')).toHaveLength(0);
     fixture.destroy();
   });
-  it('renders five ordered geometry panels with matching system routes', async () => {
+  it('renders five ordered overlapping geometry panels with matching system routes', async () => {
     await configure();
     const fixture = TestBed.createComponent(GeometryComponent);
     fixture.detectChanges();
@@ -77,11 +79,12 @@ describe('Angular rendered interactions', () => {
       '0',
     );
     expect(
-      fixture.nativeElement.querySelector('.geometry-track').hasAttribute('data-scroll-track'),
+      fixture.nativeElement.querySelector('.geometry-track').hasAttribute('data-mobile-track'),
     ).toBe(true);
+    expect(fixture.nativeElement.querySelectorAll('[data-stack-panel]')).toHaveLength(5);
     fixture.destroy();
   });
-  it('renders every assembly stage on one horizontal track', async () => {
+  it('renders every assembly stage in the overlay stack', async () => {
     await configure();
     const fixture = TestBed.createComponent(AssemblyComponent);
     fixture.detectChanges();
@@ -98,8 +101,9 @@ describe('Angular rendered interactions', () => {
       '0',
     );
     expect(
-      fixture.nativeElement.querySelector('.assembly-track').hasAttribute('data-scroll-track'),
+      fixture.nativeElement.querySelector('.assembly-track').hasAttribute('data-mobile-track'),
     ).toBe(true);
+    expect(fixture.nativeElement.querySelectorAll('[data-stack-panel]')).toHaveLength(7);
     fixture.destroy();
   });
 });
