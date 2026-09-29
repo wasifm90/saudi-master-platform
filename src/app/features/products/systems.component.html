@@ -1,4 +1,4 @@
-<section class="systems section" id="systems" aria-labelledby="systems-title">
+<section #section class="systems section" id="systems" aria-labelledby="systems-title">
   <div class="shell">
     <div class="section-heading">
       <div>
@@ -7,9 +7,9 @@
         <p>{{ copy.productsDescription }}</p>
       </div>
       <div class="catalog-mark" aria-hidden="true">
-        <span class="catalog-mark__line"></span>
-        <span>01 — {{ repository.products().length.toString().padStart(2, '0') }}</span>
-        <span>Systems catalogue</span>
+        <span class="catalog-mark__line"></span
+        ><span>01 — {{ repository.products().length.toString().padStart(2, '0') }}</span
+        ><span>Systems catalogue</span>
       </div>
     </div>
     <div class="catalog-controls">
@@ -21,38 +21,64 @@
             [attr.aria-pressed]="activeClassification() === filter.code"
             (click)="selectFilter(filter.code)"
           >
-            <span>{{ filter.label }}</span>
-            <span class="filter-count">{{ countFor(filter.code) }}</span>
+            <span>{{ filter.label }}</span
+            ><span class="filter-count">{{ countFor(filter.code) }}</span>
           </button>
         }
       </div>
-      <p class="result-count" role="status">Showing {{ filteredProducts().length }} systems</p>
+      <p class="result-count" role="status">
+        {{ activeProductIndex() + 1 }} / {{ filteredProducts().length }} systems
+      </p>
     </div>
     @if (repository.error()) {
       <p class="catalog-error" role="alert">{{ repository.error() }}</p>
     }
     @if (filteredProducts().length) {
       <div class="product-sequence" [attr.data-filter]="activeClassification()">
-        @for (row of productRows(); track row[0].slug; let rowIndex = $index) {
-          <section class="system-row" [attr.aria-label]="'System group ' + (rowIndex + 1)">
-            <div class="system-row__meta" aria-hidden="true">
-              <span>System sequence / {{ (rowIndex + 1).toString().padStart(2, '0') }}</span>
-              <span
-                >{{ (rowIndex + 1).toString().padStart(2, '0') }} —
-                {{ productRows().length.toString().padStart(2, '0') }}</span
+        @for (
+          product of filteredProducts();
+          track activeClassification() + ':' + product.slug;
+          let index = $index
+        ) {
+          <article
+            class="system-chapter"
+            smScrollReveal
+            [attr.data-product-slug]="product.slug"
+            [class.reverse]="index % 2 === 1"
+          >
+            <div class="chapter-visual">
+              <sm-image
+                [src]="product.featuredImage"
+                [alt]="product.name"
+                sizes="(min-width: 851px) 65vw, 100vw"
+              /><span class="chapter-number"
+                >{{ (index + 1).toString().padStart(2, '0') }} /
+                {{ filteredProducts().length.toString().padStart(2, '0') }}</span
               >
             </div>
-            <div class="product-grid">
-              @for (product of row; track product.slug; let index = $index) {
-                <sm-product-card
-                  class="product-tile"
-                  [product]="product"
-                  [index]="rowIndex * 3 + index"
-                  [total]="filteredProducts().length"
-                />
-              }
+            <div class="chapter-copy">
+              <p class="eyebrow">
+                {{ product.classification === 'LOCAL' ? 'Local manufactured' : 'European systems' }}
+                · {{ product.manufacturer }}
+              </p>
+              <h3>{{ product.name }}</h3>
+              <p>{{ product.shortDescription }}</p>
+              <dl class="chapter-specs">
+                @for (spec of product.technicalFeatures.slice(0, 2); track spec.label) {
+                  <div>
+                    <dt>{{ spec.label }}</dt>
+                    <dd>{{ spec.value }}</dd>
+                  </div>
+                }
+              </dl>
+              <a
+                class="chapter-link"
+                [routerLink]="['/products', product.slug]"
+                [attr.aria-label]="'View ' + product.name"
+                >View product <span aria-hidden="true">→</span></a
+              >
             </div>
-          </section>
+          </article>
         }
       </div>
     } @else {

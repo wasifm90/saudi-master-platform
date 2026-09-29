@@ -29,7 +29,7 @@ async function configure(): Promise<void> {
   repository.products.set(PRODUCTS);
 }
 describe('Angular rendered interactions', () => {
-  it('filters product tiles while keeping each card linked to its product', async () => {
+  it('rebuilds the progressive product sequence when filters change', async () => {
     await configure();
     const fixture = TestBed.createComponent(SystemsComponent);
     fixture.detectChanges();
@@ -37,59 +37,56 @@ describe('Angular rendered interactions', () => {
       fixture.nativeElement.querySelectorAll('.filters button');
     buttons[2]!.click();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelectorAll('.product-tile')).toHaveLength(6);
-    expect(fixture.nativeElement.querySelector('.product-tile h3').textContent).toContain(
+    expect(fixture.nativeElement.querySelectorAll('.system-chapter')).toHaveLength(6);
+    expect(fixture.nativeElement.querySelector('.system-chapter h3').textContent).toContain(
       'ULMA ORMA',
     );
     expect(
       fixture.nativeElement
-        .querySelectorAll('.product-tile')[1]
-        .querySelector('h3 a')
+        .querySelectorAll('.system-chapter')[1]
+        .querySelector('.chapter-link')
         .getAttribute('href'),
     ).toBe('/products/ulma-brio-ringlock');
-    expect(fixture.nativeElement.querySelector('.result-count').textContent).toContain('6 systems');
+    expect(fixture.nativeElement.querySelector('.result-count').textContent).toContain(
+      '1 / 6 systems',
+    );
     buttons[1]!.click();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelectorAll('.product-tile')).toHaveLength(6);
-    expect(fixture.nativeElement.querySelector('.product-tile h3 a').getAttribute('href')).toBe(
-      '/products/cuplock-scaffolding',
-    );
-    expect(fixture.nativeElement.querySelectorAll('.product-card')).toHaveLength(6);
+    expect(fixture.nativeElement.querySelectorAll('.system-chapter')).toHaveLength(6);
     expect(
-      fixture.nativeElement.querySelector('.product-tile .card-enquire').getAttribute('href'),
-    ).toBe('/contact?product=cuplock-scaffolding');
+      fixture.nativeElement.querySelector('.system-chapter .chapter-link').getAttribute('href'),
+    ).toBe('/products/cuplock-scaffolding');
+    expect(fixture.nativeElement.querySelectorAll('.product-grid')).toHaveLength(0);
     fixture.destroy();
   });
-  it('renders matching geometry products as scrollable slides and updates with repository data', async () => {
+  it('renders five ordered geometry panels with matching system routes', async () => {
     await configure();
     const fixture = TestBed.createComponent(GeometryComponent);
     fixture.detectChanges();
-    fixture.componentInstance.selectGeometry('slab');
-    fixture.detectChanges();
     const slides: NodeListOf<HTMLElement> =
-      fixture.nativeElement.querySelectorAll('.geometry-slide');
-    expect(slides.length).toBeGreaterThan(1);
-    expect(Array.from(slides).some((slide) => slide.textContent?.includes('Heavy Shoring'))).toBe(
-      true,
+      fixture.nativeElement.querySelectorAll('.geometry-panel');
+    expect(slides).toHaveLength(5);
+    expect(slides[0]?.dataset['category']).toBe('column');
+    expect(slides[4]?.dataset['category']).toBe('bridge');
+    expect(slides[0]?.querySelector('h3')?.textContent).toContain('Column & Pier');
+    expect(slides[0]?.querySelectorAll('.related-systems a').length).toBeGreaterThan(0);
+    expect(slides[0]?.querySelector('.panel-cta')?.getAttribute('href')).toBe(
+      '/products/circular-column-systems',
     );
-    expect(fixture.nativeElement.querySelector('.geometry-lead sm-image')).not.toBeNull();
     expect(fixture.nativeElement.querySelector('.geometry-track').getAttribute('tabindex')).toBe(
       '0',
     );
-    repository.products.set(PRODUCTS.filter((p) => p.slug === 'cuplock-scaffolding'));
-    fixture.detectChanges();
     expect(
-      fixture.nativeElement.querySelector('.geometry-slide .card-actions a').getAttribute('href'),
-    ).toBe('/products/cuplock-scaffolding');
-    expect(fixture.nativeElement.querySelectorAll('.geometry-slide')).toHaveLength(1);
+      fixture.nativeElement.querySelector('.geometry-track').hasAttribute('data-scroll-track'),
+    ).toBe(true);
     fixture.destroy();
   });
-  it('renders every assembly step in order for scroll and swipe navigation', async () => {
+  it('renders every assembly stage on one horizontal track', async () => {
     await configure();
     const fixture = TestBed.createComponent(AssemblyComponent);
     fixture.detectChanges();
     const steps: NodeListOf<HTMLElement> =
-      fixture.nativeElement.querySelectorAll('.assembly-content');
+      fixture.nativeElement.querySelectorAll('.assembly-panel');
     expect(steps).toHaveLength(7);
     expect(steps[0]!.dataset['step']).toBe('1');
     expect(steps[6]!.dataset['step']).toBe('7');
@@ -100,6 +97,9 @@ describe('Angular rendered interactions', () => {
     expect(fixture.nativeElement.querySelector('.assembly-track').getAttribute('tabindex')).toBe(
       '0',
     );
+    expect(
+      fixture.nativeElement.querySelector('.assembly-track').hasAttribute('data-scroll-track'),
+    ).toBe(true);
     fixture.destroy();
   });
 });
