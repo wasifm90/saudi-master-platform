@@ -6,7 +6,7 @@ import { gzipSync } from 'node:zlib';
 import { resolve, extname, sep } from 'node:path';
 import { previewCms } from './preview-cms.mjs';
 const root = resolve('dist/website/browser');
-const port = Number(process.env['PORT'] || 4306);
+const port = Number(process.env['PORT'] || 4305);
 const types = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'application/javascript',
