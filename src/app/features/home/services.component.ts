@@ -3,13 +3,12 @@ import { RouterLink } from '@angular/router';
 import { ContentRepository } from '../../core/services/content.repository';
 import { AccordionState } from '../../core/services/interaction-state';
 import { ImageComponent } from '../../shared/image.component';
-import { HOME } from '../../data/catalog';
 @Component({
   selector: 'sm-services',
   imports: [RouterLink, ImageComponent],
   template: ` <section class="section" aria-labelledby="services-title">
     <div class="shell">
-      <p class="eyebrow">Full lifecycle protocol</p>
+      <p class="eyebrow">{{ labels.servicesEyebrow }}</p>
       <h2 id="services-title">{{ copy.services }}</h2>
       <div class="service-list">
         @for (service of services; track service.id; let index = $index) {
@@ -111,7 +110,15 @@ import { HOME } from '../../data/catalog';
   `,
 })
 export class ServicesComponent {
-  readonly copy = HOME;
-  readonly services = inject(ContentRepository).services;
+  private readonly content = inject(ContentRepository);
+  get copy() {
+    return this.content.home;
+  }
+  get labels() {
+    return this.content.labels;
+  }
+  get services() {
+    return this.content.services;
+  }
   readonly state = new AccordionState();
 }

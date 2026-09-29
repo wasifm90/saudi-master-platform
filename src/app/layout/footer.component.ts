@@ -7,22 +7,23 @@ import { ContentRepository } from '../core/services/content.repository';
   template: ` <footer>
     <div class="shell footer-grid">
       <div>
-        <a routerLink="/" class="footer-brand">Saudi Master <span>× ULMA</span></a>
+        <a routerLink="/" class="footer-brand">{{ company.name }} <span>× ULMA</span></a>
         <p>{{ company.description }}</p>
       </div>
       <div>
-        <h2>Engineering enquiries</h2>
+        <h2>{{ labels.footerEnquiries }}</h2>
         <a [href]="'tel:' + company.phone">{{ company.phone }}</a
         ><a [href]="'mailto:' + company.email">{{ company.email }}</a>
         <p>{{ company.address }}</p>
       </div>
       <nav aria-label="Footer">
         <a routerLink="/insights">Insights</a><a routerLink="/privacy">Privacy</a
-        ><a routerLink="/terms">Terms</a><a routerLink="/contact">Start a project ↗</a>
+        ><a routerLink="/terms">Terms</a><a routerLink="/contact">Start a project ↗</a
+        ><a routerLink="/admin">Admin</a>
       </nav>
     </div>
     <div class="shell footer-bottom">
-      © {{ year }} {{ company.name }}. <span>Local manufacturing. European engineering.</span>
+      © {{ year }} {{ company.name }}. <span>{{ labels.footerTagline }}</span>
     </div>
   </footer>`,
   styles: `
@@ -90,6 +91,12 @@ import { ContentRepository } from '../core/services/content.repository';
   `,
 })
 export class FooterComponent {
-  readonly company = inject(ContentRepository).company;
+  private readonly content = inject(ContentRepository);
+  get company() {
+    return this.content.company;
+  }
+  get labels() {
+    return this.content.labels;
+  }
   readonly year = new Date().getFullYear();
 }

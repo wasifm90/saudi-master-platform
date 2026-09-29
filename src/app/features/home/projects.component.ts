@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentRepository } from '../../core/services/content.repository';
 import { ImageComponent } from '../../shared/image.component';
-import { HOME } from '../../data/catalog';
 @Component({
   selector: 'sm-projects',
   imports: [RouterLink, ImageComponent],
@@ -10,7 +9,7 @@ import { HOME } from '../../data/catalog';
     <div class="shell">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Kingdom projects</p>
+          <p class="eyebrow">{{ labels.projectsEyebrow }}</p>
           <h2>{{ copy.projects }}</h2>
         </div>
         <a routerLink="/projects" class="text-link">All projects ↗</a>
@@ -89,6 +88,14 @@ import { HOME } from '../../data/catalog';
   `,
 })
 export class ProjectsComponent {
-  readonly copy = HOME;
-  readonly projects = inject(ContentRepository).projects;
+  private readonly content = inject(ContentRepository);
+  get copy() {
+    return this.content.home;
+  }
+  get labels() {
+    return this.content.labels;
+  }
+  get projects() {
+    return this.content.projects;
+  }
 }

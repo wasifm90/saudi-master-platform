@@ -6,3 +6,4 @@ dist/
 .angular/
 out-tsc/
 coverage/
+.local-cms/

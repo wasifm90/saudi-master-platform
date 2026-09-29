@@ -8,7 +8,7 @@ import { ServicesComponent } from './services.component';
 import { ManufacturingComponent } from './manufacturing.component';
 import { ProjectsComponent } from './projects.component';
 import { SeoService } from '../../core/services/seo.service';
-import { HOME } from '../../data/catalog';
+import { ContentRepository } from '../../core/services/content.repository';
 @Component({
   selector: 'sm-home',
   imports: [
@@ -21,15 +21,44 @@ import { HOME } from '../../data/catalog';
     ManufacturingComponent,
     ProjectsComponent,
   ],
-  template: `<sm-hero /><sm-systems /><sm-geometry /><sm-assembly /><sm-services /><sm-manufacturing /><sm-projects />
-    <section class="section shell closing-cta">
-      <p class="eyebrow">Engineering consultation</p>
-      <h2>Bring us the structure.<br />We'll engineer the system.</h2>
-      <a routerLink="/contact" class="button">Start a project →</a>
-    </section>`,
+  template: `@if (visibility.hero) {
+      <sm-hero />
+    }
+    @if (visibility.systems) {
+      <sm-systems />
+    }
+    @if (visibility.geometry) {
+      <sm-geometry />
+    }
+    @if (visibility.assembly) {
+      <sm-assembly />
+    }
+    @if (visibility.services) {
+      <sm-services />
+    }
+    @if (visibility.manufacturing) {
+      <sm-manufacturing />
+    }
+    @if (visibility.projects) {
+      <sm-projects />
+    }
+    @if (visibility.closing) {
+      <section class="section shell closing-cta">
+        <p class="eyebrow">{{ labels.homeClosingKicker }}</p>
+        <h2>{{ labels.homeClosingTitle }}</h2>
+        <a routerLink="/contact" class="button">{{ labels.homeClosingCta }} →</a>
+      </section>
+    }`,
 })
 export class HomeComponent {
+  private readonly content = inject(ContentRepository);
+  get labels() {
+    return this.content.labels;
+  }
+  get visibility() {
+    return this.content.visibility;
+  }
   constructor() {
-    inject(SeoService).set('Formwork & scaffolding', HOME.description, '/');
+    inject(SeoService).set('Formwork & scaffolding', this.content.home.description, '/');
   }
 }

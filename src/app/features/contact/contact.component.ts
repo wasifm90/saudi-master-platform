@@ -10,13 +10,13 @@ import { SeoService } from '../../core/services/seo.service';
   imports: [ReactiveFormsModule],
   template: ` <section class="section shell">
     <div class="page-intro">
-      <p class="eyebrow">Engineering consultation</p>
-      <h1>Bring us the structure.<br />We'll engineer the system.</h1>
-      <p class="lead">Tell us about your project, system requirements and location.</p>
+      <p class="eyebrow">{{ labels.contactEyebrow }}</p>
+      <h1>{{ labels.contactTitle }}</h1>
+      <p class="lead">{{ labels.contactIntro }}</p>
     </div>
     <div class="contact-grid">
       <div>
-        <h2>Talk to our team</h2>
+        <h2>{{ labels.contactTeam }}</h2>
         <p>
           <a [href]="'tel:' + company.phone">{{ company.phone }}</a>
         </p>
@@ -25,8 +25,7 @@ import { SeoService } from '../../core/services/seo.service';
         </p>
         <p>{{ company.address }}</p>
         <p class="form-note">
-          Your enquiry stays in your browser until you send it using your email application. No
-          automatic submission takes place.
+          {{ labels.contactPrivacy }}
         </p>
       </div>
       <form [formGroup]="form" (ngSubmit)="prepare()">
@@ -166,7 +165,13 @@ import { SeoService } from '../../core/services/seo.service';
   `,
 })
 export class ContactComponent {
-  readonly company = inject(ContentRepository).company;
+  private readonly content = inject(ContentRepository);
+  get company() {
+    return this.content.company;
+  }
+  get labels() {
+    return this.content.labels;
+  }
   readonly products = inject(ProductRepository).products;
   readonly attempted = signal(false);
   readonly emailHref = signal('');

@@ -6,7 +6,6 @@ import { SeoService } from '../../core/services/seo.service';
 import { EditorialItem } from '../../core/models/content';
 import { resolveSlug } from '../../core/services/interaction-state';
 import { ImageComponent } from '../../shared/image.component';
-import { COLLECTION_COPY, PAGES } from '../../data/pages';
 @Component({
   selector: 'sm-content-page',
   imports: [RouterLink, ImageComponent],
@@ -173,13 +172,16 @@ export class ContentPageComponent {
   });
   readonly detail = computed(() => resolveSlug(this.items(), this.params()?.get('slug') ?? ''));
   readonly isCollection = computed(
-    () => !!COLLECTION_COPY[this.kind()] && !this.params()?.has('slug'),
+    () => !!this.repository.collectionCopy[this.kind()] && !this.params()?.has('slug'),
   );
   readonly collectionCopy = computed(
-    () => COLLECTION_COPY[this.kind()] ?? COLLECTION_COPY['insights']!,
+    () =>
+      this.repository.collectionCopy[this.kind()] ?? this.repository.collectionCopy['insights']!,
   );
   readonly page = computed(() =>
-    this.params()?.has('slug') ? PAGES['not-found']! : (PAGES[this.kind()] ?? PAGES['not-found']!),
+    this.params()?.has('slug')
+      ? this.repository.pages['not-found']!
+      : (this.repository.pages[this.kind()] ?? this.repository.pages['not-found']!),
   );
   constructor() {
     const seo = inject(SeoService);

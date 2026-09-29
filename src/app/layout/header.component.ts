@@ -1,7 +1,7 @@
 import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NAVIGATION } from '../data/catalog';
+import { ContentRepository } from '../core/services/content.repository';
 @Component({
   selector: 'sm-header',
   imports: [RouterLink, RouterLinkActive],
@@ -9,7 +9,9 @@ import { NAVIGATION } from '../data/catalog';
       <div class="header-inner">
         <a routerLink="/" class="brand"
           ><span class="monogram">SM</span
-          ><span>Saudi Master <b>× ULMA</b><small>Formwork & Scaffolding Alliance</small></span></a
+          ><span
+            >{{ company.name }} <b>× ULMA</b><small>{{ labels.headerTagline }}</small></span
+          ></a
         >
         <nav class="desktop-nav" aria-label="Main navigation">
           @for (item of navigation; track item.path) {
@@ -20,7 +22,7 @@ import { NAVIGATION } from '../data/catalog';
           }
         </nav>
         <a routerLink="/contact" class="button header-cta"
-          >Start a project <span aria-hidden="true">↗</span></a
+          >{{ labels.headerCta }} <span aria-hidden="true">↗</span></a
         >
         <button
           #menuButton
@@ -31,7 +33,7 @@ import { NAVIGATION } from '../data/catalog';
           [attr.aria-expanded]="open()"
           aria-controls="mobile-menu"
         >
-          <span>Menu</span><span class="menu-icon" aria-hidden="true">☰</span>
+          <span>Menu</span><span class="menu-icon" aria-hidden="true"></span>
         </button>
       </div>
     </header>
@@ -51,17 +53,24 @@ import { NAVIGATION } from '../data/catalog';
       </div>
       <nav aria-label="Mobile navigation">
         @for (item of navigation; track item.path) {
-          <a [routerLink]="item.path" (click)="closeMenu()"
-            >{{ item.label }} <span aria-hidden="true">↗</span></a
-          >
+          <a [routerLink]="item.path" (click)="closeMenu()">{{ item.label }}</a>
         }
       </nav>
-      <a routerLink="/contact" class="button" (click)="closeMenu()">Start a project →</a>
+      <a routerLink="/contact" class="button" (click)="closeMenu()">{{ labels.headerCta }}</a>
     </dialog>`,
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  readonly navigation = NAVIGATION;
+  private readonly content = inject(ContentRepository);
+  get navigation() {
+    return this.content.navigation;
+  }
+  get company() {
+    return this.content.company;
+  }
+  get labels() {
+    return this.content.labels;
+  }
   readonly open = signal(false);
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('menuDialog');
   private readonly button = viewChild.required<ElementRef<HTMLButtonElement>>('menuButton');

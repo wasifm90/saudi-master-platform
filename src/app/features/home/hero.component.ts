@@ -8,16 +8,16 @@ import {
   viewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { HOME } from '../../data/catalog';
+import { ContentRepository } from '../../core/services/content.repository';
 @Component({
   selector: 'sm-hero',
   imports: [RouterLink],
   template: ` <section class="hero" aria-label="Construction in motion">
       <picture
-        ><source media="(max-width: 767px)" srcset="/assets/video/hero/poster-mobile.webp" />
+        ><source media="(max-width: 767px)" [srcset]="media.heroPosterMobile" />
         <img
           class="hero-poster"
-          src="/assets/video/hero/poster-desktop.webp"
+          [src]="media.heroPosterDesktop"
           alt="Construction site and formwork"
           width="1280"
           height="720"
@@ -28,11 +28,7 @@ import { HOME } from '../../data/catalog';
           #video
           class="hero-video"
           [class.ready]="ready()"
-          [poster]="
-            mobile()
-              ? '/assets/video/hero/poster-mobile.webp'
-              : '/assets/video/hero/poster-desktop.webp'
-          "
+          [poster]="mobile() ? media.heroPosterMobile : media.heroPosterDesktop"
           [muted]="true"
           autoplay
           playsinline
@@ -42,18 +38,19 @@ import { HOME } from '../../data/catalog';
           aria-hidden="true"
         >
           <source
-            [src]="mobile() ? '/assets/video/hero/mobile.webm' : '/assets/video/hero/desktop.webm'"
+            [src]="mobile() ? media.heroVideoMobileWebm : media.heroVideoDesktopWebm"
             type="video/webm"
           />
           <source
-            [src]="mobile() ? '/assets/video/hero/mobile.mp4' : '/assets/video/hero/desktop.mp4'"
+            [src]="mobile() ? media.heroVideoMobileMp4 : media.heroVideoDesktopMp4"
             type="video/mp4"
           />
         </video>
       }
       <div class="hero-shade"></div>
       <div class="hero-caption">
-        <span>Civil engineering & formwork in motion</span><span>Saudi Master × ULMA</span>
+        <span>{{ labels.heroCaption }}</span
+        ><span>{{ labels.heroPartner }}</span>
       </div>
       @if (playVideo()) {
         <button
@@ -73,8 +70,8 @@ import { HOME } from '../../data/catalog';
       <h1>{{ copy.title }}</h1>
       <p class="lead">{{ copy.description }}</p>
       <div class="actions">
-        <a routerLink="/products" class="button">Explore systems →</a
-        ><a routerLink="/contact" class="button secondary">Talk to an engineer ↗</a>
+        <a routerLink="/products" class="button">{{ labels.heroPrimaryCta }} →</a
+        ><a routerLink="/contact" class="button secondary">{{ labels.heroSecondaryCta }} ↗</a>
       </div>
     </section>`,
   styles: `
@@ -249,7 +246,16 @@ import { HOME } from '../../data/catalog';
   `,
 })
 export class HeroComponent {
-  readonly copy = HOME;
+  private readonly content = inject(ContentRepository);
+  get copy() {
+    return this.content.home;
+  }
+  get media() {
+    return this.content.media;
+  }
+  get labels() {
+    return this.content.labels;
+  }
   readonly playVideo = signal(false);
   readonly mobile = signal(false);
   readonly ready = signal(false);

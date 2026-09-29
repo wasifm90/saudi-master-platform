@@ -4,6 +4,7 @@ import { createReadStream } from 'node:fs';
 import { stat, readFile } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
 import { resolve, extname, sep } from 'node:path';
+import { previewCms } from './preview-cms.mjs';
 const root = resolve('dist/website/browser');
 const port = Number(process.env['PORT'] || 4306);
 const types = {
@@ -24,6 +25,11 @@ const types = {
 createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    if (await previewCms(req, res, pathname)) return;
+    if (extname(pathname) === '.php') {
+      res.writeHead(404).end('Not found');
+      return;
+    }
     let file = resolve(root, '.' + pathname);
     if (file !== root && !file.startsWith(root + sep)) {
       res.writeHead(403).end();
@@ -36,13 +42,18 @@ createServer(async (req, res) => {
     }
     let status = 200;
     if (!info) {
-      if (extname(pathname) || /^\/(assets|api)\//.test(pathname)) {
-        res.writeHead(404).end('Not found');
-        return;
+      if (pathname === '/admin') {
+        file = resolve(root, 'index.csr.html');
+        info = await stat(file);
+      } else {
+        if (extname(pathname) || /^\/(assets|api)\//.test(pathname)) {
+          res.writeHead(404).end('Not found');
+          return;
+        }
+        file = resolve(root, 'index.csr.html');
+        info = await stat(file);
+        status = 404;
       }
-      file = resolve(root, 'index.csr.html');
-      info = await stat(file);
-      status = 404;
     }
     const headers = {
       'Content-Type': types[extname(file)] || 'application/octet-stream',

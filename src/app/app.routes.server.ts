@@ -1,6 +1,7 @@
 import { PrerenderFallback, RenderMode, ServerRoute } from '@angular/ssr';
 import { PRODUCTS, PROJECTS, SERVICES, INDUSTRIES } from './data/catalog';
 export const serverRoutes: ServerRoute[] = [
+  { path: 'admin', renderMode: RenderMode.Client },
   {
     path: 'products/:slug',
     renderMode: RenderMode.Prerender,

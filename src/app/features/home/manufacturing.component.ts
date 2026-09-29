@@ -1,13 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { ContentRepository } from '../../core/services/content.repository';
 import { ImageComponent } from '../../shared/image.component';
-import { HOME } from '../../data/catalog';
 @Component({
   selector: 'sm-manufacturing',
   imports: [ImageComponent],
   template: `<section class="section manufacturing">
     <div class="shell">
-      <p class="eyebrow">In-Kingdom infrastructure</p>
+      <p class="eyebrow">{{ labels.manufacturingEyebrow }}</p>
       <h2>{{ copy.manufacturing }}</h2>
       <div class="processes">
         @for (process of processes; track process.id; let index = $index) {
@@ -64,6 +63,14 @@ import { HOME } from '../../data/catalog';
   `,
 })
 export class ManufacturingComponent {
-  readonly copy = HOME;
-  readonly processes = inject(ContentRepository).processes;
+  private readonly content = inject(ContentRepository);
+  get copy() {
+    return this.content.home;
+  }
+  get labels() {
+    return this.content.labels;
+  }
+  get processes() {
+    return this.content.processes;
+  }
 }

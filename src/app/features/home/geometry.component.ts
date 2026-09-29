@@ -6,7 +6,6 @@ import { filterProducts } from '../../core/services/interaction-state';
 import { GeometryId } from '../../core/models/content';
 import { ImageComponent } from '../../shared/image.component';
 import { ScrollStackComponent } from '../../shared/scroll-stack.component';
-import { HOME } from '../../data/catalog';
 
 @Component({
   selector: 'sm-geometry',
@@ -15,7 +14,7 @@ import { HOME } from '../../data/catalog';
     <sm-scroll-stack mode="overlay" [count]="categories.length">
       <div class="geometry-stage">
         <div class="geometry-head shell">
-          <p class="eyebrow">Architectural versatility</p>
+          <p class="eyebrow">{{ labels.geometryEyebrow }}</p>
           <h2 id="geometry-title">{{ copy.geometry }}</h2>
           <p>{{ copy.geometryDescription }}</p>
           <div class="geometry-nav" role="group" aria-label="Structural geometry">
@@ -67,14 +66,14 @@ import { HOME } from '../../data/catalog';
                   <h3>{{ category.name }}</h3>
                   <p>{{ category.description }}</p>
                   <div class="related-systems">
-                    <span>Related systems</span>
+                    <span>{{ labels.geometryRelated }}</span>
                     @for (product of relatedProducts(category.id).slice(0, 3); track product.slug) {
                       <a [routerLink]="['/products', product.slug]">{{ product.name }} ↗</a>
                     }
                   </div>
                   @if (relatedProducts(category.id)[0]; as firstProduct) {
                     <a class="panel-cta" [routerLink]="['/products', firstProduct.slug]"
-                      >Explore systems <span aria-hidden="true">→</span></a
+                      >{{ labels.geometryExplore }} <span aria-hidden="true">→</span></a
                     >
                   }
                 </div>
@@ -356,10 +355,16 @@ import { HOME } from '../../data/catalog';
   `,
 })
 export class GeometryComponent {
-  readonly copy = HOME;
-  readonly categories = inject(ContentRepository).geometries.filter(
-    (category) => category.id !== 'wall',
-  );
+  private readonly content = inject(ContentRepository);
+  get copy() {
+    return this.content.home;
+  }
+  get labels() {
+    return this.content.labels;
+  }
+  get categories() {
+    return this.content.geometries.filter((category) => category.id !== 'wall');
+  }
   private readonly repository = inject(ProductRepository);
   readonly rail = viewChild(ScrollStackComponent);
   relatedProducts(id: GeometryId) {

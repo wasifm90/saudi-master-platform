@@ -6,12 +6,13 @@ import { resolveSlug } from '../../core/services/interaction-state';
 import { ImageComponent } from '../../shared/image.component';
 import { ProductCardComponent } from '../../shared/product-card.component';
 import { SeoService } from '../../core/services/seo.service';
+import { ContentRepository } from '../../core/services/content.repository';
 @Component({
   selector: 'sm-product-page',
   imports: [RouterLink, ImageComponent, ProductCardComponent],
   template: ` @if (product(); as p) {
       <article class="section shell product-page">
-        <a routerLink="/products" class="text-link">← All systems</a>
+        <a routerLink="/products" class="text-link">← {{ labels.productBack }}</a>
         <div class="product-heading">
           <p class="eyebrow">
             {{ p.classification === 'LOCAL' ? 'Local manufactured' : 'European systems' }} ·
@@ -29,25 +30,25 @@ import { SeoService } from '../../core/services/seo.service';
         />
         <div class="detail-columns">
           <div>
-            <p class="eyebrow">System information</p>
+            <p class="eyebrow">{{ labels.productInformation }}</p>
             <h2>{{ p.tagline }}</h2>
             <p>{{ p.description }}</p>
-            <h3>Applications & geometry</h3>
+            <h3>{{ labels.productApplications }}</h3>
             <p>{{ p.applicationDescription }}</p>
             <ul class="tags">
               @for (application of p.applications; track application) {
                 <li>{{ application.replaceAll('-', ' ') }}</li>
               }
             </ul>
-            <h3>Assembly & operation</h3>
+            <h3>{{ labels.productAssembly }}</h3>
             <p>{{ p.systemInformation }}</p>
-            <h3>Benefits</h3>
+            <h3>{{ labels.productBenefits }}</h3>
             <ul>
               @for (benefit of p.benefits; track benefit) {
                 <li>{{ benefit }}</li>
               }
             </ul>
-            <h3>System components</h3>
+            <h3>{{ labels.productComponents }}</h3>
             <ul>
               @for (component of p.components; track component) {
                 <li>{{ component }}</li>
@@ -55,7 +56,7 @@ import { SeoService } from '../../core/services/seo.service';
             </ul>
           </div>
           <aside>
-            <h2>Technical specification</h2>
+            <h2>{{ labels.productTechnical }}</h2>
             <dl class="spec-list">
               @for (spec of p.technicalFeatures; track spec.label) {
                 <div>
@@ -65,7 +66,7 @@ import { SeoService } from '../../core/services/seo.service';
               }
             </dl>
             <a class="button" routerLink="/contact" [queryParams]="{ product: p.slug }"
-              >Enquire about this system →</a
+              >{{ labels.productEnquire }} →</a
             >
           </aside>
         </div>
@@ -80,7 +81,7 @@ import { SeoService } from '../../core/services/seo.service';
         }
         @if (galleryImages().length) {
           <section class="detail-section">
-            <h2>Product gallery</h2>
+            <h2>{{ labels.productGallery }}</h2>
             <div class="gallery">
               @for (image of galleryImages(); track image) {
                 <sm-image [src]="image" [alt]="p.name + ' product view'" />
@@ -89,7 +90,7 @@ import { SeoService } from '../../core/services/seo.service';
           </section>
         }
         <section class="detail-section">
-          <h2>Related systems</h2>
+          <h2>{{ labels.productRelated }}</h2>
           <div class="related">
             @for (item of related(); track item.id) {
               <sm-product-card [product]="item" />
@@ -100,8 +101,8 @@ import { SeoService } from '../../core/services/seo.service';
     } @else {
       <section class="section shell">
         <p class="eyebrow">404</p>
-        <h1>Product not found</h1>
-        <p>This product is unavailable or the link has changed.</p>
+        <h1>{{ labels.productMissingTitle }}</h1>
+        <p>{{ labels.productMissingDescription }}</p>
         <a routerLink="/products" class="button">Explore active products →</a>
       </section>
     }`,
@@ -218,6 +219,10 @@ import { SeoService } from '../../core/services/seo.service';
   `,
 })
 export class ProductPageComponent {
+  private readonly content = inject(ContentRepository);
+  get labels() {
+    return this.content.labels;
+  }
   private readonly repository = inject(ProductRepository);
   private readonly params = toSignal(inject(ActivatedRoute).paramMap);
   readonly product = computed(() =>

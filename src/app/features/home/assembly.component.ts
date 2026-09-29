@@ -2,7 +2,6 @@ import { Component, inject, viewChild } from '@angular/core';
 import { ContentRepository } from '../../core/services/content.repository';
 import { ImageComponent } from '../../shared/image.component';
 import { ScrollStackComponent } from '../../shared/scroll-stack.component';
-import { HOME } from '../../data/catalog';
 
 @Component({
   selector: 'sm-assembly',
@@ -11,9 +10,9 @@ import { HOME } from '../../data/catalog';
     <sm-scroll-stack mode="overlay" [count]="steps.length">
       <div class="assembly-stage">
         <div class="assembly-head shell">
-          <p class="eyebrow">Systems in motion</p>
+          <p class="eyebrow">{{ labels.assemblyEyebrow }}</p>
           <h2 id="assembly-title">{{ copy.assembly }}</h2>
-          <p>Follow the build from base alignment to protected access.</p>
+          <p>{{ labels.assemblyDescription }}</p>
           <div class="assembly-progress" aria-label="Assembly progress">
             <span>{{ ((rail()?.activeIndex() ?? 0) + 1).toString().padStart(2, '0') }}</span
             ><span class="progress-line"
@@ -312,7 +311,15 @@ import { HOME } from '../../data/catalog';
   `,
 })
 export class AssemblyComponent {
-  readonly copy = HOME;
-  readonly steps = inject(ContentRepository).assembly;
+  private readonly content = inject(ContentRepository);
+  get copy() {
+    return this.content.home;
+  }
+  get steps() {
+    return this.content.assembly;
+  }
+  get labels() {
+    return this.content.labels;
+  }
   readonly rail = viewChild(ScrollStackComponent);
 }

@@ -29,7 +29,7 @@ async function configure(): Promise<void> {
   repository.products.set(PRODUCTS);
 }
 describe('Angular rendered interactions', () => {
-  it('rebuilds the product pile when filters change', async () => {
+  it('rebuilds the product rail when filters change', async () => {
     await configure();
     const fixture = TestBed.createComponent(SystemsComponent);
     fixture.detectChanges();
@@ -38,8 +38,7 @@ describe('Angular rendered interactions', () => {
     buttons[2]!.click();
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('.system-chapter')).toHaveLength(6);
-    expect(fixture.nativeElement.querySelector('[data-stack-stage]')).not.toBeNull();
-    expect(fixture.nativeElement.querySelectorAll('[data-stack-panel]')).toHaveLength(6);
+    expect(fixture.nativeElement.querySelector('.product-sequence[role="region"]')).not.toBeNull();
     expect(fixture.nativeElement.querySelector('.system-chapter h3').textContent).toContain(
       'ULMA ORMA',
     );

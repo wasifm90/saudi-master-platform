@@ -2,14 +2,14 @@
   <div class="shell">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Our products / Engineered systems</p>
+        <p class="eyebrow">{{ labels.productsEyebrow }}</p>
         <h2 id="systems-title">{{ copy.products }}</h2>
         <p>{{ copy.productsDescription }}</p>
       </div>
       <div class="catalog-mark" aria-hidden="true">
         <span class="catalog-mark__line"></span
         ><span>01 — {{ repository.products().length.toString().padStart(2, '0') }}</span
-        ><span>Systems catalogue</span>
+        ><span>{{ labels.productsCatalogue }}</span>
       </div>
     </div>
     <div class="catalog-controls">
@@ -21,7 +21,7 @@
             [attr.aria-pressed]="activeClassification() === filter.code"
             (click)="selectFilter(filter.code)"
           >
-            <span>{{ filter.label }}</span
+            <span>{{ filterLabel(filter.code) }}</span
             ><span class="filter-count">{{ countFor(filter.code) }}</span>
           </button>
         }
@@ -34,8 +34,9 @@
       <p class="catalog-error" role="alert">{{ repository.error() }}</p>
     }
     @if (filteredProducts().length) {
-      <sm-scroll-stack mode="pile" [count]="filteredProducts().length">
-        <div class="product-sequence" data-stack-stage [attr.data-filter]="activeClassification()">
+      <div class="product-rail-wrap">
+        <p class="rail-instruction">{{ labels.productRailHint }} <span aria-hidden="true">↔</span></p>
+        <div #rail class="product-sequence" role="region" tabindex="0" aria-label="Products; scroll sideways to explore" (scroll)="onRailScroll()" [attr.data-filter]="activeClassification()">
           @for (
             product of filteredProducts();
             track activeClassification() + ':' + product.slug;
@@ -43,10 +44,7 @@
           ) {
             <article
               class="system-chapter"
-              data-stack-panel
-              [style.z-index]="filteredProducts().length - index"
               [attr.data-product-slug]="product.slug"
-              [class.reverse]="index % 2 === 1"
             >
               <div class="chapter-visual">
                 <sm-image
@@ -61,7 +59,7 @@
               <div class="chapter-copy">
                 <p class="eyebrow">
                   {{
-                    product.classification === 'LOCAL' ? 'Local manufactured' : 'European systems'
+                    product.classification === 'LOCAL' ? labels.productsFilterLocal : labels.productsFilterEuropean
                   }}
                   · {{ product.manufacturer }}
                 </p>
@@ -79,16 +77,16 @@
                   class="chapter-link"
                   [routerLink]="['/products', product.slug]"
                   [attr.aria-label]="'View ' + product.name"
-                  >View product <span aria-hidden="true">→</span></a
+                  >{{ labels.productsView }} <span aria-hidden="true">→</span></a
                 >
               </div>
             </article>
           }
         </div>
-      </sm-scroll-stack>
+      </div>
     } @else {
       <p class="empty-state" role="status">
-        {{ repository.loading() ? 'Loading systems…' : 'No active products match this selection.' }}
+        {{ repository.loading() ? 'Loading systems…' : labels.productsEmpty }}
       </p>
     }
   </div>

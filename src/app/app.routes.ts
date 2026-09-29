@@ -3,6 +3,10 @@ const content = () =>
   import('./features/content/content-page.component').then((m) => m.ContentPageComponent);
 export const routes: Routes = [
   {
+    path: 'admin',
+    loadComponent: () => import('./features/admin/admin.component').then((m) => m.AdminComponent),
+  },
+  {
     path: '',
     loadComponent: () => import('./features/home/home.component').then((m) => m.HomeComponent),
     pathMatch: 'full',
