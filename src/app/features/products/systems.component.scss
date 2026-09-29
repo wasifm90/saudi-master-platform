@@ -3,8 +3,8 @@
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(circle at 92% 3%, #d7f5ef 0, transparent 31%),
-    radial-gradient(circle at 3% 91%, #fff0d7 0, transparent 28%), #f4fbf8;
+    radial-gradient(circle at 92% 3%, #e6edf6 0, transparent 31%),
+    radial-gradient(circle at 3% 91%, #ffebcf 0, transparent 28%), #f8f5ef;
   border-block: 1px solid var(--line);
 }
 .systems::before {
@@ -14,8 +14,8 @@
   z-index: -1;
   opacity: 0.4;
   background-image:
-    linear-gradient(#83bbac14 1px, transparent 1px),
-    linear-gradient(90deg, #83bbac14 1px, transparent 1px);
+    linear-gradient(#a98c6c14 1px, transparent 1px),
+    linear-gradient(90deg, #a98c6c14 1px, transparent 1px);
   background-size: 76px 76px;
   pointer-events: none;
 }
@@ -32,7 +32,7 @@
   gap: 7px;
   min-width: 160px;
   padding-bottom: 8px;
-  color: #587b7b;
+  color: #636b72;
   font: 700 10px var(--display);
   text-align: right;
   text-transform: uppercase;
@@ -40,10 +40,10 @@
 }
 .catalog-mark__line {
   height: 2px;
-  background: linear-gradient(90deg, transparent, #20aaa2);
+  background: linear-gradient(90deg, transparent, #df8b2e);
 }
 .catalog-mark span:nth-child(2) {
-  color: #087a75;
+  color: #a8471f;
 }
 .catalog-controls {
   display: flex;
@@ -63,10 +63,10 @@
   gap: 13px;
   min-height: 44px;
   padding: 10px 15px;
-  border: 1px solid #c6dfd7;
+  border: 1px solid #ded2c3;
   border-radius: 999px;
   background: #fff;
-  color: #31585d;
+  color: #394958;
   font: 700 10px var(--display);
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -78,11 +78,11 @@
 }
 .filters button:hover {
   transform: translateY(-2px);
-  border-color: #0a8e87;
+  border-color: #b85728;
 }
 .filters button.active {
-  border-color: #087d79;
-  background: #087d79;
+  border-color: #a8471f;
+  background: #a8471f;
   color: #fff;
 }
 .filter-count {
@@ -92,8 +92,8 @@
   height: 24px;
   padding: 0 5px;
   border-radius: 999px;
-  background: #eaf7f1;
-  color: #24615f;
+  background: #fff0e2;
+  color: #925025;
   font: 700 10px var(--display);
 }
 .filters button.active .filter-count {
@@ -103,7 +103,7 @@
 .result-count {
   flex: none;
   margin: 0;
-  color: #4a6d72;
+  color: #596572;
   font: 700 10px var(--display);
   text-transform: uppercase;
   letter-spacing: 0.11em;

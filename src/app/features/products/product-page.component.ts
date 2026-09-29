@@ -110,7 +110,7 @@ import { SeoService } from '../../core/services/seo.service';
       padding: clamp(24px, 4vw, 48px);
       border: 1px solid var(--line);
       border-radius: 28px;
-      background: linear-gradient(115deg, #e6f9f1, #eaf7fb 60%, #fff2d8);
+      background: linear-gradient(115deg, #fff0df, #edf2f8 60%, #fff1d1);
     }
     .product-heading .eyebrow {
       display: inline-block;
@@ -124,7 +124,7 @@ import { SeoService } from '../../core/services/seo.service';
     .product-hero {
       aspect-ratio: 16/8;
       border-radius: 24px;
-      box-shadow: 0 18px 44px #2f73651a;
+      box-shadow: 0 18px 44px #394a5b1a;
     }
     .detail-columns {
       display: grid;
@@ -147,11 +147,11 @@ import { SeoService } from '../../core/services/seo.service';
     }
     .detail-columns aside {
       align-self: start;
-      background: linear-gradient(140deg, #fff, #f1fbf7);
+      background: linear-gradient(140deg, #fff, #fff8ef);
       border: 1px solid var(--line);
       border-radius: 24px;
       padding: 28px;
-      box-shadow: 0 14px 34px #276b6410;
+      box-shadow: 0 14px 34px #394a5b14;
     }
     .spec-list div {
       border-bottom: 1px solid var(--line);

@@ -106,7 +106,7 @@ import { COLLECTION_COPY, PAGES } from '../../data/pages';
       border: 1px solid var(--line);
       border-radius: 22px;
       background: #fff;
-      box-shadow: 0 12px 30px #276b640d;
+      box-shadow: 0 12px 30px #394a5b12;
       transition:
         transform 0.3s,
         box-shadow 0.3s;
@@ -114,7 +114,7 @@ import { COLLECTION_COPY, PAGES } from '../../data/pages';
     .editorial-list article:hover,
     .editorial-list article:focus-within {
       transform: translateY(-5px);
-      box-shadow: 0 20px 42px #276b641b;
+      box-shadow: 0 20px 42px #394a5b24;
     }
     .editorial-list a {
       text-decoration: none;

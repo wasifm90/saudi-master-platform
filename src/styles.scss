@@ -3,14 +3,14 @@
 @use '@fontsource/ibm-plex-sans/latin-400.css' as ibm400;
 @use '@fontsource/ibm-plex-sans/latin-600.css' as ibm600;
 :root {
-  --paper: #f8fcfa;
-  --sand: #eaf7f1;
+  --paper: #faf8f4;
+  --sand: #f4ecdf;
   --white: #fff;
-  --ink: #183a40;
-  --gold: #f2bd4d;
-  --earth: #087a75;
-  --muted: #49666b;
-  --line: #d5e9e3;
+  --ink: #273441;
+  --gold: #efae36;
+  --earth: #a8471f;
+  --muted: #56616c;
+  --line: #e7ddce;
   --display: 'Space Grotesk', Arial, sans-serif;
   --body: 'IBM Plex Sans', Arial, sans-serif;
   color-scheme: light;
@@ -60,7 +60,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid #087a75;
+  outline: 3px solid #a8471f;
   outline-offset: 4px;
 }
 h1,
@@ -149,15 +149,15 @@ button {
     box-shadow 0.2s;
 }
 .button:hover {
-  background: #055d5a;
-  border-color: #055d5a;
+  background: #883514;
+  border-color: #883514;
   transform: translateY(-2px);
-  box-shadow: 0 9px 20px #087a7525;
+  box-shadow: 0 9px 20px #a8471f30;
 }
 .button.secondary {
   background: transparent;
   color: var(--earth);
-  border-color: #7dbab2;
+  border-color: #d7a17e;
 }
 .button.secondary:hover {
   background: var(--sand);
@@ -205,7 +205,7 @@ button {
   text-transform: uppercase;
   padding: 10px 16px;
   background: var(--white);
-  border: 1px solid #a9d5ca;
+  border: 1px solid #d8c8b4;
   border-radius: 12px;
   color: var(--ink);
   transition:
@@ -215,7 +215,7 @@ button {
 }
 .section-controls > button:not(:disabled):hover {
   border-color: var(--earth);
-  background: #e3f8f0;
+  background: #fff1e5;
   transform: translateY(-2px);
 }
 .section-controls > span {
@@ -236,7 +236,7 @@ button {
   padding: clamp(30px, 5vw, 64px);
   border: 1px solid var(--line);
   border-radius: 30px;
-  background: linear-gradient(110deg, #e1f9ef, #eaf7fb 58%, #fff2d9);
+  background: linear-gradient(110deg, #fff0df, #eef3f8 58%, #fff1ce);
 }
 .empty-state {
   padding: 40px 0;

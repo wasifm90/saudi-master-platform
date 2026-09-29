@@ -4,33 +4,33 @@
   height: 100%;
 }
 .product-card {
-  --card-accent: #087d79;
-  --card-tint: #e4f8f0;
+  --card-accent: #a8471f;
+  --card-tint: #fff0e4;
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid #cfe6df;
+  border: 1px solid #ead8c8;
   border-radius: 24px;
   background: #fff;
-  box-shadow: 0 14px 34px #276b6410;
+  box-shadow: 0 14px 34px #39455314;
   transition:
     transform 0.34s cubic-bezier(0.2, 0.75, 0.3, 1),
     box-shadow 0.34s,
     border-color 0.34s;
 }
 .product-card--european {
-  --card-accent: #986000;
-  --card-tint: #fff2d6;
-  border-color: #f1dec0;
+  --card-accent: #315b80;
+  --card-tint: #eaf1f9;
+  border-color: #d5e0ea;
 }
 .product-card:hover,
 .product-card:focus-within {
   transform: translateY(-7px);
   border-color: var(--card-accent);
-  box-shadow: 0 24px 50px #276b6426;
+  box-shadow: 0 24px 50px #3543532b;
 }
 .card-media {
   position: relative;
@@ -67,8 +67,8 @@
   display: grid;
   place-items: center;
   background: #fffef5ed;
-  color: #143d42;
-  box-shadow: 0 4px 14px #183c3c20;
+  color: #273441;
+  box-shadow: 0 4px 14px #28364524;
   backdrop-filter: blur(10px);
 }
 .card-index {
@@ -109,7 +109,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  color: #617b7f;
+  color: #5d6874;
   font: 700 9px var(--display);
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -141,7 +141,7 @@ h3 a:hover {
 }
 .card-description {
   margin: 12px 0 18px;
-  color: #47646a;
+  color: #53616e;
   font-size: 12px;
   line-height: 1.65;
 }
@@ -154,23 +154,23 @@ h3 a:hover {
 .card-specs > div {
   min-width: 0;
   padding: 10px 11px;
-  border: 1px solid #d9eae4;
+  border: 1px solid #eee0d1;
   border-radius: 12px;
-  background: #f7fcf9;
+  background: #fffbf6;
 }
 .product-card--european .card-specs > div {
-  border-color: #f0e6d0;
-  background: #fffcf4;
+  border-color: #dfe6ee;
+  background: #f7faff;
 }
 .card-specs dt {
-  color: #607b7f;
+  color: #626d79;
   font: 700 9px/1.4 var(--display);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 .card-specs dd {
   margin: 5px 0 0;
-  color: #1c4047;
+  color: #293744;
   font: 700 10px/1.45 var(--display);
   overflow-wrap: anywhere;
 }
@@ -180,7 +180,7 @@ h3 a:hover {
   justify-content: space-between;
   gap: 12px;
   padding-top: 15px;
-  border-top: 1px solid #dcece8;
+  border-top: 1px solid #e9dfd4;
   font: 700 10px var(--display);
   text-transform: uppercase;
   letter-spacing: 0.06em;

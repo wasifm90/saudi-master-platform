@@ -71,7 +71,7 @@ import { HOME } from '../../data/catalog';
   </section>`,
   styles: `
     .geometry {
-      background: linear-gradient(135deg, #eaf9f4, #eaf5fb 62%, #fff5df);
+      background: linear-gradient(135deg, #fff1df, #eef2f8 62%, #fff4da);
       border-block: 1px solid var(--line);
     }
     .geometry-filters {
@@ -106,7 +106,7 @@ import { HOME } from '../../data/catalog';
       border: 1px solid var(--line);
       border-radius: 28px;
       background: #ffffffb3;
-      box-shadow: 0 18px 42px #26756b0c;
+      box-shadow: 0 18px 42px #3d4c5e14;
       animation: reveal 0.3s ease;
     }
     .geometry-context h3 {
@@ -122,9 +122,9 @@ import { HOME } from '../../data/catalog';
     .geometry-callout {
       margin-top: 32px;
       padding: 20px 22px;
-      border-left: 4px solid #13a49b;
+      border-left: 4px solid #d47b2d;
       border-radius: 0 16px 16px 0;
-      background: #e5f8f2;
+      background: #fff1e3;
     }
     .geometry-callout span {
       color: var(--earth);
@@ -134,7 +134,7 @@ import { HOME } from '../../data/catalog';
     }
     .geometry-callout p {
       margin: 8px 0 0;
-      color: #325b60;
+      color: #5a5554;
       font-size: 13px;
     }
     @media (max-width: 850px) {
