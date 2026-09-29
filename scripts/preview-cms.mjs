@@ -1,4 +1,4 @@
-// Local-only API parity for the PHP/MySQL CMS. Never deploy this Node module as the public CMS.
+// Local-only API parity for the CMS. Never deploy this Node module as the public CMS.
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { mkdir, readFile, writeFile, rename, stat } from 'node:fs/promises';
 import { resolve, extname } from 'node:path';
@@ -84,7 +84,7 @@ export async function previewCms(req, res, pathname) {
   }
   if (!pathname.startsWith('/api/')) return false;
   try {
-    if (pathname === '/api/admin.php') {
+    if (pathname === '/api/admin' || pathname === '/api/admin.php') {
       if (req.method === 'GET') {
         const active = session(req);
         json(res, 200, { authenticated: !!active, configured: true, csrf: active?.csrf ?? null });
@@ -124,7 +124,7 @@ export async function previewCms(req, res, pathname) {
       );
       return true;
     }
-    if (pathname === '/api/content.php') {
+    if (pathname === '/api/content' || pathname === '/api/content.php') {
       if (req.method === 'GET') {
         const data = await saved();
         json(res, 200, data ?? { content: null, revision: 0 });
@@ -160,7 +160,7 @@ export async function previewCms(req, res, pathname) {
       json(res, 200, next);
       return true;
     }
-    if (pathname === '/api/upload.php') {
+    if (pathname === '/api/upload' || pathname === '/api/upload.php') {
       if (req.method !== 'POST') {
         json(res, 405, { error: 'Method not allowed.' });
         return true;

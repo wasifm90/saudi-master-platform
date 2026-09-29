@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "dist/website/browser",
+  "rewrites": [
+    { "source": "/admin", "destination": "/index.csr.html" },
+    { "source": "/products/:slug", "destination": "/index.csr.html" }
+  ]
+}

@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { upload as uploadBlob } from '@vercel/blob/client';
 import { SiteContent } from './site-content.store';
 
 async function responseJson(response: Response): Promise<Record<string, unknown>> {
@@ -15,7 +16,7 @@ export class CmsAdminService {
 
   async status(): Promise<void> {
     const data = await responseJson(
-      await fetch('/api/admin.php', { credentials: 'same-origin', cache: 'no-store' }),
+      await fetch('/api/admin', { credentials: 'same-origin', cache: 'no-store' }),
     );
     this.authenticated.set(Boolean(data['authenticated']));
     this.configured.set(Boolean(data['configured']));
@@ -24,7 +25,7 @@ export class CmsAdminService {
 
   async login(password: string): Promise<void> {
     const data = await responseJson(
-      await fetch('/api/admin.php', {
+      await fetch('/api/admin', {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
@@ -37,7 +38,7 @@ export class CmsAdminService {
 
   async logout(): Promise<void> {
     await responseJson(
-      await fetch('/api/admin.php', {
+      await fetch('/api/admin', {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': this.csrf() },
@@ -50,7 +51,7 @@ export class CmsAdminService {
 
   async publish(content: SiteContent, revision: number): Promise<number> {
     const data = await responseJson(
-      await fetch('/api/content.php', {
+      await fetch('/api/content', {
         method: 'PUT',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': this.csrf() },
@@ -61,10 +62,21 @@ export class CmsAdminService {
   }
 
   async upload(file: File): Promise<string> {
+    if (!['localhost', '127.0.0.1'].includes(location.hostname)) {
+      const extension = file.name.split('.').pop()?.toLowerCase() ?? '';
+      const safeExtension = /^(jpe?g|png|webp|avif|mp4|webm)$/.test(extension) ? extension : 'bin';
+      const result = await uploadBlob(`cms/media/upload.${safeExtension}`, file, {
+        access: 'public',
+        handleUploadUrl: '/api/upload',
+        clientPayload: this.csrf(),
+        multipart: file.size > 5_000_000,
+      });
+      return result.url;
+    }
     const form = new FormData();
     form.append('file', file);
     const data = await responseJson(
-      await fetch('/api/upload.php', {
+      await fetch('/api/upload', {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'X-CSRF-Token': this.csrf() },

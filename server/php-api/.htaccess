@@ -1,4 +1,6 @@
 Options -Indexes
+RewriteEngine On
+RewriteRule ^(admin|content|upload)$ $1.php [L]
 <Files "bootstrap.php">
   Require all denied
 </Files>

@@ -51,7 +51,7 @@ const SECTION_NAMES: { key: SectionKey; label: string }[] = [
           <h2>Administrator sign in</h2>
           @if (!api.configured()) {
             <p class="error">
-              Set CMS_ADMIN_PASSWORD_HASH in your PHP hosting environment to enable publishing.
+              Connect Vercel Blob and set CMS_ADMIN_PASSWORD_HASH in Vercel project settings to enable publishing.
             </p>
           }
           <label for="admin-password">Password</label>

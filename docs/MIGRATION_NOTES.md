@@ -24,7 +24,7 @@ ARCHIVE: former frontend, localStorage admin, viewer, custom API/mock server, ou
 
 Angular 22.2.0 (npm latest stable at implementation), strict TypeScript 6.0, standalone components, zoneless signals, computed collections, Angular Router, Reactive Forms, HttpClient provisioning, SCSS, server prerendering and hydration/event replay.
 
-`ProductRepository` and `ContentRepository` read from `SiteContentStore`. The store starts with the bundled catalogue, then fetches the published PHP/MySQL document from `/api/content.php` in the browser. `/admin` edits and publishes that document; see `docs/ADMIN_SETUP.md` for deployment.
+`ProductRepository` and `ContentRepository` read from `SiteContentStore`. The store starts with the bundled catalogue, then fetches the published document from `/api/content` in the browser. On Vercel the admin API stores this document and media in Vercel Blob; see `docs/VERCEL_ADMIN_SETUP.md`. An alternate PHP/MySQL package is described in `docs/ADMIN_SETUP.md`.
 
 The home systems catalogue renders three portrait product cards in a native horizontal snap rail on desktop and a swipeable rail on mobile. Vertical page scrolling remains native and uninterrupted. The geometry and assembly sections retain their scroll-based presentation.
 

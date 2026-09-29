@@ -1,6 +1,6 @@
 # Admin publishing on PHP/MySQL hosting
 
-The Angular build includes a `/admin` editor and three PHP endpoints under `/api`. The editor covers homepage sections, navigation, page copy, collections, products, company details, and images/videos. Publishing saves one versioned JSON document in MySQL. The public site fetches that document at runtime, with the bundled catalogue as its initial fallback.
+The Angular site includes a `/admin` editor. For Apache/PHP hosting, `npm run build:php` packages the three PHP endpoints under `/api`. A standard `npm run build` excludes PHP source so hosts such as Vercel cannot expose it as a static download. The editor covers homepage sections, navigation, page copy, collections, products, company details, and images/videos. Publishing saves one versioned JSON document in MySQL. The public site fetches that document at runtime, with the bundled catalogue as its initial fallback.
 
 ## Requirements
 
@@ -10,7 +10,7 @@ The Angular build includes a `/admin` editor and three PHP endpoints under `/api
 
 ## Deploy
 
-1. Run `npm ci && npm run build` locally or in CI. Upload the **contents** of `dist/website/browser/` to the website's Apache document root. Keep `api/`, `.htaccess`, and `assets/uploads/.htaccess`. Do not upload the TypeScript source or `node_modules`.
+1. Run `npm ci && npm run build:php` locally or in CI. Upload the **contents** of `dist/website/browser/` to the website's Apache document root. Keep `api/`, `.htaccess`, and `assets/uploads/.htaccess`. Do not upload the TypeScript source or `node_modules`.
 2. Set these server environment variables in the PHP host configuration: `CMS_DB_HOST`, `CMS_DB_NAME`, `CMS_DB_USER`, `CMS_DB_PASSWORD`, `CMS_ADMIN_PASSWORD_HASH`. Keep their values out of Git and the public document root.
 3. Generate the admin password hash with `php -r 'echo password_hash("YOUR_LONG_UNIQUE_PASSWORD", PASSWORD_DEFAULT), PHP_EOL;'` on a trusted machine. Store only the result in `CMS_ADMIN_PASSWORD_HASH`.
 4. Open `/api/admin.php`; it should return JSON with `configured: true`. Open `/api/content.php`; it should return revision `0` and null content before first publish. Sign in at `/admin`, review the seeded document, and click **Publish changes** to create revision 1.

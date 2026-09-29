@@ -52,7 +52,9 @@ Use stable local paths under `public/assets/images/<category>` and `public/asset
 
 `npm run optimize:assets` reproducibly regenerates migrated image/video derivatives from archived originals using Sharp and FFmpeg. The hero poster is extracted from frame one. The video is muted, looped, plays inline, pauses offscreen and is absent for reduced-motion users. Replace all video formats/poster together when approving a new clip.
 
-## Future API integration
+## Content publishing and future API integration
+
+The deployed Vercel site has an `/admin` content editor backed by Vercel Functions and Blob storage. Connect a Blob store and configure a bcrypt `CMS_ADMIN_PASSWORD_HASH` before signing in; see [Vercel admin setup](docs/VERCEL_ADMIN_SETUP.md). The published site document is loaded at runtime. Product and media changes made in the editor do not require a rebuild, though prerendered HTML and metadata retain the bundled content until a new build. The separate [PHP/MySQL package](docs/ADMIN_SETUP.md) is available for Apache hosting.
 
 Components inject `ProductRepository`. Implement a repository using HttpClient, map the API DTO once to `Product`, expose the same products/loading/error signals and change the `app.config.ts` provider. Preserve `geometryCategories` as a backend relation or explicit metadata; do not infer it from UI button text. Other content is exposed through `ContentRepository` and can use the same approach. `provideHttpClient(withFetch())` is configured. Do not restore `window.DB_SNAPSHOT`, HTML string rendering or localStorage admin overrides.
 
@@ -63,7 +65,7 @@ Environments are in `src/environments`: production site URL, API URL, analytics 
 1. Set the real production `siteUrl` in `src/environments/environment.ts` (currently the domain already used by the source project). Confirm contact details and public copy.
 2. Run `npm install`, `npm test`, `npm run build`, `npm run verify:production`.
 3. Back up the current hosting document root.
-4. Upload **contents of `dist/website/browser/`**, including hidden **`.htaccess`**, into the domain document root. Do not upload the repository, archive, database, Node server or `node_modules`.
+4. For an editable Apache deployment, run `npm run build:php`, then upload **contents of `dist/website/browser/`**, including hidden **`.htaccess`**, into the domain document root. Do not upload the repository, archive, database, Node server or `node_modules`.
 5. Enable HTTPS using the hosting control panel. No Node application needs to be configured.
 6. Verify direct product URLs and hard refresh, `/robots.txt`, `/sitemap.xml`, `/assets/video/hero/mobile.mp4` and a missing asset URL. Missing assets must return 404 rather than HTML.
 7. Test the mobile menu, all filters, product links, assembly controls and an enquiry draft.

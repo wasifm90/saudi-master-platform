@@ -284,7 +284,7 @@ export class SiteContentStore {
 
   async load(): Promise<boolean> {
     try {
-      const response = await fetch('/api/content.php', {
+      const response = await fetch('/api/content', {
         cache: 'no-store',
         credentials: 'same-origin',
       });
