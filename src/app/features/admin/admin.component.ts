@@ -51,7 +51,7 @@ const SECTION_NAMES: { key: SectionKey; label: string }[] = [
           <h2>Administrator sign in</h2>
           @if (!api.configured()) {
             <p class="error">
-              Connect Vercel Blob and set CMS_ADMIN_PASSWORD_HASH in Vercel project settings to enable publishing.
+              Connect a MySQL database to Vercel and create the first administrator account to enable publishing.
             </p>
           }
           <label for="admin-password">Password</label>
@@ -83,6 +83,9 @@ const SECTION_NAMES: { key: SectionKey; label: string }[] = [
               <input type="file" accept="application/json,.json" (change)="importJson($event)"
             /></label>
             <button type="button" (click)="reload()" [disabled]="busy()">Reload published</button>
+            <button type="button" (click)="showPassword.set(!showPassword())" [disabled]="dirty()">
+              Change password
+            </button>
             <button type="button" (click)="logout()">Sign out</button>
             <button
               type="button"
@@ -96,6 +99,24 @@ const SECTION_NAMES: { key: SectionKey; label: string }[] = [
         </div>
         @if (message()) {
           <p class="notice" role="status">{{ message() }}</p>
+        }
+        @if (showPassword()) {
+          <form class="password-panel" (ngSubmit)="changePassword()">
+            <div>
+              <strong>Change administrator password</strong>
+              <p>The new password is saved as a hash in MySQL. You will sign in again after changing it.</p>
+            </div>
+            <label>Current password
+              <input type="password" name="currentPassword" autocomplete="current-password" [(ngModel)]="currentPassword" required />
+            </label>
+            <label>New password
+              <input type="password" name="newPassword" autocomplete="new-password" minlength="12" [(ngModel)]="newPassword" required />
+            </label>
+            <label>Confirm new password
+              <input type="password" name="confirmPassword" autocomplete="new-password" [(ngModel)]="confirmPassword" required />
+            </label>
+            <button class="button" type="submit" [disabled]="busy()">Save password</button>
+          </form>
         }
         <div class="admin-layout">
           <nav class="admin-nav" aria-label="Content sections">
@@ -226,6 +247,21 @@ const SECTION_NAMES: { key: SectionKey; label: string }[] = [
       border-radius: 16px;
       background: #fff;
     }
+    .password-panel {
+      display: flex;
+      align-items: end;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #cbdde8;
+      border-radius: 16px;
+      background: #fff;
+    }
+    .password-panel > div { flex: 1 1 260px; }
+    .password-panel p { margin: 6px 0 0; color: var(--muted); }
+    .password-panel label { display: grid; gap: 6px; font-weight: 700; font-size: 12px; }
+    .password-panel input { min-height: 40px; padding: 8px 10px; border: 1px solid #ccd9e2; border-radius: 10px; }
     .admin-toolbar > span {
       color: #596a77;
       font: 700 12px var(--display);
@@ -383,12 +419,16 @@ export class AdminComponent {
   readonly loading = signal(true);
   readonly busy = signal(false);
   readonly dirty = signal(false);
+  readonly showPassword = signal(false);
   readonly message = signal('');
   readonly selected = signal<SectionKey>('products');
   readonly selectedIndex = signal(0);
   readonly revision = signal(0);
   readonly draft = signal<SiteContent>(structuredClone(DEFAULT_CONTENT));
   password = '';
+  currentPassword = '';
+  newPassword = '';
+  confirmPassword = '';
 
   constructor() {
     inject(SeoService).set(
@@ -432,11 +472,31 @@ export class AdminComponent {
       this.message.set(error instanceof Error ? error.message : 'Sign out failed.');
     }
   }
+  async changePassword(): Promise<void> {
+    if (this.newPassword !== this.confirmPassword) {
+      this.message.set('The new passwords do not match.');
+      return;
+    }
+    this.busy.set(true);
+    this.message.set('');
+    try {
+      await this.api.changePassword(this.currentPassword, this.newPassword);
+      this.showPassword.set(false);
+      this.currentPassword = '';
+      this.newPassword = '';
+      this.confirmPassword = '';
+      this.message.set('Password updated. Sign in with the new password.');
+    } catch (error) {
+      this.message.set(error instanceof Error ? error.message : 'Could not change password.');
+    } finally {
+      this.busy.set(false);
+    }
+  }
   async reload(): Promise<void> {
     this.busy.set(true);
     try {
       if (!(await this.store.load()))
-        throw new Error('Could not load published content from the PHP/MySQL API.');
+        throw new Error('Could not load published content from the CMS API.');
       this.draft.set(structuredClone(this.store.content()));
       this.revision.set(this.store.revision());
       this.dirty.set(false);

@@ -5,10 +5,6 @@ const lifetimeSeconds = 12 * 60 * 60;
 
 type Session = { expires: number; csrf: string };
 
-export function configured(): boolean {
-  return Boolean(process.env['CMS_ADMIN_PASSWORD_HASH'] && process.env['BLOB_READ_WRITE_TOKEN']);
-}
-
 export function json(body: unknown, status = 200, headers: HeadersInit = {}): Response {
   return Response.json(body, {
     status,
@@ -20,19 +16,18 @@ export function json(body: unknown, status = 200, headers: HeadersInit = {}): Re
   });
 }
 
-function signature(payload: string): string {
-  const hash = process.env['CMS_ADMIN_PASSWORD_HASH'] ?? '';
+function signature(payload: string, hash: string): string {
   return createHmac('sha256', hash).update(`saudi-master-cms-session-v1:${payload}`).digest('base64url');
 }
 
-export function session(request: Request): Session | null {
-  if (!configured()) return null;
+export function session(request: Request, hash: string | null): Session | null {
+  if (!hash) return null;
   const token = request.headers.get('cookie')?.split(';').map((part) => part.trim())
     .find((part) => part.startsWith(`${cookieName}=`))?.slice(cookieName.length + 1);
   if (!token) return null;
   const parts = token.split('.');
   if (parts.length !== 2) return null;
-  const expected = Buffer.from(signature(parts[0]));
+  const expected = Buffer.from(signature(parts[0], hash));
   const received = Buffer.from(parts[1]);
   if (expected.length !== received.length || !timingSafeEqual(expected, received)) return null;
   try {
@@ -44,14 +39,14 @@ export function session(request: Request): Session | null {
   }
 }
 
-export function newSessionCookie(request: Request): { cookie: string; csrf: string } {
+export function newSessionCookie(request: Request, hash: string): { cookie: string; csrf: string } {
   const csrf = randomBytes(24).toString('base64url');
   const payload = Buffer.from(JSON.stringify({ expires: Date.now() + lifetimeSeconds * 1000, csrf }))
     .toString('base64url');
   const secure = new URL(request.url).protocol === 'https:' ? '; Secure' : '';
   return {
     csrf,
-    cookie: `${cookieName}=${payload}.${signature(payload)}; Max-Age=${lifetimeSeconds}; HttpOnly; SameSite=Strict; Path=/${secure}`,
+    cookie: `${cookieName}=${payload}.${signature(payload, hash)}; Max-Age=${lifetimeSeconds}; HttpOnly; SameSite=Strict; Path=/${secure}`,
   };
 }
 
@@ -60,8 +55,8 @@ export function expiredSessionCookie(request: Request): string {
   return `${cookieName}=; Max-Age=0; HttpOnly; SameSite=Strict; Path=/${secure}`;
 }
 
-export function mutationError(request: Request, csrf: string | null): Response | null {
-  const active = session(request);
+export function mutationError(request: Request, csrf: string | null, hash: string | null): Response | null {
+  const active = session(request, hash);
   if (!active) return json({ error: 'Sign in required.' }, 401);
   const origin = request.headers.get('origin');
   if (origin && origin !== new URL(request.url).origin) return json({ error: 'Invalid origin.' }, 403);

@@ -4,6 +4,6 @@
     "types": ["node"],
     "noEmit": true
   },
-  "include": ["api/**/*.ts"],
-  "exclude": ["api/**/*.spec.ts"]
+  "include": ["server/vercel/**/*.ts"],
+  "exclude": ["server/vercel/**/*.spec.ts"]
 }

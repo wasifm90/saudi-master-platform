@@ -54,7 +54,7 @@ Use stable local paths under `public/assets/images/<category>` and `public/asset
 
 ## Content publishing and future API integration
 
-The deployed Vercel site has an `/admin` content editor backed by Vercel Functions and Blob storage. Connect a Blob store and configure a bcrypt `CMS_ADMIN_PASSWORD_HASH` before signing in; see [Vercel admin setup](docs/VERCEL_ADMIN_SETUP.md). The published site document is loaded at runtime. Product and media changes made in the editor do not require a rebuild, though prerendered HTML and metadata retain the bundled content until a new build. The separate [PHP/MySQL package](docs/ADMIN_SETUP.md) is available for Apache hosting.
+The deployed Vercel site has an `/admin` content editor backed by Vercel Functions, TiDB Cloud (MySQL-compatible) and Blob media storage. Connect TiDB and Blob, then seed the administrator password hash; see [Vercel admin setup](docs/VERCEL_ADMIN_SETUP.md). The published site document is loaded at runtime. Product and media changes made in the editor do not require a rebuild, though prerendered HTML and metadata retain the bundled content until a new build. The separate [PHP/MySQL package](docs/ADMIN_SETUP.md) is available for Apache hosting.
 
 Components inject `ProductRepository`. Implement a repository using HttpClient, map the API DTO once to `Product`, expose the same products/loading/error signals and change the `app.config.ts` provider. Preserve `geometryCategories` as a backend relation or explicit metadata; do not infer it from UI button text. Other content is exposed through `ContentRepository` and can use the same approach. `provideHttpClient(withFetch())` is configured. Do not restore `window.DB_SNAPSHOT`, HTML string rendering or localStorage admin overrides.
 

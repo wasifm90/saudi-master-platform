@@ -49,6 +49,19 @@ export class CmsAdminService {
     this.csrf.set('');
   }
 
+  async changePassword(currentPassword: string, newPassword: string): Promise<void> {
+    await responseJson(
+      await fetch('/api/password', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': this.csrf() },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      }),
+    );
+    this.authenticated.set(false);
+    this.csrf.set('');
+  }
+
   async publish(content: SiteContent, revision: number): Promise<number> {
     const data = await responseJson(
       await fetch('/api/content', {

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/@angular/cli/bin/ng.js serve --host 127.0.0.1 --port 4306",
-    "build": "node scripts/generate-seo.mjs && node node_modules/@angular/cli/bin/ng.js build",
+    "build": "node scripts/build-api.mjs && node scripts/generate-seo.mjs && node node_modules/@angular/cli/bin/ng.js build",
     "build:php": "npm run build && node scripts/package-php.mjs",
     "check:api": "node node_modules/typescript/bin/tsc -p tsconfig.api.json",
     "test": "node node_modules/@angular/cli/bin/ng.js test --watch=false",
@@ -25,6 +25,7 @@
     "@angular/ssr": "22.2.0",
     "@vercel/blob": "^2.8.0",
     "bcryptjs": "^3.0.3",
+    "mysql2": "^3.24.4",
     "rxjs": "~7.8.2",
     "tslib": "^2.8.1"
   },
@@ -35,6 +36,7 @@
     "@fontsource/ibm-plex-sans": "^5.3.0",
     "@fontsource/space-grotesk": "^5.3.0",
     "@types/node": "^22.0.0",
+    "esbuild": "^0.28.2",
     "ffmpeg-static": "^5.2.0",
     "jsdom": "^27.0.0",
     "lighthouse": "^13.0.0",

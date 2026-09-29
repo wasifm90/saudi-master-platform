@@ -1,14 +1,17 @@
-# Admin publishing on Vercel
+# Admin publishing on Vercel with TiDB Cloud
 
-The Vercel deployment uses Node.js Functions in the root `api/` directory. `/api/admin` authenticates editors, `/api/content` reads and publishes a versioned site document, and `/api/upload` issues short-lived Vercel Blob upload tokens. Images and videos upload directly from the browser to Blob, avoiding the Vercel Function request-size limit. The public site loads the saved document at runtime and uses its bundled catalogue until the first publish.
+The `/admin` workspace manages pages, products, sections, navigation, copy and media. Vercel Functions provide its API. A TiDB Cloud database (MySQL-compatible) stores the administrator password hash, the revisioned site document and media metadata. Image/video files live in Vercel Blob; the content document stores their public URLs. The site uses its bundled catalogue until the first publish.
 
-## One-time project setup
+## Connect storage
 
-1. In the Vercel project, open **Storage**, create a **Blob** store with public access, and connect it to this project. Vercel supplies `BLOB_READ_WRITE_TOKEN` to connected deployments.
-2. In **Settings → Environment Variables**, add `CMS_ADMIN_PASSWORD_HASH` for Production. Generate a bcrypt hash locally, for example with `htpasswd -nBC 12 admin` (enter the password at its interactive prompts, then copy the portion after `admin:`). Never put the password or hash in Git or `NEXT_PUBLIC_`/`VITE_` variables.
-3. Redeploy after the store and environment variable are connected. Visit `/api/admin`: it must return JSON with `configured: true`. Visit `/api/content`: before the first publish it returns revision `0` and null content.
-4. Sign in at `/admin`, review the bundled content, and choose **Publish changes**. Check a second browser/device for the published content. Upload an image and verify its returned Blob URL renders.
+1. Create a TiDB Cloud Serverless cluster and connect it to the Vercel project using the [TiDB Cloud Vercel integration](https://vercel.com/marketplace/tidb-cloud). It supplies `TIDB_HOST`, `TIDB_PORT`, `TIDB_USER`, `TIDB_PASSWORD` and `TIDB_DATABASE`. The API connects with TLS and creates `cms_admin`, `cms_document` and `cms_media` on first use. The TiDB account must have table creation, read, insert and update privileges.
+2. In the Vercel project, create and connect a public Blob store for images and videos. It supplies `BLOB_READ_WRITE_TOKEN` to the deployment.
+3. Generate a bcrypt hash of the initial administrator password locally. One option is `htpasswd -nBC 12 admin`; enter the password interactively and copy only the part after `admin:`. In Vercel **Settings → Environment Variables**, set `CMS_ADMIN_BOOTSTRAP_HASH` to that hash for Production. Do not put the password or hash in Git, a public environment variable, or the frontend bundle.
+4. Redeploy after the database, Blob store and bootstrap hash are connected. The first API request inserts the hash into the `cms_admin` MySQL table if no administrator exists. The bootstrap variable can then be removed and the project redeployed again; the stored hash remains in MySQL.
+5. Visit `/api/admin` and confirm `configured: true`. Sign in at `/admin`, review the bundled content and choose **Publish changes**. Verify an edit from a second browser/device, upload an image and check the returned URL. The admin panel also has **Change password**, which updates the MySQL hash and signs out existing sessions.
 
-The session is signed, HttpOnly, SameSite Strict and expires after 12 hours. Changing `CMS_ADMIN_PASSWORD_HASH` invalidates existing sessions. Publishing uses revision and Blob ETag checks to reject stale writes. Blob content and uploaded media are public; do not publish secrets through the editor. Back up the content document and media from the connected Blob store on the hosting schedule.
+If using another remote MySQL provider, set `CMS_DB_HOST`, `CMS_DB_PORT`, `CMS_DB_NAME`, `CMS_DB_USER`, `CMS_DB_PASSWORD` and `CMS_DB_SSL=true` in Vercel project settings instead of the `TIDB_*` variables. `CMS_DB_SSL_CA` can contain a custom CA certificate. The database must accept connections from Vercel Functions.
 
-`npm run build` includes no PHP files. The old PHP/MySQL backend remains available as a separate Apache package through `npm run build:php`; see [ADMIN_SETUP.md](ADMIN_SETUP.md).
+Sessions are signed, HttpOnly, SameSite Strict and expire after 12 hours. Publishing uses a MySQL transaction and revision check to reject stale writes. Back up the database and Blob media. Public content and uploaded files must not contain secrets.
+
+`npm run build` excludes the old PHP API. An alternate Apache/PHP/MySQL package remains available through `npm run build:php`; see [ADMIN_SETUP.md](ADMIN_SETUP.md).
