@@ -60,41 +60,47 @@ describe('Angular rendered interactions', () => {
     ).toBe('/contact?product=cuplock-scaffolding');
     fixture.destroy();
   });
-  it('replaces geometry content and safely resets when repository data changes', async () => {
+  it('renders matching geometry products as scrollable slides and updates with repository data', async () => {
     await configure();
     const fixture = TestBed.createComponent(GeometryComponent);
     fixture.detectChanges();
     fixture.componentInstance.selectGeometry('slab');
     fixture.detectChanges();
-    fixture.componentInstance.next();
-    fixture.detectChanges();
-    expect(
-      fixture.nativeElement.querySelector('.geometry-content .product-card h3').textContent,
-    ).toContain('Heavy Shoring');
+    const slides: NodeListOf<HTMLElement> =
+      fixture.nativeElement.querySelectorAll('.geometry-slide');
+    expect(slides.length).toBeGreaterThan(1);
+    expect(Array.from(slides).some((slide) => slide.textContent?.includes('Heavy Shoring'))).toBe(
+      true,
+    );
+    expect(fixture.nativeElement.querySelector('.geometry-lead sm-image')).not.toBeNull();
+    expect(fixture.nativeElement.querySelector('.geometry-track').getAttribute('tabindex')).toBe(
+      '0',
+    );
     repository.products.set(PRODUCTS.filter((p) => p.slug === 'cuplock-scaffolding'));
     fixture.detectChanges();
-    expect(fixture.componentInstance.activeProductIndex()).toBe(0);
     expect(
-      fixture.nativeElement.querySelector('.geometry-content .card-actions a').getAttribute('href'),
+      fixture.nativeElement.querySelector('.geometry-slide .card-actions a').getAttribute('href'),
     ).toBe('/products/cuplock-scaffolding');
+    expect(fixture.nativeElement.querySelectorAll('.geometry-slide')).toHaveLength(1);
+    fixture.destroy();
   });
-  it('renders a bounded assembly sequence through button clicks', async () => {
+  it('renders every assembly step in order for scroll and swipe navigation', async () => {
     await configure();
     const fixture = TestBed.createComponent(AssemblyComponent);
     fixture.detectChanges();
-    const buttons: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll(
-      '.section-controls > button',
+    const steps: NodeListOf<HTMLElement> =
+      fixture.nativeElement.querySelectorAll('.assembly-content');
+    expect(steps).toHaveLength(7);
+    expect(steps[0]!.dataset['step']).toBe('1');
+    expect(steps[6]!.dataset['step']).toBe('7');
+    expect(steps[6]!.querySelector('h3')?.textContent).toContain('Guardrails');
+    expect(
+      new Set(Array.from(steps, (step) => step.querySelector('img')?.getAttribute('src'))).size,
+    ).toBe(7);
+    expect(fixture.nativeElement.querySelector('.assembly-track').getAttribute('tabindex')).toBe(
+      '0',
     );
-    expect(buttons[0]!.disabled).toBe(true);
-    for (let i = 0; i < 6; i++) {
-      buttons[1]!.click();
-      fixture.detectChanges();
-    }
-    expect(buttons[1]!.disabled).toBe(true);
-    expect(fixture.nativeElement.querySelector('h3').textContent).toContain('Guardrails');
-    buttons[0]!.click();
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('h3').textContent).toContain('Trapdoors');
+    fixture.destroy();
   });
 });
 

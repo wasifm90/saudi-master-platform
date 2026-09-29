@@ -32,14 +32,27 @@
       <p class="catalog-error" role="alert">{{ repository.error() }}</p>
     }
     @if (filteredProducts().length) {
-      <div class="product-grid" [attr.data-filter]="activeClassification()">
-        @for (product of filteredProducts(); track product.slug; let index = $index) {
-          <sm-product-card
-            class="product-tile"
-            [product]="product"
-            [index]="index"
-            [total]="filteredProducts().length"
-          />
+      <div class="product-sequence" [attr.data-filter]="activeClassification()">
+        @for (row of productRows(); track row[0].slug; let rowIndex = $index) {
+          <section class="system-row" [attr.aria-label]="'System group ' + (rowIndex + 1)">
+            <div class="system-row__meta" aria-hidden="true">
+              <span>System sequence / {{ (rowIndex + 1).toString().padStart(2, '0') }}</span>
+              <span
+                >{{ (rowIndex + 1).toString().padStart(2, '0') }} —
+                {{ productRows().length.toString().padStart(2, '0') }}</span
+              >
+            </div>
+            <div class="product-grid">
+              @for (product of row; track product.slug; let index = $index) {
+                <sm-product-card
+                  class="product-tile"
+                  [product]="product"
+                  [index]="rowIndex * 3 + index"
+                  [total]="filteredProducts().length"
+                />
+              }
+            </div>
+          </section>
         }
       </div>
     } @else {

@@ -78,14 +78,16 @@ import { SeoService } from '../../core/services/seo.service';
             [attr.aria-label]="p.name + ' demonstration'"
           ></video>
         }
-        <section class="detail-section">
-          <h2>Product gallery</h2>
-          <div class="gallery">
-            @for (image of p.gallery; track image) {
-              <sm-image [src]="image" [alt]="p.name + ' product view'" />
-            }
-          </div>
-        </section>
+        @if (galleryImages().length) {
+          <section class="detail-section">
+            <h2>Product gallery</h2>
+            <div class="gallery">
+              @for (image of galleryImages(); track image) {
+                <sm-image [src]="image" [alt]="p.name + ' product view'" />
+              }
+            </div>
+          </section>
+        }
         <section class="detail-section">
           <h2>Related systems</h2>
           <div class="related">
@@ -224,6 +226,12 @@ export class ProductPageComponent {
       this.params()?.get('slug') ?? '',
     ),
   );
+  readonly galleryImages = computed(() => {
+    const product = this.product();
+    return product
+      ? [...new Set(product.gallery.filter((image) => image !== product.featuredImage))]
+      : [];
+  });
   readonly related = computed(() => {
     const active = this.product();
     return this.repository

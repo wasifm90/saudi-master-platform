@@ -17,6 +17,12 @@ export class SystemsComponent {
   readonly filteredProducts = computed(() =>
     filterProducts(this.repository.products(), this.activeClassification()),
   );
+  readonly productRows = computed(() => {
+    const products = this.filteredProducts();
+    return Array.from({ length: Math.ceil(products.length / 3) }, (_, index) =>
+      products.slice(index * 3, index * 3 + 3),
+    );
+  });
   readonly filters: readonly { code: ProductFilter; label: string }[] = [
     { code: 'ALL', label: 'All products' },
     { code: 'LOCAL', label: 'Local manufactured' },

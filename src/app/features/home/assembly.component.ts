@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ContentRepository } from '../../core/services/content.repository';
-import { AssemblyState } from '../../core/services/interaction-state';
 import { ImageComponent } from '../../shared/image.component';
 import { HOME } from '../../data/catalog';
+
 @Component({
   selector: 'sm-assembly',
   imports: [ImageComponent],
@@ -13,82 +13,96 @@ import { HOME } from '../../data/catalog';
           <p class="eyebrow">Systems in motion</p>
           <h2 id="assembly-title">{{ copy.assembly }}</h2>
         </div>
-        <span class="counter" role="status"
-          >{{ state.index() + 1 }} / {{ state.steps.length }}</span
+        <span class="assembly-cue"
+          ><span class="desktop-cue">Scroll through the build ↓</span
+          ><span class="mobile-cue">Swipe through the build →</span></span
         >
       </div>
-      @if (state.active(); as step) {
-        <div class="assembly-content" [attr.data-step]="step.id">
-          <div class="assembly-image">
-            <sm-image [src]="step.image" [alt]="step.title" /><span
-              >Step {{ step.id }} · Erection phase</span
-            >
-          </div>
-          <div>
-            <p class="eyebrow">ULMA BRIO / Cuplock</p>
-            <h3>{{ step.title }}</h3>
-            <p>{{ step.description }}</p>
-            @if (step.video) {
-              <video
-                [src]="step.video"
-                controls
-                preload="none"
-                [attr.aria-label]="step.title"
-              ></video>
-            }
-            <dl class="spec-grid">
-              @for (spec of step.technicalFeatures; track spec.label) {
-                <div>
-                  <dt>{{ spec.label }}</dt>
-                  <dd>{{ spec.value }}</dd>
-                </div>
+      <div
+        class="assembly-track"
+        role="region"
+        tabindex="0"
+        aria-label="Structural assembly steps; swipe horizontally on mobile"
+      >
+        @for (step of steps; track step.id; let index = $index) {
+          <article class="assembly-content" [attr.data-step]="step.id">
+            <div class="assembly-image">
+              <sm-image
+                [src]="step.image"
+                [alt]="step.title"
+                sizes="(min-width: 851px) 48vw, 85vw"
+              /><span>Step {{ step.id }} · Erection phase</span>
+            </div>
+            <div class="assembly-detail">
+              <div class="assembly-progress" aria-hidden="true">
+                <span>{{ (index + 1).toString().padStart(2, '0') }}</span
+                ><span class="assembly-progress__line"></span
+                ><span>{{ steps.length.toString().padStart(2, '0') }}</span>
+              </div>
+              <p class="eyebrow">ULMA BRIO / Cuplock</p>
+              <h3>{{ step.title }}</h3>
+              <p>{{ step.description }}</p>
+              @if (step.video) {
+                <video
+                  [src]="step.video"
+                  controls
+                  preload="none"
+                  [attr.aria-label]="step.title"
+                ></video>
               }
-            </dl>
-          </div>
-        </div>
-      }
-      <div class="section-controls">
-        <button type="button" (click)="state.previous()" [disabled]="state.first()">
-          ← Previous
-        </button>
-        <div class="step-dots" aria-label="Assembly steps">
-          @for (step of state.steps; track step.id; let index = $index) {
-            <button
-              type="button"
-              [class.active]="state.index() === index"
-              (click)="state.select(index)"
-              [attr.aria-label]="'Go to step ' + step.id + ': ' + step.title"
-              [attr.aria-current]="state.index() === index ? 'step' : null"
-            >
-              <span></span>
-            </button>
-          }
-        </div>
-        <button type="button" (click)="state.next()" [disabled]="state.last()">Next phase →</button>
+              <dl class="spec-grid">
+                @for (spec of step.technicalFeatures; track spec.label) {
+                  <div>
+                    <dt>{{ spec.label }}</dt>
+                    <dd>{{ spec.value }}</dd>
+                  </div>
+                }
+              </dl>
+            </div>
+          </article>
+        }
       </div>
     </div>
   </section>`,
   styles: `
     .assembly {
-      background: var(--paper);
+      background: linear-gradient(145deg, #f6f8fa, #fff5e9 72%);
     }
-    .counter {
-      font: 600 14px monospace;
+    .section-heading {
+      align-items: end;
+    }
+    .assembly-cue {
+      color: #a8471f;
+      font: 700 10px var(--display);
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      white-space: nowrap;
+    }
+    .mobile-cue {
+      display: none;
+    }
+    .assembly-track {
+      display: grid;
+      gap: 36px;
+      outline-offset: 5px;
     }
     .assembly-content {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 28px;
+      min-height: min(78svh, 760px);
+      scroll-margin-top: 110px;
+      background: #fff;
+      border: 1px solid #dfd7ce;
+      border-radius: 27px;
+      padding: clamp(16px, 3vw, 30px);
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 40px;
+      gap: clamp(20px, 4vw, 54px);
       align-items: center;
+      box-shadow: 0 18px 42px #3d4c5e12;
     }
     .assembly-image {
       position: relative;
       overflow: hidden;
-      border-radius: 12px;
+      border-radius: 19px;
     }
     .assembly-image sm-image {
       aspect-ratio: 4/3;
@@ -97,66 +111,108 @@ import { HOME } from '../../data/catalog';
       position: absolute;
       bottom: 16px;
       left: 16px;
-      background: var(--ink);
+      background: #172838e8;
       color: white;
       padding: 9px 12px;
-      border-radius: 4px;
-      font: 600 11px var(--display);
+      border-radius: 999px;
+      font: 700 10px var(--display);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    .assembly-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      color: #9c4e27;
+      font: 700 13px var(--display);
+    }
+    .assembly-progress__line {
+      display: block;
+      width: 90px;
+      height: 2px;
+      background: linear-gradient(90deg, #bd642b, #e7d7c4);
     }
     h3 {
       font: 700 clamp(25px, 3vw, 40px) / 1.08 var(--display);
       text-transform: uppercase;
       margin: 14px 0;
     }
-    p {
+    .assembly-detail > p:not(.eyebrow) {
       font-size: 15px;
       line-height: 1.8;
       color: var(--muted);
     }
-    .step-dots {
-      display: flex;
-    }
-    .step-dots button {
-      min-width: 44px;
-      padding: 0;
-      border: 0;
-      background: transparent;
-    }
-    .step-dots span {
+    video {
       display: block;
-      width: 9px;
-      height: 9px;
-      background: var(--line);
-      border-radius: 8px;
-      margin: auto;
+      max-width: 100%;
+      margin: 18px 0;
+      border-radius: 12px;
     }
-    .step-dots .active span {
-      width: 24px;
-      background: #9b7720;
+    @supports (animation-timeline: view()) {
+      .assembly-content {
+        animation: assembly-enter linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 32%;
+      }
+    }
+    @keyframes assembly-enter {
+      from {
+        opacity: 0.5;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     @media (max-width: 850px) {
+      .section-heading {
+        display: block;
+      }
+      .assembly-cue {
+        display: block;
+        margin: 15px 0 22px;
+      }
+      .desktop-cue {
+        display: none;
+      }
+      .mobile-cue {
+        display: inline;
+      }
+      .assembly-track {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-inline: contain;
+        gap: 14px;
+        padding: 0 25px 20px 0;
+        scrollbar-color: #ae612c #eadfce;
+      }
       .assembly-content {
-        grid-template-columns: 1fr;
-        padding: 16px;
-        gap: 24px;
+        flex: 0 0 min(82vw, 590px);
+        display: block;
+        min-height: 0;
+        scroll-snap-align: start;
+      }
+      .assembly-image sm-image {
+        aspect-ratio: 4/3;
+      }
+      .assembly-detail {
+        padding: 18px 3px 6px;
+      }
+      .assembly-detail > p:not(.eyebrow) {
+        font-size: 13px;
       }
     }
-    @media (max-width: 600px) {
-      .step-dots {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-      }
-      .step-dots button {
-        min-width: 44px;
-      }
-      .assembly-content p {
-        font-size: 13px;
+    @media (prefers-reduced-motion: reduce) {
+      .assembly-content {
+        animation: none;
       }
     }
   `,
 })
 export class AssemblyComponent {
   readonly copy = HOME;
-  readonly state = new AssemblyState(inject(ContentRepository).assembly);
+  readonly steps = inject(ContentRepository).assembly;
 }

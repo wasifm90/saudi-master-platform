@@ -13,7 +13,10 @@ import { NAVIGATION } from '../data/catalog';
         >
         <nav class="desktop-nav" aria-label="Main navigation">
           @for (item of navigation; track item.path) {
-            <a [routerLink]="item.path" routerLinkActive="active">{{ item.label }}</a>
+            <a [routerLink]="item.path" routerLinkActive="active"
+              ><span>{{ item.label }}</span
+              ><span class="nav-arrow" aria-hidden="true">↗</span></a
+            >
           }
         </nav>
         <a routerLink="/contact" class="button header-cta"
@@ -28,7 +31,7 @@ import { NAVIGATION } from '../data/catalog';
           [attr.aria-expanded]="open()"
           aria-controls="mobile-menu"
         >
-          Menu <span aria-hidden="true">☰</span>
+          <span>Menu</span><span class="menu-icon" aria-hidden="true">☰</span>
         </button>
       </div>
     </header>

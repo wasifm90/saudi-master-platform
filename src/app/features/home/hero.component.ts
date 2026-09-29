@@ -68,6 +68,7 @@ import { HOME } from '../../data/catalog';
       }
     </section>
     <section class="hero-statement shell">
+      <span class="statement-index" aria-hidden="true">01 / Alliance intelligence</span>
       <p class="eyebrow">{{ copy.kicker }}</p>
       <h1>{{ copy.title }}</h1>
       <p class="lead">{{ copy.description }}</p>
@@ -107,7 +108,7 @@ import { HOME } from '../../data/catalog';
     }
     .hero-caption {
       position: absolute;
-      bottom: 32px;
+      bottom: 158px;
       left: 32px;
       right: 110px;
       color: white;
@@ -120,18 +121,65 @@ import { HOME } from '../../data/catalog';
     }
     .video-control {
       position: absolute;
-      bottom: 22px;
+      bottom: 142px;
       right: 24px;
       background: #18181bd9;
       border: 1px solid #fff6;
       color: #fff;
-      border-radius: 5px;
+      border-radius: 10px;
       min-height: 44px;
       padding: 8px 14px;
     }
     .hero-statement {
-      padding-top: 70px;
-      padding-bottom: 70px;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      margin-top: -116px;
+      margin-bottom: 46px;
+      padding: clamp(28px, 4vw, 56px);
+      border: 1px solid #ffffffc9;
+      border-radius: 30px;
+      background: linear-gradient(125deg, #fffaf5eb, #f5f7faef 57%, #fff0dfe8);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 30px 80px #26354331;
+    }
+    .hero-statement::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(#a58d6c12 1px, transparent 1px),
+        linear-gradient(90deg, #a58d6c12 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(90deg, #000, transparent 75%);
+      pointer-events: none;
+    }
+    .statement-index {
+      position: absolute;
+      top: 25px;
+      right: 32px;
+      color: #7c6855;
+      font: 700 10px var(--display);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+    .hero-statement .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 13px;
+      border: 1px solid #e5c9a8;
+      border-radius: 999px;
+      background: #fff9f0;
+    }
+    .hero-statement .eyebrow::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--earth);
+      box-shadow: 0 0 0 4px #a8471f24;
     }
     .hero-statement h1 {
       font-size: clamp(36px, 5.5vw, 76px);
@@ -147,6 +195,23 @@ import { HOME } from '../../data/catalog';
     .hero-statement .actions {
       margin-top: 30px;
     }
+    @supports (animation-timeline: view()) {
+      .hero-statement {
+        animation: statement-arrive linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 28%;
+      }
+      @keyframes statement-arrive {
+        from {
+          opacity: 0.72;
+          transform: translateY(32px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    }
     @media (max-width: 600px) {
       .hero {
         height: 76svh;
@@ -154,18 +219,31 @@ import { HOME } from '../../data/catalog';
       }
       .hero-caption {
         left: 20px;
-        bottom: 28px;
+        bottom: 106px;
         flex-direction: column;
         gap: 6px;
       }
+      .video-control {
+        bottom: 94px;
+      }
       .hero-statement {
-        padding-top: 48px;
-        padding-bottom: 48px;
+        margin-top: -76px;
+        margin-bottom: 24px;
+        padding: 26px 20px 30px;
+        border-radius: 22px;
+      }
+      .statement-index {
+        position: static;
+        display: block;
+        margin-bottom: 22px;
       }
     }
     @media (prefers-reduced-motion: reduce) {
       .hero-video {
         transition: none;
+      }
+      .hero-statement {
+        animation: none !important;
       }
     }
   `,
