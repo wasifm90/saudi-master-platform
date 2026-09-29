@@ -600,22 +600,23 @@ function initPerformanceObservers() {
 }
 
 function handleHorizontalRunways() {
+  const windowH = window.innerHeight;
+
   // 1. Geometry Runway Scroll Sync
   const geomRunway = document.getElementById('geometryScrollRunway');
   if (geomRunway) {
     const rect = geomRunway.getBoundingClientRect();
     const runwayHeight = geomRunway.offsetHeight;
-    const windowH = window.innerHeight;
     const scrollableDistance = runwayHeight - windowH;
 
-    if (scrollableDistance > 0) {
+    if (scrollableDistance > 0 && rect.top <= windowH * 0.5 && rect.bottom >= 0) {
       // Calculate how far into the runway we have scrolled
-      const scrolled = -rect.top;
-      const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
+      const scrolled = Math.max(0, Math.min(scrollableDistance, -rect.top + 80));
+      const progress = scrolled / scrollableDistance;
       const geomList = (Array.isArray(geometries) && geometries.length > 0) ? geometries : (window.DB_SNAPSHOT ? window.DB_SNAPSHOT.geometries : []);
       const count = geomList ? geomList.length : 6;
       const targetIndex = Math.min(count - 1, Math.floor(progress * count));
-      if (targetIndex !== activeGeomIndex && rect.top <= 100 && rect.bottom >= windowH) {
+      if (targetIndex !== activeGeomIndex) {
         updateGeometrySlide(targetIndex, false);
       }
     }
@@ -627,15 +628,14 @@ function handleHorizontalRunways() {
   if (asmRunway && db && Array.isArray(db.assembly) && db.assembly.length > 0) {
     const rect = asmRunway.getBoundingClientRect();
     const runwayHeight = asmRunway.offsetHeight;
-    const windowH = window.innerHeight;
     const scrollableDistance = runwayHeight - windowH;
 
-    if (scrollableDistance > 0) {
-      const scrolled = -rect.top;
-      const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
+    if (scrollableDistance > 0 && rect.top <= windowH * 0.5 && rect.bottom >= 0) {
+      const scrolled = Math.max(0, Math.min(scrollableDistance, -rect.top + 80));
+      const progress = scrolled / scrollableDistance;
       const count = db.assembly.length;
       const targetIndex = Math.min(count - 1, Math.floor(progress * count));
-      if (targetIndex !== currentAssemblyStepIndex && rect.top <= 100 && rect.bottom >= windowH) {
+      if (targetIndex !== currentAssemblyStepIndex) {
         updateAssemblySlide(targetIndex);
       }
     }
