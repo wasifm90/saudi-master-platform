@@ -29,7 +29,7 @@ import { SeoService } from '../../core/services/seo.service';
         </p>
       </div>
       <form [formGroup]="form" (ngSubmit)="prepare()">
-        <label for="name">Full name *</label
+        <label for="name">{{ labels.contactName }} *</label
         ><input
           id="name"
           autocomplete="name"
@@ -37,7 +37,7 @@ import { SeoService } from '../../core/services/seo.service';
           [attr.aria-invalid]="invalid('name')"
           required
         />
-        <label for="company">Company *</label
+        <label for="company">{{ labels.contactCompany }} *</label
         ><input
           id="company"
           autocomplete="organization"
@@ -45,7 +45,7 @@ import { SeoService } from '../../core/services/seo.service';
           [attr.aria-invalid]="invalid('company')"
           required
         />
-        <label for="email">Email *</label
+        <label for="email">{{ labels.contactEmail }} *</label
         ><input
           id="email"
           type="email"
@@ -54,16 +54,16 @@ import { SeoService } from '../../core/services/seo.service';
           [attr.aria-invalid]="invalid('email')"
           required
         />
-        <label for="phone">Phone</label
+        <label for="phone">{{ labels.contactPhone }}</label
         ><input id="phone" type="tel" autocomplete="tel" formControlName="phone" />
-        <label for="product">System requirement</label
+        <label for="product">{{ labels.contactProduct }}</label
         ><select id="product" formControlName="product">
-          <option value="">Project engineering enquiry</option>
+          <option value="">{{ labels.contactProductDefault }}</option>
           @for (product of products(); track product.slug) {
             <option [value]="product.slug">{{ product.name }}</option>
           }
         </select>
-        <label for="message">Project requirements *</label
+        <label for="message">{{ labels.contactMessage }} *</label
         ><textarea
           id="message"
           rows="5"
@@ -73,19 +73,17 @@ import { SeoService } from '../../core/services/seo.service';
         ></textarea>
         @if (attempted() && form.invalid) {
           <p role="alert" class="form-error">
-            Enter your name, company, a valid email and project requirements (at least 10
-            characters).
+            {{ labels.contactInvalid }}
           </p>
         }
-        <button type="submit" class="button">Prepare enquiry →</button>
+        <button type="submit" class="button">{{ labels.contactPrepare }} →</button>
         @if (emailHref()) {
           <div class="email-preview" role="status">
-            <h2>Enquiry ready to review</h2>
+            <h2>{{ labels.contactReady }}</h2>
             <p>
-              No message has been sent. Open the draft in your email application, review it, then
-              send.
+              {{ labels.contactReadyDescription }}
             </p>
-            <a class="button secondary" [href]="emailHref()">Open email draft ↗</a>
+            <a class="button secondary" [href]="emailHref()">{{ labels.contactOpenDraft }} ↗</a>
           </div>
         }
       </form>

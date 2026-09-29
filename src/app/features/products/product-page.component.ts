@@ -103,7 +103,7 @@ import { ContentRepository } from '../../core/services/content.repository';
         <p class="eyebrow">404</p>
         <h1>{{ labels.productMissingTitle }}</h1>
         <p>{{ labels.productMissingDescription }}</p>
-        <a routerLink="/products" class="button">Explore active products →</a>
+        <a routerLink="/products" class="button">{{ labels.productMissingCta }} →</a>
       </section>
     }`,
   styles: `

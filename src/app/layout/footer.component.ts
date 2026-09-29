@@ -7,7 +7,9 @@ import { ContentRepository } from '../core/services/content.repository';
   template: ` <footer>
     <div class="shell footer-grid">
       <div>
-        <a routerLink="/" class="footer-brand">{{ company.name }} <span>× ULMA</span></a>
+        <a routerLink="/" class="footer-brand"
+          >{{ company.name }} <span>{{ labels.headerPartner }}</span></a
+        >
         <p>{{ company.description }}</p>
       </div>
       <div>
@@ -17,9 +19,11 @@ import { ContentRepository } from '../core/services/content.repository';
         <p>{{ company.address }}</p>
       </div>
       <nav aria-label="Footer">
-        <a routerLink="/insights">Insights</a><a routerLink="/privacy">Privacy</a
-        ><a routerLink="/terms">Terms</a><a routerLink="/contact">Start a project ↗</a
-        ><a routerLink="/admin">Admin</a>
+        <a routerLink="/insights">{{ labels.footerInsights }}</a
+        ><a routerLink="/privacy">{{ labels.footerPrivacy }}</a
+        ><a routerLink="/terms">{{ labels.footerTerms }}</a
+        ><a routerLink="/contact">{{ labels.footerContact }} ↗</a
+        ><a routerLink="/admin">{{ labels.footerAdmin }}</a>
       </nav>
     </div>
     <div class="shell footer-bottom">

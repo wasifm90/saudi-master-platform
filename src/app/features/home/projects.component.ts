@@ -12,7 +12,7 @@ import { ImageComponent } from '../../shared/image.component';
           <p class="eyebrow">{{ labels.projectsEyebrow }}</p>
           <h2>{{ copy.projects }}</h2>
         </div>
-        <a routerLink="/projects" class="text-link">All projects ↗</a>
+        <a routerLink="/projects" class="text-link">{{ labels.projectsAll }} ↗</a>
       </div>
       <div class="project-list">
         @for (project of projects; track project.id) {

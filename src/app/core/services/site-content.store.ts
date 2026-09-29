@@ -75,6 +75,42 @@ export interface SiteLabels {
   productRelated: string;
   productMissingTitle: string;
   productMissingDescription: string;
+  productMissingCta: string;
+  productLoading: string;
+  productCountSuffix: string;
+  heroStatementIndex: string;
+  headerMonogram: string;
+  headerPartner: string;
+  headerMenu: string;
+  headerMenuClose: string;
+  footerInsights: string;
+  footerPrivacy: string;
+  footerTerms: string;
+  footerContact: string;
+  footerAdmin: string;
+  contentDiscuss: string;
+  contentEyebrow: string;
+  contentHome: string;
+  contentContact: string;
+  geometryScrollHint: string;
+  geometrySwipeHint: string;
+  assemblyScrollHint: string;
+  assemblySwipeHint: string;
+  projectsAll: string;
+  servicesExplore: string;
+  contactName: string;
+  contactCompany: string;
+  contactEmail: string;
+  contactPhone: string;
+  contactProduct: string;
+  contactProductDefault: string;
+  contactMessage: string;
+  contactInvalid: string;
+  contactPrepare: string;
+  contactReady: string;
+  contactReadyDescription: string;
+  contactOpenDraft: string;
+  skipContent: string;
   [key: string]: string;
 }
 
@@ -195,6 +231,44 @@ export const DEFAULT_CONTENT: SiteContent = {
     productRelated: 'Related systems',
     productMissingTitle: 'Product not found',
     productMissingDescription: 'This product is unavailable or the link has changed.',
+    productMissingCta: 'Explore active products',
+    productLoading: 'Loading systems…',
+    productCountSuffix: 'systems',
+    heroStatementIndex: '01 / Alliance intelligence',
+    headerMonogram: 'SM',
+    headerPartner: '× ULMA',
+    headerMenu: 'Menu',
+    headerMenuClose: 'Close',
+    footerInsights: 'Insights',
+    footerPrivacy: 'Privacy',
+    footerTerms: 'Terms',
+    footerContact: 'Start a project',
+    footerAdmin: 'Admin',
+    contentDiscuss: 'Discuss your project',
+    contentEyebrow: 'Saudi Master × ULMA',
+    contentHome: 'Home',
+    contentContact: 'Contact the team',
+    geometryScrollHint: 'Scroll down to unveil systems',
+    geometrySwipeHint: 'Swipe to explore',
+    assemblyScrollHint: 'Scroll down to unveil each stage',
+    assemblySwipeHint: 'Swipe through the build',
+    projectsAll: 'All projects',
+    servicesExplore: 'Explore service',
+    contactName: 'Full name',
+    contactCompany: 'Company',
+    contactEmail: 'Email',
+    contactPhone: 'Phone',
+    contactProduct: 'System requirement',
+    contactProductDefault: 'Project engineering enquiry',
+    contactMessage: 'Project requirements',
+    contactInvalid:
+      'Enter your name, company, a valid email and project requirements (at least 10 characters).',
+    contactPrepare: 'Prepare enquiry',
+    contactReady: 'Enquiry ready to review',
+    contactReadyDescription:
+      'No message has been sent. Open the draft in your email application, review it, then send.',
+    contactOpenDraft: 'Open email draft',
+    skipContent: 'Skip to content',
   },
 };
 

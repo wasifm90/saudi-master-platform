@@ -28,11 +28,11 @@ import { ImageComponent } from '../../shared/image.component';
         @for (paragraph of item.body; track $index) {
           <p>{{ paragraph }}</p>
         }
-        <a routerLink="/contact" class="button">Discuss your project →</a>
+        <a routerLink="/contact" class="button">{{ labels.contentDiscuss }} →</a>
       </div>
     } @else if (isCollection()) {
       <div class="page-intro">
-        <p class="eyebrow">Saudi Master × ULMA</p>
+        <p class="eyebrow">{{ labels.contentEyebrow }}</p>
         <h1>{{ collectionCopy().title }}</h1>
         <p class="lead">{{ collectionCopy().description }}</p>
       </div>
@@ -73,8 +73,8 @@ import { ImageComponent } from '../../shared/image.component';
           <p>{{ paragraph }}</p>
         }
         <div class="actions">
-          <a routerLink="/" class="button secondary">Home</a
-          ><a routerLink="/contact" class="button">Contact the team →</a>
+          <a routerLink="/" class="button secondary">{{ labels.contentHome }}</a
+          ><a routerLink="/contact" class="button">{{ labels.contentContact }} →</a>
         </div>
       </div>
     }
@@ -152,6 +152,9 @@ import { ImageComponent } from '../../shared/image.component';
 })
 export class ContentPageComponent {
   private readonly repository = inject(ContentRepository);
+  get labels() {
+    return this.repository.labels;
+  }
   private readonly route = inject(ActivatedRoute);
   private readonly data = toSignal(this.route.data);
   private readonly params = toSignal(this.route.paramMap);

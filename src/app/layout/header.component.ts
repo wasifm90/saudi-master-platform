@@ -8,9 +8,10 @@ import { ContentRepository } from '../core/services/content.repository';
   template: ` <header class="site-header">
       <div class="header-inner">
         <a routerLink="/" class="brand"
-          ><span class="monogram">SM</span
+          ><span class="monogram">{{ labels.headerMonogram }}</span
           ><span
-            >{{ company.name }} <b>× ULMA</b><small>{{ labels.headerTagline }}</small></span
+            >{{ company.name }} <b>{{ labels.headerPartner }}</b
+            ><small>{{ labels.headerTagline }}</small></span
           ></a
         >
         <nav class="desktop-nav" aria-label="Main navigation">
@@ -33,7 +34,8 @@ import { ContentRepository } from '../core/services/content.repository';
           [attr.aria-expanded]="open()"
           aria-controls="mobile-menu"
         >
-          <span>Menu</span><span class="menu-icon" aria-hidden="true"></span>
+          <span>{{ labels.headerMenu }}</span
+          ><span class="menu-icon" aria-hidden="true"></span>
         </button>
       </div>
     </header>
@@ -46,9 +48,9 @@ import { ContentRepository } from '../core/services/content.repository';
       (cancel)="closeMenu()"
     >
       <div class="mobile-top">
-        <span class="eyebrow">Saudi Master × ULMA</span
+        <span class="eyebrow">{{ labels.contentEyebrow }}</span
         ><button type="button" (click)="closeMenu()" aria-label="Close navigation" autofocus>
-          Close ×
+          {{ labels.headerMenuClose }} ×
         </button>
       </div>
       <nav aria-label="Mobile navigation">

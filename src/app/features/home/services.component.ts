@@ -42,7 +42,9 @@ import { ImageComponent } from '../../shared/image.component';
                 />
                 <div>
                   <p>{{ service.description }}</p>
-                  <a class="button" [routerLink]="['/services', service.slug]">Explore service →</a>
+                  <a class="button" [routerLink]="['/services', service.slug]"
+                    >{{ labels.servicesExplore }} →</a
+                  >
                 </div>
               </div>
             </div>

@@ -30,7 +30,8 @@ import { ScrollStackComponent } from '../../shared/scroll-stack.component';
             }
           </div>
           <div class="rail-hint">
-            <span>Scroll down to unveil systems ↓</span><span>Swipe to explore →</span>
+            <span>{{ labels.geometryScrollHint }} ↓</span
+            ><span>{{ labels.geometrySwipeHint }} →</span>
           </div>
         </div>
         <div class="geometry-viewport" data-stack-stage>

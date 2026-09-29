@@ -27,7 +27,7 @@
         }
       </div>
       <p class="result-count" role="status">
-        {{ activeProductIndex() + 1 }} / {{ filteredProducts().length }} systems
+        {{ activeProductIndex() + 1 }} / {{ filteredProducts().length }} {{ labels.productCountSuffix }}
       </p>
     </div>
     @if (repository.error()) {
@@ -86,7 +86,7 @@
       </div>
     } @else {
       <p class="empty-state" role="status">
-        {{ repository.loading() ? 'Loading systems…' : labels.productsEmpty }}
+        {{ repository.loading() ? labels.productLoading : labels.productsEmpty }}
       </p>
     }
   </div>

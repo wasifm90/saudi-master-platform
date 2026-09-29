@@ -22,8 +22,8 @@ import { ScrollStackComponent } from '../../shared/scroll-stack.component';
             ><span>{{ steps.length.toString().padStart(2, '0') }}</span>
           </div>
           <span class="assembly-cue"
-            ><span>Scroll down to unveil each stage ↓</span
-            ><span>Swipe through the build →</span></span
+            ><span>{{ labels.assemblyScrollHint }} ↓</span
+            ><span>{{ labels.assemblySwipeHint }} →</span></span
           >
         </div>
         <div class="assembly-viewport" data-stack-stage>

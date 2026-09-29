@@ -65,7 +65,7 @@ import { ContentRepository } from '../../core/services/content.repository';
       }
     </section>
     <section class="hero-statement shell">
-      <span class="statement-index" aria-hidden="true">01 / Alliance intelligence</span>
+      <span class="statement-index" aria-hidden="true">{{ labels.heroStatementIndex }}</span>
       <p class="eyebrow">{{ copy.kicker }}</p>
       <h1>{{ copy.title }}</h1>
       <p class="lead">{{ copy.description }}</p>
