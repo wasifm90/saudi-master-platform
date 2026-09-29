@@ -17,7 +17,7 @@ npm run preview
 npm run verify:production
 ```
 
-`npm run build` generates 37 prerendered pages plus a CSR fallback in **dist/website/browser**. `npm run preview` is a local static verification server, not a production dependency. `node server.js` is a compatibility launcher for that same Angular output.
+`npm run build` generates 37 prerendered pages plus a CSR fallback in **dist/website/browser**. `npm run preview` is a local static verification server, not a production dependency.
 
 ## Structure
 
