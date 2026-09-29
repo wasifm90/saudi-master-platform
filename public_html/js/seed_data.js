@@ -953,9 +953,9 @@ window.DB_SNAPSHOT = {
       "summary_ar": "تخضع أنابيب وصفائح الفولاذ الإنشائي لاختبارات التحليل الطيفي ومقاومة الشد فور وصولها للتأكد من مطابقتها التامة.",
       "details_en": "Certified structural steel tubes (S275/S355) undergo optical spectrometry and tensile stress testing upon arrival.",
       "details_ar": "تخضع أنابيب وصفائح الفولاذ الإنشائي لاختبارات التحليل الطيفي ومقاومة الشد فور وصولها للتأكد من مطابقتها التامة.",
-      "image_url": "images/industries/industrial-logistics.jpg",
+      "image_url": "images/manufacturing/mfg-material-receiving.jpg",
       "step_tag": "Step 01: Raw Materials",
-      "hero_image": "images/industries/industrial-logistics.jpg"
+      "hero_image": "images/manufacturing/mfg-material-receiving.jpg"
     },
     {
       "id": 2,
@@ -966,9 +966,9 @@ window.DB_SNAPSHOT = {
       "summary_ar": "قص ليزري رقمي دقيق للأنابيب والصفائح يضمن تمركز عقد التثبيت بدقة متناهية وزوايا لحام مثالية.",
       "details_en": "Sub-millimeter automated laser and rotary tube cutting ensuring accurate cuplock node placements and clean bevel angles.",
       "details_ar": "قص ليزري رقمي دقيق للأنابيب والصفائح يضمن تمركز عقد التثبيت بدقة متناهية وزوايا لحام مثالية.",
-      "image_url": "images/services/construction-management.jpg",
+      "image_url": "images/manufacturing/mfg-cnc-profiling.jpg",
       "step_tag": "Step 02: CNC Profiling",
-      "hero_image": "images/services/construction-management.jpg"
+      "hero_image": "images/manufacturing/mfg-cnc-profiling.jpg"
     },
     {
       "id": 3,
@@ -979,9 +979,9 @@ window.DB_SNAPSHOT = {
       "summary_ar": "محطات لحام روبوتية متعددة المحاور تضمن درزات لحام متجانسة وعميقة ومقاومة للاهتزازات والأحمال العالية.",
       "details_en": "Automated welding cells delivering full-penetration seams tested against cyclic vibration and extreme load concentrations.",
       "details_ar": "محطات لحام روبوتية متعددة المحاور تضمن درزات لحام متجانسة وعميقة ومقاومة للاهتزازات والأحمال العالية.",
-      "image_url": "images/services/design-build.jpg",
+      "image_url": "images/manufacturing/mfg-robotic-welding.jpg",
       "step_tag": "Step 03: Robotic Welding",
-      "hero_image": "images/services/design-build.jpg"
+      "hero_image": "images/manufacturing/mfg-robotic-welding.jpg"
     },
     {
       "id": 4,
@@ -992,9 +992,9 @@ window.DB_SNAPSHOT = {
       "summary_ar": "غمس القطع في أحواض الزنك المنصهر لتوفير طبقة جلفنة متينة تقاوم التآكل في البيئات البحرية والصحراوية القاسية.",
       "details_en": "Immersion in molten zinc baths (≥ 65-85 µm) providing decades of corrosion resistance in aggressive desert and marine environments.",
       "details_ar": "غمس القطع في أحواض الزنك المنصهر لتوفير طبقة جلفنة متينة تقاوم التآكل في البيئات البحرية والصحراوية القاسية.",
-      "image_url": "images/services/civil-structural.jpg",
+      "image_url": "images/manufacturing/mfg-hot-dip-galvanizing.jpg",
       "step_tag": "Step 04: Hot-Dip Galvanizing",
-      "hero_image": "images/services/civil-structural.jpg"
+      "hero_image": "images/manufacturing/mfg-hot-dip-galvanizing.jpg"
     },
     {
       "id": 5,
@@ -1005,9 +1005,9 @@ window.DB_SNAPSHOT = {
       "summary_ar": "منصات هيدروليكية متطورة تجري اختبارات التحميل الميكانيكية وإثبات مقاومة التشوه لضمان السلامة الميدانية 100%.",
       "details_en": "Calibrated hydraulic rigs perform destructive and non-destructive load tests ensuring compliance with SASO and European norms.",
       "details_ar": "منصات هيدروليكية متطورة تجري اختبارات التحميل الميكانيكية وإثبات مقاومة التشوه لضمان السلامة الميدانية 100%.",
-      "image_url": "images/safety/safety-inspection.jpg",
+      "image_url": "images/manufacturing/mfg-hydraulic-load-testing.jpg",
       "step_tag": "Step 05: Proof Loading",
-      "hero_image": "images/safety/safety-inspection.jpg"
+      "hero_image": "images/manufacturing/mfg-hydraulic-load-testing.jpg"
     },
     {
       "id": 6,
@@ -1018,9 +1018,9 @@ window.DB_SNAPSHOT = {
       "summary_ar": "ترميز الشحنات بباركود رقمي يتيح التتبع اللوجستي وشحنها الفوري على أسطول الشاحنات للمشاريع في غضون ساعات.",
       "details_en": "Individual batches are barcoded, certified, strapped, and dispatched directly onto dedicated heavy logistics flatbeds.",
       "details_ar": "ترميز الشحنات بباركود رقمي يتيح التتبع اللوجستي وشحنها الفوري على أسطول الشاحنات للمشاريع في غضون ساعات.",
-      "image_url": "images/industries/industrial-logistics.jpg",
+      "image_url": "images/manufacturing/mfg-rapid-dispatch.jpg",
       "step_tag": "Step 06: Rapid Dispatch",
-      "hero_image": "images/industries/industrial-logistics.jpg"
+      "hero_image": "images/manufacturing/mfg-rapid-dispatch.jpg"
     }
   ],
   "projects": [
@@ -1034,7 +1034,7 @@ window.DB_SNAPSHOT = {
       "region_code": "KSA",
       "industry_en": "Rail & High-Speed Transit",
       "industry_ar": "قطارات النقل السريع والبنية التحتية",
-      "hero_image": "images/projects/desert-road-construction.jpg",
+      "hero_image": "images/projects/neom-spine-viaduct.jpg",
       "summary_en": "Turnkey falsework and pier formwork package for monumental 32m high bridge supports in extreme desert canyon topography.",
       "summary_ar": "حزمة متكاملة للتدعيم الثقيل وشدات الأعمدة لجسور بارتفاع 32 متراً في التضاريس الجبلية الوعرة بنيوم.",
       "challenge_en": "Contractor required monolithic casting of 1,400 kN hammerhead caps while resisting 85 km/h desert crosswinds without crane availability delays.",
@@ -1046,7 +1046,7 @@ window.DB_SNAPSHOT = {
       "results_en": "Zero safety incidents recorded across 180,000 man-hours; pour cycle accelerated by 4 days per segment.",
       "results_ar": "صفر حوادث سلامة عبر 180,000 ساعة عمل، مع تسريع دورة الصب بـ 4 أيام لكل قطاع.",
       "key_metrics": "[{\"label\": \"Total Pier Height\", \"value\": \"32 meters\"}, {\"label\": \"Concrete Volume\", \"value\": \"45,000 m\\u00b3\"}, {\"label\": \"Cycle Speed\", \"value\": \"6 days/pier\"}]",
-      "gallery": "[\"images/projects/desert-road-construction.jpg\"]",
+      "gallery": "[\"images/projects/neom-spine-viaduct.jpg\"]",
       "status": "PUBLISHED",
       "featured": 1,
       "display_order": 0,
@@ -1089,7 +1089,7 @@ window.DB_SNAPSHOT = {
       "results_en": "Completed 2 weeks ahead of target schedule; client awarded follow-up substation contracts.",
       "results_ar": "اكتمل العمل قبل أسبوعين من الموعد المحدد واعتمدت الهيئة أنظمتنا للمشاريع اللاحقة.",
       "key_metrics": "[{\"label\": \"Shoring Fleet\", \"value\": \"35,000 m\\u00b2\"}, {\"label\": \"Columns Cast\", \"value\": \"180 circular\"}, {\"label\": \"Striking Time\", \"value\": \"72 hours\"}]",
-      "gallery": "[]",
+      "gallery": "[\"images/projects/infrastructure-bridge.jpg\"]",
       "status": "PUBLISHED",
       "featured": 1,
       "display_order": 0,
@@ -1132,7 +1132,7 @@ window.DB_SNAPSHOT = {
       "results_en": "Received Architectural Excellence commendation from the development authority.",
       "results_ar": "حصل المشروع على إشادة هيئة تطوير البحر الأحمر للتميز في جودة الخرسانة الظاهرة.",
       "key_metrics": "[{\"label\": \"Surface Finish\", \"value\": \"Architectural Class A\"}, {\"label\": \"Marine HDG\", \"value\": \"\\u2265 75 \\u00b5m\"}, {\"label\": \"Rebar Coverage\", \"value\": \"100% Plumb\"}]",
-      "gallery": "[]",
+      "gallery": "[\"images/projects/coastal-maritime-terminus.jpg\"]",
       "status": "PUBLISHED",
       "featured": 1,
       "display_order": 0,
@@ -1163,7 +1163,7 @@ window.DB_SNAPSHOT = {
       "region_code": "KSA",
       "industry_en": "Heavy Civil & Sports Mega-Infrastructure",
       "industry_ar": "المنشآت الرياضية الكبرى والهندسة المدنية",
-      "hero_image": "images/projects/road-construction-expressway.jpg",
+      "hero_image": "images/projects/qiddiya-retaining-complex.jpg",
       "summary_en": "Heavy fabricated Grinder steel shutters and heavy MK falsework for massive 18m retaining walls.",
       "summary_ar": "شدات جريندر الفولاذية الثقيلة وأبراج MK لجدران استنادية عملاقة بارتفاع 18 متراً.",
       "challenge_en": "High retaining forces in mountainous terrain with extreme thermal fluctuations from 5°C to 48°C.",
@@ -1175,7 +1175,7 @@ window.DB_SNAPSHOT = {
       "results_en": "Wall poured to exact millimeter line; zero remediations or grinding required.",
       "results_ar": "تحقيق استقامة تامة للجدار بدون الحاجة لأي معالجات لاحقة، وتسليم المشروع وفق الجدول المعتمد.",
       "key_metrics": "[{\"label\": \"Retaining Height\", \"value\": \"18 meters\"}, {\"label\": \"Hydrostatic Load\", \"value\": \"90 kN/m\\u00b2\"}, {\"label\": \"Wall Length\", \"value\": \"1.2 km\"}]",
-      "gallery": "[]",
+      "gallery": "[\"images/projects/qiddiya-retaining-complex.jpg\"]",
       "status": "PUBLISHED",
       "featured": 1,
       "display_order": 0,

@@ -393,6 +393,22 @@ let geometries = (typeof window !== 'undefined' && window.DB_SNAPSHOT && Array.i
 async function loadAdminOverrides() {
   if (!window.DB_SNAPSHOT) return;
 
+  // 0. Sanitize and purge corrupted / empty localStorage entries
+  const storageKeys = ['sm_products_override', 'sm_geometries_override', 'sm_projects_override', 'sm_processes_override', 'sm_assembly_override'];
+  storageKeys.forEach(key => {
+    try {
+      const val = localStorage.getItem(key);
+      if (val) {
+        const parsed = JSON.parse(val);
+        if (!Array.isArray(parsed) || parsed.length === 0 || !parsed[0] || typeof parsed[0] !== 'object') {
+          localStorage.removeItem(key);
+        }
+      }
+    } catch(e) {
+      localStorage.removeItem(key);
+    }
+  });
+
   // Clear legacy invalid hero video override if present
   if (localStorage.getItem('sm_hero_override')) {
     try {
@@ -409,7 +425,7 @@ async function loadAdminOverrides() {
     if (res.ok) {
       const json = await res.json();
       const live = Array.isArray(json) ? json : (json && Array.isArray(json.data) ? json.data : null);
-      if (live && live.length > 0) {
+      if (live && live.length > 0 && live[0].slug && live[0].name_en) {
         window.DB_SNAPSHOT.products = live;
         renderProducts();
       }
@@ -418,57 +434,75 @@ async function loadAdminOverrides() {
     // Offline / static snapshot fallback
   }
 
-  // 2. Products Override (only if valid non-empty array)
+  // 2. Products Override (only if valid non-empty array with required fields)
   if (localStorage.getItem('sm_products_override')) {
     try {
       const p = JSON.parse(localStorage.getItem('sm_products_override'));
-      if (Array.isArray(p) && p.length > 0) {
+      if (Array.isArray(p) && p.length > 0 && p[0].sku && (p[0].name_en || p[0].slug)) {
         window.DB_SNAPSHOT.products = p;
         renderProducts();
+      } else {
+        localStorage.removeItem('sm_products_override');
       }
-    } catch(e) {}
+    } catch(e) {
+      localStorage.removeItem('sm_products_override');
+    }
   }
 
   // 3. Geometries Override
   if (localStorage.getItem('sm_geometries_override')) {
     try {
       const g = JSON.parse(localStorage.getItem('sm_geometries_override'));
-      if (Array.isArray(g) && g.length > 0) {
+      if (Array.isArray(g) && g.length > 0 && g[0].id && g[0].name_en) {
         geometries = g;
         renderGeometry();
+      } else {
+        localStorage.removeItem('sm_geometries_override');
       }
-    } catch(e) {}
+    } catch(e) {
+      localStorage.removeItem('sm_geometries_override');
+    }
   }
 
   // 4. Projects Override
   if (localStorage.getItem('sm_projects_override')) {
     try {
       const prjs = JSON.parse(localStorage.getItem('sm_projects_override'));
-      if (Array.isArray(prjs) && prjs.length > 0) {
+      if (Array.isArray(prjs) && prjs.length > 0 && prjs[0].id && prjs[0].name_en) {
         window.DB_SNAPSHOT.projects = prjs;
         renderProjects();
+      } else {
+        localStorage.removeItem('sm_projects_override');
       }
-    } catch(e) {}
+    } catch(e) {
+      localStorage.removeItem('sm_projects_override');
+    }
   }
 
   // 5. Processes Override
   if (localStorage.getItem('sm_processes_override')) {
     try {
       const procs = JSON.parse(localStorage.getItem('sm_processes_override'));
-      if (Array.isArray(procs) && procs.length > 0) {
+      if (Array.isArray(procs) && procs.length > 0 && procs[0].id && procs[0].name_en) {
         window.DB_SNAPSHOT.processes = procs;
         renderManufacturing();
+      } else {
+        localStorage.removeItem('sm_processes_override');
       }
-    } catch(e) {}
+    } catch(e) {
+      localStorage.removeItem('sm_processes_override');
+    }
   }
 
   // 6. Site Settings Override
   if (localStorage.getItem('sm_site_override')) {
     try {
       const s = JSON.parse(localStorage.getItem('sm_site_override'));
-      window.DB_SNAPSHOT.site = Object.assign({}, window.DB_SNAPSHOT.site, s);
-      if (s.phone) {
-        document.querySelectorAll('a[href^="tel:"]').forEach(a => a.href = `tel:${s.phone}`);
+      if (s && typeof s === 'object') {
+        window.DB_SNAPSHOT.site = Object.assign({}, window.DB_SNAPSHOT.site, s);
+        if (s.phone) {
+          document.querySelectorAll('a[href^="tel:"]').forEach(a => a.href = `tel:${s.phone}`);
+        }
       }
     } catch(e) {}
   }
@@ -477,36 +511,47 @@ async function loadAdminOverrides() {
   if (localStorage.getItem('sm_hero_override')) {
     try {
       const h = JSON.parse(localStorage.getItem('sm_hero_override'));
-      if (h.video_url && document.getElementById('heroVideoSource')) {
-        const srcEl = document.getElementById('heroVideoSource');
-        srcEl.src = h.video_url;
-        const v = document.getElementById('heroVideo');
-        if (v) v.load();
+      if (h && typeof h === 'object') {
+        if (h.video_url && document.getElementById('heroVideoSource')) {
+          const srcEl = document.getElementById('heroVideoSource');
+          srcEl.src = h.video_url;
+          const v = document.getElementById('heroVideo');
+          if (v) v.load();
+        }
+        if (h.poster_url && document.getElementById('heroPosterBg')) {
+          document.getElementById('heroPosterBg').style.backgroundImage = `url('${h.poster_url}')`;
+        }
+        if (h.title_en) i18n.en.hero_title = h.title_en;
+        if (h.title_ar) i18n.ar.hero_title = h.title_ar;
+        if (h.subcopy_en) i18n.en.hero_subcopy = h.subcopy_en;
+        if (h.subcopy_ar) i18n.ar.hero_subcopy = h.subcopy_ar;
       }
-      if (h.poster_url && document.getElementById('heroPosterBg')) {
-        document.getElementById('heroPosterBg').style.backgroundImage = `url('${h.poster_url}')`;
-      }
-      if (h.title_en) i18n.en.hero_title = h.title_en;
-      if (h.title_ar) i18n.ar.hero_title = h.title_ar;
-      if (h.subcopy_en) i18n.en.hero_subcopy = h.subcopy_en;
-      if (h.subcopy_ar) i18n.ar.hero_subcopy = h.subcopy_ar;
     } catch(e) {}
   }
 
-  // 8. Sections Visibility Override (Core showcase, geometry, and assembly are always protected)
+  // 8. Sections Visibility Override (Core showcase, geometry, and assembly are ALWAYS guaranteed visible)
+  const coreProtectedSections = ['systems-matrix', 'geometry-section', 'assembly-section', 'services-section', 'manufacturing-section', 'projects-section', 'hero-section'];
+  coreProtectedSections.forEach(secId => {
+    const el = document.getElementById(secId);
+    if (el) el.style.display = '';
+  });
+
   if (localStorage.getItem('sm_sections_override')) {
     try {
       const secList = JSON.parse(localStorage.getItem('sm_sections_override'));
-      secList.forEach(s => {
-        const el = document.getElementById(s.id);
-        if (el) {
-          if (['systems-matrix', 'geometry-section', 'assembly-section'].includes(s.id)) {
-            el.style.display = '';
-          } else {
-            el.style.display = (s.visible === false) ? 'none' : '';
+      if (Array.isArray(secList)) {
+        secList.forEach(s => {
+          if (!s || !s.id) return;
+          const el = document.getElementById(s.id);
+          if (el) {
+            if (coreProtectedSections.includes(s.id)) {
+              el.style.display = '';
+            } else {
+              el.style.display = (s.visible === false) ? 'none' : '';
+            }
           }
-        }
-      });
+        });
+      }
     } catch(e) {}
   }
 }
@@ -1595,10 +1640,13 @@ function renderGeometry() {
 
   const isAr = (currentLang === 'ar');
   const dict = i18n[currentLang] || i18n.en;
-  const list = (Array.isArray(geometries) && geometries.length > 0)
+  let list = (Array.isArray(geometries) && geometries.length > 0)
     ? geometries
     : ((window.DB_SNAPSHOT && Array.isArray(window.DB_SNAPSHOT.geometries) && window.DB_SNAPSHOT.geometries.length > 0) ? window.DB_SNAPSHOT.geometries : []);
 
+  if (list.length === 0 && window.DB_SNAPSHOT && window.DB_SNAPSHOT.geometries) {
+    list = window.DB_SNAPSHOT.geometries;
+  }
   if (list.length === 0) return;
   if (activeGeomIndex >= list.length) activeGeomIndex = 0;
 
@@ -1618,7 +1666,7 @@ function renderGeometry() {
   track.innerHTML = list.map((g, idx) => {
     const gTitle = (isAr ? g.title_ar : (g.title_en || '')).replace(/['"]/g, '');
     return `
-      <div class="w-full shrink-0 p-6 sm:p-8" data-geom-index="${idx}">
+      <div class="w-full min-w-full shrink-0 p-6 sm:p-8" data-geom-index="${idx}">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           <!-- Left Column: Visual Representation & Engineering Tag -->
           <div class="lg:col-span-6 relative rounded-xl overflow-hidden bg-charcoal min-h-[280px] sm:min-h-[340px] flex flex-col justify-between p-5 group border border-divider-color shadow-inner">
@@ -1767,7 +1815,7 @@ function renderAssemblyStep() {
   track.innerHTML = db.assembly.map((s, idx) => {
     const sTitle = (isAr ? s.title_ar : (s.title_en || '')).replace(/['"]/g, '');
     return `
-      <div class="w-full shrink-0" data-assembly-step="${idx}">
+      <div class="w-full min-w-full shrink-0" data-assembly-step="${idx}">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           <div class="lg:col-span-6 relative rounded-2xl overflow-hidden min-h-[300px] sm:min-h-[340px] flex flex-col justify-between p-6 sm:p-8 text-white border border-divider-color shadow-sm group bg-charcoal">
