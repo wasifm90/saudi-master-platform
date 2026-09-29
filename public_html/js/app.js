@@ -98,7 +98,11 @@ const i18n = {
     product_gallery_title: "Project & Application Gallery",
     related_products_title: "Complementary Systems",
     enquiry_box_title: "Need this system for your project?",
-    enquiry_box_desc: "Speak directly with our Chief Structural Engineer in Riyadh for custom CAD drawings, FEA calculations, and project supply schedules."
+    enquiry_box_desc: "Speak directly with our Chief Structural Engineer in Riyadh for custom CAD drawings, FEA calculations, and project supply schedules.",
+    pillar_systems: "SYSTEMS ARCHITECTURE & APPLICATION",
+    pillar_geometry: "GEOMETRY & DIMENSIONAL SPECIFICATIONS",
+    pillar_assembly: "ASSEMBLY IN MOTION & SITE PROTOCOL",
+    view_product_specs: "VIEW PRODUCT SPECIFICATION"
   },
   ar: {
     nav_systems: "الأنظمة الهندسية",
@@ -186,7 +190,11 @@ const i18n = {
     product_gallery_title: "معرض الصور والتطبيقات الميدانية",
     related_products_title: "أنظمة هندسية مكملة",
     enquiry_box_title: "هل تحتاج هذا النظام لمشروعك القادم؟",
-    enquiry_box_desc: "تواصل مباشرة مع كبير المهندسين بالرياض للحصول على مخططات CAD تفصيلية، وحسابات الإجهاد FEA، وتأكيد التوريد."
+    enquiry_box_desc: "تواصل مباشرة مع كبير المهندسين بالرياض للحصول على مخططات CAD تفصيلية، وحسابات الإجهاد FEA، وتأكيد التوريد.",
+    pillar_systems: "هندسة النظام والتطبيق الميداني",
+    pillar_geometry: "المواصفات الهندسية والأبعاد",
+    pillar_assembly: "تسلسل التركيب وآلية التشغيل",
+    view_product_specs: "عرض المواصفات الفنية الكاملة"
   }
 };
 
@@ -512,14 +520,14 @@ async function loadAdminOverrides() {
     try {
       const h = JSON.parse(localStorage.getItem('sm_hero_override'));
       if (h && typeof h === 'object') {
+        const v = document.getElementById('heroVideo');
         if (h.video_url && document.getElementById('heroVideoSource')) {
           const srcEl = document.getElementById('heroVideoSource');
           srcEl.src = h.video_url;
-          const v = document.getElementById('heroVideo');
           if (v) v.load();
         }
-        if (h.poster_url && document.getElementById('heroPosterBg')) {
-          document.getElementById('heroPosterBg').style.backgroundImage = `url('${h.poster_url}')`;
+        if (h.poster_url && v) {
+          v.poster = h.poster_url;
         }
         if (h.title_en) i18n.en.hero_title = h.title_en;
         if (h.title_ar) i18n.ar.hero_title = h.title_ar;
@@ -724,6 +732,92 @@ function filterByCategory(cat) {
 function scrollProductsTrack(direction) {}
 function updateScrollProgress() {}
 
+function getProductPillars(p, isAr, dict) {
+  const isLocal = p.class_code === 'LOCAL';
+  const tagBg = isLocal ? 'bg-primary-gold text-white' : 'bg-ulma-orange text-white';
+  const classLabel = isLocal ? (isAr ? 'تصنيع محلي' : 'LOCAL MANUFACTURED') : (isAr ? 'أنظمة أوروبية' : 'EUROPEAN SYSTEMS');
+  const origin = isLocal ? (isAr ? 'تصنيع محلي بالرياض' : 'KSA Riyadh Yard') : (isAr ? 'هندسة أولما الأوروبية' : 'ULMA Europe');
+  const name = isAr ? p.name_ar : p.name_en;
+  const summary = isAr ? p.short_summary_ar : p.short_summary_en;
+  const tagline = isAr ? (p.tagline_ar || '') : (p.tagline_en || '');
+
+  // 1. SYSTEMS
+  const whatIsIt = isAr ? (p.what_is_it_ar || summary) : (p.what_is_it_en || summary);
+  const whatUsedFor = isAr ? (p.what_is_used_for_ar || '') : (p.what_is_used_for_en || '');
+
+  // 2. GEOMETRY
+  let specs = p.technical_specs || {};
+  if (typeof specs === 'string') {
+    try { specs = JSON.parse(specs); } catch(e) {}
+  }
+  const geomItems = [];
+  if (specs.tube_diameter || specs.dimensions || specs.panel_dimensions || specs.diameter_range) {
+    geomItems.push({
+      label: isAr ? 'الأبعاد / القطر' : 'Dimensions / Diameter',
+      val: specs.tube_diameter || specs.dimensions || specs.panel_dimensions || specs.diameter_range
+    });
+  }
+  if (specs.wall_thickness || specs.height_range || specs.thickness || specs.timber_profile) {
+    geomItems.push({
+      label: isAr ? 'السماكة / الارتفاع' : 'Thickness / Height',
+      val: specs.wall_thickness || specs.height_range || specs.thickness || specs.timber_profile
+    });
+  }
+  if (specs.node_capacity || specs.load_capacity || specs.max_pour_pressure || specs.permissible_load) {
+    geomItems.push({
+      label: isAr ? 'طاقة التحمل' : 'Load / Pour Rating',
+      val: specs.node_capacity || specs.load_capacity || specs.max_pour_pressure || specs.permissible_load
+    });
+  }
+  if (specs.steel_grade || specs.coating || specs.saso_norm || specs.certification) {
+    geomItems.push({
+      label: isAr ? 'المعيار والجلفنة' : 'Standard & Coating',
+      val: specs.saso_norm || specs.steel_grade || specs.coating || specs.certification || 'SASO 2874 / EN 12810'
+    });
+  }
+  if (geomItems.length < 2) {
+    geomItems.push({
+      label: isAr ? 'طاقة التحمل' : 'Working Load',
+      val: isLocal ? '58 kN / Node' : '80 kN/m²'
+    });
+  }
+  if (geomItems.length < 3) {
+    geomItems.push({
+      label: isAr ? 'المعيار المعتمد' : 'Compliance Standard',
+      val: isLocal ? 'SASO 2874 / BS 1139' : 'EN 12812 / EN 12810'
+    });
+  }
+  if (geomItems.length < 4) {
+    geomItems.push({
+      label: isAr ? 'درجة الفولاذ' : 'Steel Grade',
+      val: isLocal ? 'S355JR HDG' : 'High-Yield European Steel'
+    });
+  }
+
+  // 3. ASSEMBLY IN MOTION
+  const protocol = isAr 
+    ? (p.how_does_it_work_ar || 'تركيب معياري سريع بقفل إسفيني ودقة استقامة صارمة معتمدة من الدفاع المدني.')
+    : (p.how_does_it_work_en || 'Rapid modular connection sequence with tight tolerance alignment certified for heavy civil works.');
+  const rawComps = isAr ? (p.main_components_ar || []) : (p.main_components_en || []);
+  const components = Array.isArray(rawComps) ? rawComps.slice(0, 4) : [];
+
+  return {
+    isLocal,
+    tagBg,
+    classLabel,
+    origin,
+    name,
+    summary,
+    tagline,
+    whatIsIt,
+    whatUsedFor,
+    geomItems: geomItems.slice(0, 4),
+    protocol,
+    components,
+    tolerance: '< 1.5mm / 2m Plumb'
+  };
+}
+
 function renderProducts() {
   const container = document.getElementById('productShowcaseStage');
   if (!container || !window.DB_SNAPSHOT) return;
@@ -750,13 +844,7 @@ function renderProducts() {
 
   const total = list.length;
   const first = list[0] || {};
-  const firstIsLocal = first.class_code === 'LOCAL';
-  const firstTagBg = firstIsLocal ? 'bg-primary-gold text-white' : 'bg-ulma-orange text-white';
-  const firstOrigin = firstIsLocal ? (isAr ? 'تصنيع محلي بالرياض' : 'KSA Riyadh Yard') : (isAr ? 'هندسة أولما الأوروبية' : 'ULMA Europe');
-  const firstClassLabel = firstIsLocal ? (isAr ? 'تصنيع محلي' : 'LOCAL MANUFACTURED') : (isAr ? 'أنظمة أوروبية' : 'EUROPEAN SYSTEMS');
-  const firstAdvantages = isAr 
-    ? (Array.isArray(first.key_advantages_ar) ? first.key_advantages_ar : [])
-    : (Array.isArray(first.key_advantages_en) ? first.key_advantages_en : []);
+  const firstP = getProductPillars(first, isAr, dict);
 
   container.innerHTML = `
     <!-- SCROLL-DRIVEN SHOWCASE ENGINE -->
@@ -766,10 +854,10 @@ function renderProducts() {
       <div class="hidden lg:flex items-start gap-10 xl:gap-14 relative">
         
         <!-- Left Sticky Narrative Column (stays pinned while chapters scroll naturally) -->
-        <div class="w-[40%] xl:w-[38%] shrink-0 sticky top-28 h-[calc(100vh-8.5rem)] flex flex-col justify-between py-4 pr-6 rtl:pr-0 rtl:pl-6 border-r rtl:border-r-0 rtl:border-l border-divider-color/60">
+        <div class="w-[42%] xl:w-[40%] shrink-0 sticky top-28 h-[calc(100vh-8.5rem)] flex flex-col justify-between py-2 pr-6 rtl:pr-0 rtl:pl-6 border-r rtl:border-r-0 rtl:border-l border-divider-color/60 overflow-y-auto no-scrollbar">
           
           <!-- Top Counter & Understated Progress Indicator -->
-          <div class="flex items-center justify-between pb-4 border-b border-divider-color">
+          <div class="flex items-center justify-between pb-3 border-b border-divider-color shrink-0">
             <div class="flex items-center gap-3">
               <span id="showcaseCounter" class="font-mono text-base font-bold text-primary-gold tracking-widest">
                 01 / ${String(total).padStart(2, '0')}
@@ -785,100 +873,134 @@ function renderProducts() {
           </div>
 
           <!-- Active Narrative Card (Updated via IntersectionObserver with smooth transition) -->
-          <div id="activeNarrativeCard" class="my-auto flex flex-col gap-4 transition-all duration-300">
+          <div id="activeNarrativeCard" class="my-auto flex flex-col gap-3 transition-all duration-300 py-2">
             <!-- Classification, SKU & Origin -->
             <div class="flex items-center gap-2 flex-wrap">
-              <span id="activeClassBadge" class="px-2.5 py-1 rounded text-[11px] font-display font-bold uppercase tracking-wider ${firstTagBg} shadow-xs">
-                ${firstClassLabel}
+              <span id="activeClassBadge" class="px-2.5 py-0.5 rounded text-[11px] font-display font-bold uppercase tracking-wider ${firstP.tagBg} shadow-xs">
+                ${firstP.classLabel}
               </span>
               <span id="activeSkuBadge" class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-desert-ivory text-charcoal border border-divider-color">
                 ${first.sku || ''}
               </span>
               <span id="activeOriginLabel" class="text-xs font-display text-muted-brown font-semibold flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-primary-gold"></span>
-                <span>${firstOrigin}</span>
+                <span>${firstP.origin}</span>
               </span>
             </div>
 
-            <!-- System Title -->
-            <h3 id="activeTitle" class="text-2xl xl:text-3xl font-display font-bold text-charcoal uppercase leading-tight tracking-tight hover:text-primary-gold transition-colors cursor-pointer" onclick="navigateToProduct('${first.slug}')">
-              ${isAr ? first.name_ar : first.name_en}
-            </h3>
-
-            <!-- Tagline / Subtitle -->
-            <p id="activeTagline" class="text-xs font-display text-secondary-earth font-bold uppercase tracking-wider">
-              ${isAr ? (first.tagline_ar || '') : (first.tagline_en || '')}
-            </p>
+            <!-- System Title & Tagline -->
+            <div>
+              <h3 id="activeTitle" class="text-2xl xl:text-3xl font-display font-bold text-charcoal uppercase leading-tight tracking-tight hover:text-primary-gold transition-colors cursor-pointer" onclick="navigateToProduct('${first.slug}')">
+                ${firstP.name}
+              </h3>
+              <p id="activeTagline" class="text-xs font-display text-secondary-earth font-bold uppercase tracking-wider mt-0.5">
+                ${firstP.tagline}
+              </p>
+            </div>
 
             <!-- Short Summary -->
-            <p id="activeSummary" class="text-xs sm:text-sm text-muted-brown font-body leading-relaxed line-clamp-3">
-              ${isAr ? first.short_summary_ar : first.short_summary_en}
+            <p id="activeSummary" class="text-xs text-muted-brown font-body leading-relaxed line-clamp-2">
+              ${firstP.summary}
             </p>
 
-            <!-- Key Engineering Attributes -->
-            <div class="pt-2 border-t border-divider-color/60">
-              <span class="text-[10px] font-display font-bold uppercase tracking-widest text-secondary-earth block mb-2">
-                ${dict.tech_highlights || (isAr ? 'أبرز المواصفات الهندسية' : 'KEY ENGINEERING ATTRIBUTES')}
-              </span>
-              <ul id="activeHighlights" class="space-y-1.5">
-                ${firstAdvantages.slice(0, 3).map(adv => `
-                  <li class="flex items-start gap-2 text-xs text-charcoal">
-                    <span class="material-symbols-outlined text-sm text-primary-gold shrink-0 mt-0.5">verified</span>
-                    <span class="leading-tight font-medium">${adv}</span>
-                  </li>
+            <!-- 1. SYSTEMS PILLAR -->
+            <div class="p-3 bg-desert-ivory/70 rounded-xl border border-divider-color flex flex-col gap-1">
+              <div class="flex items-center gap-1.5 text-[11px] font-display font-bold uppercase tracking-wider text-charcoal">
+                <span class="material-symbols-outlined text-sm text-primary-gold">account_tree</span>
+                <span>${dict.pillar_systems}</span>
+              </div>
+              <p id="activeSystemsInfo" class="text-xs text-charcoal font-medium leading-snug">
+                ${firstP.whatIsIt}
+              </p>
+            </div>
+
+            <!-- 2. GEOMETRY PILLAR -->
+            <div class="p-3 bg-card-surface rounded-xl border border-divider-color flex flex-col gap-1.5">
+              <div class="flex items-center justify-between text-[11px] font-display font-bold uppercase tracking-wider text-charcoal">
+                <div class="flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-sm text-primary-gold">straighten</span>
+                  <span>${dict.pillar_geometry}</span>
+                </div>
+                <span class="text-[10px] font-mono text-muted-brown">SASO 2874</span>
+              </div>
+              <div id="activeGeometrySpecs" class="grid grid-cols-2 gap-1.5 text-xs">
+                ${firstP.geomItems.map(g => `
+                  <div class="p-1.5 bg-desert-ivory/50 rounded border border-divider-color/40">
+                    <span class="block text-[9px] uppercase font-display text-muted-brown">${g.label}</span>
+                    <strong class="font-display font-bold text-xs text-charcoal">${g.val}</strong>
+                  </div>
                 `).join('')}
-              </ul>
+              </div>
+            </div>
+
+            <!-- 3. ASSEMBLY IN MOTION PILLAR -->
+            <div class="p-3 bg-desert-ivory/70 rounded-xl border border-divider-color flex flex-col gap-1.5">
+              <div class="flex items-center justify-between text-[11px] font-display font-bold uppercase tracking-wider text-charcoal">
+                <div class="flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-sm text-ulma-orange animate-spin" style="animation-duration: 6s;">sync</span>
+                  <span>${dict.pillar_assembly}</span>
+                </div>
+                <span class="text-[10px] font-mono font-bold text-primary-gold">&lt; 1.5mm / 2m Plumb</span>
+              </div>
+              <p id="activeAssemblyProtocol" class="text-xs text-muted-brown leading-snug font-body line-clamp-2">
+                ${firstP.protocol}
+              </p>
+              <div id="activeAssemblyComponents" class="flex flex-wrap gap-1 mt-0.5">
+                ${firstP.components.map(c => `
+                  <span class="px-2 py-0.5 bg-card-surface border border-divider-color rounded text-[10px] font-display text-charcoal font-semibold">${c}</span>
+                `).join('')}
+              </div>
             </div>
 
             <!-- Prominent View Product CTA Button -->
-            <div class="pt-3">
-              <a id="activeViewBtn" href="/products/${first.slug}" onclick="handleProductCtaClick(event, '${first.slug}')" class="inline-flex items-center gap-2.5 px-6 py-3.5 bg-charcoal hover:bg-primary-gold text-white font-display text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md group">
-                <span>${dict.view_product_specs || (isAr ? 'عرض المواصفات الفنية الكاملة' : 'VIEW PRODUCT SPECIFICATION')}</span>
+            <div class="pt-1 flex items-center gap-2">
+              <a id="activeViewBtn" href="/products/${first.slug}" onclick="handleProductCtaClick(event, '${first.slug}')" class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-charcoal hover:bg-primary-gold text-white font-display text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md group">
+                <span>${dict.view_product_specs}</span>
                 <span class="material-symbols-outlined text-sm group-hover:translate-x-1.5 rtl:group-hover:-translate-x-1.5 transition-transform">arrow_forward</span>
               </a>
+              <button onclick="prefillRfq('${first.name_en.replace(/'/g, "\\'")}')" class="p-3 bg-desert-ivory hover:bg-soft-sand text-charcoal border border-divider-color rounded-xl font-display text-xs font-bold uppercase transition-colors shrink-0" title="${dict.quote_btn}">
+                <span class="material-symbols-outlined text-base text-primary-gold">request_quote</span>
+              </button>
             </div>
           </div>
 
           <!-- Bottom Natural Scroll Guidance Hint -->
-          <div class="flex items-center gap-2 text-[11px] font-display text-muted-brown uppercase tracking-wider pt-3 border-t border-divider-color">
+          <div class="flex items-center gap-2 text-[11px] font-display text-muted-brown uppercase tracking-wider pt-2 border-t border-divider-color shrink-0">
             <span class="material-symbols-outlined text-sm animate-bounce text-primary-gold">south</span>
             <span>${dict.scroll_to_discover || (isAr ? 'مرر للأسفل لاكتشاف بقية الأنظمة' : 'SCROLL TO DISCOVER SYSTEMS')}</span>
           </div>
 
         </div>
 
-        <!-- Right Continuous Scroll Chapters (60% width, natural browser scrolling) -->
-        <div class="w-[60%] xl:w-[62%] flex flex-col gap-12" id="desktopShowcaseChapters">
+        <!-- Right Continuous Scroll Chapters (58% width, natural browser scrolling) -->
+        <div class="w-[58%] xl:w-[60%] flex flex-col gap-14" id="desktopShowcaseChapters">
           ${list.map((p, idx) => {
-            const isLocal = p.class_code === 'LOCAL';
-            const tagBg = isLocal ? 'bg-primary-gold text-white' : 'bg-ulma-orange text-white';
-            const name = isAr ? p.name_ar : p.name_en;
+            const pl = getProductPillars(p, isAr, dict);
             const terms = (p.sales_available && p.rental_available) ? dict.sales_and_rental : dict.sales_only;
-            const origin = isLocal ? (isAr ? 'تصنيع محلي بالرياض' : 'KSA Riyadh Yard') : (isAr ? 'هندسة أولما الأوروبية' : 'ULMA Europe');
             const imgSrc = p.main_image || p.hero_image;
             const padIndex = String(idx + 1).padStart(2, '0');
 
             return `
               <!-- Product Chapter ${padIndex} -->
               <div 
-                class="desktop-scroll-chapter min-h-[85vh] flex flex-col justify-center py-6"
+                class="desktop-scroll-chapter min-h-[85vh] flex flex-col justify-center py-4"
                 data-product-index="${idx}"
                 data-product-slug="${p.slug}"
               >
                 <!-- Large Visual Photographic Card (~60-70% visual area) -->
                 <div 
                   onclick="navigateToProduct('${p.slug}')"
-                  class="relative h-[68vh] xl:h-[72vh] rounded-2xl overflow-hidden bg-charcoal border border-divider-color shadow-2xl group cursor-pointer"
+                  class="relative h-[62vh] xl:h-[66vh] rounded-2xl overflow-hidden bg-charcoal border border-divider-color shadow-2xl group cursor-pointer"
                 >
                   <img 
                     src="${imgSrc}" 
-                    alt="${name}" 
+                    alt="${pl.name}" 
                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100"
-                    onerror="handleImageFallback(this, '${p.sku}', '${p.cat_slug}', '${name.replace(/'/g, "\\'")}')"
+                    onerror="handleImageFallback(this, '${p.sku}', '${p.cat_slug}', '${pl.name.replace(/'/g, "\\'")}')"
                     loading="lazy" decoding="async"
                   />
                   <!-- Cinematic Dark Vignette Overlay -->
-                  <div class="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/30 to-black/35 pointer-events-none"></div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/25 to-black/35 pointer-events-none"></div>
 
                   <!-- Technical HUD Crosshairs -->
                   <div class="absolute top-3 left-3 text-xs font-mono text-primary-gold/70 pointer-events-none z-10 leading-none">┌</div>
@@ -892,7 +1014,7 @@ function renderProducts() {
                       ${padIndex} / ${String(total).padStart(2, '0')}
                     </span>
                     <div class="flex items-center gap-2">
-                      <span class="px-2.5 py-1 rounded-md text-[11px] font-display font-bold uppercase tracking-wider ${tagBg} shadow-xs">
+                      <span class="px-2.5 py-1 rounded-md text-[11px] font-display font-bold uppercase tracking-wider ${pl.tagBg} shadow-xs">
                         ${p.sku}
                       </span>
                       <span class="px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white text-[11px] font-display uppercase tracking-wider font-semibold border border-white/15">
@@ -906,12 +1028,12 @@ function renderProducts() {
                     <div>
                       <div class="flex items-center gap-2 text-[11px] font-display text-primary-gold uppercase tracking-wider font-bold drop-shadow-xs mb-1">
                         <span class="w-1.5 h-1.5 rounded-full bg-primary-gold animate-pulse"></span>
-                        <span>${origin}</span>
+                        <span>${pl.origin}</span>
                         <span class="text-white/40">•</span>
                         <span class="text-white/80 font-mono">SASO / EN 12810</span>
                       </div>
                       <h4 class="text-xl sm:text-2xl font-display font-bold text-white uppercase drop-shadow-md">
-                        ${name}
+                        ${pl.name}
                       </h4>
                     </div>
 
@@ -921,12 +1043,50 @@ function renderProducts() {
                         onclick="event.stopPropagation(); navigateToProduct('${p.slug}')"
                         class="px-4 py-2.5 bg-white/15 hover:bg-primary-gold text-white font-display text-xs font-bold uppercase tracking-wider rounded-lg backdrop-blur-md border border-white/20 transition-all flex items-center gap-2 shadow-lg group-hover:bg-primary-gold"
                       >
-                        <span>${dict.inspect_system || (isAr ? 'معاينة النظام' : 'Inspect System')}</span>
+                        <span>${dict.view_product_specs}</span>
                         <span class="material-symbols-outlined text-sm">arrow_forward</span>
                       </button>
                     </div>
                   </div>
                 </div>
+
+                <!-- Structured Technical Tray Directly Below Photo (SYSTEMS, GEOMETRY, ASSEMBLY IN MOTION) -->
+                <div class="mt-3 bg-card-surface border border-divider-color rounded-xl p-4 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <!-- Systems Pillar -->
+                  <div class="flex flex-col gap-1 border-b md:border-b-0 md:border-r rtl:md:border-r-0 rtl:md:border-l border-divider-color/60 pb-2 md:pb-0 pr-0 md:pr-3 rtl:md:pr-0 rtl:md:pl-3">
+                    <span class="text-[10px] font-display font-bold uppercase text-primary-gold flex items-center gap-1">
+                      <span class="material-symbols-outlined text-xs">account_tree</span>
+                      <span>SYSTEMS</span>
+                    </span>
+                    <p class="text-xs text-charcoal font-medium leading-snug line-clamp-2">${pl.whatIsIt}</p>
+                  </div>
+                  <!-- Geometry Pillar -->
+                  <div class="flex flex-col gap-1 border-b md:border-b-0 md:border-r rtl:md:border-r-0 rtl:md:border-l border-divider-color/60 pb-2 md:pb-0 pr-0 md:pr-3 rtl:md:pr-0 rtl:md:pl-3">
+                    <span class="text-[10px] font-display font-bold uppercase text-primary-gold flex items-center gap-1">
+                      <span class="material-symbols-outlined text-xs">straighten</span>
+                      <span>GEOMETRY</span>
+                    </span>
+                    <span class="text-xs font-mono font-bold text-charcoal">${pl.geomItems[0] ? pl.geomItems[0].val : 'Ø48.3mm'}</span>
+                    <span class="text-[10px] text-muted-brown">${pl.geomItems[1] ? pl.geomItems[1].val : '58 kN Load'}</span>
+                  </div>
+                  <!-- Assembly in Motion Pillar -->
+                  <div class="flex flex-col justify-between">
+                    <div>
+                      <span class="text-[10px] font-display font-bold uppercase text-ulma-orange flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">sync</span>
+                        <span>ASSEMBLY IN MOTION</span>
+                      </span>
+                      <p class="text-xs text-muted-brown leading-snug line-clamp-2 mt-0.5">${pl.protocol}</p>
+                    </div>
+                    <div class="pt-1">
+                      <a href="/products/${p.slug}" onclick="handleProductCtaClick(event, '${p.slug}')" class="text-[11px] font-display font-bold uppercase text-charcoal hover:text-primary-gold flex items-center gap-1">
+                        <span>${dict.view_product_specs}</span>
+                        <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             `;
           }).join('')}
@@ -937,18 +1097,10 @@ function renderProducts() {
       <!-- Mobile Natural Touch Scrolling Chapter Cards (Hidden on Desktop >= lg) -->
       <div class="flex flex-col gap-8 lg:hidden" id="mobileShowcaseChapters">
         ${list.map((p, idx) => {
-          const isLocal = p.class_code === 'LOCAL';
-          const tagBg = isLocal ? 'bg-primary-gold text-white' : 'bg-ulma-orange text-white';
-          const name = isAr ? p.name_ar : p.name_en;
-          const summary = isAr ? p.short_summary_ar : p.short_summary_en;
+          const pl = getProductPillars(p, isAr, dict);
           const terms = (p.sales_available && p.rental_available) ? dict.sales_and_rental : dict.sales_only;
-          const origin = isLocal ? (isAr ? 'تصنيع محلي بالرياض' : 'KSA Riyadh Yard') : (isAr ? 'هندسة أولما الأوروبية' : 'ULMA Europe');
-          const classLabel = isLocal ? (isAr ? 'تصنيع محلي' : 'LOCAL MANUFACTURED') : (isAr ? 'أنظمة أوروبية' : 'EUROPEAN SYSTEMS');
           const imgSrc = p.main_image || p.hero_image;
           const padIndex = String(idx + 1).padStart(2, '0');
-          const advantages = isAr 
-            ? (Array.isArray(p.key_advantages_ar) ? p.key_advantages_ar : []) 
-            : (Array.isArray(p.key_advantages_en) ? p.key_advantages_en : []);
 
           return `
             <article class="bg-card-surface border border-divider-color rounded-2xl overflow-hidden shadow-md flex flex-col">
@@ -957,21 +1109,18 @@ function renderProducts() {
                 <span class="font-mono text-xs font-bold text-primary-gold tracking-widest">
                   ${padIndex} / ${String(total).padStart(2, '0')}
                 </span>
-                <span class="px-2.5 py-0.5 rounded text-[10px] font-display font-bold uppercase tracking-wider ${tagBg}">
-                  ${classLabel}
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-display font-bold uppercase tracking-wider ${pl.tagBg}">
+                  ${pl.classLabel}
                 </span>
               </div>
 
-              <!-- Large Visual Photograph -->
-              <div 
-                onclick="navigateToProduct('${p.slug}')"
-                class="relative h-64 sm:h-72 w-full overflow-hidden bg-charcoal cursor-pointer group"
-              >
+              <!-- Photographic Card -->
+              <div class="relative h-64 w-full overflow-hidden bg-charcoal cursor-pointer" onclick="navigateToProduct('${p.slug}')">
                 <img 
                   src="${imgSrc}" 
-                  alt="${name}" 
-                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                  onerror="handleImageFallback(this, '${p.sku}', '${p.cat_slug}', '${name.replace(/'/g, "\\'")}')"
+                  alt="${pl.name}" 
+                  class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                  onerror="handleImageFallback(this, '${p.sku}', '${p.cat_slug}', '${pl.name.replace(/'/g, "\\'")}')"
                   loading="lazy" decoding="async"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/20 to-black/30 pointer-events-none"></div>
@@ -990,51 +1139,83 @@ function renderProducts() {
                 <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white pointer-events-none">
                   <span class="text-[11px] font-display font-bold uppercase text-primary-gold flex items-center gap-1">
                     <span class="w-1.5 h-1.5 rounded-full bg-primary-gold"></span>
-                    <span>${origin}</span>
+                    <span>${pl.origin}</span>
                   </span>
                   <span class="text-[10px] font-display bg-white/20 backdrop-blur-xs px-2.5 py-0.5 rounded text-white font-medium">
-                    ${dict.inspect_system || (isAr ? 'معاينة' : 'Inspect')}
+                    ${dict.view_product_specs}
                   </span>
                 </div>
               </div>
 
-              <!-- Chapter Content -->
+              <!-- Chapter Content with 3 Pillars -->
               <div class="p-5 flex flex-col gap-3.5">
                 <div>
                   <h3 
                     onclick="navigateToProduct('${p.slug}')"
                     class="text-lg font-display font-bold text-charcoal uppercase leading-snug hover:text-primary-gold transition-colors cursor-pointer"
                   >
-                    ${name}
+                    ${pl.name}
                   </h3>
                   <p class="text-xs text-muted-brown font-body leading-relaxed mt-1 line-clamp-2">
-                    ${summary}
+                    ${pl.summary}
                   </p>
                 </div>
 
-                <!-- Mini Advantages -->
-                <ul class="space-y-1 text-xs text-charcoal">
-                  ${advantages.slice(0, 2).map(adv => `
-                    <li class="flex items-center gap-1.5">
-                      <span class="material-symbols-outlined text-sm text-primary-gold shrink-0">verified</span>
-                      <span class="line-clamp-1">${adv}</span>
-                    </li>
-                  `).join('')}
-                </ul>
+                <!-- 1. Systems Pillar -->
+                <div class="p-3 bg-desert-ivory/70 rounded-xl border border-divider-color flex flex-col gap-1">
+                  <span class="text-[10px] font-display font-bold uppercase text-primary-gold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">account_tree</span>
+                    <span>${dict.pillar_systems}</span>
+                  </span>
+                  <p class="text-xs text-charcoal font-medium leading-snug">${pl.whatIsIt}</p>
+                </div>
+
+                <!-- 2. Geometry Pillar -->
+                <div class="p-3 bg-card-surface rounded-xl border border-divider-color flex flex-col gap-1.5">
+                  <span class="text-[10px] font-display font-bold uppercase text-primary-gold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">straighten</span>
+                    <span>${dict.pillar_geometry}</span>
+                  </span>
+                  <div class="grid grid-cols-2 gap-1.5 text-xs">
+                    ${pl.geomItems.map(g => `
+                      <div class="p-1.5 bg-desert-ivory/50 rounded border border-divider-color/40">
+                        <span class="block text-[9px] uppercase font-display text-muted-brown">${g.label}</span>
+                        <strong class="font-display font-bold text-xs text-charcoal">${g.val}</strong>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+
+                <!-- 3. Assembly in Motion Pillar -->
+                <div class="p-3 bg-desert-ivory/70 rounded-xl border border-divider-color flex flex-col gap-1">
+                  <div class="flex items-center justify-between text-[10px] font-display font-bold uppercase text-ulma-orange">
+                    <span class="flex items-center gap-1">
+                      <span class="material-symbols-outlined text-xs">sync</span>
+                      <span>${dict.pillar_assembly}</span>
+                    </span>
+                    <span class="font-mono text-primary-gold">&lt; 1.5mm / 2m</span>
+                  </div>
+                  <p class="text-xs text-muted-brown leading-snug font-body">${pl.protocol}</p>
+                  <div class="flex flex-wrap gap-1 mt-1">
+                    ${pl.components.map(c => `
+                      <span class="px-2 py-0.5 bg-card-surface border border-divider-color rounded text-[10px] font-display text-charcoal font-semibold">${c}</span>
+                    `).join('')}
+                  </div>
+                </div>
 
                 <!-- Action Button -->
                 <div class="pt-2 border-t border-divider-color flex items-center gap-2">
                   <a 
                     href="/products/${p.slug}"
                     onclick="handleProductCtaClick(event, '${p.slug}')"
-                    class="flex-1 py-2.5 px-4 bg-charcoal text-white rounded-lg font-display text-xs font-bold uppercase tracking-wider hover:bg-primary-gold transition-colors flex items-center justify-center gap-2 shadow-xs"
+                    class="flex-1 py-3 px-4 bg-charcoal text-white rounded-lg font-display text-xs font-bold uppercase tracking-wider hover:bg-primary-gold transition-colors flex items-center justify-center gap-2 shadow-xs"
                   >
-                    <span>${dict.view_details || (isAr ? 'تفاصيل النظام' : 'View Specifications')}</span>
+                    <span>${dict.view_product_specs}</span>
                     <span class="material-symbols-outlined text-sm">arrow_forward</span>
                   </a>
                   <button 
-                    onclick="prefillRfq('${name.replace(/'/g, "\\'")}')"
-                    class="py-2.5 px-3 bg-desert-ivory text-charcoal border border-divider-color rounded-lg font-display text-xs font-bold uppercase hover:bg-soft-sand transition-colors shrink-0"
+                    onclick="prefillRfq('${pl.name.replace(/'/g, "\\'")}')"
+                    class="py-3 px-3.5 bg-desert-ivory text-charcoal border border-divider-color rounded-lg font-display text-xs font-bold uppercase hover:bg-soft-sand transition-colors shrink-0"
                     title="${dict.quote_btn}"
                   >
                     <span class="material-symbols-outlined text-sm text-primary-gold">request_quote</span>
@@ -1097,18 +1278,9 @@ function updateActiveNarrative(idx) {
 
   const p = list[idx];
   const isAr = (currentLang === 'ar');
-  const dict = i18n[currentLang];
+  const dict = i18n[currentLang] || i18n.en;
   const total = list.length;
-  const isLocal = p.class_code === 'LOCAL';
-  const tagBg = isLocal ? 'bg-primary-gold text-white' : 'bg-ulma-orange text-white';
-  const classLabel = isLocal ? (isAr ? 'تصنيع محلي' : 'LOCAL MANUFACTURED') : (isAr ? 'أنظمة أوروبية' : 'EUROPEAN SYSTEMS');
-  const origin = isLocal ? (isAr ? 'تصنيع محلي بالرياض' : 'KSA Riyadh Yard') : (isAr ? 'هندسة أولما الأوروبية' : 'ULMA Europe');
-  const name = isAr ? p.name_ar : p.name_en;
-  const summary = isAr ? p.short_summary_ar : p.short_summary_en;
-  const tagline = isAr ? (p.tagline_ar || '') : (p.tagline_en || '');
-  const advantages = isAr 
-    ? (Array.isArray(p.key_advantages_ar) ? p.key_advantages_ar : []) 
-    : (Array.isArray(p.key_advantages_en) ? p.key_advantages_en : []);
+  const pl = getProductPillars(p, isAr, dict);
   const padIndex = String(idx + 1).padStart(2, '0');
 
   const counter = document.getElementById('showcaseCounter');
@@ -1128,31 +1300,50 @@ function updateActiveNarrative(idx) {
       const titleEl = document.getElementById('activeTitle');
       const taglineEl = document.getElementById('activeTagline');
       const summaryEl = document.getElementById('activeSummary');
-      const highlightsEl = document.getElementById('activeHighlights');
+      const systemsInfoEl = document.getElementById('activeSystemsInfo');
+      const geomSpecsEl = document.getElementById('activeGeometrySpecs');
+      const asmProtocolEl = document.getElementById('activeAssemblyProtocol');
+      const asmCompsEl = document.getElementById('activeAssemblyComponents');
       const viewBtn = document.getElementById('activeViewBtn');
 
       if (classBadge) {
-        classBadge.className = `px-2.5 py-1 rounded text-[11px] font-display font-bold uppercase tracking-wider ${tagBg} shadow-xs`;
-        classBadge.innerText = classLabel;
+        classBadge.className = `px-2.5 py-0.5 rounded text-[11px] font-display font-bold uppercase tracking-wider ${pl.tagBg} shadow-xs`;
+        classBadge.innerText = pl.classLabel;
       }
       if (skuBadge) skuBadge.innerText = p.sku || '';
       if (originLabel) {
-        originLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-primary-gold"></span><span>${origin}</span>`;
+        originLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-primary-gold"></span><span>${pl.origin}</span>`;
       }
       if (titleEl) {
-        titleEl.innerText = name;
+        titleEl.innerText = pl.name;
         titleEl.onclick = () => navigateToProduct(p.slug);
       }
-      if (taglineEl) taglineEl.innerText = tagline;
-      if (summaryEl) summaryEl.innerText = summary;
-      if (highlightsEl) {
-        highlightsEl.innerHTML = advantages.slice(0, 3).map(adv => `
-          <li class="flex items-start gap-2 text-xs text-charcoal">
-            <span class="material-symbols-outlined text-sm text-primary-gold shrink-0 mt-0.5">verified</span>
-            <span class="leading-tight font-medium">${adv}</span>
-          </li>
+      if (taglineEl) taglineEl.innerText = pl.tagline;
+      if (summaryEl) summaryEl.innerText = pl.summary;
+
+      if (systemsInfoEl) {
+        systemsInfoEl.innerText = pl.whatIsIt;
+      }
+
+      if (geomSpecsEl) {
+        geomSpecsEl.innerHTML = pl.geomItems.map(g => `
+          <div class="p-1.5 bg-desert-ivory/50 rounded border border-divider-color/40">
+            <span class="block text-[9px] uppercase font-display text-muted-brown">${g.label}</span>
+            <strong class="font-display font-bold text-xs text-charcoal">${g.val}</strong>
+          </div>
         `).join('');
       }
+
+      if (asmProtocolEl) {
+        asmProtocolEl.innerText = pl.protocol;
+      }
+
+      if (asmCompsEl) {
+        asmCompsEl.innerHTML = pl.components.map(c => `
+          <span class="px-2 py-0.5 bg-card-surface border border-divider-color rounded text-[10px] font-display text-charcoal font-semibold">${c}</span>
+        `).join('');
+      }
+
       if (viewBtn) {
         viewBtn.setAttribute('href', `/products/${p.slug}`);
         viewBtn.onclick = (e) => handleProductCtaClick(e, p.slug);
@@ -1254,9 +1445,10 @@ function renderProductDetailPage(p) {
 
   // Gallery items using real project images
   const galleryPhotos = [
-    { src: 'images/projects/metropolitan-tower-erection.jpg', title: isAr ? 'برج العاصمة - صب النواة الخرسانية' : 'Metropolitan Core Concrete Pour' },
-    { src: 'images/projects/infrastructure-bridge.jpg', title: isAr ? 'تدعيم جسر الطريق السريع الثقيل' : 'Highway Heavy Shoring Works' },
-    { src: 'images/projects/stadium-canopy.jpg', title: isAr ? 'سقالات المظلة والمنشآت الضخمة' : 'Arena Canopy Spatial Access' }
+    { src: 'images/projects/neom-spine-viaduct.jpg', title: isAr ? 'مشروع مسار قطار نيوم - تدعيم وأعمدة الجسور' : 'NEOM Spine Viaduct - High-Load Falsework' },
+    { src: 'images/projects/riyadh-metro-interchange.jpg', title: isAr ? 'محطة مترو الرياض المسار 3 - قوالب الأعمدة وسقالات الكابلوك' : 'Riyadh Metro Line 03 - Pier Shoring' },
+    { src: 'images/projects/red-sea-coastal-gateway.jpg', title: isAr ? 'وجهة البحر الأحمر - خرسانة معمارية ظاهرة فائقة الجودة' : 'Red Sea Destination - Fair-Faced Marine Formwork' },
+    { src: 'images/projects/qiddiya-retaining-complex.jpg', title: isAr ? 'مشروع القدية - جدران استنادية عملاقة 18 متر' : 'Qiddiya Retaining Complex - Heavy Wall System' }
   ];
 
   container.innerHTML = `

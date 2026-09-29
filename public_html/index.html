@@ -133,11 +133,9 @@
 
     <!-- 1. FULL-WIDTH CINEMATIC VIDEO BANNER (REALISTIC CIVIL WORKS / ZERO TEXT OVERLAY) -->
     <section class="w-full relative h-[60vh] sm:h-[72vh] min-h-[480px] max-h-[780px] overflow-hidden bg-charcoal shadow-2xl" id="hero-section">
-      <video id="heroVideo" autoplay loop muted playsinline preload="auto" poster="images/projects/metropolitan-tower-erection.jpg" class="w-full h-full object-cover gpu-layer">
+      <video id="heroVideo" autoplay loop muted playsinline preload="auto" poster="assets/hero_video_poster.jpg" class="w-full h-full object-cover">
         <source id="heroVideoSource" src="assets/hero_construction.mp4" type="video/mp4"/>
       </video>
-      <!-- Fallback Photographic Poster -->
-      <div id="heroPosterBg" class="absolute inset-0 bg-cover bg-center pointer-events-none opacity-40 mix-blend-overlay gpu-layer" style="background-image: url('images/projects/metropolitan-tower-erection.jpg');"></div>
       <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-black/25 pointer-events-none"></div>
 
       <!-- Real-Time Civil Engineering Telemetry HUD (Pure Visual Context) -->
@@ -267,7 +265,271 @@
 
       <!-- Immersive Desktop Sticky Showcase & Mobile Chapter Progression Container -->
       <div id="productShowcaseStage" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-        <!-- Injected and updated dynamically via app.js -->
+        <!-- Pre-rendered Initial Fail-Safe State -->
+        <div class="w-full relative">
+          <!-- Desktop Two-Column Immersive Sticky Presentation (Hidden on mobile < lg) -->
+          <div class="hidden lg:flex items-start gap-10 xl:gap-14 relative">
+            <!-- Left Sticky Narrative Column -->
+            <div class="w-[42%] xl:w-[40%] shrink-0 sticky top-28 h-[calc(100vh-8.5rem)] flex flex-col justify-between py-2 pr-6 rtl:pr-0 rtl:pl-6 border-r rtl:border-r-0 rtl:border-l border-divider-color/60 overflow-y-auto no-scrollbar">
+              <div class="flex items-center justify-between pb-3 border-b border-divider-color shrink-0">
+                <div class="flex items-center gap-3">
+                  <span id="showcaseCounter" class="font-mono text-base font-bold text-primary-gold tracking-widest">01 / 06</span>
+                  <span class="text-xs uppercase font-display tracking-widest text-muted-brown" data-i18n="showcase_kicker">SYSTEM CHAPTER</span>
+                </div>
+                <div class="w-28 h-1 bg-divider-color/70 rounded-full overflow-hidden">
+                  <div id="showcaseProgressBar" class="h-full bg-primary-gold transition-all duration-300 ease-out" style="width: 17%;"></div>
+                </div>
+              </div>
+
+              <!-- Active Narrative Card -->
+              <div id="activeNarrativeCard" class="my-auto flex flex-col gap-3 transition-all duration-300 py-2">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span id="activeClassBadge" class="px-2.5 py-0.5 rounded text-[11px] font-display font-bold uppercase tracking-wider bg-primary-gold text-white shadow-xs">LOCAL MANUFACTURED</span>
+                  <span id="activeSkuBadge" class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-desert-ivory text-charcoal border border-divider-color">SMC-CP-01</span>
+                  <span id="activeOriginLabel" class="text-xs font-display text-muted-brown font-semibold flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary-gold"></span>
+                    <span>KSA Riyadh Yard</span>
+                  </span>
+                </div>
+
+                <div>
+                  <h3 id="activeTitle" class="text-2xl xl:text-3xl font-display font-bold text-charcoal uppercase leading-tight tracking-tight hover:text-primary-gold transition-colors cursor-pointer" onclick="navigateToProduct('cuplock-scaffolding')">
+                    Cuplock Scaffolding System
+                  </h3>
+                  <p id="activeTagline" class="text-xs font-display text-secondary-earth font-bold uppercase tracking-wider mt-0.5">
+                    The Kingdom’s Proven Modular Access & Shoring Backbone
+                  </p>
+                </div>
+
+                <p id="activeSummary" class="text-xs text-muted-brown font-body leading-relaxed line-clamp-2">
+                  A modular steel scaffolding system using cup-type locking connections between standards and ledgers, fabricated in Riyadh according to SASO standards.
+                </p>
+
+                <!-- 1. SYSTEMS PILLAR -->
+                <div class="p-3 bg-desert-ivory/70 rounded-xl border border-divider-color flex flex-col gap-1">
+                  <div class="flex items-center gap-1.5 text-[11px] font-display font-bold uppercase tracking-wider text-charcoal">
+                    <span class="material-symbols-outlined text-sm text-primary-gold">account_tree</span>
+                    <span data-i18n="pillar_systems">SYSTEMS ARCHITECTURE & APPLICATION</span>
+                  </div>
+                  <p id="activeSystemsInfo" class="text-xs text-charcoal font-medium leading-snug">
+                    A heavy-duty, fast-erecting multi-point node scaffolding system manufactured from high-yield structural steel tubes for access and falsework.
+                  </p>
+                </div>
+
+                <!-- 2. GEOMETRY PILLAR -->
+                <div class="p-3 bg-card-surface rounded-xl border border-divider-color flex flex-col gap-1.5">
+                  <div class="flex items-center justify-between text-[11px] font-display font-bold uppercase tracking-wider text-charcoal">
+                    <div class="flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm text-primary-gold">straighten</span>
+                      <span data-i18n="pillar_geometry">GEOMETRY & DIMENSIONAL SPECIFICATIONS</span>
+                    </div>
+                    <span class="text-[10px] font-mono text-muted-brown">SASO 2874</span>
+                  </div>
+                  <div id="activeGeometrySpecs" class="grid grid-cols-2 gap-1.5 text-xs">
+                    <div class="p-1.5 bg-desert-ivory/50 rounded border border-divider-color/40">
+                      <span class="block text-[9px] uppercase font-display text-muted-brown">Dimensions / Diameter</span>
+                      <strong class="font-display font-bold text-xs text-charcoal">48.3 mm</strong>
+                    </div>
+                    <div class="p-1.5 bg-desert-ivory/50 rounded border border-divider-color/40">
+                      <span class="block text-[9px] uppercase font-display text-muted-brown">Thickness / Height</span>
+                      <strong class="font-display font-bold text-xs text-charcoal">3.2 mm / 3.6 mm</strong>
+                    </div>
+                    <div class="p-1.5 bg-desert-ivory/50 rounded border border-divider-color/40">
+                      <span class="block text-[9px] uppercase font-display text-muted-brown">Load / Pour Rating</span>
+                      <strong class="font-display font-bold text-xs text-charcoal">58 kN Node</strong>
+                    </div>
+                    <div class="p-1.5 bg-desert-ivory/50 rounded border border-divider-color/40">
+                      <span class="block text-[9px] uppercase font-display text-muted-brown">Standard & Coating</span>
+                      <strong class="font-display font-bold text-xs text-charcoal">SASO 2874 HDG</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 3. ASSEMBLY IN MOTION PILLAR -->
+                <div class="p-3 bg-desert-ivory/70 rounded-xl border border-divider-color flex flex-col gap-1.5">
+                  <div class="flex items-center justify-between text-[11px] font-display font-bold uppercase tracking-wider text-charcoal">
+                    <div class="flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm text-ulma-orange animate-spin" style="animation-duration: 6s;">sync</span>
+                      <span data-i18n="pillar_assembly">ASSEMBLY IN MOTION & SITE PROTOCOL</span>
+                    </div>
+                    <span class="text-[10px] font-mono font-bold text-primary-gold">&lt; 1.5mm / 2m Plumb</span>
+                  </div>
+                  <p id="activeAssemblyProtocol" class="text-xs text-muted-brown leading-snug font-body line-clamp-2">
+                    Standards incorporate fixed bottom cups welded at 500mm intervals. Loose top cups slide down and lock up to four ledgers with a single hammer blow.
+                  </p>
+                  <div id="activeAssemblyComponents" class="flex flex-wrap gap-1 mt-0.5">
+                    <span class="px-2 py-0.5 bg-card-surface border border-divider-color rounded text-[10px] font-display text-charcoal font-semibold">Standard</span>
+                    <span class="px-2 py-0.5 bg-card-surface border border-divider-color rounded text-[10px] font-display text-charcoal font-semibold">Ledger</span>
+                    <span class="px-2 py-0.5 bg-card-surface border border-divider-color rounded text-[10px] font-display text-charcoal font-semibold">Base Jack</span>
+                    <span class="px-2 py-0.5 bg-card-surface border border-divider-color rounded text-[10px] font-display text-charcoal font-semibold">Brace</span>
+                  </div>
+                </div>
+
+                <!-- Prominent View Product CTA Button -->
+                <div class="pt-1 flex items-center gap-2">
+                  <a id="activeViewBtn" href="/products/cuplock-scaffolding" onclick="handleProductCtaClick(event, 'cuplock-scaffolding')" class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-charcoal hover:bg-primary-gold text-white font-display text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md group">
+                    <span data-i18n="view_product_specs">VIEW PRODUCT SPECIFICATION</span>
+                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1.5 rtl:group-hover:-translate-x-1.5 transition-transform">arrow_forward</span>
+                  </a>
+                  <button onclick="prefillRfq('Cuplock Scaffolding System')" class="p-3 bg-desert-ivory hover:bg-soft-sand text-charcoal border border-divider-color rounded-xl font-display text-xs font-bold uppercase transition-colors shrink-0" title="Request Quote">
+                    <span class="material-symbols-outlined text-base text-primary-gold">request_quote</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Bottom Natural Scroll Guidance Hint -->
+              <div class="flex items-center gap-2 text-[11px] font-display text-muted-brown uppercase tracking-wider pt-2 border-t border-divider-color shrink-0">
+                <span class="material-symbols-outlined text-sm animate-bounce text-primary-gold">south</span>
+                <span data-i18n="scroll_to_discover">SCROLL TO DISCOVER SYSTEMS</span>
+              </div>
+            </div>
+
+            <!-- Right Continuous Scroll Chapters (58% width, natural browser scrolling) -->
+            <div class="w-[58%] xl:w-[60%] flex flex-col gap-14" id="desktopShowcaseChapters">
+              <!-- Product Chapter 01 -->
+              <div class="desktop-scroll-chapter min-h-[85vh] flex flex-col justify-center py-4" data-product-index="0" data-product-slug="cuplock-scaffolding">
+                <div onclick="navigateToProduct('cuplock-scaffolding')" class="relative h-[62vh] xl:h-[66vh] rounded-2xl overflow-hidden bg-charcoal border border-divider-color shadow-2xl group cursor-pointer">
+                  <img src="images/products/cuplock-scaffolding.jpg" alt="Cuplock Scaffolding System" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100" loading="lazy" decoding="async"/>
+                  <div class="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/25 to-black/35 pointer-events-none"></div>
+                  <div class="absolute top-4 inset-x-4 flex items-center justify-between pointer-events-none z-10">
+                    <span class="px-3 py-1 rounded-md text-xs font-mono font-bold text-white bg-black/60 backdrop-blur-md border border-white/15">01 / 06</span>
+                    <div class="flex items-center gap-2">
+                      <span class="px-2.5 py-1 rounded-md text-[11px] font-display font-bold uppercase tracking-wider bg-primary-gold text-white shadow-xs">SMC-CP-01</span>
+                      <span class="px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white text-[11px] font-display uppercase tracking-wider font-semibold border border-white/15">Sales & Rental</span>
+                    </div>
+                  </div>
+                  <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between pointer-events-none z-10 gap-4">
+                    <div>
+                      <div class="flex items-center gap-2 text-[11px] font-display text-primary-gold uppercase tracking-wider font-bold drop-shadow-xs mb-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-primary-gold animate-pulse"></span>
+                        <span>KSA Riyadh Yard</span>
+                        <span class="text-white/40">•</span>
+                        <span class="text-white/80 font-mono">SASO / EN 12810</span>
+                      </div>
+                      <h4 class="text-xl sm:text-2xl font-display font-bold text-white uppercase drop-shadow-md">Cuplock Scaffolding System</h4>
+                    </div>
+                    <div class="pointer-events-auto shrink-0">
+                      <button onclick="event.stopPropagation(); navigateToProduct('cuplock-scaffolding')" class="px-4 py-2.5 bg-white/15 hover:bg-primary-gold text-white font-display text-xs font-bold uppercase tracking-wider rounded-lg backdrop-blur-md border border-white/20 transition-all flex items-center gap-2 shadow-lg group-hover:bg-primary-gold">
+                        <span data-i18n="view_product_specs">VIEW PRODUCT SPECIFICATION</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Structured Technical Tray Directly Below Photo -->
+                <div class="mt-3 bg-card-surface border border-divider-color rounded-xl p-4 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div class="flex flex-col gap-1 border-b md:border-b-0 md:border-r rtl:md:border-r-0 rtl:md:border-l border-divider-color/60 pb-2 md:pb-0 pr-0 md:pr-3 rtl:md:pr-0 rtl:md:pl-3">
+                    <span class="text-[10px] font-display font-bold uppercase text-primary-gold flex items-center gap-1">
+                      <span class="material-symbols-outlined text-xs">account_tree</span>
+                      <span>SYSTEMS</span>
+                    </span>
+                    <p class="text-xs text-charcoal font-medium leading-snug line-clamp-2">Modular node locking connection for heavy access and concrete falsework.</p>
+                  </div>
+                  <div class="flex flex-col gap-1 border-b md:border-b-0 md:border-r rtl:md:border-r-0 rtl:md:border-l border-divider-color/60 pb-2 md:pb-0 pr-0 md:pr-3 rtl:md:pr-0 rtl:md:pl-3">
+                    <span class="text-[10px] font-display font-bold uppercase text-primary-gold flex items-center gap-1">
+                      <span class="material-symbols-outlined text-xs">straighten</span>
+                      <span>GEOMETRY</span>
+                    </span>
+                    <span class="text-xs font-mono font-bold text-charcoal">Ø48.3mm × 3.2mm</span>
+                    <span class="text-[10px] text-muted-brown">58 kN Node Vertical Load</span>
+                  </div>
+                  <div class="flex flex-col justify-between">
+                    <div>
+                      <span class="text-[10px] font-display font-bold uppercase text-ulma-orange flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">sync</span>
+                        <span>ASSEMBLY IN MOTION</span>
+                      </span>
+                      <p class="text-xs text-muted-brown leading-snug line-clamp-2 mt-0.5">Captive cup rotation locking up to 4 ledgers per hammer blow.</p>
+                    </div>
+                    <div class="pt-1">
+                      <a href="/products/cuplock-scaffolding" onclick="handleProductCtaClick(event, 'cuplock-scaffolding')" class="text-[11px] font-display font-bold uppercase text-charcoal hover:text-primary-gold flex items-center gap-1">
+                        <span data-i18n="view_product_specs">VIEW PRODUCT SPECIFICATION</span>
+                        <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Natural Touch Scrolling Chapter Cards (Hidden on Desktop >= lg) -->
+          <div class="flex flex-col gap-8 lg:hidden" id="mobileShowcaseChapters">
+            <article class="bg-card-surface border border-divider-color rounded-2xl overflow-hidden shadow-md flex flex-col">
+              <div class="px-5 py-3.5 bg-desert-ivory/60 border-b border-divider-color flex items-center justify-between">
+                <span class="font-mono text-xs font-bold text-primary-gold tracking-widest">01 / 06</span>
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-display font-bold uppercase tracking-wider bg-primary-gold text-white">LOCAL MANUFACTURED</span>
+              </div>
+              <div class="relative h-64 w-full overflow-hidden bg-charcoal cursor-pointer" onclick="navigateToProduct('cuplock-scaffolding')">
+                <img src="images/products/cuplock-scaffolding.jpg" alt="Cuplock Scaffolding System" class="w-full h-full object-cover" loading="lazy" decoding="async"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/20 to-black/30 pointer-events-none"></div>
+                <div class="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none">
+                  <span class="px-2 py-0.5 rounded bg-black/65 backdrop-blur-xs text-white text-[10px] font-mono border border-white/15">SMC-CP-01</span>
+                  <span class="px-2 py-0.5 rounded bg-black/65 backdrop-blur-xs text-white text-[10px] font-display uppercase tracking-wider border border-white/15">Sales & Rental</span>
+                </div>
+                <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white pointer-events-none">
+                  <span class="text-[11px] font-display font-bold uppercase text-primary-gold flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary-gold"></span>
+                    <span>KSA Riyadh Yard</span>
+                  </span>
+                  <span class="text-[10px] font-display bg-white/20 backdrop-blur-xs px-2.5 py-0.5 rounded text-white font-medium">VIEW PRODUCT</span>
+                </div>
+              </div>
+              <div class="p-5 flex flex-col gap-3.5">
+                <div>
+                  <h3 onclick="navigateToProduct('cuplock-scaffolding')" class="text-lg font-display font-bold text-charcoal uppercase leading-snug hover:text-primary-gold transition-colors cursor-pointer">Cuplock Scaffolding System</h3>
+                  <p class="text-xs text-muted-brown font-body leading-relaxed mt-1 line-clamp-2">Modular steel scaffolding system using cup-type locking connections between standards and ledgers.</p>
+                </div>
+                <!-- 1. Systems Pillar -->
+                <div class="p-3 bg-desert-ivory/70 rounded-xl border border-divider-color flex flex-col gap-1">
+                  <span class="text-[10px] font-display font-bold uppercase text-primary-gold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">account_tree</span>
+                    <span data-i18n="pillar_systems">SYSTEMS ARCHITECTURE & APPLICATION</span>
+                  </span>
+                  <p class="text-xs text-charcoal font-medium leading-snug">Modular node connection for heavy civil shoring and facade access.</p>
+                </div>
+                <!-- 2. Geometry Pillar -->
+                <div class="p-3 bg-card-surface rounded-xl border border-divider-color flex flex-col gap-1.5">
+                  <span class="text-[10px] font-display font-bold uppercase text-primary-gold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">straighten</span>
+                    <span data-i18n="pillar_geometry">GEOMETRY & DIMENSIONAL SPECIFICATIONS</span>
+                  </span>
+                  <div class="grid grid-cols-2 gap-1.5 text-xs">
+                    <div class="p-1.5 bg-desert-ivory/50 rounded border border-divider-color/40">
+                      <span class="block text-[9px] uppercase font-display text-muted-brown">Diameter</span>
+                      <strong class="font-display font-bold text-xs text-charcoal">48.3 mm</strong>
+                    </div>
+                    <div class="p-1.5 bg-desert-ivory/50 rounded border border-divider-color/40">
+                      <span class="block text-[9px] uppercase font-display text-muted-brown">Capacity</span>
+                      <strong class="font-display font-bold text-xs text-charcoal">58 kN / Node</strong>
+                    </div>
+                  </div>
+                </div>
+                <!-- 3. Assembly in Motion Pillar -->
+                <div class="p-3 bg-desert-ivory/70 rounded-xl border border-divider-color flex flex-col gap-1">
+                  <div class="flex items-center justify-between text-[10px] font-display font-bold uppercase text-ulma-orange">
+                    <span class="flex items-center gap-1">
+                      <span class="material-symbols-outlined text-xs">sync</span>
+                      <span data-i18n="pillar_assembly">ASSEMBLY IN MOTION & SITE PROTOCOL</span>
+                    </span>
+                    <span class="font-mono text-primary-gold">&lt; 1.5mm / 2m</span>
+                  </div>
+                  <p class="text-xs text-muted-brown leading-snug font-body">Slide and hammer-lock node connection with captive cups.</p>
+                </div>
+                <div class="pt-2 border-t border-divider-color flex items-center gap-2">
+                  <a href="/products/cuplock-scaffolding" onclick="handleProductCtaClick(event, 'cuplock-scaffolding')" class="flex-1 py-3 px-4 bg-charcoal text-white rounded-lg font-display text-xs font-bold uppercase tracking-wider hover:bg-primary-gold transition-colors flex items-center justify-center gap-2 shadow-xs">
+                    <span data-i18n="view_product_specs">VIEW PRODUCT SPECIFICATION</span>
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </a>
+                  <button onclick="prefillRfq('Cuplock Scaffolding System')" class="py-3 px-3.5 bg-desert-ivory text-charcoal border border-divider-color rounded-lg font-display text-xs font-bold uppercase hover:bg-soft-sand transition-colors shrink-0" title="Request Quote">
+                    <span class="material-symbols-outlined text-sm text-primary-gold">request_quote</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -305,13 +567,76 @@
 
             <!-- Geometry Pills Selector -->
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2 mb-6" id="geometryButtons">
-              <!-- Dynamic geometry chips -->
+              <button onclick="selectGeometryIndex(0)" class="px-4 py-2 rounded-full border border-divider-color font-display text-xs font-bold uppercase tracking-wider shrink-0 transition-all bg-charcoal text-white shadow-xs">
+                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary-gold"></span><span>Wall & Core</span></span>
+              </button>
+              <button onclick="selectGeometryIndex(1)" class="px-4 py-2 rounded-full border border-divider-color font-display text-xs font-bold uppercase tracking-wider shrink-0 transition-all bg-card-surface text-charcoal hover:bg-soft-sand">
+                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-divider-color"></span><span>Column & Pier</span></span>
+              </button>
+              <button onclick="selectGeometryIndex(2)" class="px-4 py-2 rounded-full border border-divider-color font-display text-xs font-bold uppercase tracking-wider shrink-0 transition-all bg-card-surface text-charcoal hover:bg-soft-sand">
+                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-divider-color"></span><span>Circular & Curved</span></span>
+              </button>
+              <button onclick="selectGeometryIndex(3)" class="px-4 py-2 rounded-full border border-divider-color font-display text-xs font-bold uppercase tracking-wider shrink-0 transition-all bg-card-surface text-charcoal hover:bg-soft-sand">
+                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-divider-color"></span><span>Slab & Shoring</span></span>
+              </button>
+              <button onclick="selectGeometryIndex(4)" class="px-4 py-2 rounded-full border border-divider-color font-display text-xs font-bold uppercase tracking-wider shrink-0 transition-all bg-card-surface text-charcoal hover:bg-soft-sand">
+                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-divider-color"></span><span>High-Rise Climbing</span></span>
+              </button>
+              <button onclick="selectGeometryIndex(5)" class="px-4 py-2 rounded-full border border-divider-color font-display text-xs font-bold uppercase tracking-wider shrink-0 transition-all bg-card-surface text-charcoal hover:bg-soft-sand">
+                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-divider-color"></span><span>Bridge & Viaduct</span></span>
+              </button>
             </div>
 
             <!-- Horizontal Sliding Track Container -->
             <div class="relative w-full overflow-hidden rounded-2xl border border-divider-color shadow-md bg-card-surface">
               <div id="geometryTrack" class="flex transition-transform duration-500 ease-out will-change-transform" style="transform: translateX(0%);">
-                <!-- Rendered dynamically as 6 horizontal slides by app.js -->
+                <!-- Slide 01: Wall & Core -->
+                <div class="w-full min-w-full shrink-0 p-6 sm:p-8" data-geom-index="0">
+                  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                    <div class="lg:col-span-6 relative rounded-xl overflow-hidden bg-charcoal min-h-[280px] sm:min-h-[340px] flex flex-col justify-between p-5 group border border-divider-color shadow-inner">
+                      <img src="images/geometries/geometry-wall.jpg" alt="Straight & Shear Walls" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-out" loading="lazy" decoding="async"/>
+                      <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/30 to-black/20 pointer-events-none"></div>
+                      <div class="relative z-10 flex items-center justify-between gap-2">
+                        <span class="font-display text-[11px] px-3 py-1 rounded-full bg-primary-gold text-white font-bold uppercase tracking-wider shadow-sm flex items-center gap-1.5">
+                          <span class="material-symbols-outlined text-xs">architecture</span>
+                          <span>Wall & Core</span>
+                        </span>
+                        <span class="font-display text-[10px] px-2.5 py-1 rounded bg-black/60 backdrop-blur-sm text-soft-sand font-semibold uppercase tracking-wider border border-white/10">Modular Gang Form</span>
+                      </div>
+                      <div class="relative z-10 pt-8">
+                        <span class="text-[11px] font-display uppercase tracking-widest text-primary-gold font-bold block mb-1">ULMA ORMA & Saudi Master Wall Form</span>
+                        <p class="text-sm font-display font-bold text-white uppercase drop-shadow-md">Straight, Retaining & Shear Wall Systems</p>
+                      </div>
+                    </div>
+                    <div class="lg:col-span-6 flex flex-col justify-between">
+                      <div>
+                        <div class="flex items-center justify-between border-b border-divider-color pb-2 mb-3">
+                          <span class="font-display text-xs text-secondary-earth font-bold uppercase tracking-wider">Structural Specification & Application</span>
+                          <span class="text-xs font-mono text-muted-brown uppercase tracking-wider font-semibold">ULMA ORMA</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-display font-bold text-charcoal mb-2 uppercase leading-snug">Straight, Retaining & Shear Wall Systems</h3>
+                        <p class="text-xs sm:text-sm text-muted-brown leading-relaxed mb-5 font-body">Heavy-duty gang formwork optimized for fast crane cycling, high hydrostatic concrete pour pressures, and fair-faced architectural concrete walls.</p>
+                        <div class="grid grid-cols-2 gap-3 p-4 bg-desert-ivory border border-divider-color rounded-xl mb-6">
+                          <div>
+                            <span class="text-[10px] font-display uppercase text-muted-brown block font-semibold">Max Concrete Pressure</span>
+                            <strong class="font-display font-bold text-base text-charcoal">80 kN/m²</strong>
+                          </div>
+                          <div>
+                            <span class="text-[10px] font-display uppercase text-muted-brown block font-semibold">Standard Panel Height</span>
+                            <strong class="font-display font-bold text-base text-primary-gold">3.3m Gangs</strong>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-3">
+                        <button onclick="prefillRfq('Straight, Retaining & Shear Wall Systems')" class="flex-1 py-3 bg-charcoal text-content-offwhite rounded-xl font-display text-xs font-bold uppercase tracking-wider hover:bg-primary-gold transition-colors flex items-center justify-center gap-2 shadow-xs">
+                          <span class="material-symbols-outlined text-base">architecture</span>
+                          <span>Quote This Geometry</span>
+                          <span class="material-symbols-outlined text-sm rtl:rotate-180">arrow_forward</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -349,7 +674,47 @@
               <!-- Horizontal Sliding Stepper Track -->
               <div class="relative w-full overflow-hidden rounded-xl">
                 <div id="assemblyTrack" class="flex transition-transform duration-500 ease-out will-change-transform" style="transform: translateX(0%);">
-                  <!-- Rendered dynamically as 7 horizontal step slides by app.js -->
+                  <!-- Step 01 Initial Pre-render -->
+                  <div class="w-full min-w-full shrink-0" data-assembly-step="0">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                      <div class="lg:col-span-6 relative rounded-2xl overflow-hidden min-h-[300px] sm:min-h-[340px] flex flex-col justify-between p-6 sm:p-8 text-white border border-divider-color shadow-sm group bg-charcoal">
+                        <img src="images/assembly/step1-base-jack.jpg" alt="Foundation Alignment & Base Jacks Setup" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-90 transition-all duration-700 ease-out" loading="lazy" decoding="async"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-black/30 pointer-events-none"></div>
+                        <div class="relative z-10 flex items-center justify-between">
+                          <span class="px-3 py-1 rounded-full bg-primary-gold font-display text-xs font-bold text-white shadow-xs">STEP 01 / 07</span>
+                          <span class="text-xs font-display uppercase tracking-widest text-soft-sand bg-black/50 px-2.5 py-1 rounded backdrop-blur-xs border border-white/10">ULMA BRIO / Cuplock</span>
+                        </div>
+                        <div class="relative z-10 my-6">
+                          <span class="text-[10px] font-display uppercase tracking-widest text-primary-gold font-bold block">Erection Phase</span>
+                          <h3 class="font-display font-bold text-xl sm:text-2xl text-white uppercase mt-1 drop-shadow-md">Foundation Alignment & Base Jacks Setup</h3>
+                        </div>
+                        <div class="relative z-10 pt-3 border-t border-white/20 flex items-center justify-between text-xs font-display">
+                          <span class="text-soft-sand/90 font-medium">Plumb Deviation Tolerance</span>
+                          <span class="text-primary-gold font-bold font-mono">&lt; 1.5mm / 2m</span>
+                        </div>
+                      </div>
+                      <div class="lg:col-span-6 flex flex-col justify-between gap-4">
+                        <p class="text-sm sm:text-base text-charcoal leading-relaxed font-body">Surveyors confirm ground bearing capacity and level concrete mud-sills. Base collars and heavy spindle jacks are spaced according to engineering nodal calculation drawings.</p>
+                        <div class="grid grid-cols-2 gap-3 mt-2">
+                          <div class="p-3.5 bg-desert-ivory border border-divider-color rounded-xl">
+                            <span class="block text-[10px] uppercase font-display text-muted-brown font-semibold">Base Spindle Capacity</span>
+                            <strong class="font-display font-bold text-sm text-charcoal">45 kN Load Rating</strong>
+                          </div>
+                          <div class="p-3.5 bg-desert-ivory border border-divider-color rounded-xl">
+                            <span class="block text-[10px] uppercase font-display text-muted-brown font-semibold">Compliance Check</span>
+                            <strong class="font-display font-bold text-sm text-primary-gold">SASO ISO 3834-2</strong>
+                          </div>
+                        </div>
+                        <div class="p-4 bg-desert-ivory/60 border border-divider-color rounded-xl flex items-center justify-between text-xs text-muted-brown">
+                          <span class="flex items-center gap-1.5 font-display font-semibold">
+                            <span class="material-symbols-outlined text-base text-primary-gold">verified_user</span>
+                            <span>Civil Defense & SASO Certified Safety</span>
+                          </span>
+                          <span class="font-mono text-charcoal font-bold">100% Zero Drop</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -411,7 +776,102 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="manufacturingStepsGrid">
-          <!-- 6-Stage factory processes -->
+          <!-- Stage 1 -->
+          <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col justify-between group hover:border-primary-gold transition-all duration-300">
+            <div class="relative h-44 w-full overflow-hidden bg-charcoal">
+              <img src="images/manufacturing/mfg-material-receiving.jpg" alt="Material Receiving & Spectro QA" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="handleImageFallback(this, 'MFG-01', 'manufacturing', 'Material Receiving & Spectro QA')" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent pointer-events-none"></div>
+              <div class="absolute top-3 left-3 pointer-events-none">
+                <span class="px-2.5 py-1 rounded bg-black/60 backdrop-blur-xs text-[10px] font-display uppercase tracking-wider text-primary-gold font-bold border border-white/10 shadow-xs">Step 01: Raw Materials</span>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+                <h4 class="font-display font-bold text-base uppercase text-white drop-shadow-xs">Material Receiving & Spectro QA</h4>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="text-xs text-muted-brown leading-relaxed font-body">Certified structural steel tubes (S275/S355) undergo optical spectrometry and tensile stress testing upon arrival.</p>
+            </div>
+          </div>
+          <!-- Stage 2 -->
+          <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col justify-between group hover:border-primary-gold transition-all duration-300">
+            <div class="relative h-44 w-full overflow-hidden bg-charcoal">
+              <img src="images/manufacturing/mfg-cnc-profiling.jpg" alt="CNC High-Tension Profiling" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="handleImageFallback(this, 'MFG-02', 'manufacturing', 'CNC High-Tension Profiling')" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent pointer-events-none"></div>
+              <div class="absolute top-3 left-3 pointer-events-none">
+                <span class="px-2.5 py-1 rounded bg-black/60 backdrop-blur-xs text-[10px] font-display uppercase tracking-wider text-primary-gold font-bold border border-white/10 shadow-xs">Step 02: CNC Profiling</span>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+                <h4 class="font-display font-bold text-base uppercase text-white drop-shadow-xs">CNC High-Tension Profiling</h4>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="text-xs text-muted-brown leading-relaxed font-body">Sub-millimeter automated laser and rotary tube cutting ensuring accurate cuplock node placements and clean bevel angles.</p>
+            </div>
+          </div>
+          <!-- Stage 3 -->
+          <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col justify-between group hover:border-primary-gold transition-all duration-300">
+            <div class="relative h-44 w-full overflow-hidden bg-charcoal">
+              <img src="images/manufacturing/mfg-robotic-welding.jpg" alt="Multi-Axis Robotic Welding" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="handleImageFallback(this, 'MFG-03', 'manufacturing', 'Multi-Axis Robotic Welding')" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent pointer-events-none"></div>
+              <div class="absolute top-3 left-3 pointer-events-none">
+                <span class="px-2.5 py-1 rounded bg-black/60 backdrop-blur-xs text-[10px] font-display uppercase tracking-wider text-primary-gold font-bold border border-white/10 shadow-xs">Step 03: Robotic Welding</span>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+                <h4 class="font-display font-bold text-base uppercase text-white drop-shadow-xs">Multi-Axis Robotic Welding</h4>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="text-xs text-muted-brown leading-relaxed font-body">Automated welding cells delivering full-penetration seams tested against cyclic vibration and extreme load concentrations.</p>
+            </div>
+          </div>
+          <!-- Stage 4 -->
+          <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col justify-between group hover:border-primary-gold transition-all duration-300">
+            <div class="relative h-44 w-full overflow-hidden bg-charcoal">
+              <img src="images/manufacturing/mfg-hot-dip-galvanizing.jpg" alt="Thermal Dip Galvanizing & Coating" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="handleImageFallback(this, 'MFG-04', 'manufacturing', 'Thermal Dip Galvanizing & Coating')" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent pointer-events-none"></div>
+              <div class="absolute top-3 left-3 pointer-events-none">
+                <span class="px-2.5 py-1 rounded bg-black/60 backdrop-blur-xs text-[10px] font-display uppercase tracking-wider text-primary-gold font-bold border border-white/10 shadow-xs">Step 04: Hot-Dip Galvanizing</span>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+                <h4 class="font-display font-bold text-base uppercase text-white drop-shadow-xs">Thermal Dip Galvanizing & Coating</h4>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="text-xs text-muted-brown leading-relaxed font-body">Immersion in molten zinc baths (≥ 65-85 µm) providing decades of corrosion resistance in aggressive desert and marine environments.</p>
+            </div>
+          </div>
+          <!-- Stage 5 -->
+          <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col justify-between group hover:border-primary-gold transition-all duration-300">
+            <div class="relative h-44 w-full overflow-hidden bg-charcoal">
+              <img src="images/manufacturing/mfg-hydraulic-load-testing.jpg" alt="Hydraulic Load Proof Testing" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="handleImageFallback(this, 'MFG-05', 'manufacturing', 'Hydraulic Load Proof Testing')" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent pointer-events-none"></div>
+              <div class="absolute top-3 left-3 pointer-events-none">
+                <span class="px-2.5 py-1 rounded bg-black/60 backdrop-blur-xs text-[10px] font-display uppercase tracking-wider text-primary-gold font-bold border border-white/10 shadow-xs">Step 05: Proof Loading</span>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+                <h4 class="font-display font-bold text-base uppercase text-white drop-shadow-xs">Hydraulic Load Proof Testing</h4>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="text-xs text-muted-brown leading-relaxed font-body">Calibrated hydraulic rigs perform destructive and non-destructive load tests ensuring compliance with SASO and European norms.</p>
+            </div>
+          </div>
+          <!-- Stage 6 -->
+          <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col justify-between group hover:border-primary-gold transition-all duration-300">
+            <div class="relative h-44 w-full overflow-hidden bg-charcoal">
+              <img src="images/manufacturing/mfg-rapid-dispatch.jpg" alt="Barcoded Staging & Rapid Dispatch" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="handleImageFallback(this, 'MFG-06', 'manufacturing', 'Barcoded Staging & Rapid Dispatch')" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent pointer-events-none"></div>
+              <div class="absolute top-3 left-3 pointer-events-none">
+                <span class="px-2.5 py-1 rounded bg-black/60 backdrop-blur-xs text-[10px] font-display uppercase tracking-wider text-primary-gold font-bold border border-white/10 shadow-xs">Step 06: Rapid Dispatch</span>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+                <h4 class="font-display font-bold text-base uppercase text-white drop-shadow-xs">Barcoded Staging & Rapid Dispatch</h4>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="text-xs text-muted-brown leading-relaxed font-body">Individual batches are barcoded, certified, strapped, and dispatched directly onto dedicated heavy logistics flatbeds.</p>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -430,7 +890,149 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projectsGrid">
-          <!-- Populated from DB -->
+          <!-- Project 1 -->
+          <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col group hover:shadow-md hover:border-primary-gold transition-all duration-300">
+            <div class="relative h-48 w-full overflow-hidden bg-charcoal">
+              <img src="images/projects/neom-spine-viaduct.jpg" alt="NEOM Spine Rail High-Speed Viaduct" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="handleImageFallback(this, 'PRJ-01', 'project', 'NEOM Spine Rail High-Speed Viaduct')" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent pointer-events-none"></div>
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                <span class="px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-xs text-soft-sand text-[10px] font-display uppercase tracking-wider font-semibold border border-white/10">Rail & High-Speed Transit</span>
+                <span class="text-[10px] font-display text-primary-gold uppercase tracking-wider font-bold drop-shadow-xs">NEOM (The Line Sector 04), Saudi Arabia</span>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+                <h3 class="font-display font-bold text-lg text-white uppercase drop-shadow-xs">NEOM Spine Rail High-Speed Viaduct</h3>
+              </div>
+            </div>
+            <div class="p-5 flex flex-col gap-3">
+              <p class="text-xs text-muted-brown leading-relaxed font-body">Turnkey falsework and pier formwork package for monumental 32m high bridge supports in extreme desert canyon topography.</p>
+              <div class="grid grid-cols-3 gap-2 p-2.5 bg-desert-ivory border border-divider-color rounded-lg text-center text-xs">
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Total Pier Height</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">32 meters</strong>
+                </div>
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Concrete Volume</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">45,000 m³</strong>
+                </div>
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Cycle Speed</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">6 days/pier</strong>
+                </div>
+              </div>
+              <div class="p-3 bg-card-surface border border-divider-color rounded-lg flex flex-col gap-1 text-xs">
+                <strong class="text-charcoal uppercase tracking-wider text-[10px] font-display">Engineering Solution:</strong>
+                <span class="text-muted-brown font-body">Saudi Master engineered a hybrid assembly pairing locally fabricated steel pier shutters with ULMA MK heavy shoring towers.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col group hover:shadow-md hover:border-primary-gold transition-all duration-300">
+            <div class="relative h-48 w-full overflow-hidden bg-charcoal">
+              <img src="images/projects/riyadh-metro-interchange.jpg" alt="Riyadh Metro Line 03 Elevated Interchange" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="handleImageFallback(this, 'PRJ-02', 'project', 'Riyadh Metro Line 03 Elevated Interchange')" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent pointer-events-none"></div>
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                <span class="px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-xs text-soft-sand text-[10px] font-display uppercase tracking-wider font-semibold border border-white/10">Urban Transit & Metros</span>
+                <span class="text-[10px] font-display text-primary-gold uppercase tracking-wider font-bold drop-shadow-xs">Riyadh, Saudi Arabia</span>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+                <h3 class="font-display font-bold text-lg text-white uppercase drop-shadow-xs">Riyadh Metro Line 03 Elevated Interchange</h3>
+              </div>
+            </div>
+            <div class="p-5 flex flex-col gap-3">
+              <p class="text-xs text-muted-brown leading-relaxed font-body">Heavy Cuplock shoring and bespoke steel circular column formwork across central Riyadh urban corridors.</p>
+              <div class="grid grid-cols-3 gap-2 p-2.5 bg-desert-ivory border border-divider-color rounded-lg text-center text-xs">
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Shoring Fleet</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">35,000 m²</strong>
+                </div>
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Columns Cast</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">180 circular</strong>
+                </div>
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Striking Time</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">72 hours</strong>
+                </div>
+              </div>
+              <div class="p-3 bg-card-surface border border-divider-color rounded-lg flex flex-col gap-1 text-xs">
+                <strong class="text-charcoal uppercase tracking-wider text-[10px] font-display">Engineering Solution:</strong>
+                <span class="text-muted-brown font-body">Supplied 35,000 m² of Cuplock rental falsework with calibrated drop-heads enabling early stripping in 72 hours.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col group hover:shadow-md hover:border-primary-gold transition-all duration-300">
+            <div class="relative h-48 w-full overflow-hidden bg-charcoal">
+              <img src="images/projects/red-sea-coastal-gateway.jpg" alt="The Red Sea Coastal Resort & Marine Gateway" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="handleImageFallback(this, 'PRJ-03', 'project', 'The Red Sea Coastal Resort & Marine Gateway')" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent pointer-events-none"></div>
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                <span class="px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-xs text-soft-sand text-[10px] font-display uppercase tracking-wider font-semibold border border-white/10">Luxury Hospitality & Marine</span>
+                <span class="text-[10px] font-display text-primary-gold uppercase tracking-wider font-bold drop-shadow-xs">Red Sea Destination, Saudi Arabia</span>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+                <h3 class="font-display font-bold text-lg text-white uppercase drop-shadow-xs">The Red Sea Coastal Resort & Marine Gateway</h3>
+              </div>
+            </div>
+            <div class="p-5 flex flex-col gap-3">
+              <p class="text-xs text-muted-brown leading-relaxed font-body">Architectural Fair-Faced Concrete Wall Formwork using ULMA ORMA and coastal-grade galvanized BRIO access.</p>
+              <div class="grid grid-cols-3 gap-2 p-2.5 bg-desert-ivory border border-divider-color rounded-lg text-center text-xs">
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Surface Finish</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">Architectural Class A</strong>
+                </div>
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Marine HDG</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">≥ 75 µm</strong>
+                </div>
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Rebar Coverage</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">100% Plumb</strong>
+                </div>
+              </div>
+              <div class="p-3 bg-card-surface border border-divider-color rounded-lg flex flex-col gap-1 text-xs">
+                <strong class="text-charcoal uppercase tracking-wider text-[10px] font-display">Engineering Solution:</strong>
+                <span class="text-muted-brown font-body">Deployed ULMA ORMA with premium birch plywood and SASO-certified hot-dip galvanized BRIO platforms.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="bg-card-surface border border-divider-color rounded-xl overflow-hidden shadow-sm flex flex-col group hover:shadow-md hover:border-primary-gold transition-all duration-300">
+            <div class="relative h-48 w-full overflow-hidden bg-charcoal">
+              <img src="images/projects/qiddiya-retaining-complex.jpg" alt="Qiddiya Speed Park Viaduct & Retaining Complex" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="handleImageFallback(this, 'PRJ-04', 'project', 'Qiddiya Speed Park Viaduct & Retaining Complex')" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent pointer-events-none"></div>
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                <span class="px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-xs text-soft-sand text-[10px] font-display uppercase tracking-wider font-semibold border border-white/10">Heavy Civil & Sports Mega-Infrastructure</span>
+                <span class="text-[10px] font-display text-primary-gold uppercase tracking-wider font-bold drop-shadow-xs">Qiddiya Entertainment City, Riyadh, KSA</span>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+                <h3 class="font-display font-bold text-lg text-white uppercase drop-shadow-xs">Qiddiya Speed Park Viaduct & Retaining Complex</h3>
+              </div>
+            </div>
+            <div class="p-5 flex flex-col gap-3">
+              <p class="text-xs text-muted-brown leading-relaxed font-body">Heavy fabricated Grinder steel shutters and heavy MK falsework for massive 18m retaining walls.</p>
+              <div class="grid grid-cols-3 gap-2 p-2.5 bg-desert-ivory border border-divider-color rounded-lg text-center text-xs">
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Retaining Height</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">18 meters</strong>
+                </div>
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Hydrostatic Load</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">90 kN/m²</strong>
+                </div>
+                <div>
+                  <span class="text-[10px] font-display text-muted-brown block uppercase">Wall Length</span>
+                  <strong class="font-display font-bold text-xs text-charcoal">1.2 km</strong>
+                </div>
+              </div>
+              <div class="p-3 bg-card-surface border border-divider-color rounded-lg flex flex-col gap-1 text-xs">
+                <strong class="text-charcoal uppercase tracking-wider text-[10px] font-display">Engineering Solution:</strong>
+                <span class="text-muted-brown font-body">Fabricated extra-rigid all-steel waler shutters in our Riyadh plant coupled with MK structural braces.</span>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
