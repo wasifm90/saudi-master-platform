@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Material Receiving & Spectro QA",
+    "description": "Certified structural steel tubes (S275/S355) undergo optical spectrometry and tensile stress testing upon arrival.",
+    "image": "/assets/images/manufacturing/mfg-material-receiving.webp"
+  },
+  {
+    "id": 2,
+    "name": "CNC High-Tension Profiling",
+    "description": "Sub-millimeter automated laser and rotary tube cutting ensuring accurate cuplock node placements and clean bevel angles.",
+    "image": "/assets/images/manufacturing/mfg-cnc-profiling.webp"
+  },
+  {
+    "id": 3,
+    "name": "Multi-Axis Robotic Welding",
+    "description": "Automated welding cells delivering full-penetration seams tested against cyclic vibration and extreme load concentrations.",
+    "image": "/assets/images/manufacturing/mfg-robotic-welding.webp"
+  },
+  {
+    "id": 4,
+    "name": "Thermal Dip Galvanizing & Coating",
+    "description": "Immersion in molten zinc baths (≥ 65-85 µm) providing decades of corrosion resistance in aggressive desert and marine environments.",
+    "image": "/assets/images/manufacturing/mfg-hot-dip-galvanizing.webp"
+  },
+  {
+    "id": 5,
+    "name": "Hydraulic Load Proof Testing",
+    "description": "Calibrated hydraulic rigs perform destructive and non-destructive load tests ensuring compliance with SASO and European norms.",
+    "image": "/assets/images/manufacturing/mfg-hydraulic-load-testing.webp"
+  },
+  {
+    "id": 6,
+    "name": "Barcoded Staging & Rapid Dispatch",
+    "description": "Individual batches are barcoded, certified, strapped, and dispatched directly onto dedicated heavy logistics flatbeds.",
+    "image": "/assets/images/manufacturing/mfg-rapid-dispatch.webp"
+  }
+]

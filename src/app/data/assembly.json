@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "title": "Base Jack & Collar Alignment",
+    "description": "Heavy-duty base jacks anchored to engineered ground footings. Initial spindle adjustment guarantees 0.1° plumb line tolerance across irregular terrain.",
+    "image": "/assets/images/assembly/step1-base-jack.webp",
+    "technicalFeatures": [
+      {
+        "label": "Base Spindle Capacity",
+        "value": "45 kN Load Rating"
+      },
+      {
+        "label": "Compliance Check",
+        "value": "SASO ISO 3834-2"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Vertical Standard Insertion",
+    "description": "Vertical standards fitted into base collars. Patented 8-hole rosette discs position at exact 500mm vertical increments.",
+    "image": "/assets/images/assembly/step2-standards.webp",
+    "technicalFeatures": [
+      {
+        "label": "Post Wall Thickness",
+        "value": "3.2 mm S355 Steel"
+      },
+      {
+        "label": "Standard Plumb",
+        "value": "Max 1.5mm / 2m deviation"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Ledger Placement & Wedge Lock",
+    "description": "Horizontal ledgers connected at 90° intervals. Hammer blow engages captive wedge into rosette disc, securing rigid unyielding joint.",
+    "image": "/assets/images/assembly/step3-ledgers.webp",
+    "technicalFeatures": [
+      {
+        "label": "Wedge Engagement",
+        "value": "500 g Hammer Blow"
+      },
+      {
+        "label": "Node Joint Rigidity",
+        "value": "Over 14 kN·m resistance"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Diagonal Spatial Bracing",
+    "description": "Diagonal braces attached across alternate bays to establish triangulation and eliminate sway during high-elevation loads.",
+    "image": "/assets/images/assembly/step4-bracing.webp",
+    "technicalFeatures": [
+      {
+        "label": "Brace Angle",
+        "value": "45° Ideal Triangulation"
+      },
+      {
+        "label": "Sway Resistance",
+        "value": "Class A Seismic Rating"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Anti-Tilt Steel Planks",
+    "description": "Perforated galvanized steel decks locked directly onto ledger profiles with integrated wind-lift security catches.",
+    "image": "/assets/images/assembly/step5-planks.webp",
+    "technicalFeatures": [
+      {
+        "label": "Uniform Load Rating",
+        "value": "Class 6 (6.0 kN/m²)"
+      },
+      {
+        "label": "Slip Resistance",
+        "value": "R11 Anti-Slip Surface"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Internal Access Trapdoors & Ladders",
+    "description": "Integrated aluminum inclined stairways or trapdoor decks installed to guarantee safe internal operative passage.",
+    "image": "/assets/images/assembly/step6-trapdoors.webp",
+    "technicalFeatures": [
+      {
+        "label": "Hatch Auto-Close",
+        "value": "Gravity Spring Return"
+      },
+      {
+        "label": "Ladder Capacity",
+        "value": "150 kg Single User"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Advanced Guardrails & Toe Boards",
+    "description": "Dual-tier guardrails and perimeter steel toe boards mounted before operatives step onto upper levels, achieving zero-fall risk.",
+    "image": "/assets/images/assembly/step7-guardrails.webp",
+    "technicalFeatures": [
+      {
+        "label": "Guardrail Height",
+        "value": "1.10 m Nominal Height"
+      },
+      {
+        "label": "Certification",
+        "value": "EN 12810 Full Compliance"
+      }
+    ]
+  }
+]

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" width="240" height="50" fill="none">
+  <!-- Architectural Mark -->
+  <g transform="translate(4, 5)">
+    <rect x="0" y="0" width="40" height="40" rx="4" fill="#12161F"/>
+    <path d="M10 12h20v4H10z" fill="#C8963E"/>
+    <path d="M10 18h12v4H10z" fill="#FAF9F5"/>
+    <path d="M10 24h20v4H10z" fill="#FAF9F5"/>
+    <rect x="26" y="18" width="4" height="4" fill="#C8963E"/>
+  </g>
+  <!-- Brand Typography -->
+  <text x="56" y="32" font-family="'Space Grotesk', -apple-system, sans-serif" font-size="24" font-weight="700" letter-spacing="0.08em" fill="#12161F">CHECP</text>
+  <text x="56" y="42" font-family="'Space Grotesk', -apple-system, sans-serif" font-size="7.5" font-weight="600" letter-spacing="0.22em" fill="#787E87">CONSTRUCTION &amp; ENGINEERING</text>
+</svg>

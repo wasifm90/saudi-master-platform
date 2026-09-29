@@ -1,0 +1,82 @@
+<section class="systems section" id="systems" aria-labelledby="systems-title">
+  <div class="shell">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Our products</p>
+        <h2 id="systems-title">{{ copy.products }}</h2>
+        <p>{{ copy.productsDescription }}</p>
+      </div>
+    </div>
+    <div class="filters" role="group" aria-label="Product classification">
+      @for (filter of filters; track filter.code) {
+        <button
+          type="button"
+          [class.active]="activeClassification() === filter.code"
+          [attr.aria-pressed]="activeClassification() === filter.code"
+          (click)="selectFilter(filter.code)"
+        >
+          {{ filter.label }}
+        </button>
+      }
+    </div>
+    @if (repository.error()) {
+      <p role="alert">{{ repository.error() }}</p>
+    }
+    @if (activeProduct(); as active) {
+      <div class="showcase" [attr.data-filter]="activeClassification()">
+        <aside class="narrative">
+          <div class="chapter-progress">
+            <span>{{ activeProductIndex() + 1 }} / {{ filteredProducts().length }}</span
+            ><span>System chapter</span
+            ><progress
+              [value]="activeProductIndex() + 1"
+              [max]="filteredProducts().length"
+              aria-label="Product progress"
+            ></progress>
+          </div>
+          <sm-product-narrative [product]="active" />
+          <p class="scroll-hint">↓ Scroll to discover systems</p>
+        </aside>
+        <div class="chapters">
+          @for (
+            product of filteredProducts();
+            track activeClassification() + product.slug;
+            let index = $index
+          ) {
+            <article
+              class="chapter"
+              [smChapter]="index"
+              [chapterSequence]="filteredProducts()"
+              (entered)="activate($event)"
+              [attr.data-product-slug]="product.slug"
+            >
+              <a class="chapter-image" [routerLink]="['/products', product.slug]"
+                ><sm-image [src]="product.featuredImage" [alt]="product.name" />
+                <div class="image-shade"></div>
+                <div class="image-top">
+                  <span>{{ index + 1 }} / {{ filteredProducts().length }}</span
+                  ><span>{{ product.sku }}</span>
+                </div>
+                <div class="image-bottom">
+                  <p>{{ product.manufacturer }}</p>
+                  <h3>{{ product.name }}</h3>
+                  <span>View product specification ↗</span>
+                </div></a
+              >
+              <div class="chapter-summary">
+                <span class="eyebrow">Systems · Geometry · Assembly</span>
+                <p>{{ product.description }}</p>
+                <a [routerLink]="['/products', product.slug]">View product →</a>
+              </div>
+              <div class="mobile-narrative"><sm-product-narrative [product]="product" /></div>
+            </article>
+          }
+        </div>
+      </div>
+    } @else {
+      <p class="empty-state" role="status">
+        {{ repository.loading() ? 'Loading systems…' : 'No active products match this selection.' }}
+      </p>
+    }
+  </div>
+</section>

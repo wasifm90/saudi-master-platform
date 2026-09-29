@@ -1,0 +1,38 @@
+[
+  {
+    "id": "wall",
+    "name": "Wall & Shear",
+    "description": "Engineered for swift cycle repetitions. Integrates ULMA modular wall panels with locally fabricated high-load alignment struts to hold lateral pressure up to 80 kN/m².",
+    "image": "/assets/images/geometries/geometry-wall.webp"
+  },
+  {
+    "id": "column",
+    "name": "Column & Pier",
+    "description": "Custom-rolled high-tensile steel half-cylinders and universal clamp assemblies for fair-faced columns up to 100 kN/m² pour speeds.",
+    "image": "/assets/images/geometries/geometry-column.webp"
+  },
+  {
+    "id": "circular",
+    "name": "Circular & Curved",
+    "description": "Continuously adjustable radius wall formwork engineered for wastewater treatment digesters and cylindrical water storage tanks.",
+    "image": "/assets/images/geometries/geometry-circular.webp"
+  },
+  {
+    "id": "slab",
+    "name": "Slab & Shoring",
+    "description": "Aluminum drop-head modular decking enabling 3-day striking cycles while leaving shoring props untouched, reducing inventory on-site by 40%.",
+    "image": "/assets/images/geometries/geometry-slab.webp"
+  },
+  {
+    "id": "high-rise",
+    "name": "High-Rise Climbing",
+    "description": "Crane-free self-climbing hydraulic system carrying multi-tiered placing booms, formwork panels, and weather shields up skyscraper towers.",
+    "image": "/assets/images/geometries/geometry-high-rise.webp"
+  },
+  {
+    "id": "bridge",
+    "name": "Bridge & Viaduct",
+    "description": "Specialized modular trusses for balanced cantilever bridges, composite decks, and high-clearance overpass flyovers.",
+    "image": "/assets/images/geometries/geometry-bridge.webp"
+  }
+]

@@ -1,0 +1,7 @@
+archive
+node_modules
+dist
+.angular
+docs/lighthouse-*
+package-lock.json
+public

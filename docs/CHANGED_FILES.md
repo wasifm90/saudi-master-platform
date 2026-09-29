@@ -1,0 +1,609 @@
+# Changed-file manifest
+
+Working-tree changes for the Angular migration. Archived files are recoverable reference copies and are excluded from the production output. `D` entries have generally moved to `archive/legacy`; `??` entries are new files not staged in Git. No commit was made.
+
+```text
+ M .gitignore
+ M README.md
+ M cpanel/.htaccess
+ M cpanel/README.md
+ D data/used_classes.txt
+ D frontend/package.json
+ D frontend/proxy.conf.json
+ M package.json
+ D public_html/.htaccess
+ D public_html/admin.html
+ D public_html/api/.htaccess
+ D public_html/api/Database.php
+ D public_html/api/config.php
+ D public_html/api/index.php
+ D public_html/assets/hero_construction.mp4
+ D public_html/assets/hero_video_poster.jpg
+ D public_html/css/styles.css
+ D public_html/images/about/about-hero.jpg
+ D public_html/images/assembly/step1-base-jack.jpg
+ D public_html/images/assembly/step2-standards.jpg
+ D public_html/images/assembly/step3-ledgers.jpg
+ D public_html/images/assembly/step4-bracing.jpg
+ D public_html/images/assembly/step5-planks.jpg
+ D public_html/images/assembly/step6-trapdoors.jpg
+ D public_html/images/assembly/step7-guardrails.jpg
+ D public_html/images/careers/careers-team.jpg
+ D public_html/images/careers/engineering-team.jpg
+ D public_html/images/careers/team-collaboration.jpg
+ D public_html/images/checp-logo-white.svg
+ D public_html/images/checp-logo.svg
+ D public_html/images/geometries/geometry-bridge.jpg
+ D public_html/images/geometries/geometry-circular.jpg
+ D public_html/images/geometries/geometry-column.jpg
+ D public_html/images/geometries/geometry-high-rise.jpg
+ D public_html/images/geometries/geometry-slab.jpg
+ D public_html/images/geometries/geometry-wall.jpg
+ D public_html/images/hero/hero-construction-dusk.jpg
+ D public_html/images/hero/hero-main.jpg
+ D public_html/images/industries/commercial-mixed-use.jpg
+ D public_html/images/industries/healthcare-life-sciences.jpg
+ D public_html/images/industries/hospitality-luxury.jpg
+ D public_html/images/industries/industrial-logistics.jpg
+ D public_html/images/industries/mission-critical.jpg
+ D public_html/images/insights/annual-hse-review.jpg
+ D public_html/images/insights/commercial-topping-out.jpg
+ D public_html/images/insights/low-carbon-concrete.jpg
+ D public_html/images/manufacturing/mfg-cnc-profiling.jpg
+ D public_html/images/manufacturing/mfg-hot-dip-galvanizing.jpg
+ D public_html/images/manufacturing/mfg-hydraulic-load-testing.jpg
+ D public_html/images/manufacturing/mfg-material-receiving.jpg
+ D public_html/images/manufacturing/mfg-rapid-dispatch.jpg
+ D public_html/images/manufacturing/mfg-robotic-welding.jpg
+ D public_html/images/products/circular-column-systems.jpg
+ D public_html/images/products/circular-working-platforms.jpg
+ D public_html/images/products/cuplock-scaffolding.jpg
+ D public_html/images/products/grinder-steel-shutter.jpg
+ D public_html/images/products/manhole-systems.jpg
+ D public_html/images/products/piers-formwork.jpg
+ D public_html/images/products/precast-panels.jpg
+ D public_html/images/products/project-specific-engineering.jpg
+ D public_html/images/products/specialized-formwork.jpg
+ D public_html/images/products/ulma-brio-ringlock.jpg
+ D public_html/images/products/ulma-formwork.jpg
+ D public_html/images/products/ulma-heavy-shoring.jpg
+ D public_html/images/projects/coastal-maritime-terminus.jpg
+ D public_html/images/projects/desert-road-construction.jpg
+ D public_html/images/projects/desert-road-grading.jpg
+ D public_html/images/projects/financial-district-cantilever.jpg
+ D public_html/images/projects/financial-district-glazing.jpg
+ D public_html/images/projects/financial-district-hq.jpg
+ D public_html/images/projects/highway-phase-1-earthworks.jpg
+ D public_html/images/projects/highway-phase-2-paving.jpg
+ D public_html/images/projects/highway-phase-3-commissioned.jpg
+ D public_html/images/projects/infrastructure-bridge.jpg
+ D public_html/images/projects/maritime-berth-apron.jpg
+ D public_html/images/projects/maritime-quay-cranes.jpg
+ D public_html/images/projects/metropolitan-slipform-core.jpg
+ D public_html/images/projects/metropolitan-tower-erection.jpg
+ D public_html/images/projects/metropolitan-tower.jpg
+ D public_html/images/projects/neom-spine-viaduct.jpg
+ D public_html/images/projects/qiddiya-retaining-complex.jpg
+ D public_html/images/projects/red-sea-coastal-gateway.jpg
+ D public_html/images/projects/riyadh-metro-interchange.jpg
+ D public_html/images/projects/road-construction-expressway.jpg
+ D public_html/images/projects/sovereign-atrium-millwork.jpg
+ D public_html/images/projects/sovereign-executive-mezzanine.jpg
+ D public_html/images/projects/sovereign-wealth-atrium.jpg
+ D public_html/images/projects/stadium-canopy.jpg
+ D public_html/images/safety/safety-inspection.jpg
+ D public_html/images/services/civil-structural.jpg
+ D public_html/images/services/construction-management.jpg
+ D public_html/images/services/design-build.jpg
+ D public_html/images/services/general-contracting.jpg
+ D public_html/images/services/interior-fitout.jpg
+ D public_html/images/services/preconstruction-feasibility.jpg
+ D public_html/images/services/renovation-modernization.jpg
+ D public_html/images/services/specialized-infrastructure.jpg
+ D public_html/index.html
+ D public_html/js/app.js
+ D public_html/js/seed_data.js
+ D public_html/viewer.html
+ M server.js
+ D server/api_server.py
+ D server/test_suite.py
+ D server/update_admin.py
+ D src/input.css
+ D tailwind.config.js
+?? .prettierignore
+?? .prettierrc.json
+?? angular.json
+?? archive/legacy/data/used_classes.txt
+?? archive/legacy/frontend/package.json
+?? archive/legacy/frontend/proxy.conf.json
+?? archive/legacy/input.css
+?? archive/legacy/public_html/.htaccess
+?? archive/legacy/public_html/admin.html
+?? archive/legacy/public_html/api/.htaccess
+?? archive/legacy/public_html/api/Database.php
+?? archive/legacy/public_html/api/config.php
+?? archive/legacy/public_html/api/index.php
+?? archive/legacy/public_html/assets/hero_construction.mp4
+?? archive/legacy/public_html/assets/hero_video_poster.jpg
+?? archive/legacy/public_html/css/styles.css
+?? archive/legacy/public_html/images/about/about-hero.jpg
+?? archive/legacy/public_html/images/assembly/step1-base-jack.jpg
+?? archive/legacy/public_html/images/assembly/step2-standards.jpg
+?? archive/legacy/public_html/images/assembly/step3-ledgers.jpg
+?? archive/legacy/public_html/images/assembly/step4-bracing.jpg
+?? archive/legacy/public_html/images/assembly/step5-planks.jpg
+?? archive/legacy/public_html/images/assembly/step6-trapdoors.jpg
+?? archive/legacy/public_html/images/assembly/step7-guardrails.jpg
+?? archive/legacy/public_html/images/careers/careers-team.jpg
+?? archive/legacy/public_html/images/careers/engineering-team.jpg
+?? archive/legacy/public_html/images/careers/team-collaboration.jpg
+?? archive/legacy/public_html/images/checp-logo-white.svg
+?? archive/legacy/public_html/images/checp-logo.svg
+?? archive/legacy/public_html/images/geometries/geometry-bridge.jpg
+?? archive/legacy/public_html/images/geometries/geometry-circular.jpg
+?? archive/legacy/public_html/images/geometries/geometry-column.jpg
+?? archive/legacy/public_html/images/geometries/geometry-high-rise.jpg
+?? archive/legacy/public_html/images/geometries/geometry-slab.jpg
+?? archive/legacy/public_html/images/geometries/geometry-wall.jpg
+?? archive/legacy/public_html/images/hero/hero-construction-dusk.jpg
+?? archive/legacy/public_html/images/hero/hero-main.jpg
+?? archive/legacy/public_html/images/industries/commercial-mixed-use.jpg
+?? archive/legacy/public_html/images/industries/healthcare-life-sciences.jpg
+?? archive/legacy/public_html/images/industries/hospitality-luxury.jpg
+?? archive/legacy/public_html/images/industries/industrial-logistics.jpg
+?? archive/legacy/public_html/images/industries/mission-critical.jpg
+?? archive/legacy/public_html/images/insights/annual-hse-review.jpg
+?? archive/legacy/public_html/images/insights/commercial-topping-out.jpg
+?? archive/legacy/public_html/images/insights/low-carbon-concrete.jpg
+?? archive/legacy/public_html/images/manufacturing/mfg-cnc-profiling.jpg
+?? archive/legacy/public_html/images/manufacturing/mfg-hot-dip-galvanizing.jpg
+?? archive/legacy/public_html/images/manufacturing/mfg-hydraulic-load-testing.jpg
+?? archive/legacy/public_html/images/manufacturing/mfg-material-receiving.jpg
+?? archive/legacy/public_html/images/manufacturing/mfg-rapid-dispatch.jpg
+?? archive/legacy/public_html/images/manufacturing/mfg-robotic-welding.jpg
+?? archive/legacy/public_html/images/products/circular-column-systems.jpg
+?? archive/legacy/public_html/images/products/circular-working-platforms.jpg
+?? archive/legacy/public_html/images/products/cuplock-scaffolding.jpg
+?? archive/legacy/public_html/images/products/grinder-steel-shutter.jpg
+?? archive/legacy/public_html/images/products/manhole-systems.jpg
+?? archive/legacy/public_html/images/products/piers-formwork.jpg
+?? archive/legacy/public_html/images/products/precast-panels.jpg
+?? archive/legacy/public_html/images/products/project-specific-engineering.jpg
+?? archive/legacy/public_html/images/products/specialized-formwork.jpg
+?? archive/legacy/public_html/images/products/ulma-brio-ringlock.jpg
+?? archive/legacy/public_html/images/products/ulma-formwork.jpg
+?? archive/legacy/public_html/images/products/ulma-heavy-shoring.jpg
+?? archive/legacy/public_html/images/projects/coastal-maritime-terminus.jpg
+?? archive/legacy/public_html/images/projects/desert-road-construction.jpg
+?? archive/legacy/public_html/images/projects/desert-road-grading.jpg
+?? archive/legacy/public_html/images/projects/financial-district-cantilever.jpg
+?? archive/legacy/public_html/images/projects/financial-district-glazing.jpg
+?? archive/legacy/public_html/images/projects/financial-district-hq.jpg
+?? archive/legacy/public_html/images/projects/highway-phase-1-earthworks.jpg
+?? archive/legacy/public_html/images/projects/highway-phase-2-paving.jpg
+?? archive/legacy/public_html/images/projects/highway-phase-3-commissioned.jpg
+?? archive/legacy/public_html/images/projects/infrastructure-bridge.jpg
+?? archive/legacy/public_html/images/projects/maritime-berth-apron.jpg
+?? archive/legacy/public_html/images/projects/maritime-quay-cranes.jpg
+?? archive/legacy/public_html/images/projects/metropolitan-slipform-core.jpg
+?? archive/legacy/public_html/images/projects/metropolitan-tower-erection.jpg
+?? archive/legacy/public_html/images/projects/metropolitan-tower.jpg
+?? archive/legacy/public_html/images/projects/neom-spine-viaduct.jpg
+?? archive/legacy/public_html/images/projects/qiddiya-retaining-complex.jpg
+?? archive/legacy/public_html/images/projects/red-sea-coastal-gateway.jpg
+?? archive/legacy/public_html/images/projects/riyadh-metro-interchange.jpg
+?? archive/legacy/public_html/images/projects/road-construction-expressway.jpg
+?? archive/legacy/public_html/images/projects/sovereign-atrium-millwork.jpg
+?? archive/legacy/public_html/images/projects/sovereign-executive-mezzanine.jpg
+?? archive/legacy/public_html/images/projects/sovereign-wealth-atrium.jpg
+?? archive/legacy/public_html/images/projects/stadium-canopy.jpg
+?? archive/legacy/public_html/images/safety/safety-inspection.jpg
+?? archive/legacy/public_html/images/services/civil-structural.jpg
+?? archive/legacy/public_html/images/services/construction-management.jpg
+?? archive/legacy/public_html/images/services/design-build.jpg
+?? archive/legacy/public_html/images/services/general-contracting.jpg
+?? archive/legacy/public_html/images/services/interior-fitout.jpg
+?? archive/legacy/public_html/images/services/preconstruction-feasibility.jpg
+?? archive/legacy/public_html/images/services/renovation-modernization.jpg
+?? archive/legacy/public_html/images/services/specialized-infrastructure.jpg
+?? archive/legacy/public_html/index.html
+?? archive/legacy/public_html/js/app.js
+?? archive/legacy/public_html/js/seed_data.js
+?? archive/legacy/public_html/viewer.html
+?? archive/legacy/server.js
+?? archive/legacy/server/api_server.py
+?? archive/legacy/server/test_suite.py
+?? archive/legacy/server/update_admin.py
+?? archive/legacy/tailwind.config.js
+?? docs/MIGRATION_NOTES.md
+?? docs/VERIFICATION.md
+?? docs/lighthouse-desktop.report.html
+?? docs/lighthouse-desktop.report.json
+?? docs/lighthouse-mobile.report.html
+?? docs/lighthouse-mobile.report.json
+?? docs/screenshots/angular-desktop-systems.png
+?? docs/screenshots/angular-mobile-geometry.png
+?? package-lock.json
+?? public/.htaccess
+?? public/assets/images/about/about-hero-1600.webp
+?? public/assets/images/about/about-hero-480.webp
+?? public/assets/images/about/about-hero-960.webp
+?? public/assets/images/about/about-hero.webp
+?? public/assets/images/assembly/step1-base-jack-1600.webp
+?? public/assets/images/assembly/step1-base-jack-480.webp
+?? public/assets/images/assembly/step1-base-jack-960.webp
+?? public/assets/images/assembly/step1-base-jack.webp
+?? public/assets/images/assembly/step2-standards-1600.webp
+?? public/assets/images/assembly/step2-standards-480.webp
+?? public/assets/images/assembly/step2-standards-960.webp
+?? public/assets/images/assembly/step2-standards.webp
+?? public/assets/images/assembly/step3-ledgers-1600.webp
+?? public/assets/images/assembly/step3-ledgers-480.webp
+?? public/assets/images/assembly/step3-ledgers-960.webp
+?? public/assets/images/assembly/step3-ledgers.webp
+?? public/assets/images/assembly/step4-bracing-1600.webp
+?? public/assets/images/assembly/step4-bracing-480.webp
+?? public/assets/images/assembly/step4-bracing-960.webp
+?? public/assets/images/assembly/step4-bracing.webp
+?? public/assets/images/assembly/step5-planks-1600.webp
+?? public/assets/images/assembly/step5-planks-480.webp
+?? public/assets/images/assembly/step5-planks-960.webp
+?? public/assets/images/assembly/step5-planks.webp
+?? public/assets/images/assembly/step6-trapdoors-1600.webp
+?? public/assets/images/assembly/step6-trapdoors-480.webp
+?? public/assets/images/assembly/step6-trapdoors-960.webp
+?? public/assets/images/assembly/step6-trapdoors.webp
+?? public/assets/images/assembly/step7-guardrails-1600.webp
+?? public/assets/images/assembly/step7-guardrails-480.webp
+?? public/assets/images/assembly/step7-guardrails-960.webp
+?? public/assets/images/assembly/step7-guardrails.webp
+?? public/assets/images/careers/careers-team-1600.webp
+?? public/assets/images/careers/careers-team-480.webp
+?? public/assets/images/careers/careers-team-960.webp
+?? public/assets/images/careers/careers-team.webp
+?? public/assets/images/careers/engineering-team-1600.webp
+?? public/assets/images/careers/engineering-team-480.webp
+?? public/assets/images/careers/engineering-team-960.webp
+?? public/assets/images/careers/engineering-team.webp
+?? public/assets/images/careers/team-collaboration-1600.webp
+?? public/assets/images/careers/team-collaboration-480.webp
+?? public/assets/images/careers/team-collaboration-960.webp
+?? public/assets/images/careers/team-collaboration.webp
+?? public/assets/images/checp-logo-white.svg
+?? public/assets/images/checp-logo.svg
+?? public/assets/images/geometries/geometry-bridge-1600.webp
+?? public/assets/images/geometries/geometry-bridge-480.webp
+?? public/assets/images/geometries/geometry-bridge-960.webp
+?? public/assets/images/geometries/geometry-bridge.webp
+?? public/assets/images/geometries/geometry-circular-1600.webp
+?? public/assets/images/geometries/geometry-circular-480.webp
+?? public/assets/images/geometries/geometry-circular-960.webp
+?? public/assets/images/geometries/geometry-circular.webp
+?? public/assets/images/geometries/geometry-column-1600.webp
+?? public/assets/images/geometries/geometry-column-480.webp
+?? public/assets/images/geometries/geometry-column-960.webp
+?? public/assets/images/geometries/geometry-column.webp
+?? public/assets/images/geometries/geometry-high-rise-1600.webp
+?? public/assets/images/geometries/geometry-high-rise-480.webp
+?? public/assets/images/geometries/geometry-high-rise-960.webp
+?? public/assets/images/geometries/geometry-high-rise.webp
+?? public/assets/images/geometries/geometry-slab-1600.webp
+?? public/assets/images/geometries/geometry-slab-480.webp
+?? public/assets/images/geometries/geometry-slab-960.webp
+?? public/assets/images/geometries/geometry-slab.webp
+?? public/assets/images/geometries/geometry-wall-1600.webp
+?? public/assets/images/geometries/geometry-wall-480.webp
+?? public/assets/images/geometries/geometry-wall-960.webp
+?? public/assets/images/geometries/geometry-wall.webp
+?? public/assets/images/hero/hero-construction-dusk-1600.webp
+?? public/assets/images/hero/hero-construction-dusk-480.webp
+?? public/assets/images/hero/hero-construction-dusk-960.webp
+?? public/assets/images/hero/hero-construction-dusk.webp
+?? public/assets/images/hero/hero-main-1600.webp
+?? public/assets/images/hero/hero-main-480.webp
+?? public/assets/images/hero/hero-main-960.webp
+?? public/assets/images/hero/hero-main.webp
+?? public/assets/images/industries/commercial-mixed-use-1600.webp
+?? public/assets/images/industries/commercial-mixed-use-480.webp
+?? public/assets/images/industries/commercial-mixed-use-960.webp
+?? public/assets/images/industries/commercial-mixed-use.webp
+?? public/assets/images/industries/healthcare-life-sciences-1600.webp
+?? public/assets/images/industries/healthcare-life-sciences-480.webp
+?? public/assets/images/industries/healthcare-life-sciences-960.webp
+?? public/assets/images/industries/healthcare-life-sciences.webp
+?? public/assets/images/industries/hospitality-luxury-1600.webp
+?? public/assets/images/industries/hospitality-luxury-480.webp
+?? public/assets/images/industries/hospitality-luxury-960.webp
+?? public/assets/images/industries/hospitality-luxury.webp
+?? public/assets/images/industries/industrial-logistics-1600.webp
+?? public/assets/images/industries/industrial-logistics-480.webp
+?? public/assets/images/industries/industrial-logistics-960.webp
+?? public/assets/images/industries/industrial-logistics.webp
+?? public/assets/images/industries/mission-critical-1600.webp
+?? public/assets/images/industries/mission-critical-480.webp
+?? public/assets/images/industries/mission-critical-960.webp
+?? public/assets/images/industries/mission-critical.webp
+?? public/assets/images/insights/annual-hse-review-1600.webp
+?? public/assets/images/insights/annual-hse-review-480.webp
+?? public/assets/images/insights/annual-hse-review-960.webp
+?? public/assets/images/insights/annual-hse-review.webp
+?? public/assets/images/insights/commercial-topping-out-1600.webp
+?? public/assets/images/insights/commercial-topping-out-480.webp
+?? public/assets/images/insights/commercial-topping-out-960.webp
+?? public/assets/images/insights/commercial-topping-out.webp
+?? public/assets/images/insights/low-carbon-concrete-1600.webp
+?? public/assets/images/insights/low-carbon-concrete-480.webp
+?? public/assets/images/insights/low-carbon-concrete-960.webp
+?? public/assets/images/insights/low-carbon-concrete.webp
+?? public/assets/images/manufacturing/mfg-cnc-profiling-1600.webp
+?? public/assets/images/manufacturing/mfg-cnc-profiling-480.webp
+?? public/assets/images/manufacturing/mfg-cnc-profiling-960.webp
+?? public/assets/images/manufacturing/mfg-cnc-profiling.webp
+?? public/assets/images/manufacturing/mfg-hot-dip-galvanizing-1600.webp
+?? public/assets/images/manufacturing/mfg-hot-dip-galvanizing-480.webp
+?? public/assets/images/manufacturing/mfg-hot-dip-galvanizing-960.webp
+?? public/assets/images/manufacturing/mfg-hot-dip-galvanizing.webp
+?? public/assets/images/manufacturing/mfg-hydraulic-load-testing-1600.webp
+?? public/assets/images/manufacturing/mfg-hydraulic-load-testing-480.webp
+?? public/assets/images/manufacturing/mfg-hydraulic-load-testing-960.webp
+?? public/assets/images/manufacturing/mfg-hydraulic-load-testing.webp
+?? public/assets/images/manufacturing/mfg-material-receiving-1600.webp
+?? public/assets/images/manufacturing/mfg-material-receiving-480.webp
+?? public/assets/images/manufacturing/mfg-material-receiving-960.webp
+?? public/assets/images/manufacturing/mfg-material-receiving.webp
+?? public/assets/images/manufacturing/mfg-rapid-dispatch-1600.webp
+?? public/assets/images/manufacturing/mfg-rapid-dispatch-480.webp
+?? public/assets/images/manufacturing/mfg-rapid-dispatch-960.webp
+?? public/assets/images/manufacturing/mfg-rapid-dispatch.webp
+?? public/assets/images/manufacturing/mfg-robotic-welding-1600.webp
+?? public/assets/images/manufacturing/mfg-robotic-welding-480.webp
+?? public/assets/images/manufacturing/mfg-robotic-welding-960.webp
+?? public/assets/images/manufacturing/mfg-robotic-welding.webp
+?? public/assets/images/products/circular-column-systems-1600.webp
+?? public/assets/images/products/circular-column-systems-480.webp
+?? public/assets/images/products/circular-column-systems-960.webp
+?? public/assets/images/products/circular-column-systems.webp
+?? public/assets/images/products/circular-working-platforms-1600.webp
+?? public/assets/images/products/circular-working-platforms-480.webp
+?? public/assets/images/products/circular-working-platforms-960.webp
+?? public/assets/images/products/circular-working-platforms.webp
+?? public/assets/images/products/cuplock-scaffolding-1600.webp
+?? public/assets/images/products/cuplock-scaffolding-480.webp
+?? public/assets/images/products/cuplock-scaffolding-960.webp
+?? public/assets/images/products/cuplock-scaffolding.webp
+?? public/assets/images/products/grinder-steel-shutter-1600.webp
+?? public/assets/images/products/grinder-steel-shutter-480.webp
+?? public/assets/images/products/grinder-steel-shutter-960.webp
+?? public/assets/images/products/grinder-steel-shutter.webp
+?? public/assets/images/products/manhole-systems-1600.webp
+?? public/assets/images/products/manhole-systems-480.webp
+?? public/assets/images/products/manhole-systems-960.webp
+?? public/assets/images/products/manhole-systems.webp
+?? public/assets/images/products/piers-formwork-1600.webp
+?? public/assets/images/products/piers-formwork-480.webp
+?? public/assets/images/products/piers-formwork-960.webp
+?? public/assets/images/products/piers-formwork.webp
+?? public/assets/images/products/precast-panels-1600.webp
+?? public/assets/images/products/precast-panels-480.webp
+?? public/assets/images/products/precast-panels-960.webp
+?? public/assets/images/products/precast-panels.webp
+?? public/assets/images/products/project-specific-engineering-1600.webp
+?? public/assets/images/products/project-specific-engineering-480.webp
+?? public/assets/images/products/project-specific-engineering-960.webp
+?? public/assets/images/products/project-specific-engineering.webp
+?? public/assets/images/products/specialized-formwork-1600.webp
+?? public/assets/images/products/specialized-formwork-480.webp
+?? public/assets/images/products/specialized-formwork-960.webp
+?? public/assets/images/products/specialized-formwork.webp
+?? public/assets/images/products/ulma-brio-ringlock-1600.webp
+?? public/assets/images/products/ulma-brio-ringlock-480.webp
+?? public/assets/images/products/ulma-brio-ringlock-960.webp
+?? public/assets/images/products/ulma-brio-ringlock.webp
+?? public/assets/images/products/ulma-formwork-1600.webp
+?? public/assets/images/products/ulma-formwork-480.webp
+?? public/assets/images/products/ulma-formwork-960.webp
+?? public/assets/images/products/ulma-formwork.webp
+?? public/assets/images/products/ulma-heavy-shoring-1600.webp
+?? public/assets/images/products/ulma-heavy-shoring-480.webp
+?? public/assets/images/products/ulma-heavy-shoring-960.webp
+?? public/assets/images/products/ulma-heavy-shoring.webp
+?? public/assets/images/projects/coastal-maritime-terminus-1600.webp
+?? public/assets/images/projects/coastal-maritime-terminus-480.webp
+?? public/assets/images/projects/coastal-maritime-terminus-960.webp
+?? public/assets/images/projects/coastal-maritime-terminus.webp
+?? public/assets/images/projects/desert-road-construction-1600.webp
+?? public/assets/images/projects/desert-road-construction-480.webp
+?? public/assets/images/projects/desert-road-construction-960.webp
+?? public/assets/images/projects/desert-road-construction.webp
+?? public/assets/images/projects/desert-road-grading-1600.webp
+?? public/assets/images/projects/desert-road-grading-480.webp
+?? public/assets/images/projects/desert-road-grading-960.webp
+?? public/assets/images/projects/desert-road-grading.webp
+?? public/assets/images/projects/financial-district-cantilever-1600.webp
+?? public/assets/images/projects/financial-district-cantilever-480.webp
+?? public/assets/images/projects/financial-district-cantilever-960.webp
+?? public/assets/images/projects/financial-district-cantilever.webp
+?? public/assets/images/projects/financial-district-glazing-1600.webp
+?? public/assets/images/projects/financial-district-glazing-480.webp
+?? public/assets/images/projects/financial-district-glazing-960.webp
+?? public/assets/images/projects/financial-district-glazing.webp
+?? public/assets/images/projects/financial-district-hq-1600.webp
+?? public/assets/images/projects/financial-district-hq-480.webp
+?? public/assets/images/projects/financial-district-hq-960.webp
+?? public/assets/images/projects/financial-district-hq.webp
+?? public/assets/images/projects/highway-phase-1-earthworks-1600.webp
+?? public/assets/images/projects/highway-phase-1-earthworks-480.webp
+?? public/assets/images/projects/highway-phase-1-earthworks-960.webp
+?? public/assets/images/projects/highway-phase-1-earthworks.webp
+?? public/assets/images/projects/highway-phase-2-paving-1600.webp
+?? public/assets/images/projects/highway-phase-2-paving-480.webp
+?? public/assets/images/projects/highway-phase-2-paving-960.webp
+?? public/assets/images/projects/highway-phase-2-paving.webp
+?? public/assets/images/projects/highway-phase-3-commissioned-1600.webp
+?? public/assets/images/projects/highway-phase-3-commissioned-480.webp
+?? public/assets/images/projects/highway-phase-3-commissioned-960.webp
+?? public/assets/images/projects/highway-phase-3-commissioned.webp
+?? public/assets/images/projects/infrastructure-bridge-1600.webp
+?? public/assets/images/projects/infrastructure-bridge-480.webp
+?? public/assets/images/projects/infrastructure-bridge-960.webp
+?? public/assets/images/projects/infrastructure-bridge.webp
+?? public/assets/images/projects/maritime-berth-apron-1600.webp
+?? public/assets/images/projects/maritime-berth-apron-480.webp
+?? public/assets/images/projects/maritime-berth-apron-960.webp
+?? public/assets/images/projects/maritime-berth-apron.webp
+?? public/assets/images/projects/maritime-quay-cranes-1600.webp
+?? public/assets/images/projects/maritime-quay-cranes-480.webp
+?? public/assets/images/projects/maritime-quay-cranes-960.webp
+?? public/assets/images/projects/maritime-quay-cranes.webp
+?? public/assets/images/projects/metropolitan-slipform-core-1600.webp
+?? public/assets/images/projects/metropolitan-slipform-core-480.webp
+?? public/assets/images/projects/metropolitan-slipform-core-960.webp
+?? public/assets/images/projects/metropolitan-slipform-core.webp
+?? public/assets/images/projects/metropolitan-tower-1600.webp
+?? public/assets/images/projects/metropolitan-tower-480.webp
+?? public/assets/images/projects/metropolitan-tower-960.webp
+?? public/assets/images/projects/metropolitan-tower-erection-1600.webp
+?? public/assets/images/projects/metropolitan-tower-erection-480.webp
+?? public/assets/images/projects/metropolitan-tower-erection-960.webp
+?? public/assets/images/projects/metropolitan-tower-erection.webp
+?? public/assets/images/projects/metropolitan-tower.webp
+?? public/assets/images/projects/neom-spine-viaduct-1600.webp
+?? public/assets/images/projects/neom-spine-viaduct-480.webp
+?? public/assets/images/projects/neom-spine-viaduct-960.webp
+?? public/assets/images/projects/neom-spine-viaduct.webp
+?? public/assets/images/projects/qiddiya-retaining-complex-1600.webp
+?? public/assets/images/projects/qiddiya-retaining-complex-480.webp
+?? public/assets/images/projects/qiddiya-retaining-complex-960.webp
+?? public/assets/images/projects/qiddiya-retaining-complex.webp
+?? public/assets/images/projects/red-sea-coastal-gateway-1600.webp
+?? public/assets/images/projects/red-sea-coastal-gateway-480.webp
+?? public/assets/images/projects/red-sea-coastal-gateway-960.webp
+?? public/assets/images/projects/red-sea-coastal-gateway.webp
+?? public/assets/images/projects/riyadh-metro-interchange-1600.webp
+?? public/assets/images/projects/riyadh-metro-interchange-480.webp
+?? public/assets/images/projects/riyadh-metro-interchange-960.webp
+?? public/assets/images/projects/riyadh-metro-interchange.webp
+?? public/assets/images/projects/road-construction-expressway-1600.webp
+?? public/assets/images/projects/road-construction-expressway-480.webp
+?? public/assets/images/projects/road-construction-expressway-960.webp
+?? public/assets/images/projects/road-construction-expressway.webp
+?? public/assets/images/projects/sovereign-atrium-millwork-1600.webp
+?? public/assets/images/projects/sovereign-atrium-millwork-480.webp
+?? public/assets/images/projects/sovereign-atrium-millwork-960.webp
+?? public/assets/images/projects/sovereign-atrium-millwork.webp
+?? public/assets/images/projects/sovereign-executive-mezzanine-1600.webp
+?? public/assets/images/projects/sovereign-executive-mezzanine-480.webp
+?? public/assets/images/projects/sovereign-executive-mezzanine-960.webp
+?? public/assets/images/projects/sovereign-executive-mezzanine.webp
+?? public/assets/images/projects/sovereign-wealth-atrium-1600.webp
+?? public/assets/images/projects/sovereign-wealth-atrium-480.webp
+?? public/assets/images/projects/sovereign-wealth-atrium-960.webp
+?? public/assets/images/projects/sovereign-wealth-atrium.webp
+?? public/assets/images/projects/stadium-canopy-1600.webp
+?? public/assets/images/projects/stadium-canopy-480.webp
+?? public/assets/images/projects/stadium-canopy-960.webp
+?? public/assets/images/projects/stadium-canopy.webp
+?? public/assets/images/safety/safety-inspection-1600.webp
+?? public/assets/images/safety/safety-inspection-480.webp
+?? public/assets/images/safety/safety-inspection-960.webp
+?? public/assets/images/safety/safety-inspection.webp
+?? public/assets/images/services/civil-structural-1600.webp
+?? public/assets/images/services/civil-structural-480.webp
+?? public/assets/images/services/civil-structural-960.webp
+?? public/assets/images/services/civil-structural.webp
+?? public/assets/images/services/construction-management-1600.webp
+?? public/assets/images/services/construction-management-480.webp
+?? public/assets/images/services/construction-management-960.webp
+?? public/assets/images/services/construction-management.webp
+?? public/assets/images/services/design-build-1600.webp
+?? public/assets/images/services/design-build-480.webp
+?? public/assets/images/services/design-build-960.webp
+?? public/assets/images/services/design-build.webp
+?? public/assets/images/services/general-contracting-1600.webp
+?? public/assets/images/services/general-contracting-480.webp
+?? public/assets/images/services/general-contracting-960.webp
+?? public/assets/images/services/general-contracting.webp
+?? public/assets/images/services/interior-fitout-1600.webp
+?? public/assets/images/services/interior-fitout-480.webp
+?? public/assets/images/services/interior-fitout-960.webp
+?? public/assets/images/services/interior-fitout.webp
+?? public/assets/images/services/preconstruction-feasibility-1600.webp
+?? public/assets/images/services/preconstruction-feasibility-480.webp
+?? public/assets/images/services/preconstruction-feasibility-960.webp
+?? public/assets/images/services/preconstruction-feasibility.webp
+?? public/assets/images/services/renovation-modernization-1600.webp
+?? public/assets/images/services/renovation-modernization-480.webp
+?? public/assets/images/services/renovation-modernization-960.webp
+?? public/assets/images/services/renovation-modernization.webp
+?? public/assets/images/services/specialized-infrastructure-1600.webp
+?? public/assets/images/services/specialized-infrastructure-480.webp
+?? public/assets/images/services/specialized-infrastructure-960.webp
+?? public/assets/images/services/specialized-infrastructure.webp
+?? public/assets/video/hero/desktop.mp4
+?? public/assets/video/hero/desktop.webm
+?? public/assets/video/hero/mobile.mp4
+?? public/assets/video/hero/mobile.webm
+?? public/assets/video/hero/poster-desktop.webp
+?? public/assets/video/hero/poster-mobile.webp
+?? public/assets/video/hero/poster-optimized.jpg
+?? public/assets/video/hero/poster.jpg
+?? public/favicon.svg
+?? public/robots.txt
+?? public/sitemap.xml
+?? scripts/generate-seo.mjs
+?? scripts/migrate-content.py
+?? scripts/optimize-assets.mjs
+?? scripts/serve.mjs
+?? scripts/verify-http.mjs
+?? scripts/verify-production.mjs
+?? src/app/app.component.ts
+?? src/app/app.config.server.ts
+?? src/app/app.config.ts
+?? src/app/app.routes.server.ts
+?? src/app/app.routes.ts
+?? src/app/core/models/content.ts
+?? src/app/core/services/content.repository.ts
+?? src/app/core/services/interaction-state.spec.ts
+?? src/app/core/services/interaction-state.ts
+?? src/app/core/services/product.repository.ts
+?? src/app/core/services/seo.service.ts
+?? src/app/data/assembly.json
+?? src/app/data/catalog.ts
+?? src/app/data/company.json
+?? src/app/data/geometries.json
+?? src/app/data/pages.ts
+?? src/app/data/processes.json
+?? src/app/data/products.json
+?? src/app/data/projects.json
+?? src/app/data/services.json
+?? src/app/features/contact/contact.component.ts
+?? src/app/features/content/content-page.component.ts
+?? src/app/features/home/assembly.component.ts
+?? src/app/features/home/geometry.component.ts
+?? src/app/features/home/hero.component.ts
+?? src/app/features/home/home.component.ts
+?? src/app/features/home/interactions.spec.ts
+?? src/app/features/home/manufacturing.component.ts
+?? src/app/features/home/projects.component.ts
+?? src/app/features/home/services.component.ts
+?? src/app/features/products/product-page.component.ts
+?? src/app/features/products/products-page.component.ts
+?? src/app/features/products/systems.component.html
+?? src/app/features/products/systems.component.scss
+?? src/app/features/products/systems.component.ts
+?? src/app/layout/footer.component.ts
+?? src/app/layout/header.component.scss
+?? src/app/layout/header.component.ts
+?? src/app/shared/chapter.directive.ts
+?? src/app/shared/image.component.ts
+?? src/app/shared/product-narrative.component.ts
+?? src/environments/environment.development.ts
+?? src/environments/environment.ts
+?? src/index.html
+?? src/main.server.ts
+?? src/main.ts
+?? src/styles.scss
+?? tsconfig.app.json
+?? tsconfig.json
+?? tsconfig.spec.json
+```

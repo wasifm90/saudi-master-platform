@@ -1,0 +1,110 @@
+[
+  {
+    "id": "1",
+    "slug": "neom-spine-rail-high-speed-viaduct",
+    "name": "NEOM Spine Rail High-Speed Viaduct",
+    "description": "Turnkey falsework and pier formwork package for monumental 32m high bridge supports in extreme desert canyon topography.",
+    "image": "/assets/images/projects/neom-spine-viaduct.webp",
+    "body": [
+      "Saudi Master engineered a hybrid assembly pairing locally fabricated steel pier shutters with ULMA MK heavy shoring towers."
+    ],
+    "displayOrder": 0,
+    "location": "NEOM (The Line Sector 04), Saudi Arabia",
+    "industry": "Rail & High-Speed Transit",
+    "metrics": [
+      {
+        "label": "Total Pier Height",
+        "value": "32 meters"
+      },
+      {
+        "label": "Concrete Volume",
+        "value": "45,000 m³"
+      },
+      {
+        "label": "Cycle Speed",
+        "value": "6 days/pier"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "slug": "riyadh-metro-line-03-elevated-interchange",
+    "name": "Riyadh Metro Line 03 Elevated Interchange",
+    "description": "Heavy Cuplock shoring and bespoke steel circular column formwork across central Riyadh urban corridors.",
+    "image": "/assets/images/projects/riyadh-metro-interchange.webp",
+    "body": [
+      "Supplied 35,000 m² of Cuplock rental falsework with calibrated drop-heads enabling early stripping in 72 hours."
+    ],
+    "displayOrder": 1,
+    "location": "Riyadh, Saudi Arabia",
+    "industry": "Urban Transit & Metros",
+    "metrics": [
+      {
+        "label": "Shoring Fleet",
+        "value": "35,000 m²"
+      },
+      {
+        "label": "Columns Cast",
+        "value": "180 circular"
+      },
+      {
+        "label": "Striking Time",
+        "value": "72 hours"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "slug": "the-red-sea-coastal-resort-marine-gateway",
+    "name": "The Red Sea Coastal Resort & Marine Gateway",
+    "description": "Architectural Fair-Faced Concrete Wall Formwork using ULMA ORMA and coastal-grade galvanized BRIO access.",
+    "image": "/assets/images/projects/red-sea-coastal-gateway.webp",
+    "body": [
+      "Deployed ULMA ORMA with premium birch plywood and SASO-certified hot-dip galvanized BRIO platforms."
+    ],
+    "displayOrder": 2,
+    "location": "Red Sea Destination, Saudi Arabia",
+    "industry": "Luxury Hospitality & Marine",
+    "metrics": [
+      {
+        "label": "Surface Finish",
+        "value": "Architectural Class A"
+      },
+      {
+        "label": "Marine HDG",
+        "value": "≥ 75 µm"
+      },
+      {
+        "label": "Rebar Coverage",
+        "value": "100% Plumb"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "slug": "qiddiya-speed-park-viaduct-retaining-complex",
+    "name": "Qiddiya Speed Park Viaduct & Retaining Complex",
+    "description": "Heavy fabricated Grinder steel shutters and heavy MK falsework for massive 18m retaining walls.",
+    "image": "/assets/images/projects/qiddiya-retaining-complex.webp",
+    "body": [
+      "Fabricated extra-rigid all-steel waler shutters in our Riyadh plant coupled with MK structural braces."
+    ],
+    "displayOrder": 3,
+    "location": "Qiddiya Entertainment City, Riyadh, KSA",
+    "industry": "Heavy Civil & Sports Mega-Infrastructure",
+    "metrics": [
+      {
+        "label": "Retaining Height",
+        "value": "18 meters"
+      },
+      {
+        "label": "Hydrostatic Load",
+        "value": "90 kN/m²"
+      },
+      {
+        "label": "Wall Length",
+        "value": "1.2 km"
+      }
+    ]
+  }
+]

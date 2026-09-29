@@ -1,0 +1,57 @@
+[
+  {
+    "id": "1",
+    "slug": "engineering-structural-design",
+    "name": "Engineering & Structural Design",
+    "description": "Certified structural calculations, FEA load analysis, and 3D BIM coordination strictly adhering to the Saudi Building Code (SBC).",
+    "image": "/assets/images/services/design-build.webp",
+    "body": [
+      "Certified structural calculations, FEA load analysis, and 3D BIM coordination strictly adhering to the Saudi Building Code (SBC)."
+    ],
+    "displayOrder": 0
+  },
+  {
+    "id": "2",
+    "slug": "material-supply-logistics",
+    "name": "Material Supply & Logistics",
+    "description": "Rapid mobilization from massive stockyards in Riyadh, Jeddah, and Dammam with flatbed fleet delivery within 24 to 48 hours.",
+    "image": "/assets/images/services/general-contracting.webp",
+    "body": [
+      "Rapid mobilization from massive stockyards in Riyadh, Jeddah, and Dammam with flatbed fleet delivery within 24 to 48 hours."
+    ],
+    "displayOrder": 1
+  },
+  {
+    "id": "3",
+    "slug": "on-site-technical-supervision",
+    "name": "On-Site Technical Supervision",
+    "description": "Certified SCE temporary works field engineers conducting pre-pour audits, plumb checks, and early striking milestones.",
+    "image": "/assets/images/services/construction-management.webp",
+    "body": [
+      "Certified SCE temporary works field engineers conducting pre-pour audits, plumb checks, and early striking milestones."
+    ],
+    "displayOrder": 2
+  },
+  {
+    "id": "4",
+    "slug": "equipment-sales-custom-fabrication",
+    "name": "Equipment Sales & Custom Fabrication",
+    "description": "Direct acquisition of Saudi-manufactured steel moulds or certified ULMA systems with warranty, buyback options, and life tracking.",
+    "image": "/assets/images/services/civil-structural.webp",
+    "body": [
+      "Direct acquisition of Saudi-manufactured steel moulds or certified ULMA systems with warranty, buyback options, and life tracking."
+    ],
+    "displayOrder": 3
+  },
+  {
+    "id": "5",
+    "slug": "rental-fleet-operations",
+    "name": "Rental Fleet & Operations",
+    "description": "The Kingdom’s premier certified scaffolding and slab shoring rental fleet with flexible monthly terms aligned with project cash flows.",
+    "image": "/assets/images/services/specialized-infrastructure.webp",
+    "body": [
+      "The Kingdom’s premier certified scaffolding and slab shoring rental fleet with flexible monthly terms aligned with project cash flows."
+    ],
+    "displayOrder": 4
+  }
+]

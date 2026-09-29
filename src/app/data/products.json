@@ -1,0 +1,743 @@
+[
+  {
+    "id": 1,
+    "slug": "cuplock-scaffolding",
+    "sku": "SMC-CP-01",
+    "name": "Cuplock Scaffolding System",
+    "nameAr": "نظام سقالات الكابلوك المعياري",
+    "classification": "LOCAL",
+    "manufacturer": "Saudi Master",
+    "tagline": "The Kingdom’s Proven Modular Access & Shoring Backbone",
+    "shortDescription": "A modular steel scaffolding system using cup-type locking connections between standards and ledgers, fabricated in Riyadh according to SASO standards.",
+    "description": "A heavy-duty, fast-erecting multi-point node scaffolding system manufactured from high-yield structural steel tubes.",
+    "systemInformation": "Standards incorporate fixed bottom cups welded at 500mm intervals. Loose top cups slide down and rotate over ledger blade ends, locking up to four horizontal components with a single hammer blow.",
+    "applicationDescription": "Temporary access, safe working platforms, facade maintenance, and medium-to-heavy structural falsework support during concrete casting.",
+    "applications": [
+      "facades",
+      "infrastructure",
+      "industrial"
+    ],
+    "geometryCategories": [
+      "slab"
+    ],
+    "benefits": [
+      "Rapid hammer-strike node locking without loose bolts",
+      "High yield S355 steel with hot-dip galvanizing",
+      "Zero maintenance wear nodes tested to SASO 2874",
+      "High local inventory available for 24-hr site delivery"
+    ],
+    "components": [
+      "Standard (Vertical)",
+      "Ledger (Horizontal)",
+      "Transom",
+      "Base Jack",
+      "Swivel Face Brace",
+      "Steel Walkway Planks"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Tube Diameter",
+        "value": "48.3 mm"
+      },
+      {
+        "label": "Wall Thickness",
+        "value": "3.2 mm / 3.6 mm"
+      },
+      {
+        "label": "Steel Grade",
+        "value": "S275J2H / S355JR"
+      },
+      {
+        "label": "Node Capacity",
+        "value": "58 kN vertical load"
+      },
+      {
+        "label": "Coating",
+        "value": "Hot-Dip Galvanized ≥ 65 µm"
+      },
+      {
+        "label": "Saso Norm",
+        "value": "SASO 2874 / BS 1139"
+      }
+    ],
+    "featuredImage": "/assets/images/products/cuplock-scaffolding.webp",
+    "gallery": [
+      "/assets/images/products/cuplock-scaffolding.webp"
+    ],
+    "video": null,
+    "displayOrder": 1,
+    "active": true
+  },
+  {
+    "id": 2,
+    "slug": "manhole-systems",
+    "sku": "SMC-MH-02",
+    "name": "Manhole Formwork Systems",
+    "nameAr": "نظام قوالب المناهل وغرف التفتيش",
+    "classification": "LOCAL",
+    "manufacturer": "Saudi Master",
+    "tagline": "Engineered Reusable Steel Moulds for Underground Infrastructure",
+    "shortDescription": "A reusable forming and construction solution manufactured in KSA for pouring square, rectangular, and round concrete manhole structures.",
+    "description": "Rigid external steel shuttering panels paired with a proprietary collapsible internal core mechanism for high-frequency municipal utility casting.",
+    "systemInformation": "Inner core contracts inward via corner toggle hinges or central turnbuckles once concrete reaches initial set, allowing the assembly to be stripped and craned in minutes.",
+    "applicationDescription": "Underground municipal stormwater drainage, electrical cable vaults, sanitary sewer chambers, and telecom duct banks.",
+    "applications": [
+      "infrastructure",
+      "precast"
+    ],
+    "geometryCategories": [
+      "circular"
+    ],
+    "benefits": [
+      "Zero plywood waste across 200+ pours",
+      "Collapsible corner keys for 15-minute striking",
+      "Hydrostatic concrete pressure capacity up to 60 kN/m²",
+      "Bespoke dimensions matching MOMRA & NWC specs"
+    ],
+    "components": [
+      "Collapsible Core Panels",
+      "Rigid Outer Corner Units",
+      "Walers & Alignment Braces",
+      "Tie-Rod Assemblies",
+      "Lifting Eyes"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Steel Face Thickness",
+        "value": "5.0 mm plate"
+      },
+      {
+        "label": "Frame Profile",
+        "value": "100x50 mm boxed channel"
+      },
+      {
+        "label": "Max Pour Height",
+        "value": "4.5 m single lift"
+      },
+      {
+        "label": "Permissible Pressure",
+        "value": "60 kN/m²"
+      },
+      {
+        "label": "Striking Mechanism",
+        "value": "Mechanical ratchet toggle"
+      }
+    ],
+    "featuredImage": "/assets/images/products/manhole-systems.webp",
+    "gallery": [
+      "/assets/images/products/manhole-systems.webp"
+    ],
+    "video": null,
+    "displayOrder": 2,
+    "active": true
+  },
+  {
+    "id": 3,
+    "slug": "circular-column-systems",
+    "sku": "SMC-CC-03",
+    "name": "Circular Column Systems",
+    "nameAr": "نظام قوالب الأعمدة الدائرية",
+    "classification": "LOCAL",
+    "manufacturer": "Saudi Master",
+    "tagline": "Precision Rolled Steel Halves for Flawless Fair-Faced Geometry",
+    "shortDescription": "Precision rolled two-half steel shuttering systems manufactured in Saudi Arabia for casting smooth, fair-faced circular columns.",
+    "description": "Heavy cylindrical steel shells with integrated perimeter connection flanges and alignment wedges, handling rapid vertical concrete placement.",
+    "systemInformation": "Two pre-curved steel half-shells bolt or wedge together securely. Concrete is placed in a single continuous lift, producing uniform fair-faced results without tie holes across the face.",
+    "applicationDescription": "Commercial tower entrance columns, metro viaduct piers, high-ceiling architectural atriums, and infrastructure bridge supports.",
+    "applications": [
+      "high-rise",
+      "bridges",
+      "infrastructure"
+    ],
+    "geometryCategories": [
+      "column",
+      "circular",
+      "bridge"
+    ],
+    "benefits": [
+      "Architectural Class A mirror-smooth concrete surface",
+      "No internal through-ties required across column diameter",
+      "Integrated pouring funnel and working platform brackets",
+      "Available in stock from Ø300mm to Ø2000mm"
+    ],
+    "components": [
+      "Rolled Semi-Cylindrical Shells",
+      "Quick-Connect Wedge Clamps",
+      "Push-Pull Plumbing Struts",
+      "Integrated Access Ladder & Platform"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Diameter Range",
+        "value": "300 mm – 2000 mm"
+      },
+      {
+        "label": "Standard Heights",
+        "value": "0.5m, 1.0m, 1.5m, 2.0m, 3.0m"
+      },
+      {
+        "label": "Max Pour Pressure",
+        "value": "100 kN/m² hydrostatic"
+      },
+      {
+        "label": "Shell Thickness",
+        "value": "4.0 mm – 6.0 mm S355 steel"
+      }
+    ],
+    "featuredImage": "/assets/images/products/circular-column-systems.webp",
+    "gallery": [
+      "/assets/images/products/circular-column-systems.webp"
+    ],
+    "video": null,
+    "displayOrder": 3,
+    "active": true
+  },
+  {
+    "id": 4,
+    "slug": "precast-panels",
+    "sku": "SMC-PC-04",
+    "name": "Precast Concrete Panel Moulds",
+    "nameAr": "قوالب الألواح الخرسانية مسبقة الصب",
+    "classification": "LOCAL",
+    "manufacturer": "Saudi Master",
+    "tagline": "Industrial Tilting Tables and Battery Moulds Built for Off-Site Speed",
+    "shortDescription": "Factory-produced heavy industrial moulds and tilting beds engineered in KSA for repetitive precast concrete wall elements and boundary enclosures.",
+    "description": "Machined steel casting beds with integrated magnetic side formers, heating pipe conduits, and hydraulic tilt mechanisms.",
+    "systemInformation": "Rebar cages are placed onto the polished steel deck. Concrete is poured, vibrated via integral high-frequency vibrators, cured, and tilted up to 80° for safe crane demoulding.",
+    "applicationDescription": "National border security walls, modular housing panels, warehouse tilt-up panels, and civil retaining walls.",
+    "applications": [
+      "industrial",
+      "precast"
+    ],
+    "geometryCategories": [
+      "wall"
+    ],
+    "benefits": [
+      "Sub-millimeter flatness tolerances across 14-meter table lengths",
+      "Hydraulic tilting up to 80° preventing green-concrete cracking",
+      "Adaptable magnetic edge shutters for infinite panel widths",
+      "Fabricated with domestic high-grade steel"
+    ],
+    "components": [
+      "Polished Steel Decking Table",
+      "Hydraulic Lift Cylinders",
+      "Magnetic Side Rails",
+      "Compaction Vibration System",
+      "Thermal Curing Tubes"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Standard Table Width",
+        "value": "3.5 m – 4.5 m"
+      },
+      {
+        "label": "Standard Length",
+        "value": "12 m – 100 m"
+      },
+      {
+        "label": "Max Capacity",
+        "value": "1,000 kg/m²"
+      },
+      {
+        "label": "Tilting Angle",
+        "value": "0° to 83° hydraulic"
+      },
+      {
+        "label": "Deck Plate",
+        "value": "8.0 mm machined plate"
+      }
+    ],
+    "featuredImage": "/assets/images/products/precast-panels.webp",
+    "gallery": [
+      "/assets/images/products/precast-panels.webp"
+    ],
+    "video": null,
+    "displayOrder": 4,
+    "active": true
+  },
+  {
+    "id": 5,
+    "slug": "grinder-steel-shutter",
+    "sku": "SMC-GS-05",
+    "name": "Grinder Steel Shutter",
+    "nameAr": "شدات جريندر الفولاذية الثقيلة",
+    "classification": "LOCAL",
+    "manufacturer": "Saudi Master",
+    "tagline": "Heavy-Duty Structural Steel Shuttering for Massive Repetitive Casting",
+    "shortDescription": "An extra-heavy duty fabricated steel shutter and formwork system engineered for non-deflecting repetitive casting in major Saudi civil works.",
+    "description": "High-moment steel walers welded directly to 5mm faceplates with robust external taper-tie connection points.",
+    "systemInformation": "Large modular crane-handled gangs are coupled together with high-shear pins. Concrete is placed in high-velocity lifts without risk of face bulge.",
+    "applicationDescription": "Massive retaining walls, deep basement perimeters, strategic water storage reservoirs, and power plant substations.",
+    "applications": [
+      "infrastructure",
+      "industrial",
+      "tanks-circular"
+    ],
+    "geometryCategories": [
+      "wall"
+    ],
+    "benefits": [
+      "Over 300 successful pour reuses with minimal maintenance",
+      "Eliminates surface plywood replacement costs",
+      "Engineered for 90 kN/m² hydrostatic concrete pressure",
+      "Complete local parts availability in Riyadh and Dammam"
+    ],
+    "components": [
+      "All-Steel Shutter Panels",
+      "Integrated Stiffener Walers",
+      "Heavy-Duty Tie Wedges",
+      "Crane Lifting Hooks"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Faceplate Steel",
+        "value": "5.0 mm S355 Structural Steel"
+      },
+      {
+        "label": "Frame Depth",
+        "value": "150 mm welded profile"
+      },
+      {
+        "label": "Max Permissible Pressure",
+        "value": "90 kN/m²"
+      },
+      {
+        "label": "Crane Handling",
+        "value": "Integrated 2.5t lift lugs"
+      }
+    ],
+    "featuredImage": "/assets/images/products/grinder-steel-shutter.webp",
+    "gallery": [
+      "/assets/images/products/grinder-steel-shutter.webp"
+    ],
+    "video": null,
+    "displayOrder": 5,
+    "active": true
+  },
+  {
+    "id": 6,
+    "slug": "piers-formwork",
+    "sku": "SMC-PF-06",
+    "name": "Bespoke Highway Pier Systems",
+    "nameAr": "نظام قوالب ركائز الجسور والهامات",
+    "classification": "LOCAL",
+    "manufacturer": "Saudi Master",
+    "tagline": "Bespoke Heavy-Gauge Steel Shuttering for Bridges and Interchange Pylons",
+    "shortDescription": "A customized structural steel shuttering system manufactured for casting reinforced-concrete bridge piers, viaduct columns, and flared hammerhead caps.",
+    "description": "Multi-segment modular steel forms engineered to match project-specific geometric curvature and cross-sectional tapers.",
+    "systemInformation": "Curved panels are rigged into place around heavy reinforcing cages. Anchor ties and integral working access brackets enable safe, monolithic casting in 4m to 8m vertical segments.",
+    "applicationDescription": "High-speed rail viaducts, highway interchange flyovers, marine bridge pylons, and heavy infrastructure overpasses.",
+    "applications": [
+      "bridges",
+      "infrastructure"
+    ],
+    "geometryCategories": [
+      "column",
+      "bridge"
+    ],
+    "benefits": [
+      "Engineered FEA stress analysis for severe desert wind gust dynamics",
+      "Full pre-assembly verification at Riyadh plant prior to dispatch",
+      "Self-supporting tie-free options for signature architectural bridge piers",
+      "Seamless compatibility with heavy shoring falsework"
+    ],
+    "components": [
+      "Tapered Steel Pier Shells",
+      "Hammerhead Soffit Brackets",
+      "Heavy Tie Rods & Walers",
+      "Perimeter Working Deck",
+      "Access Ladderway"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Steel Specification",
+        "value": "S355JR high-yield steel"
+      },
+      {
+        "label": "Pier Height Supported",
+        "value": "Up to 40 m segmented"
+      },
+      {
+        "label": "Lateral Pressure",
+        "value": "120 kN/m² hydrostatic"
+      },
+      {
+        "label": "Fabrication Tolerance",
+        "value": "± 1.5 mm laser verified"
+      }
+    ],
+    "featuredImage": "/assets/images/products/piers-formwork.webp",
+    "gallery": [
+      "/assets/images/products/piers-formwork.webp"
+    ],
+    "video": null,
+    "displayOrder": 6,
+    "active": true
+  },
+  {
+    "id": 7,
+    "slug": "ulma-formwork",
+    "sku": "ULM-ORM-01",
+    "name": "ULMA ORMA Modular Formwork",
+    "nameAr": "نظام شدات أولما أورما المعيارية للحوائط",
+    "classification": "EUROPEAN",
+    "manufacturer": "ULMA Construction",
+    "tagline": "European Benchmark for High-Efficiency Concrete Wall & Column Construction",
+    "shortDescription": "An engineered modular panel formwork system developed by ULMA in Spain, designed for rapid crane-handled forming of large concrete wall surfaces.",
+    "description": "High-strength perimeter steel frame with reinforced corners enclosing 21mm Finnish birch phenolic plywood face, joined by a single-strike BFD clamp.",
+    "systemInformation": "Panels join rapidly with the multi-function BFD clamp which aligns, stiffens, and tightly locks adjacent panels in a single motion, handling 80 kN/m² concrete pressure.",
+    "applicationDescription": "High-rise building cores, shear walls, retaining structures, bridge abutments, and underground infrastructure.",
+    "applications": [
+      "high-rise",
+      "infrastructure"
+    ],
+    "geometryCategories": [
+      "wall",
+      "high-rise"
+    ],
+    "benefits": [
+      "Certified to EN 12812 European temporary works norms",
+      "Only 2 tie rods required for 3.3m high panels",
+      "BFD clamp achieves panel connection and flush alignment simultaneously",
+      "Extensive rental stock available across KSA"
+    ],
+    "components": [
+      "ORMA Panel Elements (3.3m & 2.7m)",
+      "BFD Quick Coupling Clamps",
+      "DW15 / DW20 Tie Systems",
+      "Push-Pull Plumbing Props",
+      "Pouring Platform Brackets"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Max Concrete Pressure",
+        "value": "80 kN/m²"
+      },
+      {
+        "label": "Plywood Spec",
+        "value": "21 mm 100% Birch Plywood 220 g/m² film"
+      },
+      {
+        "label": "Panel Heights",
+        "value": "3.3 m, 2.7 m, 1.2 m"
+      },
+      {
+        "label": "Panel Widths",
+        "value": "0.3 m to 2.4 m"
+      },
+      {
+        "label": "Euro Code",
+        "value": "EN 12812 / DIN 18218"
+      }
+    ],
+    "featuredImage": "/assets/images/products/ulma-formwork.webp",
+    "gallery": [
+      "/assets/images/products/ulma-formwork.webp"
+    ],
+    "video": null,
+    "displayOrder": 7,
+    "active": true
+  },
+  {
+    "id": 8,
+    "slug": "ulma-brio-ringlock",
+    "sku": "ULM-BRIO-02",
+    "name": "ULMA BRIO Ringlock Scaffolding",
+    "nameAr": "نظام سقالات أولما بريو رينج لوك متعددة الاتجاهات",
+    "classification": "EUROPEAN",
+    "manufacturer": "ULMA Construction",
+    "tagline": "Gold Standard European Multidirectional Scaffolding for Access & Shoring",
+    "shortDescription": "A certified multidirectional ringlock scaffolding system designed and certified according to European standards EN 12810-1/2 and EN 12811-1/2/3.",
+    "description": "Standards equipped with patented 8-hole connection rosettes at 500mm spacing, accepting ledger and diagonal brace heads with captive wedge locks.",
+    "systemInformation": "Ledger cast ends slide over the rosette disc. The integrated captive steel wedge is driven through the matching opening and secured with a single hammer blow.",
+    "applicationDescription": "Architectural facades, petrochemical refineries, industrial boiler maintenance, complex curved structures, and public temporary pedestrian bridges.",
+    "applications": [
+      "facades",
+      "industrial",
+      "tanks-circular"
+    ],
+    "geometryCategories": [
+      "circular"
+    ],
+    "benefits": [
+      "Certified under AENOR Product Certification according to EN 12810/11",
+      "Supports up to 8 connections at a single node without geometric interference",
+      "High leg capacity up to 75 kN when configured as heavy shoring",
+      "Anti-tilt non-slip perforated steel decking"
+    ],
+    "components": [
+      "BRIO Standard with Rosette",
+      "BRIO Ledger with Wedge",
+      "Diagonal Brace",
+      "Steel Walkway Deck",
+      "Aluminum Access Trapdoor Ladder",
+      "Toe Boards"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Tube Specs",
+        "value": "Ø 48.3 mm x 3.2 mm S355 steel"
+      },
+      {
+        "label": "Rosette Spacing",
+        "value": "500 mm regular interval"
+      },
+      {
+        "label": "Hot Dip Galv",
+        "value": "≥ 75 µm thickness"
+      },
+      {
+        "label": "Load Class",
+        "value": "Class 6 heavy industrial (6.0 kN/m²)"
+      },
+      {
+        "label": "Certification",
+        "value": "AENOR / EN 12810 / EN 12811"
+      }
+    ],
+    "featuredImage": "/assets/images/products/ulma-brio-ringlock.webp",
+    "gallery": [
+      "/assets/images/products/ulma-brio-ringlock.webp"
+    ],
+    "video": null,
+    "displayOrder": 8,
+    "active": true
+  },
+  {
+    "id": 9,
+    "slug": "ulma-heavy-shoring",
+    "sku": "ULM-MK-03",
+    "name": "ULMA Heavy Shoring Systems (MK / T-500)",
+    "nameAr": "أبراج التدعيم الثقيل أولما إم كيه و تي-500",
+    "classification": "EUROPEAN",
+    "manufacturer": "ULMA Construction",
+    "tagline": "Extreme-Capacity Structural Falsework Towers Supporting Up to 500 kN Per Leg",
+    "shortDescription": "A high-load modular shoring and truss falsework system engineered for heavy civil concrete structures, viaduct spans, and deep transfer slabs.",
+    "description": "Modular MK structural steel walers combined into independent towers, gantry falsework frames, or launching carriages.",
+    "systemInformation": "MK walers bolt together via standardized high-tensile connection plates. Hydraulic jacks at base or head allow controlled pre-loading and millimeter-accurate post-pour release.",
+    "applicationDescription": "Balanced cantilever bridges, post-tensioned flyover spans, mega-transfer beam supports, and tunnel portal casting.",
+    "applications": [
+      "bridges",
+      "infrastructure"
+    ],
+    "geometryCategories": [
+      "slab",
+      "bridge"
+    ],
+    "benefits": [
+      "Enormous load capacity from 250 kN up to 500 kN per shoring column",
+      "Allows large traffic clearance spans underneath without closing live roads",
+      "Complete structural calculation package signed by European and Saudi PEs",
+      "Fully compatible with ULMA formwork decks"
+    ],
+    "components": [
+      "MK Heavy Waler Beams",
+      "Spindle Screw Jacks",
+      "High-Load Base Plates",
+      "Diagonal Bracing Trusses",
+      "Hydraulic Lowering Units"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Leg Load Capacity",
+        "value": "Up to 500 kN / leg"
+      },
+      {
+        "label": "Waler Profile",
+        "value": "Double UPN rolled channels back-to-back"
+      },
+      {
+        "label": "Steel Quality",
+        "value": "S355 Structural Steel"
+      },
+      {
+        "label": "Certifications",
+        "value": "EN 12812 / Eurocode 3"
+      }
+    ],
+    "featuredImage": "/assets/images/products/ulma-heavy-shoring.webp",
+    "gallery": [
+      "/assets/images/products/ulma-heavy-shoring.webp"
+    ],
+    "video": null,
+    "displayOrder": 9,
+    "active": true
+  },
+  {
+    "id": 10,
+    "slug": "specialized-formwork",
+    "sku": "ULM-CLB-04",
+    "name": "Specialized Climbing & Hydraulic Systems (ATR)",
+    "nameAr": "أنظمة الشدات المتخصصة والتسلق الهيدروليكي الآلي",
+    "classification": "EUROPEAN",
+    "manufacturer": "ULMA Construction",
+    "tagline": "Crane-Independent Hydraulic Self-Climbing Formwork for Mega-Tower Cores",
+    "shortDescription": "Crane-free hydraulic climbing systems and rail-guided perimeter safety screens designed for ultra-tall skyscraper towers and suspension pylons.",
+    "description": "Continuous mast rails anchored to cast concrete sleeves with synchronized hydraulic climbing cylinders moving multi-story platforms simultaneously.",
+    "systemInformation": "Hydraulic power units advance the climbing rails upward into fresh anchor shoes, followed by the entire platform assembly in an automated cycle.",
+    "applicationDescription": "Skyscrapers exceeding 40 floors, high-wind airport control towers, telecommunications obelisks, and deep dam pylons.",
+    "applications": [
+      "high-rise"
+    ],
+    "geometryCategories": [
+      "high-rise"
+    ],
+    "benefits": [
+      "Operates independently of tower crane availability, saving critical crane time",
+      "Full weather and wind enclosure protecting crews up to extreme elevations",
+      "Heavy concrete placing boom can be mounted directly onto the climbing mast",
+      "Zero drop hazard with continuous mechanical pawl locking"
+    ],
+    "components": [
+      "ATR Hydraulic Cylinders",
+      "Guide Climbing Rails",
+      "Anchor Cone Receptacles",
+      "Multi-Tiered Work Platforms",
+      "HWS Wind Protection Screens"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Cylinder Capacity",
+        "value": "100 kN lifting force"
+      },
+      {
+        "label": "Stroke Length",
+        "value": "4.0 m single push"
+      },
+      {
+        "label": "Wind Resistance",
+        "value": "Operational up to 72 km/h wind speeds"
+      },
+      {
+        "label": "Enclosure",
+        "value": "Corrugated steel or perforated mesh"
+      }
+    ],
+    "featuredImage": "/assets/images/products/specialized-formwork.webp",
+    "gallery": [
+      "/assets/images/products/specialized-formwork.webp"
+    ],
+    "video": null,
+    "displayOrder": 10,
+    "active": true
+  },
+  {
+    "id": 11,
+    "slug": "project-specific-engineering",
+    "sku": "ULM-ENG-05",
+    "name": "Project-Specific Engineered Solutions",
+    "nameAr": "الحلول الهندسية المخصصة للمشاريع الكبرى",
+    "classification": "EUROPEAN",
+    "manufacturer": "ULMA Construction",
+    "tagline": "Turnkey Finite Element Analysis, BIM Coordination, and Custom Structural Weldments",
+    "shortDescription": "A comprehensive temporary works engineering service integrating 3D BIM clash detection, structural static calculations, and hybrid European-Saudi equipment assemblies.",
+    "description": "High-density structural calculations paired with custom fabricated transition brackets that bridge standard ULMA systems with site-specific architectural geometry.",
+    "systemInformation": "Engineers analyze structural drawings, build parametric 3D models in Navisworks/Revit, run FEA load simulations, and fabricate custom connection nodes at our Riyadh center.",
+    "applicationDescription": "Iconic cultural pavilions, stadium cantilevered canopies, tunnel carriage shuttering, and deep station cut-and-cover excavations.",
+    "applications": [
+      "high-rise",
+      "bridges",
+      "infrastructure"
+    ],
+    "geometryCategories": [
+      "bridge"
+    ],
+    "benefits": [
+      "Full compliance with Saudi Building Code (SBC) and European Eurocodes",
+      "Zero-clash digital twin submittals for tier-1 consultants",
+      "PE-stamped calculation books accepted across NEOM, Red Sea, and Qiddiya",
+      "On-site resident engineer supervision during erection"
+    ],
+    "components": [
+      "FEA Stress Calculation Book",
+      "3D BIM LOD 400 Erection Model",
+      "Custom Steel Transition Welds",
+      "Step-by-Step Method Statement"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Software Suite",
+        "value": "Autodesk Revit, Navisworks, RSTAB, Dlubal FEA"
+      },
+      {
+        "label": "Bim Standard",
+        "value": "ISO 19650 / LOD 400"
+      },
+      {
+        "label": "Pe Stamp",
+        "value": "Licensed Saudi Council of Engineers (SCE)"
+      },
+      {
+        "label": "Wind Analysis",
+        "value": "Desert dynamic wind load simulation"
+      }
+    ],
+    "featuredImage": "/assets/images/products/project-specific-engineering.webp",
+    "gallery": [
+      "/assets/images/products/project-specific-engineering.webp"
+    ],
+    "video": null,
+    "displayOrder": 11,
+    "active": true
+  },
+  {
+    "id": 12,
+    "slug": "circular-working-platforms",
+    "sku": "ULM-WPF-06",
+    "name": "Working Platforms & Circular Access (SGF / KSP)",
+    "nameAr": "منصات العمل المحيطية والوصول للمنشآت الدائرية",
+    "classification": "EUROPEAN",
+    "manufacturer": "ULMA Construction",
+    "tagline": "High-Security Perimeter Staging and Suspended Brackets for Silos and Storage Tanks",
+    "shortDescription": "Modular perimeter brackets and suspended staging platforms designed to wrap circular storage tanks, flared bridge piers, and silo perimeters with zero fall hazard.",
+    "description": "Heavy-duty cantilevered brackets anchoring directly into prior pour tie-rod cones with fully integrated perimeter mesh screens and toe boards.",
+    "systemInformation": "Brackets hang from anchor cones placed in previous concrete lifts. Workers assemble safe continuous circular walkways that follow the structure radius smoothly.",
+    "applicationDescription": "Wastewater clarifier tanks, cryogenic LNG spherical storage, grain silos, and stepped bridge pylon pours.",
+    "applications": [
+      "industrial",
+      "tanks-circular"
+    ],
+    "geometryCategories": [
+      "circular",
+      "column"
+    ],
+    "benefits": [
+      "Completely enclosed work zones with fall arrest anchor rings",
+      "Adjustable bracket inclination compensates for batter angles up to 20°",
+      "Hot-dip galvanized components withstand harsh coastal and industrial environments",
+      "OSHA and Saudi Civil Defense safety compliance"
+    ],
+    "components": [
+      "SGF Climbing Brackets",
+      "Heavy Anchor Cones",
+      "Perimeter Safety Handrails",
+      "Non-Slip Circular Deck Infill",
+      "Integrated Hoist Arm"
+    ],
+    "technicalFeatures": [
+      {
+        "label": "Permissible Live Load",
+        "value": "Class 4 (3.0 kN/m²)"
+      },
+      {
+        "label": "Platform Width",
+        "value": "1.8 m to 2.2 m wide deck"
+      },
+      {
+        "label": "Max Angle Inclination",
+        "value": "± 20° vertical slope"
+      },
+      {
+        "label": "Safety Standard",
+        "value": "EN 12811-1 / OSHA 1926"
+      }
+    ],
+    "featuredImage": "/assets/images/products/circular-working-platforms.webp",
+    "gallery": [
+      "/assets/images/products/circular-working-platforms.webp"
+    ],
+    "video": null,
+    "displayOrder": 12,
+    "active": true
+  }
+]
