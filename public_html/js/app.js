@@ -706,6 +706,7 @@ function renderProducts() {
   const total = list.length;
   const first = list[0] || {};
   const firstIsLocal = first.class_code === 'LOCAL';
+  const firstTagBg = firstIsLocal ? 'bg-primary-gold text-white' : 'bg-ulma-orange text-white';
   const firstOrigin = firstIsLocal ? (isAr ? 'تصنيع محلي بالرياض' : 'KSA Riyadh Yard') : (isAr ? 'هندسة أولما الأوروبية' : 'ULMA Europe');
   const firstClassLabel = firstIsLocal ? (isAr ? 'تصنيع محلي' : 'LOCAL MANUFACTURED') : (isAr ? 'أنظمة أوروبية' : 'EUROPEAN SYSTEMS');
   const firstAdvantages = isAr 

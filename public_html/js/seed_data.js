@@ -1018,9 +1018,9 @@ window.DB_SNAPSHOT = {
       "summary_ar": "ترميز الشحنات بباركود رقمي يتيح التتبع اللوجستي وشحنها الفوري على أسطول الشاحنات للمشاريع في غضون ساعات.",
       "details_en": "Individual batches are barcoded, certified, strapped, and dispatched directly onto dedicated heavy logistics flatbeds.",
       "details_ar": "ترميز الشحنات بباركود رقمي يتيح التتبع اللوجستي وشحنها الفوري على أسطول الشاحنات للمشاريع في غضون ساعات.",
-      "image_url": "images/careers/team-collaboration.jpg",
+      "image_url": "images/industries/industrial-logistics.jpg",
       "step_tag": "Step 06: Rapid Dispatch",
-      "hero_image": "images/careers/team-collaboration.jpg"
+      "hero_image": "images/industries/industrial-logistics.jpg"
     }
   ],
   "projects": [
@@ -1034,7 +1034,7 @@ window.DB_SNAPSHOT = {
       "region_code": "KSA",
       "industry_en": "Rail & High-Speed Transit",
       "industry_ar": "قطارات النقل السريع والبنية التحتية",
-      "hero_image": "images/projects/desert-road-grading.jpg",
+      "hero_image": "images/projects/desert-road-construction.jpg",
       "summary_en": "Turnkey falsework and pier formwork package for monumental 32m high bridge supports in extreme desert canyon topography.",
       "summary_ar": "حزمة متكاملة للتدعيم الثقيل وشدات الأعمدة لجسور بارتفاع 32 متراً في التضاريس الجبلية الوعرة بنيوم.",
       "challenge_en": "Contractor required monolithic casting of 1,400 kN hammerhead caps while resisting 85 km/h desert crosswinds without crane availability delays.",
@@ -1046,7 +1046,7 @@ window.DB_SNAPSHOT = {
       "results_en": "Zero safety incidents recorded across 180,000 man-hours; pour cycle accelerated by 4 days per segment.",
       "results_ar": "صفر حوادث سلامة عبر 180,000 ساعة عمل، مع تسريع دورة الصب بـ 4 أيام لكل قطاع.",
       "key_metrics": "[{\"label\": \"Total Pier Height\", \"value\": \"32 meters\"}, {\"label\": \"Concrete Volume\", \"value\": \"45,000 m\\u00b3\"}, {\"label\": \"Cycle Speed\", \"value\": \"6 days/pier\"}]",
-      "gallery": "[\"images/projects/desert-road-grading.jpg\"]",
+      "gallery": "[\"images/projects/desert-road-construction.jpg\"]",
       "status": "PUBLISHED",
       "featured": 1,
       "display_order": 0,
@@ -1163,7 +1163,7 @@ window.DB_SNAPSHOT = {
       "region_code": "KSA",
       "industry_en": "Heavy Civil & Sports Mega-Infrastructure",
       "industry_ar": "المنشآت الرياضية الكبرى والهندسة المدنية",
-      "hero_image": "images/projects/financial-district-hq.jpg",
+      "hero_image": "images/projects/road-construction-expressway.jpg",
       "summary_en": "Heavy fabricated Grinder steel shutters and heavy MK falsework for massive 18m retaining walls.",
       "summary_ar": "شدات جريندر الفولاذية الثقيلة وأبراج MK لجدران استنادية عملاقة بارتفاع 18 متراً.",
       "challenge_en": "High retaining forces in mountainous terrain with extreme thermal fluctuations from 5°C to 48°C.",
