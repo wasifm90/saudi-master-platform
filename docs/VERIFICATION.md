@@ -1,6 +1,16 @@
 # Production verification — 29 September 2026
 
-Verified local release: **http://localhost:4305**, Angular **22.2.0** (`sm-root[ng-version]` inspected in the browser). This is a local production build, not a deployment to the public domain or Namecheap account.
+The original migration baseline was verified at **http://localhost:4305**, Angular **22.2.0** (`sm-root[ng-version]` inspected in the browser). The product catalogue was redesigned into tiles later on 29 September; the Lighthouse reports and screenshots below belong to the earlier baseline and are retained for reference.
+
+## Product tile update
+
+- Production build passed with **37 prerendered routes** and 355.72 kB initial raw bundle (98.89 kB estimated transfer).
+- **10 tests across 2 files passed**, including the updated rendered card/filter/link test.
+- Production output check passed for all routes, canonical metadata, 153 asset references, and deployment rules.
+- In the production preview at port 4306, the responsive tile grid rendered 12 products with no broken loaded card images or horizontal overflow at a 615px viewport. Keyboard activation of European systems updated the visible count and cards to 6, starting with ULMA ORMA. Product detail and enquiry links remained correct in the rendered page.
+- The first sandboxed build aborted without diagnostics; the same build passed outside the sandbox. Lighthouse was not rerun after this visual update.
+
+## Original migration baseline
 
 ## Build and automated checks
 
@@ -15,7 +25,7 @@ Verified local release: **http://localhost:4305**, Angular **22.2.0** (`sm-root[
 | `git diff --check` | Pass |
 | Production source scan | No `any`, inline `onclick`, `DB_SNAPSHOT`, or `document.querySelector` application logic |
 
-Tests cover repeated ALL/LOCAL/EUROPEAN filtering and inactive records, empty results, all geometry categories, multiple product assignments, assembly bounds/sequencing, accordion state, slug resolution, rendered Angular product/CTA consistency, geometry data replacement, observer cleanup, and reduced-motion/muted-video initialization.
+At the baseline, tests covered repeated ALL/LOCAL/EUROPEAN filtering and inactive records, empty results, all geometry categories, multiple product assignments, assembly bounds/sequencing, accordion state, slug resolution, rendered Angular product/CTA consistency, geometry data replacement, observer cleanup, and reduced-motion/muted-video initialization. The current suite replaces the chapter/observer assertion with card/filter/link coverage.
 
 ## Chrome Lighthouse — final production build
 

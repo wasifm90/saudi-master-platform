@@ -7,13 +7,12 @@ import { PRODUCTS } from '../../data/catalog';
 import { GeometryComponent } from './geometry.component';
 import { AssemblyComponent } from './assembly.component';
 import { SystemsComponent } from '../products/systems.component';
-const disconnect = vi.fn();
 beforeEach(() => {
   vi.stubGlobal(
     'IntersectionObserver',
     class {
       observe = vi.fn();
-      disconnect = disconnect;
+      disconnect = vi.fn();
     },
   );
 });
@@ -30,7 +29,7 @@ async function configure(): Promise<void> {
   repository.products.set(PRODUCTS);
 }
 describe('Angular rendered interactions', () => {
-  it('updates filtered chapters and the active CTA together', async () => {
+  it('filters product tiles while keeping each card linked to its product', async () => {
     await configure();
     const fixture = TestBed.createComponent(SystemsComponent);
     fixture.detectChanges();
@@ -38,21 +37,27 @@ describe('Angular rendered interactions', () => {
       fixture.nativeElement.querySelectorAll('.filters button');
     buttons[2]!.click();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelectorAll('.chapter')).toHaveLength(6);
-    expect(fixture.nativeElement.querySelector('.narrative h3').textContent).toContain('ULMA ORMA');
-    fixture.componentInstance.activate(1);
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.narrative .button').getAttribute('href')).toBe(
-      '/products/ulma-brio-ringlock',
+    expect(fixture.nativeElement.querySelectorAll('.product-tile')).toHaveLength(6);
+    expect(fixture.nativeElement.querySelector('.product-tile h3').textContent).toContain(
+      'ULMA ORMA',
     );
+    expect(
+      fixture.nativeElement
+        .querySelectorAll('.product-tile')[1]
+        .querySelector('h3 a')
+        .getAttribute('href'),
+    ).toBe('/products/ulma-brio-ringlock');
+    expect(fixture.nativeElement.querySelector('.result-count').textContent).toContain('6 systems');
     buttons[1]!.click();
     fixture.detectChanges();
-    expect(fixture.componentInstance.activeProductIndex()).toBe(0);
-    expect(fixture.nativeElement.querySelector('.narrative .button').getAttribute('href')).toBe(
+    expect(fixture.nativeElement.querySelectorAll('.product-tile')).toHaveLength(6);
+    expect(fixture.nativeElement.querySelector('.product-tile h3 a').getAttribute('href')).toBe(
       '/products/cuplock-scaffolding',
     );
+    expect(
+      fixture.nativeElement.querySelector('.product-tile .tile-enquire').getAttribute('href'),
+    ).toBe('/contact?product=cuplock-scaffolding');
     fixture.destroy();
-    expect(disconnect).toHaveBeenCalled();
   });
   it('replaces geometry content and safely resets when repository data changes', async () => {
     await configure();

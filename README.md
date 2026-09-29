@@ -24,10 +24,10 @@ npm run verify:production
 - `src/app/core/models`: strongly typed product and editorial content contracts.
 - `src/app/core/services`: repository boundaries, interaction state and metadata.
 - `src/app/data`: editable catalogue JSON, static page copy, taxonomy, navigation.
-- `src/app/shared`: responsive image component, product narrative and scroll observer directive.
+- `src/app/shared`: responsive image component.
 - `src/app/layout`: header, accessible mobile dialog and footer.
 - `src/app/features/home`: separate hero, geometry, assembly, services, manufacturing and projects.
-- `src/app/features/products`: scroll showcase, product index and product detail routes.
+- `src/app/features/products`: filterable product tile catalogue, product index and product detail routes.
 - `src/app/features/content`: reusable editorial index/detail/static pages.
 - `src/app/features/contact`: typed Reactive Form and explicit email-draft flow.
 - `public/assets`: local responsive images, video and poster. Fonts are bundled by Angular.

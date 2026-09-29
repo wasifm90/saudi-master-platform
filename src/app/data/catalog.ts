@@ -76,7 +76,7 @@ export const HOME = {
     'Bespoke steel shutters, modular formwork systems, heavy shoring, and access scaffolding engineered for the Kingdom’s demanding construction projects.',
   products: 'Engineered systems',
   productsDescription:
-    'Saudi fabrication and European ULMA engineering chapters discovered in continuous motion.',
+    'Saudi fabrication and European ULMA engineering in a clear, filterable systems catalogue.',
   geometry: 'Formwork for every geometry',
   geometryDescription:
     'Select a structural geometry to explore the corresponding formwork, access and shoring systems.',

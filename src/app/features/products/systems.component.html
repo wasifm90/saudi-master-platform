@@ -2,76 +2,94 @@
   <div class="shell">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Our products</p>
+        <p class="eyebrow">Our products / Engineered systems</p>
         <h2 id="systems-title">{{ copy.products }}</h2>
         <p>{{ copy.productsDescription }}</p>
       </div>
+      <div class="catalog-mark" aria-hidden="true">
+        <span class="catalog-mark__line"></span>
+        <span>01 — {{ repository.products().length.toString().padStart(2, '0') }}</span>
+        <span>Systems catalogue</span>
+      </div>
     </div>
-    <div class="filters" role="group" aria-label="Product classification">
-      @for (filter of filters; track filter.code) {
-        <button
-          type="button"
-          [class.active]="activeClassification() === filter.code"
-          [attr.aria-pressed]="activeClassification() === filter.code"
-          (click)="selectFilter(filter.code)"
-        >
-          {{ filter.label }}
-        </button>
-      }
+
+    <div class="catalog-controls">
+      <div class="filters" role="group" aria-label="Product classification">
+        @for (filter of filters; track filter.code) {
+          <button
+            type="button"
+            [class.active]="activeClassification() === filter.code"
+            [attr.aria-pressed]="activeClassification() === filter.code"
+            (click)="selectFilter(filter.code)"
+          >
+            <span>{{ filter.label }}</span>
+            <span class="filter-count">{{ countFor(filter.code) }}</span>
+          </button>
+        }
+      </div>
+      <p class="result-count" role="status">Showing {{ filteredProducts().length }} systems</p>
     </div>
+
     @if (repository.error()) {
-      <p role="alert">{{ repository.error() }}</p>
+      <p class="catalog-error" role="alert">{{ repository.error() }}</p>
     }
-    @if (activeProduct(); as active) {
-      <div class="showcase" [attr.data-filter]="activeClassification()">
-        <aside class="narrative">
-          <div class="chapter-progress">
-            <span>{{ activeProductIndex() + 1 }} / {{ filteredProducts().length }}</span
-            ><span>System chapter</span
-            ><progress
-              [value]="activeProductIndex() + 1"
-              [max]="filteredProducts().length"
-              aria-label="Product progress"
-            ></progress>
-          </div>
-          <sm-product-narrative [product]="active" />
-          <p class="scroll-hint">↓ Scroll to discover systems</p>
-        </aside>
-        <div class="chapters">
-          @for (
-            product of filteredProducts();
-            track activeClassification() + product.slug;
-            let index = $index
-          ) {
-            <article
-              class="chapter"
-              [smChapter]="index"
-              [chapterSequence]="filteredProducts()"
-              (entered)="activate($event)"
-              [attr.data-product-slug]="product.slug"
+    @if (filteredProducts().length) {
+      <div class="product-grid" [attr.data-filter]="activeClassification()">
+        @for (product of filteredProducts(); track product.slug; let index = $index) {
+          <article class="product-tile" [attr.data-product-slug]="product.slug">
+            <a
+              class="tile-media"
+              [routerLink]="['/products', product.slug]"
+              [attr.aria-label]="'View ' + product.name"
             >
-              <a class="chapter-image" [routerLink]="['/products', product.slug]"
-                ><sm-image [src]="product.featuredImage" [alt]="product.name" />
-                <div class="image-shade"></div>
-                <div class="image-top">
-                  <span>{{ index + 1 }} / {{ filteredProducts().length }}</span
-                  ><span>{{ product.sku }}</span>
-                </div>
-                <div class="image-bottom">
-                  <p>{{ product.manufacturer }}</p>
-                  <h3>{{ product.name }}</h3>
-                  <span>View product specification ↗</span>
-                </div></a
+              <sm-image
+                [src]="product.featuredImage"
+                [alt]="product.name"
+                sizes="(min-width: 1080px) 30vw, (min-width: 680px) 46vw, 100vw"
+              />
+              <span class="tile-media__wash"></span>
+              <span class="tile-index"
+                >{{ (index + 1).toString().padStart(2, '0') }} /
+                {{ filteredProducts().length.toString().padStart(2, '0') }}</span
               >
-              <div class="chapter-summary">
-                <span class="eyebrow">Systems · Geometry · Assembly</span>
-                <p>{{ product.description }}</p>
-                <a [routerLink]="['/products', product.slug]">View product →</a>
+              <span class="tile-open" aria-hidden="true">↗</span>
+            </a>
+
+            <div class="tile-content">
+              <div class="tile-meta">
+                <span class="tile-classification">{{
+                  product.classification === 'LOCAL' ? 'Saudi manufactured' : 'European systems'
+                }}</span>
+                <span>{{ product.sku }}</span>
               </div>
-              <div class="mobile-narrative"><sm-product-narrative [product]="product" /></div>
-            </article>
-          }
-        </div>
+              <p class="tile-manufacturer">{{ product.manufacturer }}</p>
+              <h3>
+                <a [routerLink]="['/products', product.slug]">{{ product.name }}</a>
+              </h3>
+              <p class="tile-description">{{ product.shortDescription }}</p>
+              <dl class="tile-specs">
+                @for (spec of product.technicalFeatures.slice(0, 2); track spec.label) {
+                  <div>
+                    <dt>{{ spec.label }}</dt>
+                    <dd>{{ spec.value }}</dd>
+                  </div>
+                }
+              </dl>
+              <div class="tile-actions">
+                <a [routerLink]="['/products', product.slug]"
+                  >Explore system <span aria-hidden="true">→</span></a
+                >
+                <a
+                  class="tile-enquire"
+                  routerLink="/contact"
+                  [queryParams]="{ product: product.slug }"
+                  [attr.aria-label]="'Enquire about ' + product.name"
+                  >Enquire <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </div>
+          </article>
+        }
       </div>
     } @else {
       <p class="empty-state" role="status">
