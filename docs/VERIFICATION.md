@@ -1,5 +1,12 @@
 # Production verification — 29 September 2026
 
+## Brighter shared-card update
+
+- The home catalogue, `/products`, geometry feature, and related systems use one product-card component. Product detail pages use the same rounded, pale-gradient visual language.
+- Ten tests across two files passed. The production build prerendered all **37 routes** without warnings; the initial bundle is **356.62 kB raw / 99.09 kB estimated transfer**. Production output verification passed for routes, metadata, 153 assets, and deployment rules. The local HTTP check passed for all 37 pages, expected 404s, video byte ranges, and gzip HTML.
+- In the local production browser preview, the catalogue, geometry feature, and product detail page rendered with the brighter palette at a 628px viewport. The geometry category control selected Wall & Shear and updated the product card. The detail page rendered its related card with a valid route, no broken card images, and no horizontal overflow at that width.
+- Product card hover and focus motion, image zoom, sheen, arrow movement, and progressive scroll entrance are disabled by reduced-motion preferences. Lighthouse was not rerun for this styling update.
+
 The original migration baseline was verified at **http://localhost:4305**, Angular **22.2.0** (`sm-root[ng-version]` inspected in the browser). The product catalogue was redesigned into tiles later on 29 September; the Lighthouse reports and screenshots below belong to the earlier baseline and are retained for reference.
 
 ## Product tile update

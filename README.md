@@ -24,7 +24,7 @@ npm run verify:production
 - `src/app/core/models`: strongly typed product and editorial content contracts.
 - `src/app/core/services`: repository boundaries, interaction state and metadata.
 - `src/app/data`: editable catalogue JSON, static page copy, taxonomy, navigation.
-- `src/app/shared`: responsive image component.
+- `src/app/shared`: responsive image and reusable product card components.
 - `src/app/layout`: header, accessible mobile dialog and footer.
 - `src/app/features/home`: separate hero, geometry, assembly, services, manufacturing and projects.
 - `src/app/features/products`: filterable product tile catalogue, product index and product detail routes.

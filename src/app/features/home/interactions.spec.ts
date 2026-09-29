@@ -54,8 +54,9 @@ describe('Angular rendered interactions', () => {
     expect(fixture.nativeElement.querySelector('.product-tile h3 a').getAttribute('href')).toBe(
       '/products/cuplock-scaffolding',
     );
+    expect(fixture.nativeElement.querySelectorAll('.product-card')).toHaveLength(6);
     expect(
-      fixture.nativeElement.querySelector('.product-tile .tile-enquire').getAttribute('href'),
+      fixture.nativeElement.querySelector('.product-tile .card-enquire').getAttribute('href'),
     ).toBe('/contact?product=cuplock-scaffolding');
     fixture.destroy();
   });
@@ -67,15 +68,15 @@ describe('Angular rendered interactions', () => {
     fixture.detectChanges();
     fixture.componentInstance.next();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.geometry-copy h3').textContent).toContain(
-      'Heavy Shoring',
-    );
+    expect(
+      fixture.nativeElement.querySelector('.geometry-content .product-card h3').textContent,
+    ).toContain('Heavy Shoring');
     repository.products.set(PRODUCTS.filter((p) => p.slug === 'cuplock-scaffolding'));
     fixture.detectChanges();
     expect(fixture.componentInstance.activeProductIndex()).toBe(0);
-    expect(fixture.nativeElement.querySelector('.geometry-copy .button').getAttribute('href')).toBe(
-      '/products/cuplock-scaffolding',
-    );
+    expect(
+      fixture.nativeElement.querySelector('.geometry-content .card-actions a').getAttribute('href'),
+    ).toBe('/products/cuplock-scaffolding');
   });
   it('renders a bounded assembly sequence through button clicks', async () => {
     await configure();

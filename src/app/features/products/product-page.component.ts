@@ -4,10 +4,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ProductRepository } from '../../core/services/product.repository';
 import { resolveSlug } from '../../core/services/interaction-state';
 import { ImageComponent } from '../../shared/image.component';
+import { ProductCardComponent } from '../../shared/product-card.component';
 import { SeoService } from '../../core/services/seo.service';
 @Component({
   selector: 'sm-product-page',
-  imports: [RouterLink, ImageComponent],
+  imports: [RouterLink, ImageComponent, ProductCardComponent],
   template: ` @if (product(); as p) {
       <article class="section shell product-page">
         <a routerLink="/products" class="text-link">← All systems</a>
@@ -89,14 +90,7 @@ import { SeoService } from '../../core/services/seo.service';
           <h2>Related systems</h2>
           <div class="related">
             @for (item of related(); track item.id) {
-              <a [routerLink]="['/products', item.slug]"
-                ><sm-image
-                  [src]="item.featuredImage"
-                  [alt]="item.name"
-                  sizes="(min-width:800px) 30vw, 100vw"
-                />
-                <h3>{{ item.name }} ↗</h3></a
-              >
+              <sm-product-card [product]="item" />
             }
           </div>
         </section>
@@ -113,10 +107,24 @@ import { SeoService } from '../../core/services/seo.service';
     .product-heading {
       max-width: 1000px;
       margin: 40px 0;
+      padding: clamp(24px, 4vw, 48px);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(115deg, #e6f9f1, #eaf7fb 60%, #fff2d8);
+    }
+    .product-heading .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #ffffffc9;
+    }
+    .product-heading h1 {
+      max-width: 850px;
     }
     .product-hero {
       aspect-ratio: 16/8;
-      border-radius: 14px;
+      border-radius: 24px;
+      box-shadow: 0 18px 44px #2f73651a;
     }
     .detail-columns {
       display: grid;
@@ -139,10 +147,11 @@ import { SeoService } from '../../core/services/seo.service';
     }
     .detail-columns aside {
       align-self: start;
-      background: white;
+      background: linear-gradient(140deg, #fff, #f1fbf7);
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 24px;
       padding: 28px;
+      box-shadow: 0 14px 34px #276b6410;
     }
     .spec-list div {
       border-bottom: 1px solid var(--line);
@@ -168,17 +177,8 @@ import { SeoService } from '../../core/services/seo.service';
     }
     .related {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .related a {
-      text-decoration: none;
-    }
-    .related h3 {
-      font: 600 19px var(--display);
-    }
-    .related sm-image {
-      border-radius: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
     }
     .tags {
       display: flex;
@@ -188,10 +188,17 @@ import { SeoService } from '../../core/services/seo.service';
       padding: 0;
     }
     .tags li {
-      padding: 3px 10px;
+      padding: 5px 12px;
       background: var(--sand);
+      border: 1px solid var(--line);
+      border-radius: 999px;
       font-size: 11px !important;
       text-transform: capitalize;
+    }
+    @media (max-width: 1000px) {
+      .related {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
     @media (max-width: 800px) {
       .detail-columns {

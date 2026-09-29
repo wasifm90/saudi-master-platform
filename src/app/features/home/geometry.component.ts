@@ -1,14 +1,13 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ContentRepository } from '../../core/services/content.repository';
 import { ProductRepository } from '../../core/services/product.repository';
 import { filterProducts } from '../../core/services/interaction-state';
 import { GeometryId } from '../../core/models/content';
-import { ImageComponent } from '../../shared/image.component';
+import { ProductCardComponent } from '../../shared/product-card.component';
 import { HOME } from '../../data/catalog';
 @Component({
   selector: 'sm-geometry',
-  imports: [RouterLink, ImageComponent],
+  imports: [ProductCardComponent],
   template: ` <section class="geometry section" id="geometry" aria-labelledby="geometry-title">
     <div class="shell">
       <div class="section-heading">
@@ -32,29 +31,18 @@ import { HOME } from '../../data/catalog';
       </div>
       @if (activeProduct(); as product) {
         <div class="geometry-content" [attr.data-product-slug]="product.slug">
-          <a class="geometry-image" [routerLink]="['/products', product.slug]"
-            ><sm-image [src]="product.featuredImage" [alt]="product.name" /><span>{{
-              categoryName()
-            }}</span></a
-          >
-          <div class="geometry-copy">
+          <div class="geometry-context">
             <p class="eyebrow">
-              {{ product.classification === 'LOCAL' ? 'Local manufactured' : 'European systems' }} ·
-              {{ product.manufacturer }}
+              Selected geometry / {{ activeProductIndex() + 1 }} of {{ geometryProducts().length }}
             </p>
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.shortDescription }}</p>
-            <p class="application">{{ product.applicationDescription }}</p>
-            <dl class="spec-grid">
-              @for (spec of product.technicalFeatures.slice(0, 4); track spec.label) {
-                <div>
-                  <dt>{{ spec.label }}</dt>
-                  <dd>{{ spec.value }}</dd>
-                </div>
-              }
-            </dl>
-            <a class="button" [routerLink]="['/products', product.slug]">View product →</a>
+            <h3>{{ categoryName() }}</h3>
+            <p>{{ categoryDescription() }}</p>
+            <div class="geometry-callout">
+              <span>Application insight</span>
+              <p>{{ product.applicationDescription }}</p>
+            </div>
           </div>
+          <sm-product-card [product]="product" [featured]="true" />
         </div>
       } @else {
         <p role="status">No active products are assigned to this geometry.</p>
@@ -83,7 +71,7 @@ import { HOME } from '../../data/catalog';
   </section>`,
   styles: `
     .geometry {
-      background: var(--sand);
+      background: linear-gradient(135deg, #eaf9f4, #eaf5fb 62%, #fff5df);
       border-block: 1px solid var(--line);
     }
     .geometry-filters {
@@ -102,61 +90,57 @@ import { HOME } from '../../data/catalog';
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
+    .geometry-filters button:hover {
+      border-color: var(--earth);
+    }
     .geometry-filters button.active {
-      background: var(--ink);
+      background: var(--earth);
       color: #fff;
     }
     .geometry-content {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 36px;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+      gap: clamp(24px, 5vw, 72px);
       align-items: center;
-      padding: 24px;
+      padding: clamp(20px, 3vw, 38px);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--white);
+      border-radius: 28px;
+      background: #ffffffb3;
+      box-shadow: 0 18px 42px #26756b0c;
       animation: reveal 0.3s ease;
     }
-    .geometry-image {
-      position: relative;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .geometry-image sm-image {
-      aspect-ratio: 4/3;
-    }
-    .geometry-image > span {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      background: var(--ink);
-      color: #fff;
-      border-radius: 4px;
-      padding: 8px 12px;
-      font: 600 11px var(--display);
-    }
-    h3 {
-      font: 700 clamp(24px, 3vw, 38px) / 1.1 var(--display);
+    .geometry-context h3 {
+      font: 700 clamp(27px, 3.4vw, 42px) / 1.08 var(--display);
       text-transform: uppercase;
       margin: 12px 0;
     }
-    .geometry-copy p {
-      font-size: 13px;
-      line-height: 1.7;
-    }
-    .geometry-copy .eyebrow {
-      font-size: 10px;
-    }
-    .application {
+    .geometry-context > p:not(.eyebrow) {
+      max-width: 440px;
       color: var(--muted);
+      font-size: 15px;
     }
-    .geometry-copy .button {
-      margin-top: 18px;
+    .geometry-callout {
+      margin-top: 32px;
+      padding: 20px 22px;
+      border-left: 4px solid #13a49b;
+      border-radius: 0 16px 16px 0;
+      background: #e5f8f2;
+    }
+    .geometry-callout span {
+      color: var(--earth);
+      font: 700 10px var(--display);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .geometry-callout p {
+      margin: 8px 0 0;
+      color: #325b60;
+      font-size: 13px;
     }
     @media (max-width: 850px) {
       .geometry-content {
         grid-template-columns: 1fr;
-        padding: 16px;
+        padding: 18px;
         gap: 24px;
       }
       .geometry-filters {
@@ -183,6 +167,9 @@ export class GeometryComponent {
   );
   readonly categoryName = computed(
     () => this.categories.find((g) => g.id === this.activeGeometry())?.name ?? '',
+  );
+  readonly categoryDescription = computed(
+    () => this.categories.find((g) => g.id === this.activeGeometry())?.description ?? '',
   );
   constructor() {
     effect(() => {

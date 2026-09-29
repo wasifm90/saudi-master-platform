@@ -98,14 +98,30 @@ import { COLLECTION_COPY, PAGES } from '../../data/pages';
     .editorial-list {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 24px;
+    }
+    .editorial-list article {
+      overflow: hidden;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 12px 30px #276b640d;
+      transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+    }
+    .editorial-list article:hover,
+    .editorial-list article:focus-within {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 42px #276b641b;
     }
     .editorial-list a {
       text-decoration: none;
     }
     .editorial-list sm-image {
       aspect-ratio: 16/10;
-      border-radius: 10px;
+      border-radius: 16px;
     }
     .editorial-list h2 {
       font-size: 26px;
@@ -115,6 +131,15 @@ import { COLLECTION_COPY, PAGES } from '../../data/pages';
       font-size: 14px;
       line-height: 1.8;
       color: var(--muted);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .editorial-list article {
+        transition: none;
+      }
+      .editorial-list article:hover,
+      .editorial-list article:focus-within {
+        transform: none;
+      }
     }
     @media (max-width: 700px) {
       .editorial-list {

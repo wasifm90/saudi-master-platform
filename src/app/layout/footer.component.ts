@@ -27,8 +27,8 @@ import { ContentRepository } from '../core/services/content.repository';
   </footer>`,
   styles: `
     footer {
-      background: var(--ink);
-      color: #faf8f5;
+      background: linear-gradient(135deg, #184c51, #1c5961);
+      color: #f8fffc;
       padding: 64px 0 28px;
     }
     .footer-grid {
@@ -45,7 +45,7 @@ import { ContentRepository } from '../core/services/content.repository';
       color: var(--gold);
     }
     p {
-      color: #d5cec3;
+      color: #d4ece9;
       max-width: 420px;
       font-size: 14px;
       line-height: 1.7;
@@ -69,13 +69,13 @@ import { ContentRepository } from '../core/services/content.repository';
       font-size: 14px;
     }
     .footer-bottom {
-      border-top: 1px solid #4c4944;
+      border-top: 1px solid #ffffff38;
       margin-top: 36px;
       padding-top: 24px;
       display: flex;
       justify-content: space-between;
       font-size: 11px;
-      color: #d5cec3;
+      color: #d4ece9;
     }
     @media (max-width: 760px) {
       .footer-grid {

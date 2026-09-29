@@ -12,7 +12,6 @@
         <span>Systems catalogue</span>
       </div>
     </div>
-
     <div class="catalog-controls">
       <div class="filters" role="group" aria-label="Product classification">
         @for (filter of filters; track filter.code) {
@@ -29,66 +28,18 @@
       </div>
       <p class="result-count" role="status">Showing {{ filteredProducts().length }} systems</p>
     </div>
-
     @if (repository.error()) {
       <p class="catalog-error" role="alert">{{ repository.error() }}</p>
     }
     @if (filteredProducts().length) {
       <div class="product-grid" [attr.data-filter]="activeClassification()">
         @for (product of filteredProducts(); track product.slug; let index = $index) {
-          <article class="product-tile" [attr.data-product-slug]="product.slug">
-            <a
-              class="tile-media"
-              [routerLink]="['/products', product.slug]"
-              [attr.aria-label]="'View ' + product.name"
-            >
-              <sm-image
-                [src]="product.featuredImage"
-                [alt]="product.name"
-                sizes="(min-width: 1080px) 30vw, (min-width: 680px) 46vw, 100vw"
-              />
-              <span class="tile-media__wash"></span>
-              <span class="tile-index"
-                >{{ (index + 1).toString().padStart(2, '0') }} /
-                {{ filteredProducts().length.toString().padStart(2, '0') }}</span
-              >
-              <span class="tile-open" aria-hidden="true">↗</span>
-            </a>
-
-            <div class="tile-content">
-              <div class="tile-meta">
-                <span class="tile-classification">{{
-                  product.classification === 'LOCAL' ? 'Saudi manufactured' : 'European systems'
-                }}</span>
-                <span>{{ product.sku }}</span>
-              </div>
-              <p class="tile-manufacturer">{{ product.manufacturer }}</p>
-              <h3>
-                <a [routerLink]="['/products', product.slug]">{{ product.name }}</a>
-              </h3>
-              <p class="tile-description">{{ product.shortDescription }}</p>
-              <dl class="tile-specs">
-                @for (spec of product.technicalFeatures.slice(0, 2); track spec.label) {
-                  <div>
-                    <dt>{{ spec.label }}</dt>
-                    <dd>{{ spec.value }}</dd>
-                  </div>
-                }
-              </dl>
-              <div class="tile-actions">
-                <a [routerLink]="['/products', product.slug]"
-                  >Explore system <span aria-hidden="true">→</span></a
-                >
-                <a
-                  class="tile-enquire"
-                  routerLink="/contact"
-                  [queryParams]="{ product: product.slug }"
-                  [attr.aria-label]="'Enquire about ' + product.name"
-                  >Enquire <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </div>
-          </article>
+          <sm-product-card
+            class="product-tile"
+            [product]="product"
+            [index]="index"
+            [total]="filteredProducts().length"
+          />
         }
       </div>
     } @else {

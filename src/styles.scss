@@ -3,14 +3,14 @@
 @use '@fontsource/ibm-plex-sans/latin-400.css' as ibm400;
 @use '@fontsource/ibm-plex-sans/latin-600.css' as ibm600;
 :root {
-  --paper: #faf8f5;
-  --sand: #f3ece0;
+  --paper: #f8fcfa;
+  --sand: #eaf7f1;
   --white: #fff;
-  --ink: #18181b;
-  --gold: #d4af37;
-  --earth: #97531e;
-  --muted: #57534e;
-  --line: #e8dfd1;
+  --ink: #183a40;
+  --gold: #f2bd4d;
+  --earth: #087a75;
+  --muted: #49666b;
+  --line: #d5e9e3;
   --display: 'Space Grotesk', Arial, sans-serif;
   --body: 'IBM Plex Sans', Arial, sans-serif;
   color-scheme: light;
@@ -60,7 +60,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid #826112;
+  outline: 3px solid #087a75;
   outline-offset: 4px;
 }
 h1,
@@ -134,29 +134,34 @@ button {
   justify-content: center;
   min-height: 48px;
   padding: 15px 24px;
-  border: 1px solid var(--ink);
-  border-radius: 7px;
+  border: 1px solid var(--earth);
+  border-radius: 12px;
   color: #fff;
-  background: var(--ink);
+  background: var(--earth);
   text-decoration: none;
   font: 700 11px var(--display);
   text-transform: uppercase;
   letter-spacing: 0.07em;
   transition:
     background 0.2s,
-    color 0.2s;
+    color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 .button:hover {
-  background: #735c22;
-  border-color: #735c22;
+  background: #055d5a;
+  border-color: #055d5a;
+  transform: translateY(-2px);
+  box-shadow: 0 9px 20px #087a7525;
 }
 .button.secondary {
   background: transparent;
-  color: var(--ink);
-  border-color: #918777;
+  color: var(--earth);
+  border-color: #7dbab2;
 }
 .button.secondary:hover {
   background: var(--sand);
+  color: var(--earth);
 }
 .actions {
   display: flex;
@@ -174,7 +179,7 @@ button {
   padding: 10px;
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 12px;
   min-width: 0;
 }
 .spec-grid dt {
@@ -200,8 +205,18 @@ button {
   text-transform: uppercase;
   padding: 10px 16px;
   background: var(--white);
-  border: 1px solid #bfb4a3;
-  border-radius: 6px;
+  border: 1px solid #a9d5ca;
+  border-radius: 12px;
+  color: var(--ink);
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.2s;
+}
+.section-controls > button:not(:disabled):hover {
+  border-color: var(--earth);
+  background: #e3f8f0;
+  transform: translateY(-2px);
 }
 .section-controls > span {
   font: 500 11px var(--display);
@@ -215,6 +230,13 @@ button {
 .page-intro {
   padding-block: 38px;
   max-width: 1050px;
+}
+.closing-cta {
+  margin-block: 54px;
+  padding: clamp(30px, 5vw, 64px);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background: linear-gradient(110deg, #e1f9ef, #eaf7fb 58%, #fff2d9);
 }
 .empty-state {
   padding: 40px 0;
@@ -235,6 +257,12 @@ button {
   background: var(--ink);
   color: white;
   padding: 14px 20px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .button:hover,
+  .section-controls > button:not(:disabled):hover {
+    transform: none;
+  }
 }
 .skip-link:focus {
   transform: none;

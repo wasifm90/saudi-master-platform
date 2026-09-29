@@ -1,13 +1,12 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ProductRepository } from '../../core/services/product.repository';
 import { filterProducts } from '../../core/services/interaction-state';
 import { ProductFilter } from '../../core/models/content';
-import { ImageComponent } from '../../shared/image.component';
+import { ProductCardComponent } from '../../shared/product-card.component';
 import { HOME } from '../../data/catalog';
 @Component({
   selector: 'sm-systems',
-  imports: [RouterLink, ImageComponent],
+  imports: [ProductCardComponent],
   templateUrl: './systems.component.html',
   styleUrl: './systems.component.scss',
 })
